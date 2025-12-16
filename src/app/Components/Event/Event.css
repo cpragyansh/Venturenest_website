@@ -1,0 +1,210 @@
+/* .events-container{
+    width: 100%;
+    min-width: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     
+    Adjust to provide spacing from the main page
+    position: relative; 
+    For layering
+    z-index: 1; 
+    Lower z-index to stay below the main page
+}
+
+.events {
+    margin-top: -10em;
+    width: auto;
+    height: 40em;
+    margin-top: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+     Prevents overflow when events expand
+}
+
+.event-main {
+    height: 40vh;
+    width: 80vw;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    gap: 3em; 
+    Set a standard gap
+}
+
+.event {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 10px solid rgb(255, 255, 255);
+    width: 60em;
+    height: 100%;
+    transition: width 700ms ease-in-out,height 700ms, transform 300ms ease-in-out;
+     Added transform for smooth scaling
+    position: relative;
+    object-fit: fill;
+    overflow: hidden;
+     Prevents child overflow
+}
+
+.event:hover {
+    Set expanded width on hover
+    transform: scale(1.08); 
+    Slightly scale for a zoom effect
+}
+
+.head-event {
+    position: absolute;
+    transition: transform 800ms ease-in-out;
+    font-weight: bold;
+    font-size: 2vh;
+color:black;
+    opacity: 0; 
+    Hidden by default
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+.details-event {
+    padding-left: 10%;
+    padding-right: 10%;
+    bottom: 2%;
+    opacity: 1; 
+    Hidden by default
+    color: white;
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.event:hover .head-event {
+    color: white;
+    background-color: rgba(45, 42, 42, 0.5);
+    animation: fadeOut 5s ease-in-out forwards;
+}
+
+.event:hover .details-event {
+    color: white;
+    background-color: rgba(45, 42, 42, 0.5);
+    animation: fadeOut 20s ease-in forwards;
+}
+
+Keyframes for fading out
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.event:hover .head-event {
+    transform: translate(0%, 0%) rotate(0deg); 
+    Move head event on hover
+}
+
+.event:hover .details-event {
+    font-size: 18px; 
+    Adjust font size
+    font-weight: 600; 
+    Adjust font weight
+    Change color
+    text-align: justify;
+}
+
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+     Ensures the image covers the area
+    object-position: center;
+    margin: auto;
+    position: absolute; 
+    Keep the image positioned behind other elements
+}
+ */
+.events-section-new-design-events-boxes-main-container{
+    width: 100%;
+    height: auto;
+    padding: 2em;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-wrap: wrap;
+     gap: 4em;
+}
+.events-new-design-boxes-main-container-main-direct-entry-boxes{
+  
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap:1em;
+
+}
+.events-section-new-design-direct-entry-main-img-division-block{
+    height: 24em;
+    width: 24em;
+    background-color: white;
+    border: 6px solid #A30D33;
+    border-radius: 20px;
+    object-fit: cover;
+    
+}
+.event-section-new-design-direct-entry-heading-name-tag-direct{
+    font-size:2.4vh;
+    font-weight: 600;
+}
+.event-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.main-image-event-section-image-tag-direct-entry{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+@media (min-width:320px) and (max-width:480px) {
+    .events-section-new-design-direct-entry-main-img-division-block {
+        height: 18vh;
+        width: 40vw;
+        border: 4px solid #A30D33;
+    }
+    .event-section-new-design-direct-entry-heading-name-tag-direct{
+        font-size:4.4vw;
+        font-weight: 500;
+        width: 26vw;
+        text-align: center;
+    }
+    .events-new-design-boxes-main-container-main-direct-entry-boxes{
+    
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        gap:1em;
+    
+    }
+    .events-section-new-design-events-boxes-main-container{
+        width: 100%;
+        height: auto;
+        padding: 1em;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-wrap: wrap;
+         gap: 2em;
+    }
+    
+}

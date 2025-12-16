@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind Components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  /* margin: 0;padding: 0; */
+  /* padding-top: 10vh; */
+}
+
+/* Define a CSS variable for the navbar height */
+:root {
+    /* --navbar-height: 4em;  */
+    /* Adjust this to match your navbar's height */
+  }
+  
+  /* Ensure that the main content starts below the fixed navbar */
+  .main-content {
+    /* margin-top: var(--navbar-height); */
+    /* padding-top: 1em;  */
+    /* Optional: adds extra spacing */
+
+  }
+
+  
+  

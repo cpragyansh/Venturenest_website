@@ -1,0 +1,344 @@
+.members-main {
+    display: flex;
+    flex-wrap: wrap; /* Allows multiple rows of cards */
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 20px; /* Space between the cards */
+    margin: auto;
+    width: 100%;
+}
+
+.members-category {
+    margin: 1em 0; /* Space between categories */
+}
+
+.category-description {
+    text-align: center;
+    font-size: 4em;
+    font-weight: 600;
+    color: goldenrod;
+    /* margin-bottom: 1em; */
+}
+
+.category-title {
+    text-align: center;
+    /* font-size: 2.5em;zsz */
+    color: #fff;
+    /* margin-bottom: 0.5em; */
+}
+
+.members-category h2 {
+    text-align: center;
+    font-size: 2em;
+    color: #fff; /* Adjust color as needed */
+    /* margin-bottom: 1em; */
+}
+
+.members-box {
+    position: relative;
+    margin: 20px;
+    width: 11vw;
+    height: 26vh;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.488);
+    border-radius: 23px;
+    background-color: #092436;
+    font-family: "Raleway", sans-serif;
+    color: goldenrod;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.members-center {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.center-box-photo-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    flex-direction: column;
+}
+
+.members-box img {
+    border-radius: 100%;
+    height: 130px;
+    width: 130px;
+    object-fit: cover;
+    object-position: 50% 30%;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 1);
+}
+
+.members-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+}
+
+.members-user_name {
+    font-size: 2.5vh;
+    font-weight: 800;
+}
+
+.members-skill {
+    font-size: 2vh;
+    font-weight: 600;
+    text-align: center;
+    color: rgba(15, 15, 15, 0.877);
+}
+
+.members-arr_container {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 3vw;
+    height: 5vh;
+    background-color: rgb(15, 12, 12);
+    border-radius: 23px 0 23px 0;
+    transition-duration: 0.3s;
+}
+
+.members-cancel {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    width: 2vw;
+    height: 3.5vh;
+    background-color: rgb(15, 12, 12);
+    border-radius: 16px 0 14px 0;
+    transition-duration: 0.3s;
+}
+
+.members-cancel:hover,
+.members-arr_container:hover {
+    background-color: rgba(243, 33, 33, 0.555);
+}
+
+.members-arr_container i,
+.members-cancel i {
+    color: rgb(70, 70, 70);
+    position: inherit;
+    right: 22px;
+    bottom: 16px;
+    font-size: large;
+}
+
+.members-left_container {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    border-radius: 23px;
+    padding: 40px 0 0 20px;
+    transition: all 0.4s;
+    background-color: white;
+}
+
+.members-left_container p {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.members-left_container .members-skills div {
+    display: inline;
+    color: rgb(155, 155, 155);
+    border: 1px solid rgb(155, 155, 155);
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    margin: 4px 4px 4px 0;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.members-left_container .members-skills div:hover {
+    color: rgb(33, 175, 128);
+    border: 1px solid rgb(23, 90, 128);
+}
+
+.members-left_container .members-icons {
+    font-size: 1.6rem;
+    margin-top: 20px;
+}
+
+.members-left_container .members-icons a {
+    color: #cfcfcf;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all 0.4s;
+    text-decoration: none;
+}
+
+.members-left_container .members-icons a:hover {
+    color: #2c5364;
+}
+
+.members-off {
+    transform: translate(-84%, -96%) rotate(90deg);
+}
+
+.members-active {
+    transform: translate(0px) rotate(0px);
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    list-style: none;
+}
+
+.page-item {
+    margin: 0 10px;
+}
+
+.page-link {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    color: goldenrod;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.page-link:hover {
+    background-color: #ddd;
+}
+
+@media only screen and (max-width: 600px) {
+    .members-box {
+        width: 90%;
+        height: auto;
+        margin: 10px;
+    }   
+
+    .members-box img {
+        height: 120px;
+        width: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .members-text {
+        text-align: center;
+        right: 0;
+    }
+}
+
+
+/* custom css for diffferent blocks or cards */
+
+.ceo-section .members-box{
+    position: relative;
+    /* margin: 20px; */
+    width: 46vw;
+    height: 50vh;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.488);
+    border-radius: 23px;
+    background-color: #092436;
+    font-family: "Raleway", sans-serif;
+    color: goldenrod;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../../../public/assets/cec-vv-bg-table.png');
+background-position: center;
+background-repeat: no-repeat;
+object-position: center;
+background-size: fill;
+object-fit: fill;
+    text-align: center;
+}
+
+.ceo-section .members-user_name {
+    font-size: 4vh;
+    font-weight: 800;
+}
+
+.ceo-section .members-skill {
+    font-size: 3vh;
+    font-weight: 600;
+    text-align: center;
+    color: rgba(15, 15, 15, 0.877);
+}
+
+
+.members-category {
+    margin: 1em 0; /* Space between categories */
+}
+
+.category-description {
+    text-align: center;
+    font-size: 4em;
+    font-weight: 600;
+    color: goldenrod;
+    /* margin-bottom: 1em; */
+}
+
+.category-title {
+    text-align: center;
+    /* font-size: 2.5em;zsz */
+    color: #fff;
+    /* margin-bottom: 0.5em; */
+}
+
+.members-category h2 {
+    text-align: center;
+    font-size: 2em;
+    color: #fff; /* Adjust color as needed */
+    /* margin-bottom: 1em; */
+}
+
+
+
+.center-box-photo-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    flex-direction: column;
+}
+
+.ceo-section .members-box img {
+    border-radius: 100%;
+    height: 22.5vh;
+    width: 10.5vw;
+    object-fit: cover;
+    object-position: 50% 30%;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 1);
+}
+
+.members-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+}

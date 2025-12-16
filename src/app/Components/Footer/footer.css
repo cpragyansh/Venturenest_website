@@ -1,0 +1,292 @@
+    /* Main Footer Container */
+.footer-main-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    background-color: black;
+    color: white;
+    padding: 4em 2em;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 2vw;
+    z-index: 9999999999999999999999999999999999999;
+}
+.footer-section-column-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    gap: 2vw;
+    /* background-color: red; */
+    /* flex-direction: row; */
+}
+.venturenest-mian-logo
+/* Footer Logo */
+.footer-logo-cgc-img {
+    height: auto;
+    width: 12vw;
+    transition: transform 0.3s ease-in-out;
+    object-position: center;
+}
+
+/* .footer-logo-cgc-img{
+    width: 30vw;
+} */
+
+
+.footer-logo-cgc-img:hover {
+    transform: scale(1.1); /* Logo hover effect */
+}
+.footer-logo-ecell-img{
+    width: 8vw;
+    transition: transform 0.3s ease-in-out;
+}
+.venturenest-mian-logo{
+    width: 6vw;
+}
+.footer-logo-ecell-img:hover {
+    transform: scale(1.1); /* Logo hover effect */
+}
+
+/* Useful Links Section */
+.usefull-links-footer-section-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: goldenrod;
+    margin-bottom: 1rem;
+}
+
+.usefull-links-para {
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.usefull-links-para:hover {
+    color: goldenrod;
+    transform: translateX(5px); /* Slide effect on hover */
+}
+
+/* Contact Section */
+.footer-section-contact-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: goldenrod;
+    margin-bottom: 1rem;
+}
+
+.footer-section-contact-text-part {
+    font-size: 1rem;
+    /* line-height: 1.8; */
+}
+
+.section-1-footer-name {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.cgc-address-para-footer-section p {
+    margin: 0;
+}
+
+.section-1-footer-sub-part h1 {
+    font-size: 1.2rem;
+    margin-top: 1em;
+}
+
+.section-1-footer-sub-part p {
+    font-size: 1rem;
+    color: goldenrod;
+}
+
+/* Connect Section */
+.footer-section-connect-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: goldenrod;
+    margin-bottom: 1rem;
+}
+
+.footer-section-connecting-social-media-para {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.social-media-icons-footer-section {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1em;
+}
+
+.social-media-icons-img {
+    height: 6vh;
+    width: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-media-hover:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* Copyright Section */
+.footer-copy-right-section {
+    background-color: rgb(2, 5, 15);
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.copyright-footer-section-para {
+    color: goldenrod;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-main-container {
+    animation: fadeIn 1s ease-in-out;
+}
+
+
+.footer-new-logos-part-seperation-experiment{
+           display: flex;
+    flex-wrap: wrap;
+    gap: 3em;
+    background-color: black;
+    color: white;
+    padding: 2em 2em;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 1vw;
+    z-index: 9999999999999999999999999999999999999;
+}
+
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .footer-main-container {
+        flex-direction: column;
+        gap: 2em;
+        text-align: justify;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-logo-cgc-img {
+        width: 40vw;
+    }
+
+    .usefull-links-footer-section-heading, .footer-section-contact-heading, .footer-section-connect-heading {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .footer-section-contact-text-part, .footer-section-connecting-social-media-para {
+        font-size: 0.9rem;
+    }
+
+    .social-media-icons-img {
+        height: 4vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-logo-cgc-img {
+        width: 40vw;
+    }
+
+    .usefull-links-footer-section-heading, .footer-section-contact-heading, .footer-section-connect-heading {
+        font-size: 1rem;
+    }
+
+    .social-media-icons-img {
+        height: 4vh;
+    }
+    .footer-section-column-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    /* background-color: red; */
+    /* border: 2px solid green; */
+    gap: 2vw;
+    flex-direction: row;
+}
+.footer-logo-qsgauge-img{
+        width: 40%;
+    }
+      .footer-logo-nirf-img{
+        width: 30%;
+    }
+    .footer-logo-ecell-img{
+    width:30%;
+}
+
+}
+@media (min-width: 770px) {
+    .footer-logo-cgc-img {
+        width: 10vw;
+        /* height: 7vw; */
+    }
+.footer-section-column-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 2vw;
+    /* background-color: red; */
+    /* flex-direction: row; */
+}
+    .usefull-links-footer-section-heading, .footer-section-contact-heading, .footer-section-connect-heading {
+        font-size: 1vw;
+    }
+    .footer-logo-nirf-img{
+        width: 5.4vw;
+    }
+    .footer-logo-qsgauge-img{
+        width: 9vw;
+    }
+
+    .social-media-icons-img {
+        height: 3vw;
+    }
+    .usefull-links-para {
+        font-size: 0.94vw;
+        font-weight: 500 !important;
+        cursor: pointer;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .footer-usefullinks-para-main-div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.3vw;
+    }
+    .footer-section-contact-text-part {
+        font-size: 1vw;
+        font-weight: 400;
+        display: flex;
+        flex-direction: column !important;
+        gap: 0.3vw ;
+    }
+}
+

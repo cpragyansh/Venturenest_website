@@ -1,0 +1,117 @@
+/* Main Container */
+.inspirational-stories-section {
+    padding: 3em 1em;
+    background-image: url("../../../../public/assets/partners-section-bg.jpg");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.stories-heading {
+    font-size: 2vw !important;
+    margin-bottom: 2.5vw !important;
+    color: white;
+    text-align: center;
+    text-shadow: 4px 2.5px 0px rgba(170, 8, 8, 0.6);
+}
+
+/* Swiper Styling */
+.stories-swiper {
+    width: 70vw;
+    overflow: hidden;
+}
+
+.story-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.story-main-box {
+    width: 30vw !important;
+    height: 26vw !important;
+    border-radius: 20px;
+    padding: 1vw !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0vw !important;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-main-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.story-person-image {
+    width: 28vw;
+    height: 20vw;
+    border-radius: 15px;
+    object-fit: cover;
+    border: 3px solid white;
+    transition: transform 0.3s ease;
+    margin-bottom: 1vw;
+}
+
+.story-person-image:hover {
+    transform: scale(1.1);
+}
+
+.story-person-name {
+    font-size: 1.3vw !important;
+    font-weight: bold;
+    color: goldenrod;
+    text-align: center;
+}
+
+.story-person-company {
+    font-size: 1vw !important;
+    color: white;
+    text-align: center;
+}
+
+/* Loading Spinner */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .story-person-image {
+        width: 40vw;
+        height: 30vw;
+    }
+
+    .story-main-box {
+        width: 50vw;
+        height: 45vh;
+    }
+
+    .story-person-name {
+        font-size: 3vw;
+    }
+
+    .story-person-company {
+        font-size: 2vw;
+    }
+
+    .stories-heading {
+        font-size: 5vw;
+    }
+}

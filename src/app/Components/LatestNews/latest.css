@@ -1,0 +1,328 @@
+/* General container styling */
+.latest-news-container {
+    /* height: auto; */
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    flex-wrap: wrap;
+    /* background-color: #f4f4f9; */
+    /* padding: 2em; */
+    /* background-color: red; */
+    background-image: url("../../../../public/assets/bg1.jpg");
+    background-repeat: no-repeat;
+    /* object-fit: fill; */
+background-size:  cover;
+background-position: center;
+
+}
+
+/* Grid structure for the latest news items */
+.latest-newss {
+    /* display: flex; */
+    /* width: 80vw; */
+    /* flex-direction: row-reverse; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* height: auto; */
+    /* display: grid; */
+    /* grid-template-rows: repeat(1, 1fr); */
+    /* grid-template-columns: repeat(4, 1fr); */
+    /* grid-gap: 2em; */
+    /* align-content: center; */
+    /* justify-content: center; */
+    /* transform: translateY(4em); */
+    /* background-color: yellow; */
+    /* display: flex; */
+}
+
+/* Main container for individual news cards */
+.latest-news-main {
+    /* padding-top: 1em; */
+    display: flex;
+    gap: 3em;
+justify-content: center;
+align-items: center;
+flex-direction: row;
+flex-wrap: wrap;
+    /* transform: translateX(-5em); */
+    /* background-color: aquamarine; */
+    padding: 2em;
+    
+}
+.news-main-container-shadow-border {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1em;
+    /* min-height: 70vh; */
+    height: 73vh;
+    
+    border: 20px double rgb(227, 222, 222);
+    padding: 1em;
+    overflow:scroll;
+    scrollbar-width: none; /* Firefox: Thin scrollbar */
+    -ms-overflow-style: none;
+    border-radius: 40px;
+    /* scrollbar-color: #ff6f61 #f4f4f9;  */
+    /* Firefox: Scrollbar color */
+}
+
+/* Scrollbar styling for Webkit-based browsers (Chrome, Safari) */
+.news-main-container-shadow-border::-webkit-scrollbar {
+    width: 0px; /* Width of the scrollbar */
+    background: transparent;
+}
+
+
+/* For smoother scroll behavior */
+.news-main-container-shadow-border {
+    scroll-behavior: smooth;
+}
+
+/* Styling for each news item */
+.latest-news {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    /* background-color: white; */
+    box-shadow: 12px 12px 10px rgba(0, 0, 0, 0.1),-5px -4px 7px rgba(0, 0, 0, 0.1);
+    width: 26vw;
+    height: 46vh;
+    transition: all 0.4s ease-in-out;
+    overflow: hidden;
+    /* object-fit: contain; */
+    /* position: relative; */
+    padding: 1em;
+    background-color: white;
+    /* background-color:navy; */
+    
+    /* border: 2px dashed gold; */
+    /* border: 20px double grey; */
+}
+
+.latest-news:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    border-color: #ff6f61;
+}
+
+.news-image-inline{
+    /* width: 100%; */
+    height: 30vh;
+    /* margin: auto; */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    /* border:2px solid red; */
+}
+/* Image within each news card */
+.latest-news-img {
+    /* position: absolute; */
+    /* background-image: url("../../../../public/assets/pulkesh.jpg"); */
+    /* width: 100%; */
+    /* height:auto; */
+    /* background-position: center; */
+
+    /* background-size:cover; */
+    /* object-fit: contain; */
+    /* background-repeat: no-repeat; */
+    /* border-bottom: 5px solid #ff6f61; */
+    transition: transform 0.4s ease;
+    /* border-radius: 20px 20px 0 0; */
+}
+
+.latest-news:hover .latest-news-img {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Headline styling */
+.head-latest-news {
+    /* position: absolute; */
+    /* top: 60%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    font-weight: 700;
+    text-align: center;
+    font-size: 32px;
+    color: Black;
+    text-shadow: 10px 4px 20px rgba(0, 0, 0, 0.9);
+    /* z-index: 10; */
+    transition: color 1s ease-in-out;
+    /* margin-bottom: 1em; */
+}
+
+.latest-news:hover .head-latest-news {
+    /* color: #ffeb3b; */
+    /* letter-spacing: 1px; */
+}
+
+/* Description and button container */
+.latest-news-description-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4vh;
+    box-sizing: content-box;
+    
+    /* padding: 1em; */
+    padding: 1em;
+    /* transform: translateY(16.2em); */
+    /* background: rgba(255, 255, 255, 0.9); */
+    border-radius: 0 0 20px 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Description text styling */
+.details-latest-news {
+    font-size: 18px;
+    font-weight: 700;
+    /* padding: 0 2em; */
+    opacity: 0.8;
+    color: black;
+    text-align: justify;
+    /* line-height: 1.5; */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Call-to-action button styling */
+.latest-news-button {
+    height: 4em;
+    width: 14em;
+    background-color: #ff6f61;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.latest-news-button button {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.latest-news-button:hover {
+    background-color: #ff8567;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.latest-news-button:hover button {
+    color: #fff;
+}
+
+/* Hover effect for expanding the news card */
+.latest-news-one:hover,
+.latest-news-two:hover,
+.latest-news-three:hover,
+.latest-news-four:hover,
+.latest-news-five:hover,
+.latest-news-six:hover,
+.latest-news-seven:hover,
+.latest-news-eight:hover {
+    height: 76vh;
+    /* color: black; */
+}
+
+/* Smooth transition for card expansion */
+.latest-news {
+    transition: height 0.5s ease-in-out;
+}
+
+
+/* Modal overlay styling */
+/* Modal overlay styling with fade-in effect */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  /* Modal open state for showing the overlay */
+  .modal-open {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Modal content with slide-up animation */
+  .modal-content {
+    background-color: white;
+    padding: 2em;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 30vw;
+    /* height: auto; */
+    text-align: center;
+    position: relative;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  }
+  
+  /* Modal slide-up animation on open */
+  .modal-slide-up {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  /* Modal close button */
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .modal-close:hover {
+    color: red;
+  }
+  
+  /* Modal image styling */
+  .modal-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1em;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Modal title styling */
+  .modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5em;
+    color: #333;
+  }
+  
+  /* Modal description styling */
+  .modal-content p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  

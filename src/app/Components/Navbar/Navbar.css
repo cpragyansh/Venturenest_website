@@ -1,0 +1,513 @@
+.navbar {
+  /* background-color: #a8193d; */
+  background-color: white;
+  width: 100%;
+  z-index: 9999999999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  height:10vh;
+  transition: background-color 0.3s ease;
+  /* margin-top: 0.5vw; */
+  /* background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); */
+  /* backdrop-filter: blur(1px); */
+  position: fixed;
+  margin-top: -5vw;
+  
+}
+.navbar-main-experimental-setup{
+  /* position: fixed; */
+  background-color: white;
+    width: 100%;
+    z-index: 99999999;
+  margin-bottom: 5vw;
+  
+}
+
+.navbar.scrolled {
+  background-color: rgba(160, 5, 52, 0.8);
+  /* margin-top:8em ; */
+}
+.venture-nest-logo-bg-removed{
+  height: 8vh;
+  background-color: white;
+  border-radius:100% ;
+  border: 2px solid white;
+  width: 4vw;
+  padding: 0;
+  margin: 0;padding: 0;
+}
+
+.logo-updated{
+  width: 24vw;
+}
+
+
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  object-fit: contain;
+  object-position: center;
+  gap: 1em;
+  /* margin-top: 2vw; */
+}
+
+.logo,
+.naac-logo {
+  height: 4vw;
+  /* margin-right: 10px; */
+  /* margin-top: 2vw; */
+}
+.logo{
+  height: 20px;
+  /* margin-top: 2vw; */
+}
+
+/* Dropdown menu styles */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1vw;
+  justify-content: center;
+  color:black;
+  align-items: center;
+  /* margin-top: 2vw; */
+   z-index: 999999999999999999999999999999999;
+}
+
+.nav-links li a {
+  /* color: black; */
+  font-size: 1vw;
+  font-weight:500 ;
+  text-decoration: none;
+  /* padding: 0.3vw; */
+  display: flex;
+  position: relative;
+  transition: color 0.3s ease,letter-spacing 0.3s ease;
+  overflow: hidden;
+   z-index: 999999999999999999999999999999999;
+}
+
+/* Underline Slide-in Effect */
+.nav-links li a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: -100%;
+  background-color: #f2a365;
+  transition: all 0.3s ease-in-out;
+   z-index: 999999999999999999999999999999999;
+}
+.nav-links li a:hover::before {
+  left: 0;
+}
+/* Background Highlight */
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+   z-index: 999999999999999999999999999999999;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.1); /* Slight transparent background */
+  z-index: -1; /* Ensure it's behind the text */
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  transform: scale(0.8);
+}
+.nav-links li a:hover::after {
+  opacity: 1;
+  transform: scale(1); /* Smooth scale effect */
+}
+.nav-links li a:hover {
+  color: #f2a365;
+  letter-spacing: 1px; /* Slightly expand the letter spacing */
+}
+
+.nav-links .dropdown {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+}
+
+.nav-links .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  color: black;
+  list-style: none;
+  padding: 0.2vw;
+  border-radius: 5px;
+  min-width: 12vw;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  z-index: 999999999999;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links .dropdown-menu li a {
+  color: black;
+  padding: 0.8vw 0.8vw;
+  display: block;
+  text-decoration: none;
+  font-size: 1vw;
+  position: relative;
+  transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.nav-links .dropdown-menu li a:hover {
+ 
+  background-color: #a00534;
+  color: white;
+  padding-left: 20px; /* Slight slide-in effect */
+}
+.nav-links .dropdown-menu li a::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background-color: #f2a365;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.nav-links .dropdown-menu li a:hover::before {
+  opacity: 1;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  animation: dropdownFade 0.3s ease-in-out;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* margin-top: ; */
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 3px;
+  background-color: red;
+  transition: all 0.3s ease;
+}
+
+.hamburger.open .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+  
+}
+
+.hamburger.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.join-us-btn-navbar-extra{
+  background-color: #A30D33;
+  color: white;
+  border-radius: 30px;
+  width: 8vw;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+
+}
+.navbar-links-joinus-btn-text{
+  color: white;
+  text-align: center;
+}
+
+
+.cgc-university-logo-updated{
+  width: 7.6vw;
+  height: 3.4vw;
+}
+
+/* Responsive styles */
+@media (max-width: 1250px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position:fixed;
+    top: 103px;
+    right: 0;
+    background-color: #a00534;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+
+
+    height: calc(100vh - 60px);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 9999999999999;
+  }
+
+  .nav-links.nav-active {
+    transform: translateX(0);
+  }
+
+  .dropdown-menu {
+    position: relative;
+    background-color: #fff;
+    color: black;
+    width: 100%;
+  }
+
+  .dropdown-menu li {
+    padding: 10px;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    height: 6vh;
+    width: 18vw;
+    margin-right: 10px;
+  }
+
+  .naac-logo {
+    height: 5vh;
+    width: 14vw;
+  }
+  .nav-links li a {
+    /* color: black; */
+    font-size: 4vw;
+    font-weight:450 ;
+    text-decoration: none;
+    padding: 10px;
+    display: flex;
+    position: relative;
+    transition: color 0.3s ease,letter-spacing 0.3s ease;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+.venture-nest-logo-bg-removed{
+  height: 8vh ;
+  width: 22vw;
+}
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    background-image: url("../../../../public/assets/corosuel-bg.png");
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 60px);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 9999999999999;
+    color: white;
+  }
+
+  .nav-links.nav-active {
+    transform: translateX(0);
+  }
+
+  .dropdown-menu {
+    position: relative;
+    background-color: #fff;
+    color: black;
+    width: 100%;
+  }
+
+  .dropdown-menu li {
+    padding: 10px;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .logo {
+    height: 5vh;
+    width: 28vw;
+    /* margin-right: 10px; */
+  }
+
+  .naac-logo {
+    height: 30px;
+    width: 20vw;
+  }
+  .cgc-university-logo-updated{
+  width: 35vw;
+  height: 15vw;
+}
+
+  .navbar
+  .join-us-btn-navbar-extra{
+    width: 40vw;
+    background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent */
+  backdrop-filter: blur(1px); /* Adjust blur strength */
+  -webkit-backdrop-filter: blur(1px); /* For Safari support */
+    
+  }
+  .logo-updated{
+  width: 60vw;
+  height: 8vw;
+  display: none;
+}
+  .navbar-links-joinus-btn-text{
+    
+  }
+  .navbar{
+    /* height: 20vw; */
+  }.nav-links .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  color: black;
+  list-style: none;
+  padding: 0.2vw;
+  border-radius: 5px;
+  min-width: 50vw;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  z-index: 999999999999;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links .dropdown-menu li a {
+  color: black;
+  padding: 0.8vw 0.8vw;
+  display: block;
+  text-decoration: none;
+  font-size: 4vw;
+  position: relative;
+  transition: color 0.3s ease, padding-left 0.3s ease;
+}
+}
+
+/* @media (min-width: 1500px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position:fixed;
+    top: 103px;
+    right: 0;
+    background-color: #a00534;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+
+
+    height: calc(100vh - 60px);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 9999999999999;
+  }
+
+  .nav-links.nav-active {
+    transform: translateX(0);
+  }
+
+  .dropdown-menu {
+    position: relative;
+    background-color: #fff;
+    color: black;
+    width: 100%;
+  }
+
+  .dropdown-menu li {
+    padding: 10px;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    height: 8vh;
+    width: 9vw;
+    margin-right: -0.6vw;
+  }
+
+  .naac-logo {
+    height: 5vh;
+    width: 4vw;
+  }
+} */
+
+
+@media (min-width: 1001px) {
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .logo {
+    height: 7vh;
+    width: 8vw;
+    /* margin-right: 10px; */
+  }
+
+  .naac-logo {
+    height: 2vw;
+    width: 4vw;
+  }
+  .venture-nest-logo-bg-removed{
+    height: 7.8vh;
+    background-color: white;
+    border-radius:100% ;
+    border: 2px solid white;
+    width: 4vw;
+    padding: 0;
+    margin: 0;padding: 0;
+  }
+  
+}

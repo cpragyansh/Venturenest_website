@@ -1,0 +1,186 @@
+.patent-main-bg-container
+{
+    background-image: url('../../../public/assets/cec-vv-bg-table.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: fill;
+    background-size: cover;
+    
+}
+.patent-information-para{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    margin: auto;
+    margin-top: 4em;
+    gap: 2em;
+    text-align: justify;
+    flex-direction: column;
+    margin-bottom: 4em;
+    
+}
+.materials-heading{
+    font-size: 3.5vh;
+    font-weight: 600;
+    color:#a00534 ;
+
+}
+.material-para{
+    font-size: 20px;
+    font-weight: 400;
+    padding: 2em;
+}
+.material{
+    background-color: rgb(244, 239, 239);
+    padding: 2em;
+    /* border-radius: 20px; */
+}
+
+
+
+/* Flex center alignment for container */
+/* Main Container */
+.patent-main-bg-container {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  width: 100%;
+  max-width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.entries-dropdown {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Table Wrapper (for responsiveness) */
+.table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto; /* Makes the table scrollable on small screens */
+  margin: 1rem 0;
+}
+
+/* Table Styling */
+.table-main-body {
+  width: 100%;
+  border-collapse: collapse;
+  background: linear-gradient(to right, rgba(150, 34, 71, 0.9), rgba(150, 34, 71, 0.7), rgba(150, 34, 71, 0.5));
+  color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* Table Header */
+.table-main-body th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 1.3rem;
+  color: #f9e562;
+  background: rgba(150, 34, 71, 0.7);
+  white-space: nowrap;
+}
+
+/* Table Rows */
+.table-main-body tbody tr {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.table-main-body tbody tr:hover {
+  background-color: rgb(109, 9, 39);
+  transform: scale(1.02);
+}
+
+/* Table Cells */
+.table-main-body td {
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid white;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+/* No Data Styling */
+.no-data {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #a0aec0;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Pagination Buttons */
+.pagination-buttons {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.pagination-buttons button {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: gray;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pagination-buttons button:hover {
+  background: #444;
+}
+
+.pagination-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Page Numbers */
+.page-numbers {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.page-numbers button {
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  background: gray;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.page-numbers button.active {
+  background: #f9e562;
+  color: black;
+  font-weight: bold;
+}
+
+.page-numbers button:hover {
+  background: #f9e562;
+  color: black;
+}

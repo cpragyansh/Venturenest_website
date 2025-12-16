@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind Components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;padding: 0;
+  
+    /* cursor: url('../public/assets/cursor/cursor2.png') 1 1 , auto; */
+
+
+
+}
+
+/* code {
+
+} */

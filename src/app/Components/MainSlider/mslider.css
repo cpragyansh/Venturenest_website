@@ -1,0 +1,156 @@
+
+.container {
+    display: flex;
+    justify-content: center;
+    /* background-color: red; */
+    padding-top: 8vw;
+    margin: auto;
+    gap: 2em;
+    padding: 1em;
+  }
+  
+  .thumbnails {
+    display: flex;
+    flex-direction: column;
+    /* line-height: 0; */
+    gap: 1em;
+    /* overflow: auto; */
+    /* height: 70vh; */
+    
+  }
+  
+  .thumbnails li {
+    flex: auto;
+    /* overflow: auto; */
+  }
+  
+  /* .thumbnails a {
+    display: block;
+  }
+   */
+  .thumbnails img {
+    width: 45vmin;
+    height: 16vmin;
+    object-fit: cover;
+    object-position: center;
+    border-radius:20px ;
+    overflow: auto;
+  }
+  
+  .slides {
+    overflow: hidden;
+    width: 160vmin;
+    /* width: 1300px; */
+    height: 60vmin;
+    border-radius: 20px;
+    background-size: contain;
+    position: relative;
+}
+
+.slides li {
+    width: 100%;  /* Make the list item take up the full width of the container */
+    height: auto; /* Make the list item take up the full height of the container */
+    position: absolute; /* Position absolutely within the container */
+    z-index: 1;
+    display: none;
+    object-fit: cover;
+}
+
+.slides li.active {
+    display: block; /* Show the active slide */
+}
+
+.corosuel-image-dashboard-main-picture {
+    border-radius: 20px;
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    object-position: center;
+     /* Centers the image */
+    width: 100%; /* Ensure the image takes up the full width of the container */
+    height: auto; /* Ensure the image takes up the full height of the container */
+}
+
+.slides img {
+    width: 100%;  /* Ensure the image takes up the full width of the container */
+    height: 10%; /* Ensure the image takes up the full height of the container */
+    border-radius: 20px;
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    object-position: center; /* Centers the image */
+
+display: flex;
+    /* margin: auto; */
+  }
+  
+  .slides li:target {
+    z-index: 3;
+    -webkit-animation: slide 1s 1;
+    animation: slide 1s 1;
+  }
+  
+  .slides li:not(:target) {
+    -webkit-animation: hidden 1s 1;
+    animation: hidden 1s 1;
+  }
+  
+  
+  @keyframes slide {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+  
+  @keyframes hidden {
+    0% {
+      z-index: 2;
+    }
+    100% {
+      z-index: 2;
+    }
+  }
+  
+
+
+  @media (min-width:320px) and (max-width:768px){
+
+    .container{
+      flex-direction: column;
+    }
+    .thumbnails{
+      flex-direction: row;
+      gap: 0.5em;
+      width: 100%;
+      /* overflow: scroll; */
+
+    }
+    .slides{
+      width: 100%;
+      height:20vh;
+      margin: auto;
+      /* padding-right: 2em; */
+
+    }
+    .thumbnails img {
+      width: 40vmin;
+      height: 16vmin;
+      border-radius:8px ;
+      overflow: auto;
+    }
+  }
+
+
+
+  @media (max-width: 580px) {
+    .css-12ewiei {
+        width: 100%;
+        height: auto !important ;
+    }
+}
+
+  @media (max-width: 5780px) {
+    .css-12ewiei {
+        width: 100%;
+        height: auto  !important;
+    }
+}
