@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // Change this line
 import axios from "axios";
 import {
   Box,
@@ -62,9 +63,19 @@ export default function Programs() {
     return words.slice(0, wordLimit).join(" ") + " ...";
   };
 
+  // Helper function to create slug
+  const createSlug = (name) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
   return (
-    <Box sx={{ background: "#f9f9f9", minHeight: "100vh", pb:"4vw" }}>
-      <Typography variant="h3" textAlign="center" fontWeight="bold" pt={4} mb={2} sx={{pt:{xs:"20%",lg:"2vw"}}}>
+    <Box sx={{ background: "#f9f9f9", minHeight: "100vh", pb: "4vw" }}>
+      <Typography variant="h3" textAlign="center" fontWeight="bold" pt={4} mb={2} sx={{ pt: { xs: "20%", lg: "2vw" } }}>
         Programs
       </Typography>
 
@@ -96,7 +107,7 @@ export default function Programs() {
                   sx={{
                     width: "100%",
                     height: "100%",
-                    objectFit: {xs:"cover",lg:"cover"},
+                    objectFit: { xs: "cover", lg: "cover" },
                     objectPosition: "center"
                   }}
                 />
@@ -173,8 +184,8 @@ export default function Programs() {
                         WebkitLineClamp: 2,
                         WebkitBoxOrient: "vertical",
                         overflow: "hidden",
-                        fontSize: {xs:"5vw",lg:"1vw"},
-                        width: {xs:"100%",lg:"22vw"}
+                        fontSize: { xs: "5vw", lg: "1vw" },
+                        width: { xs: "100%", lg: "22vw" }
                       }}
                     >
                       {trimText(program.programTitle, 20)}
@@ -194,6 +205,9 @@ export default function Programs() {
                     </Typography>
                   </Box>
                   <Button
+                    component={Link}
+                    to={`/Programs/${createSlug(program.programName)}`}
+                    onClick={(e) => e.stopPropagation()}
                     size="small"
                     variant="outlined"
                     sx={{

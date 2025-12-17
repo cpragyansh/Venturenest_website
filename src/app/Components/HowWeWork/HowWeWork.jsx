@@ -35,8 +35,7 @@ const SectionHeading = styled(Typography)(({ theme }) => ({
   textTransform: "uppercase",
   fontWeight: 700,
   textAlign: "center",
-  textShadow:
-    "2px 2px 0px rgba(197, 73, 73, 0.6), 5px 3.5px 1px rgb(217, 230, 203)",
+  letterSpacing: "0.1em",
   color: "rgb(133, 41, 41)",
   display: "flex",
   alignItems: "center",
@@ -64,7 +63,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 
   [theme.breakpoints.up("xs")]: {
     width: "100%",
-    height:"16rem"
+    height: "16rem"
   },
   [theme.breakpoints.up("sm")]: {
     width: "46vw",
@@ -74,9 +73,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
   [theme.breakpoints.up("lg")]: {
     width: "20vw",
-    height:"80%",
+    height: "80%",
     border: "4px solid #A30D33",
-    textAlign:"center"
+    textAlign: "center"
   },
 
   "&:hover": {
@@ -84,6 +83,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
     boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
     backgroundColor: "#A30D33",
     color: "white",
+    "& .MuiTypography-root": {
+      color: "white",
+    },
   },
   "&:hover img": {
     filter: "brightness(0) saturate(100%) invert(100%)",
@@ -103,21 +105,27 @@ const StyledImage = styled("img")(({ theme }) => ({
 }));
 
 const ProgramTitle = styled(Typography)(({ theme }) => ({
-  fontWeight: 700,
+  fontWeight: 600,
   fontSize: "clamp(1rem, 1.1vw, 1.5rem)",
   marginTop: "0.5rem",
   textAlign: "center",
+  lineHeight: 1.3,
+  letterSpacing: "0.02em",
+  color: "#2C2C2C",
 }));
 
 const ProgramDescription = styled(Typography)(({ theme }) => ({
   textAlign: "center",
-  fontSize: "clamp(0.95rem, 1vw, 1.4rem)",
-  fontWeight: 500,
-  marginTop: "0.6rem",
+  fontSize: "clamp(0.95rem, 1vw, 1.25rem)",
+  fontWeight: 400,
+  lineHeight: 1.6,
+  color: "#555",
+  marginTop: "0.8rem",
   padding: "0 0.5rem",
+  letterSpacing: "0.01em",
   // width:"100%",
-   [theme.breakpoints.up("xs")]: {
-    
+  [theme.breakpoints.up("xs")]: {
+
   },
   [theme.breakpoints.up("sm")]: {
   },
@@ -238,7 +246,7 @@ const HowWeSupportYou = () => {
         >
           {supportPrograms.map((program, index) => (
             <SwiperSlide key={index}>
-              <Box sx={{ p: 0 , mb:2 }}>
+              <Box sx={{ p: 0, mb: 2 }}>
                 <StyledCard>
                   <StyledImage src={program.img} alt={program.title} />
                   <CardContent>
