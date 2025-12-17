@@ -28,19 +28,20 @@ import Recognitions from "./app/recognitions/page";
 import VIsion from "./app/vision/page";
 import Invest from "./app/partner/Investment/page";
 import Startups from "./app/invubatedstartup/page";
+import ProgramDetails from "./app/Programs/[programName]/page";
 
 // import Values from "./about/Values";
 
 function App() {
- 
+
 
   // Simulate loading process (e.g., fetching data, etc.)
 
 
   return (
     <div className="App">
-     
-        <Layout>
+
+      <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -49,28 +50,29 @@ function App() {
           <Route path="/Members" element={<Member />} />
           <Route path="/ContactUs" element={<Contact />} />
           <Route path="/Events" element={<Events />} />
-          <Route path="/Gallery/Photos" element={< Photos/>} />
-          <Route path="/Gallery/Videos" element={< Videos/>} />
-          <Route path="/IncubateWithUs" element={< JoinUs/>} />
-          <Route path="/Accelerator-Collabrators" element={< Accelerators/>} />
-          <Route path="/Advisory" element={< Advisory/>} />
-          <Route path="/Eco-System-Partners" element={< Eco/>} />
-          <Route path="/Government-Catalyst" element={< GovCatalyst/>} />
-          <Route path="/Investment-and-Funding" element={< InvestandFund/>} />
-          <Route path="/LegalCompliance" element={< LegalComplianceCouncil/>} />
-          <Route path="/Mentorship" element={< MentorshipCouncil/>} />
-          <Route path="/Technology-and-inovation" element={< TechInnovCouncil/>} />
-          <Route path="/Programs" element={< Programs/>} />
-          <Route path="/Recognitions" element={< Recognitions/>} />
-          <Route path="/Vision" element={< VIsion/>} />
-          <Route path="/Invest" element={< Invest/>} />
-          <Route path="/Startups" element={< Startups/>} />
+          <Route path="/Gallery/Photos" element={< Photos />} />
+          <Route path="/Gallery/Videos" element={< Videos />} />
+          <Route path="/IncubateWithUs" element={< JoinUs />} />
+          <Route path="/Accelerator-Collabrators" element={< Accelerators />} />
+          <Route path="/Advisory" element={< Advisory />} />
+          <Route path="/Eco-System-Partners" element={< Eco />} />
+          <Route path="/Government-Catalyst" element={< GovCatalyst />} />
+          <Route path="/Investment-and-Funding" element={< InvestandFund />} />
+          <Route path="/LegalCompliance" element={< LegalComplianceCouncil />} />
+          <Route path="/Mentorship" element={< MentorshipCouncil />} />
+          <Route path="/Technology-and-inovation" element={< TechInnovCouncil />} />
+          <Route path="/Programs" element={< Programs />} />
+          <Route path="/Programs/:programName" element={< ProgramDetails />} />
+          <Route path="/Recognitions" element={< Recognitions />} />
+          <Route path="/Vision" element={< VIsion />} />
+          <Route path="/Invest" element={< Invest />} />
+          <Route path="/Startups" element={< Startups />} />
 
-       
+
 
         </Routes>
-        </Layout>
-    
+      </Layout>
+
       {/* <Footer /> */}
     </div>
   );
