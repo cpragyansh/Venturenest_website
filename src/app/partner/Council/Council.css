@@ -1,5 +1,4 @@
-
-.main-council-block-container{
+.main-council-block-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,7 +6,8 @@
     gap: 2em;
     width: 100%;
 }
-.council-block-1-main-bg-img-section{
+
+.council-block-1-main-bg-img-section {
     width: 100%;
     height: auto;
     padding: 4em;
@@ -17,68 +17,72 @@
     background-size: cover;
     width: 100%;
     display: flex;
-    justify-content: start  ;
+    justify-content: start;
     align-items: start;
     flex-direction: column;
     gap: 2em;
 }
+
 .council-description-wrapper {
-  background: linear-gradient(135deg, #f5f7fa 0%, #e0e7ff 100%);
-  border-radius: 12px;
-  padding: 24px 40px;
-  /* max-width: 80vw; */
-  margin: 16px auto 40px auto;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e0e7ff 100%);
+    border-radius: 12px;
+    padding: 24px 40px;
+    /* max-width: 80vw; */
+    margin: 16px auto 40px auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .council-description {
-  font-size: 1.15rem;
-  line-height: 1.75;
-  color: #2c3e50;
-  font-weight: 500;
-  margin-bottom: 16px;
-  font-style: normal;
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: #2c3e50;
+    font-weight: 500;
+    margin-bottom: 16px;
+    font-style: normal;
 }
 
 .council-description strong {
-  color: #c8102e; /* Highlight color matching your brand */
+    color: #c8102e;
+    /* Highlight color matching your brand */
 }
 
 .council-divider {
-  width: 12vw;
-  height: 0.2vw;
-  background-color: #c8102e;
-  margin: 0 auto;
-  border: none;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(200, 10, 46, 0.4);
+    width: 12vw;
+    height: 0.2vw;
+    background-color: #c8102e;
+    margin: 0 auto;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(200, 10, 46, 0.4);
 }
 
 
-.council-block-1-head-main-text-area{
+.council-block-1-head-main-text-area {
     font-size: 4vh;
     font-weight: 600;
     color: white;
     text-align: center;
 
 }
-.council-block-1-mian-images-section-details{
+
+.council-block-1-mian-images-section-details {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 70vw;
     margin: auto;
-    
+
     height: auto;
     /* padding: 1vh; */
 
     gap: 4em;
     flex-wrap: wrap;
-    
+
 }
-.council-block-1-in-person-image-blocks{
+
+.council-block-1-in-person-image-blocks {
     /* height: 25em;
     width: 25em;
     background-color: grey; */
@@ -89,21 +93,24 @@
 
     /* gap: 1.4em; */
 }
-.council-members-details-1st-block{
+
+.council-members-details-1st-block {
     height: 14vw;
     width: 14vw;
-    background-color: white; 
+    background-color: white;
     object-fit: cover;
-    margin-bottom: 1em;  
+    margin-bottom: 1em;
     border-radius: 10px;
 }
-.council-block-1-in-person-name{
+
+.council-block-1-in-person-name {
     color: white;
     font-size: 2vh;
     font-weight: 600;
     text-align: center;
 }
-.council-block-1-in-person-company-detail{
+
+.council-block-1-in-person-company-detail {
     color: white;
     font-size: 1.7vh;
     font-weight: 500;
@@ -112,18 +119,19 @@
     /* width:; */
     /* margin: auto; */
 }
-.coucil-block-1-members-details-main-container{
+
+.coucil-block-1-members-details-main-container {
 
     text-align: center;
-width: 100%;
-margin: auto;
+    width: 100%;
+    margin: auto;
 }
 
 
 
 /* //block-2 */
 
-.council-block-2-main-bg-img-section{
+.council-block-2-main-bg-img-section {
     width: 100%;
     height: auto;
     padding: 4em;
@@ -132,40 +140,44 @@ margin: auto;
     /* background-position: center; */
     /* background-size: cover; */
     display: flex;
-    justify-content: start  ;
+    justify-content: start;
     align-items: start;
     flex-direction: column;
     gap: 3em;
 }
 
-.council-block-2-head-main-text-area{
+.council-block-2-head-main-text-area {
     font-size: 4vh;
     font-weight: 600;
     color: black;
 
 }
-.council-members-details-2st-block{
+
+.council-members-details-2st-block {
     height: 22em;
     width: 24em;
-    background-color: white; 
-    margin-bottom: 1em;  
+    background-color: white;
+    margin-bottom: 1em;
     border: 6px solid #A30D33;
-    border-radius:20px ;
+    border-radius: 20px;
 }
-.council-block-odd-non-bg-container-text-color{
+
+.council-block-odd-non-bg-container-text-color {
     color: black;
 }
-.council-block-1-in-person-main-img{
+
+.council-block-1-in-person-main-img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     object-position: center;
-    
+
     border-radius: 12px;
 }
+
 @media (min-width:320px) and (max-width:480px) {
-  
-    .council-block-1-mian-images-section-details{
+
+    .council-block-1-mian-images-section-details {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -174,11 +186,12 @@ margin: auto;
         ;
         height: auto;
         padding: 0vh;
-    
+
         gap: 4vw;
         flex-wrap: wrap;
     }
-    .council-block-1-main-bg-img-section{
+
+    .council-block-1-main-bg-img-section {
         width: 100%;
         height: auto;
         padding: 4em;
@@ -189,27 +202,29 @@ margin: auto;
         background-position: center;
         background-size: cover;
         display: flex;
-        justify-content: start  ;
+        justify-content: start;
         align-items: start;
         flex-direction: column;
         gap: 2em;
     }
-   
-    .council-members-details-1st-block{
+
+    .council-members-details-1st-block {
         height: 11em;
         width: 42vw;
-        background-color: white; 
-        margin-bottom: 1em;  
+        background-color: white;
+        margin-bottom: 1em;
         border-radius: 20px;
         object-fit: contain;
     }
-    .council-block-1-in-person-name{
+
+    .council-block-1-in-person-name {
         color: white;
         font-size: 1.7vh;
-        font-weight:600;
+        font-weight: 600;
         text-align: center;
     }
-    .council-block-1-in-person-company-detail{
+
+    .council-block-1-in-person-company-detail {
         color: white;
         font-size: 1.4vh;
         width: 35vw;
@@ -218,7 +233,8 @@ margin: auto;
         /* width:; */
         /* margin: auto; */
     }
-    .council-block-2-main-bg-img-section{
+
+    .council-block-2-main-bg-img-section {
         width: 100%;
         height: auto;
         padding: 1em;
@@ -227,11 +243,12 @@ margin: auto;
         /* background-position: center; */
         /* background-size: cover; */
         display: flex;
-        justify-content: start  ;
+        justify-content: start;
         align-items: start;
         flex-direction: column;
         gap: 4em;
     }
+
     .council-members-details-2st-block {
         height: 11em;
         width: 42vw;
@@ -240,10 +257,12 @@ margin: auto;
         border: 3px solid #A30D33;
         border-radius: 20px;
     }
-    .council-block-odd-non-bg-container-text-color{
+
+    .council-block-odd-non-bg-container-text-color {
         color: black;
     }
-    .council-block-1-in-person-main-img{
+
+    .council-block-1-in-person-main-img {
         height: 100%;
         width: 100%;
         object-fit: contain;

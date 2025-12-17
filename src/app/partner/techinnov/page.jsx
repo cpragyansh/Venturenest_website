@@ -18,23 +18,23 @@ export default function TechInnovCouncil() {
   }, []);
 
   return (
-  <div>
+    <div>
       <div className="council-block-1-main-bg-img-section">
+        {/* <div className="council-block-1-main-heading">
+          <h1 className="council-block-1-head-main-text-area">Technology and Innovation Council</h1>
+        </div> */}
+
+
         <div className="council-block-1-main-heading">
           <h1 className="council-block-1-head-main-text-area">Technology and Innovation Council</h1>
+
+          <div className="council-description-wrapper">
+            <p className="council-description">
+              The <strong>Technology and Innovation Council</strong>  supports startups in adopting emerging technologies, accelerating product development and fostering a culture of innovation. Members offer expertise in R&D, tech integration and innovation strategies that drive high-impact, competitive and future-ready solutions.
+            </p>
+            <hr className="council-divider" />
+          </div>
         </div>
-        
-
-        <div className="council-block-1-main-heading">
-  <h1 className="council-block-1-head-main-text-area">Technology and Innovation Council</h1>
-
-  <div className="council-description-wrapper">
-    <p className="council-description">
-      The <strong>Technology and Innovation Council</strong>  supports startups in adopting emerging technologies, accelerating product development and fostering a culture of innovation. Members offer expertise in R&D, tech integration and innovation strategies that drive high-impact, competitive and future-ready solutions.
-    </p>
-    <hr className="council-divider" />
-  </div>
-</div>
         <div className="council-block-1-mian-images-section-details">
           {members.length > 0 ? (
             members.map((member, index) => (

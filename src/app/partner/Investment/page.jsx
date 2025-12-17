@@ -28,7 +28,7 @@ export default function Invest() {
   }, []);
 
   return (
-    <div className="partners-container">
+    <div className="partners-container bg-repeat-y">
       {/* Background Image */}
       <img src="/assets/corosuel-bg.png" alt="Background" className="background-image" />
 
@@ -36,13 +36,13 @@ export default function Invest() {
       <div className="partners-content">
         <h2 className="eco-partners-title">Strategic Investment Partners</h2>
         <div className="gov-description-wrapper">
-  <p className="gov-description">
-    Our  <strong>strategic investment partners </strong> include reputed angel networks, venture capital firms and private investors who actively support our startups with funding, mentorship and strategic growth advisory to help them scale sustainably.
+          <p className="gov-description">
+            Our  <strong>strategic investment partners </strong> include reputed angel networks, venture capital firms and private investors who actively support our startups with funding, mentorship and strategic growth advisory to help them scale sustainably.
 
- </p>
-  <hr className="gov-divider" />
-</div>
-        
+          </p>
+          <hr className="gov-divider" />
+        </div>
+
         {loading ? (
           <p>Loading investors...</p>
         ) : investors.length === 0 ? (
@@ -51,7 +51,7 @@ export default function Invest() {
           <div className="partners-grid">
             {investors.map((partner, index) => (
               <div className="partner-card" key={index}>
-                <img src={partner.imgpath} alt={partner.Name}  className="ecosystem-partners-main-photo-direct" />
+                <img src={partner.imgpath} alt={partner.Name} className="ecosystem-partners-main-photo-direct" />
               </div>
             ))}
           </div>
