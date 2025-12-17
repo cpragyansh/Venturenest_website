@@ -28,6 +28,7 @@ import Recognitions from "./app/recognitions/page";
 import VIsion from "./app/vision/page";
 import Invest from "./app/partner/Investment/page";
 import Startups from "./app/invubatedstartup/page";
+import SuccessStories from "./app/successstories/page";
 
 // import Values from "./about/Values";
 
@@ -65,6 +66,7 @@ function App() {
           <Route path="/Vision" element={< VIsion/>} />
           <Route path="/Invest" element={< Invest/>} />
           <Route path="/Startups" element={< Startups/>} />
+          <Route path="/success" element={<SuccessStories />} />
 
        
 

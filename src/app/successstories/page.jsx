@@ -1,86 +1,162 @@
-// 'use client';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import MainPage from '../Components/Mainpage/Mainpage';
-import LatestNews from '../Components/LatestNews/LatestNews';
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Typography,
+  Avatar,
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  IconButton,
+  Fade,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import axios from "axios";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-export default function Page() {
-  const [successStories, setSuccessStories] = useState([]);
+const StartupStories = () => {
+  const [starredStories, setStarredStories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; // Number of items per page
+  // const [currentIndex, setCurrentIndex] = useState(0);
+  // const [show, setShow] = useState(true);
+  // const [selectedStory, setSelectedStory] = useState(null);
 
   useEffect(() => {
-    const fetchSuccessStories = async () => {
-      try {
-        const response = await axios.get('https://venturenest.onrender.com/getsuccess');
-        setSuccessStories(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching success stories:', err);
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-
-    fetchSuccessStories();
+    AOS.init({ duration: 1200 });
+    fetchStarredStories();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-  // Calculate the index of the first and last item to display
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = successStories.slice(indexOfFirstItem, indexOfLastItem);
-
-  const handleNext = () => {
-    if (currentPage * itemsPerPage < successStories.length) {
-      setCurrentPage(currentPage + 1);
+  const fetchStarredStories = async () => {
+    try {
+      const response = await axios.get("https://venturenest.onrender.com/starred-stories");
+      setStarredStories(response.data);
+    } catch (err) {
+      console.error("Error fetching starred stories:", err);
+      setError("Failed to load stories.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handlePrevious = () => {
-    if (currentPage > 1) { 
-      setCurrentPage(currentPage - 1);
-    }
-  };
 
   return (
-    <div>
-      <MainPage headingText="Success Stories" />
-      <div className="main-success-story flex flex-wrap justify-center items-center">
-      {currentItems.length > 0 ? (
-        currentItems.map((story) => (
-          <LatestNews
-            key={story._id}
-            NewsTitle={story.StartupName}
-            NewsImg={story.FounderImg} // Adjust path if necessary
-            NewsContent={story.StartupAbout}
-          />
-        ))
-      ) : (
-        <p>No success stories found.</p>
-      )}
-      </div>
+      // <Typography sx={{ mb: "4vw", fontSize: { xs: "6vw", sm: "6vw", lg: "2vw" }, mt: "2vw" }} className="section-title "> Inspirational Stories</Typography>
+      <Box>
 
-      <div className="flex justify-between mx-28 mt-5">
-        <button 
-          className={`bg-[#a00534] rounded-md p-2 text-white font-semibold hover:bg-[#d7295d] ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`} 
-          onClick={handlePrevious} 
-          disabled={currentPage === 1}
-        >
-          Pre
-        </button>
-        <button 
-          className={`bg-[#a00534] rounded-md p-2 text-white font-semibold hover:bg-[#d7295d] ${currentPage * itemsPerPage >= successStories.length ? 'opacity-50 cursor-not-allowed' : ''}`} 
-          onClick={handleNext}
-          disabled={currentPage * itemsPerPage >= successStories.length}
-        >
-          Next
-        </button>
-      </div>
-    </div>
+       <Typography variant="h3" textAlign="center" fontWeight="bold" pt={4} mb={8} sx={{pt:{xs:"20%",lg:"2vw"}}}>
+              Programs
+            </Typography>
+    <Box sx={{ width: { xs: "100%", sm: "100%", lg: "80%" }, minHeight: "100vh", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", margin: "auto",flexWrap:"wrap",gap:"2vw" }}>
+      {loading ? (
+        <Box display="flex" justifyContent="center" alignItems="center" py={4}>
+          <CircularProgress size={50} />
+        </Box>
+      ) : error ? (
+        <Typography color="error" textAlign="center">
+          {error}
+        </Typography>
+      ) : starredStories.length > 0?  (
+        starredStories.map((story , index) => (
+        <Box
+  key={index}
+  sx={{
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: 2,
+    overflow: "hidden",
+    boxShadow: 3,
+    cursor: "pointer",
+    width: { xs: "90%", sm: "100%", lg: "20vw" },
+    height: "700px",          // ✅ FIXED HEIGHT
+    border: "2px solid black",
+  }}
+>
+
+          {/* Top section */}
+           <Box
+  sx={{
+    backgroundImage: `url(${story.FounderImg || "assets/default.jpg"})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "100%",
+    height: "350px",        // ✅ FIXED IMAGE HEIGHT
+  }}
+/>
+
+       <Box
+  sx={{
+    backgroundColor: "#fff",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    flex: 1,                // ✅ THIS IS IMPORTANT
+    p: 3,
+  }}
+>
+
+            <Box flex={1} sx={{display:"flex",}}>
+              {/* <Box sx={{ height: { xs: "14vw", sm: "10vw", lg: "2vw" }, width: { xs: "32vw", sm: "25vw", lg: "12vw" }, objectFit: "cover", mb: { xs: "8vw", lg: "4vw" } }}>
+                <img
+                  src={story.FounderLogoImg || "assets/logo-placeholder.png"}
+                  alt="Startup Logo"
+                  style={{  objectFit: "cover" }}
+                />
+              </Box> */}
+              <Box>
+              <Typography variant="body1" color="red">
+                Success
+              </Typography>
+              <Typography variant="h4" fontWeight="bold">
+                {story.StartupName}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary">
+                Creating the World’s Largest Community <br /> for Entrepreneurs and Investors
+              </Typography>
+              </Box>
+            </Box>
+          
+          </Box>
+
+          {/* Bottom red section */}
+        <Box
+  sx={{
+    backgroundColor: "#e94b5e",
+    color: "#fff",
+    p: 3,
+    height: "140px",        // ✅ SAME HEIGHT FOR ALL
+    overflow: "hidden",
+  }}
+>
+  <Typography
+    variant="body1"
+    sx={{
+      display: "-webkit-box",
+      WebkitLineClamp: 4,
+      WebkitBoxOrient: "vertical",
+      overflow: "hidden",
+    }}
+  >
+    {story.StartupAbout}
+  </Typography>
+</Box>
+
+        </Box>
+        ))
+        // {/* </Fade> */}
+      )
+        : (
+          <Typography textAlign="center">No starred stories available.</Typography>
+        )}
+
+      {/* Popup */}
+
+
+
+    </Box>
+    </Box>
   );
-}
+};
+
+export default StartupStories;
