@@ -19,6 +19,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 
 const ContactSection = () => {
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -57,6 +58,63 @@ const ContactSection = () => {
                 Questions? We'd love to hear from you. Fill out the form and our team will get back to you soon.
               </Typography>
 
+              <Grid container spacing={2} mt={6} mb={6}>
+                <Grid item xs={12} sm={6} className="cursor-pointer" onClick={() => window.open('https://maps.app.goo.gl/rpp1Tn6aE7WjcZcx8', '_blank')}>
+
+                  <Paper sx={{ p: 3, display: 'flex', gap: 2, alignItems: 'center' }} elevation={3}>
+                    <Avatar sx={{ bgcolor: 'rgb(133, 41, 41)' }}><LocationOnIcon /></Avatar>
+                    <Box>
+                      <Typography variant="subtitle1" fontWeight={600}>Address</Typography>
+                      <Typography variant="body2">
+                        CGC University,
+                        Mohali State Highway 12A,
+                        Sahibzada Ajit Singh Nagar, Punjab 140307
+                      </Typography>
+                    </Box>
+                  </Paper>
+                </Grid>
+                {/* Phone copies to clipboard and show toast message*/}
+
+                <Grid item xs={12} sm={6} className="cursor-pointer" onClick={() => navigator.clipboard.writeText('+91 9056710756')} >
+                  <Paper sx={{ p: 3, display: 'flex', gap: 2, alignItems: 'center' }} elevation={3}>
+                    <Avatar sx={{ bgcolor: 'rgb(133, 41, 41)' }}><PhoneIcon /></Avatar>
+                    <Box>
+                      <Typography variant="subtitle1" fontWeight={600}>Phone</Typography>
+                      <Typography variant="body2"  >+91 9056710756</Typography>
+                    </Box>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} className="cursor-pointer" onClick={() => navigator.clipboard.writeText('venturenest@cgc.ac.in')}>
+                  <Paper sx={{ p: 3, display: 'flex', gap: 2, alignItems: 'center' }} elevation={3}>
+                    <Avatar sx={{ bgcolor: 'rgb(133, 41, 41)' }}><EmailIcon /></Avatar>
+                    <Box>
+                      <Typography variant="subtitle1" fontWeight={600}>Email</Typography>
+                      <Typography variant="body2">venturenest@cgc.ac.in</Typography>
+                    </Box>
+                  </Paper>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Slide direction="left" in timeout={1000}>
+                  <Box
+                    component="iframe"
+                    src="https://maps.google.com/maps?q=CGC%20University%20 University&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    sx={{
+                      width: '100%',
+                      height: 420,
+                      // maxWidth: 600,
+                      marginBottom: 2,
+                      border: 0,
+                      borderRadius: 4,
+                      boxShadow: '0 8px 30px rgba(0,0,0,0.2)'
+                    }}
+                    width={800}
+                    height={600}
+                    allowFullScreen=""
+                    loading="lazy"
+                  />
+                </Slide>
+              </Grid>
               <Box
                 component="form"
                 sx={{
@@ -95,61 +153,12 @@ const ContactSection = () => {
               </Box>
 
               {/* Highlighted Campus Info */}
-              <Grid container spacing={2} mt={6}>
-                <Grid item xs={12} sm={6}>
-                  <Paper sx={{ p: 3, display: 'flex', gap: 2, alignItems: 'center' }} elevation={3}>
-                    <Avatar sx={{ bgcolor: 'rgb(133, 41, 41)' }}><LocationOnIcon /></Avatar>
-                    <Box>
-                      <Typography variant="subtitle1" fontWeight={600}>Address</Typography>
-                      <Typography variant="body2">
-                        CGC University,
-                        Mohali State Highway 12A,
-                        Sahibzada Ajit Singh Nagar, Punjab 140307
-                      </Typography>
-                    </Box>
-                  </Paper>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Paper sx={{ p: 3, display: 'flex', gap: 2, alignItems: 'center' }} elevation={3}>
-                    <Avatar sx={{ bgcolor: 'rgb(133, 41, 41)' }}><PhoneIcon /></Avatar>
-                    <Box>
-                      <Typography variant="subtitle1" fontWeight={600}>Phone</Typography>
-                      <Typography variant="body2">+91 9056710756</Typography>
-                    </Box>
-                  </Paper>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Paper sx={{ p: 3, display: 'flex', gap: 2, alignItems: 'center' }} elevation={3}>
-                    <Avatar sx={{ bgcolor: 'rgb(133, 41, 41)' }}><EmailIcon /></Avatar>
-                    <Box>
-                      <Typography variant="subtitle1" fontWeight={600}>Email</Typography>
-                      <Typography variant="body2">venturenest@cgc.ac.in</Typography>
-                    </Box>
-                  </Paper>
-                </Grid>
-              </Grid>
+
             </Box>
           </Fade>
         </Grid>
 
         {/* Map Section */}
-        <Grid item xs={12} md={6}>
-          <Slide direction="left" in timeout={1000}>
-            <Box
-              component="iframe"
-              src="https://maps.google.com/maps?q=CGC%20University%20 University&t=&z=13&ie=UTF8&iwloc=&output=embed"
-              sx={{
-                width: '100%',
-                height: 420,
-                border: 0,
-                borderRadius: 4,
-                boxShadow: '0 8px 30px rgba(0,0,0,0.2)'
-              }}
-              allowFullScreen=""
-              loading="lazy"
-            />
-          </Slide>
-        </Grid>
       </Grid>
     </Box>
   );

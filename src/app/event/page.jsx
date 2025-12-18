@@ -1,5 +1,6 @@
 // "use client";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import {
   Box,
@@ -45,6 +46,15 @@ export default function Events() {
     fetchEvents();
   }, []);
 
+  const createSlug = (name) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
   useEffect(() => {
     if (!selectedMonth && !selectedYear) {
       setFilteredEvents(events);
@@ -86,7 +96,7 @@ export default function Events() {
   };
 
   return (
-    <Box sx={{ background: "#f9f9f9", minHeight: "100vh", pb: "4vw",pt:{xs:"30vw",sm:"30vw",md:"10vw",lg:"5vw"} }}>
+    <Box sx={{ background: "#f9f9f9", minHeight: "100vh", pb: "4vw", pt: { xs: "30vw", sm: "30vw", md: "10vw", lg: "5vw" } }}>
       {/* 🌟 CAROUSEL */}
       {/* <Box sx={{ width: "100%", height: { xs: "40vh", sm: "50vh", md: "70vh" }, mb: 4 }}>
         <Swiper
@@ -168,7 +178,7 @@ export default function Events() {
         textAlign="center"
         fontWeight="bold"
         mb={2}
-        sx={{ fontSize: { xs: "7vw", sm: "5vw", md: "3vw" } ,mt:{xs:"4vw",md:"2vw",lg:"1vw"}}}
+        sx={{ fontSize: { xs: "7vw", sm: "5vw", md: "3vw" }, mt: { xs: "4vw", md: "2vw", lg: "1vw" } }}
       >
         Events
       </Typography>
@@ -275,6 +285,8 @@ export default function Events() {
                     </Box>
 
                     <Button
+                      component={Link}
+                      to={`/Events/${createSlug(event.eventName)}`}
                       size="small"
                       variant="contained"
                       sx={{
@@ -285,13 +297,6 @@ export default function Events() {
                         fontSize: { xs: "3.5vw", sm: "1.1vw" },
                         alignSelf: "flex-start",
                         "&:hover": { background: "#B22222" }
-                      }}
-                      onClick={() => {
-                        if (event.eventDescription?.startsWith("http")) {
-                          window.open(event.eventDescription, "_blank");
-                        } else {
-                          alert("Invalid or missing link in description.");
-                        }
                       }}
                     >
                       Read More

@@ -12,6 +12,7 @@ import Dashboard from "./app/Components/Dashboard/Dashboard";
 import Member from "./app/Components/Members/Member";
 import Contact from "./app/contact/page";
 import Events from "./app/event/page";
+import EventDetails from "./app/events/[eventName]/page";
 import Photos from "./app/gallery/photo/page";
 import Videos from "./app/gallery/video/page";
 import JoinUs from "./app/Incubate_form/page";
@@ -52,6 +53,7 @@ function App() {
           <Route path="/Members" element={<Member />} />
           <Route path="/ContactUs" element={<Contact />} />
           <Route path="/Events" element={<Events />} />
+          <Route path="/Events/:eventName" element={<EventDetails />} />
           <Route path="/Gallery/Photos" element={< Photos />} />
           <Route path="/Gallery/Videos" element={< Videos />} />
           <Route path="/IncubateWithUs" element={< JoinUs />} />
