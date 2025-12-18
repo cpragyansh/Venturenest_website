@@ -43,33 +43,33 @@ export default function Photos() {
 
   return (
     <>
-       <Typography variant="h4" textAlign="center" fontWeight="bold" pt={4} mb={2} sx={{pt:{xs:"20%",lg:"2vw"}}}>
+      <Typography variant="h4" textAlign="center" fontWeight="bold" pt={4} mb={2} sx={{ pt: { xs: "20%", lg: "2vw" } }}>
         Photos
       </Typography>
       <div className="flex justify-center main-photo-container">
         <div className="flex justify-center items-center flex-wrap ">
-        {Path.length > 0 ? (
-  Path.map((item, index) => (
-    <div key={item.id} onClick={() => handleImageClick(item)}>
-      <div className="gallery-container">
-        <div className="gallerys">
-          <div className={`gallery-row-one gallery-main ${index % 2 === 0 ? "big-box" : "small-box"}`}>
-            <div className="gallery">
-              <img
-                className="background-image-vv-photo"
-                src={item.imageUrl} 
-                alt={item.photoName} 
-              />
-              <div className="head-gallery">{item.photoName}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  ))
-) : (
-  <div>Loading...</div>
-)}
+          {Path.length > 0 ? (
+            Path.map((item, index) => (
+              <div key={item.id} onClick={() => handleImageClick(item)}>
+                <div className="gallery-container">
+                  <div className="gallerys">
+                    <div className={`gallery-row-one gallery-main ${index % 2 === 0 ? "big-box" : "small-box"}`}>
+                      <div className="gallery">
+                        <img
+                          className="background-image-vv-photo"
+                          src={item.imageUrl}
+                          alt={item.photoName}
+                        />
+                        <div className="head-gallery">{item.photoName}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div>Loading...</div>
+          )}
 
         </div>
       </div>
