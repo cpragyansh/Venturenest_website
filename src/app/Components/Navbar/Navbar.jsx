@@ -88,6 +88,7 @@ const Navbar = () => {
               <li><a href="/aboutUs" onClick={closeMenu}>About Us</a></li>
               <li><a href="/vision" onClick={closeMenu}>Mission & Vision</a></li>
               <li><a href="/contact" onClick={closeMenu}>Contact</a></li>
+              <li><a href="/success" onClick={closeMenu}>Success Stories</a></li>
             </ul>
           </li>
 
