@@ -30,6 +30,7 @@ import Invest from "./app/partner/Investment/page";
 import Startups from "./app/invubatedstartup/page";
 import SuccessStories from "./app/successstories/page";
 import ProgramDetails from "./app/Programs/[programName]/page";
+import StoryDetails from "./app/successstories/seperatesuccess";
 
 // import Values from "./about/Values";
 
@@ -69,6 +70,7 @@ function App() {
           <Route path="/Invest" element={< Invest />} />
           <Route path="/Startups" element={< Startups />} />
           <Route path="/success" element={< SuccessStories />} />
+          <Route path="/success/:id" element={< StoryDetails />} />
 
 
 

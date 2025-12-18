@@ -14,6 +14,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useNavigate } from "react-router-dom";
+
 
 const StartupStories = () => {
   const [starredStories, setStarredStories] = useState([]);
@@ -22,12 +24,12 @@ const StartupStories = () => {
   // const [currentIndex, setCurrentIndex] = useState(0);
   // const [show, setShow] = useState(true);
   // const [selectedStory, setSelectedStory] = useState(null);
-
+  
   useEffect(() => {
     AOS.init({ duration: 1200 });
     fetchStarredStories();
   }, []);
-
+  
   const fetchStarredStories = async () => {
     try {
       const response = await axios.get("https://venturenest.onrender.com/starred-stories");
@@ -39,88 +41,91 @@ const StartupStories = () => {
       setLoading(false);
     }
   };
-
-
+  
+  const navigate = useNavigate();
+  
   return (
-      // <Typography sx={{ mb: "4vw", fontSize: { xs: "6vw", sm: "6vw", lg: "2vw" }, mt: "2vw" }} className="section-title "> Inspirational Stories</Typography>
-      <Box>
+    // <Typography sx={{ mb: "4vw", fontSize: { xs: "6vw", sm: "6vw", lg: "2vw" }, mt: "2vw" }} className="section-title "> Inspirational Stories</Typography>
+    <Box>
 
-       <Typography variant="h3" textAlign="center" fontWeight="bold" pt={4} mb={8} sx={{pt:{xs:"20%",lg:"2vw"}}}>
-              Programs
-            </Typography>
-    <Box sx={{ width: { xs: "100%", sm: "100%", lg: "80%" }, minHeight: "100vh", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", margin: "auto",flexWrap:"wrap",gap:"2vw" }}>
-      {loading ? (
-        <Box display="flex" justifyContent="center" alignItems="center" py={4}>
-          <CircularProgress size={50} />
-        </Box>
-      ) : error ? (
-        <Typography color="error" textAlign="center">
-          {error}
-        </Typography>
-      ) : starredStories.length > 0?  (
-        starredStories.map((story , index) => (
-        <Box
-  key={index}
-  sx={{
-    display: "flex",
-    flexDirection: "column",
-    borderRadius: 2,
-    overflow: "hidden",
-    boxShadow: 3,
-    cursor: "pointer",
-    width: { xs: "90%", sm: "100%", lg: "20vw" },
-    height: "700px",          // ✅ FIXED HEIGHT
-    border: "2px solid black",
-  }}
->
+      <Typography variant="h3" textAlign="center" fontWeight="bold" pt={4} mb={1} sx={{ pt: { xs: "20%", lg: "2vw" } }}>
+        Success stories
+      </Typography>
+      <Box sx={{ width: { xs: "100%", sm: "100%", lg: "100%" }, minHeight: "100vh", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", margin: "auto", flexWrap: "wrap", gap: "2vw" }}>
+        {loading ? (
+          <Box display="flex" justifyContent="center" alignItems="center" py={4}>
+            <CircularProgress size={50} />
+          </Box>
+        ) : error ? (
+          <Typography color="error" textAlign="center">
+            {error}
+          </Typography>
+        ) : starredStories.length > 0 ? (
+          starredStories.map((story, index) => (
+            <Box
 
-          {/* Top section */}
-           <Box
-  sx={{
-    backgroundImage: `url(${story.FounderImg || "assets/default.jpg"})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    height: "350px",        // ✅ FIXED IMAGE HEIGHT
-  }}
-/>
+              key={index}
+              onClick={() => navigate(`/success/${story._id}`)}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: 2,
+                overflow: "hidden",
+                boxShadow: 3,
+                cursor: "pointer",
+                width: { xs: "90%", sm: "100%", lg: "20vw" },
+                height: "580px",          // ✅ FIXED HEIGHT
+                border: "2px solid black",
+              }}
+            >
 
-       <Box
-  sx={{
-    backgroundColor: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    flex: 1,                // ✅ THIS IS IMPORTANT
-    p: 3,
-  }}
->
+              {/* Top section */}
+              <Box
+                sx={{
+                  backgroundImage: `url(${story.FounderImg || "assets/default.jpg"})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  width: "100%",
+                  height: "350px",        // ✅ FIXED IMAGE HEIGHT
+                }}
+              />
 
-            <Box flex={1} sx={{display:"flex",}}>
-              {/* <Box sx={{ height: { xs: "14vw", sm: "10vw", lg: "2vw" }, width: { xs: "32vw", sm: "25vw", lg: "12vw" }, objectFit: "cover", mb: { xs: "8vw", lg: "4vw" } }}>
+              <Box
+                sx={{
+                  backgroundColor: "#fff",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  flex: 1,                // ✅ THIS IS IMPORTANT
+                  p: 3,
+                }}
+              >
+
+                <Box flex={1} sx={{ display: "flex", }}>
+                  {/* <Box sx={{ height: { xs: "14vw", sm: "10vw", lg: "2vw" }, width: { xs: "32vw", sm: "25vw", lg: "12vw" }, objectFit: "cover", mb: { xs: "8vw", lg: "4vw" } }}>
                 <img
                   src={story.FounderLogoImg || "assets/logo-placeholder.png"}
                   alt="Startup Logo"
                   style={{  objectFit: "cover" }}
                 />
               </Box> */}
-              <Box>
-              <Typography variant="body1" color="red">
-                Success
-              </Typography>
-              <Typography variant="h4" fontWeight="bold">
-                {story.StartupName}
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary">
-                Creating the World’s Largest Community <br /> for Entrepreneurs and Investors
-              </Typography>
-              </Box>
-            </Box>
-          
-          </Box>
+                  <Box>
+                    <Typography variant="body1" color="red">
+                      Success
+                    </Typography>
+                    <Typography variant="h4" fontWeight="bold">
+                      {story.StartupName}
+                    </Typography>
+                    <Typography variant="subtitle1" color="text.secondary">
+                      Creating the World’s Largest Community <br /> for Entrepreneurs and Investors
+                    </Typography>
+                  </Box>
+                </Box>
 
-          {/* Bottom red section */}
-        <Box
+              </Box>
+
+              {/* Bottom red section */}
+              {/* <Box
   sx={{
     backgroundColor: "#e94b5e",
     color: "#fff",
@@ -140,21 +145,21 @@ const StartupStories = () => {
   >
     {story.StartupAbout}
   </Typography>
-</Box>
+</Box> */}
 
-        </Box>
-        ))
-        // {/* </Fade> */}
-      )
-        : (
-          <Typography textAlign="center">No starred stories available.</Typography>
-        )}
+            </Box>
+          ))
+          // {/* </Fade> */}
+        )
+          : (
+            <Typography textAlign="center">No starred stories available.</Typography>
+          )}
 
-      {/* Popup */}
+        {/* Popup */}
 
 
 
-    </Box>
+      </Box>
     </Box>
   );
 };
