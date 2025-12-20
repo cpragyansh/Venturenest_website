@@ -10,7 +10,9 @@ import {
   CheckCircle,
   HowToReg,
   Assessment,
-  RocketLaunch
+  RocketLaunch,
+  School,
+  ArrowRight
 } from "@mui/icons-material";
 
 // Animation Variants
@@ -20,7 +22,7 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.15,
-      delayChildren: 0.2
+      delayChildren: 0.1
     }
   }
 };
@@ -34,15 +36,6 @@ const itemVariants = {
   }
 };
 
-const slideRightVariants = {
-  hidden: { opacity: 0, x: -50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: "easeOut" }
-  }
-};
-
 const slideLeftVariants = {
   hidden: { opacity: 0, x: 50 },
   visible: {
@@ -53,11 +46,11 @@ const slideLeftVariants = {
 };
 
 const scaleVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
+  hidden: { opacity: 0, scale: 0.95 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5, ease: "backOut" }
+    transition: { duration: 0.4, ease: "backOut" }
   }
 };
 
@@ -94,7 +87,7 @@ export default function JoinUs() {
             </motion.div>
           </motion.div>
 
-          {/* Right: The Mission (Moved here) */}
+          {/* Right: The Mission / Welcome */}
           <motion.div
             className="hero-right"
             initial="hidden"
@@ -102,14 +95,18 @@ export default function JoinUs() {
             variants={slideLeftVariants}
           >
             <div className="mission-text">
-              <p style={{ marginBottom: '1.5rem', fontWeight: 'bold', fontSize: '1.2rem', color: 'var(--color-primary)' }}>
-                THE MISSION
+              <p style={{ marginBottom: '1rem', fontWeight: 'bold', fontSize: '1.2rem', color: 'var(--color-primary)' }}>
+                WELCOME TO CGC VENTURENEST
+              </p>
+              <p style={{ marginBottom: '1rem' }}>
+                Welcome to CGC University VentureNest – The Innovation Hub for Emerging Startups.
+                Looking to transform your startup dream into a thriving business?
               </p>
               <p style={{ marginBottom: '1rem' }}>
                 CGC University VentureNest is your ultimate launchpad — an entrepreneurial ecosystem built to support and accelerate innovation, from ideation to execution.
               </p>
               <p>
-                Join a dynamic community of changemakers, visionary mentors, and investors ready to fuel your journey. Whether you're a student founder or a growth-stage startup, VentureNest offers everything you need to scale smarter, faster, and stronger.
+                Join a dynamic community of changemakers, visionary mentors and investors ready to fuel your journey. Whether you're a student founder or a growth-stage startup, VentureNest offers everything you need to scale smarter, faster and stronger.
               </p>
             </div>
           </motion.div>
@@ -117,8 +114,43 @@ export default function JoinUs() {
         </div>
       </section>
 
-      {/* 2. ECOSYSTEM - Glassmorphism Cards with Icons */}
-      <section className="section-container" style={{ marginTop: 'var(--space-xl)' }}>
+      {/* 2. ABOUT US (New Section) */}
+      <section className="section-container" style={{ marginTop: 'var(--space-lg)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 'var(--space-md)' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="section-header" style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>About CGC University VentureNest</h2>
+            <p className="card-desc" style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
+              At VentureNest, we empower startups at every stage — turning ambitious ideas into sustainable ventures.
+            </p>
+            <p className="card-desc" style={{ fontWeight: '600', marginBottom: '0.5rem' }}>
+              Our incubation program is designed to provide:
+            </p>
+            <ul className="about-list">
+              {[
+                "Strategic Mentorship from seasoned entrepreneurs and industry experts",
+                "Seed Funding & Investor Access to back your vision",
+                "Co-working Infrastructure that sparks productivity",
+                "Workshops & Training to sharpen your startup skills",
+                "Exposure to Ecosystem Networks, events and pitch opportunities"
+              ].map((item, i) => (
+                <li key={i} className="about-item">
+                  <ArrowRight className="about-icon" /> {item}
+                </li>
+              ))}
+            </ul>
+            <p className="card-desc" style={{ marginTop: '1rem', fontStyle: 'italic', color: 'var(--color-primary)' }}>
+              Our goal is to create future-ready entrepreneurs equipped with the tools, knowledge and confidence to lead the next wave of innovation.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 3. WHY CHOOSE VENTURENEST (Cards) */}
+      <section className="section-container" style={{ marginTop: 'var(--space-lg)' }}>
         <motion.h2
           className="section-header"
           initial={{ opacity: 0, width: 0 }}
@@ -126,7 +158,7 @@ export default function JoinUs() {
           transition={{ duration: 1 }}
           viewport={{ once: true }}
         >
-          Our Ecosystem
+          Why Choose VentureNest?
         </motion.h2>
 
         <motion.div
@@ -136,41 +168,52 @@ export default function JoinUs() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
+          {/* Card 1 */}
           <motion.div className="glass-card" variants={scaleVariants}>
             <Psychology className="card-icon" />
-            <h3 className="card-title">Mentorship</h3>
-            <p className="card-desc">Strategic guidance from seasoned entrepreneurs and industry experts who have been there.</p>
+            <h3 className="card-title">Expert Mentorship</h3>
+            <p className="card-desc">Get one-on-one guidance from startup veterans, industry leaders and domain experts.</p>
           </motion.div>
 
+          {/* Card 2 */}
           <motion.div className="glass-card" variants={scaleVariants}>
             <MonetizationOn className="card-icon" />
-            <h3 className="card-title">Capital</h3>
-            <p className="card-desc">Access to seed funding, angel investors, and venture capitalists to back your vision.</p>
+            <h3 className="card-title">Funding Access</h3>
+            <p className="card-desc">Connect with angel investors, venture capitalists and funding bodies to raise capital.</p>
           </motion.div>
 
+          {/* Card 3 */}
           <motion.div className="glass-card" variants={scaleVariants}>
             <Apartment className="card-icon" />
-            <h3 className="card-title">Space</h3>
-            <p className="card-desc">Modern co-working infrastructure designed to spark productivity and collaboration.</p>
+            <h3 className="card-title">World-Class Infrastructure</h3>
+            <p className="card-desc">Work in modern, tech-enabled office spaces that support focus, collaboration and creativity.</p>
           </motion.div>
 
+          {/* Card 4 */}
           <motion.div className="glass-card" variants={scaleVariants}>
             <Hub className="card-icon" />
-            <h3 className="card-title">Network</h3>
-            <p className="card-desc">A powerful network of fellow founders, corporate partners, and alumni.</p>
+            <h3 className="card-title">Powerful Networking</h3>
+            <p className="card-desc">Build valuable connections with fellow founders, investors, alumni and corporate partners.</p>
+          </motion.div>
+
+          {/* Card 5 */}
+          <motion.div className="glass-card" variants={scaleVariants}>
+            <School className="card-icon" />
+            <h3 className="card-title">Skill-Building Bootcamps</h3>
+            <p className="card-desc">Attend interactive masterclasses, startup workshops and intensive training sessions tailored to your growth stage.</p>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* 3. WHO WE BACK - Checklist Cards */}
-      <section className="section-container" style={{ marginTop: 'var(--space-xl)' }}>
+      {/* 4. WHO SHOULD APPLY - Checklist Cards */}
+      <section className="section-container" style={{ marginTop: 'var(--space-lg)' }}>
         <motion.h2
           className="section-header"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          Who We Back
+          Who Should Apply?
         </motion.h2>
         <motion.div
           className="checklist-grid"
@@ -180,28 +223,28 @@ export default function JoinUs() {
           viewport={{ once: true }}
         >
           {[
-            "Aspiring student entrepreneurs with big ideas",
-            "Early-stage startups seeking traction",
-            "Growth-focused teams solving real problems",
-            "Innovators in AI, Healthtech, Edtech, & Sustainability"
+            "Aspiring student entrepreneurs with big ideas Early-stage startups seeking traction and guidance",
+            "Growth-focused teams solving real-world problems",
+            "Innovators in tech, AI/ML, sustainability, healthtech, edtech and more",
+            "Whether you're at the prototype stage or looking to raise your first round — VentureNest is the place for you."
           ].map((item, index) => (
-            <motion.div key={index} className="check-card" variants={slideRightVariants}>
-              <CheckCircle sx={{ color: 'var(--color-primary)', fontSize: 28 }} />
+            <motion.div key={index} className="check-card" variants={scaleVariants}>
+              <CheckCircle sx={{ color: 'var(--color-primary)', fontSize: 24, marginRight: '10px', marginTop: '2px' }} />
               <span className="check-text">{item}</span>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
-      {/* 4. PROCESS - Tree / Timeline */}
-      <section className="section-container" style={{ marginTop: 'var(--space-xl)', marginBottom: 'var(--space-xl)' }}>
+      {/* 5. PROCESS - Tree / Timeline */}
+      <section className="section-container" style={{ marginTop: 'var(--space-lg)', marginBottom: 'var(--space-lg)' }}>
         <motion.h2
           className="section-header"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          The Process
+          Application Process
         </motion.h2>
 
         <div className="timeline-container">
@@ -214,25 +257,25 @@ export default function JoinUs() {
           ></motion.div>
 
           {[
-            { id: 1, title: 'Application', icon: <HowToReg sx={{ color: 'var(--color-primary)' }} />, text: 'Submit your initial concept via our online portal.' },
-            { id: 2, title: 'Evaluation', icon: <Assessment sx={{ color: 'var(--color-primary)' }} />, text: 'Screening by our investment committee and internal experts.' },
-            { id: 3, title: 'Onboarding', icon: <RocketLaunch sx={{ color: 'var(--color-primary)' }} />, text: 'Formal induction into the cohort and resource allocation.' }
+            { id: 1, title: 'Submit Your Application', icon: <HowToReg sx={{ color: 'var(--color-primary)' }} />, text: 'Fill out our simple online form.' },
+            { id: 2, title: 'Screening & Evaluation', icon: <Assessment sx={{ color: 'var(--color-primary)' }} />, text: 'We review and invite top candidates for interviews.' },
+            { id: 3, title: 'Selection & Onboarding', icon: <RocketLaunch sx={{ color: 'var(--color-primary)' }} />, text: 'Join our program and start your journey.' }
           ].map((step, idx) => (
             <motion.div
               key={step.id}
               className="timeline-node"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: idx * 0.3, duration: 0.5 }}
+              transition={{ delay: idx * 0.2, duration: 0.5 }}
               viewport={{ once: true }}
             >
               <div className="timeline-circle">{step.id}</div>
               <div className="timeline-content">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                   {step.icon}
-                  <h3 className="timeline-title" style={{ margin: 0 }}>{step.title}</h3>
+                  <h3 className="timeline-title" style={{ margin: 0, fontSize: '1.1rem' }}>{step.title}</h3>
                 </div>
-                <p className="card-desc">{step.text}</p>
+                <p className="card-desc" style={{ fontSize: '1rem' }}>{step.text}</p>
               </div>
             </motion.div>
           ))}
@@ -240,10 +283,10 @@ export default function JoinUs() {
         </div>
 
         <motion.div
-          style={{ marginTop: 'var(--space-lg)', textAlign: 'center' }}
+          style={{ marginTop: 'var(--space-md)', textAlign: 'center' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.5 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
           viewport={{ once: true }}
         >
           <motion.a
