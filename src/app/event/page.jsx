@@ -2,34 +2,197 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {
-  Box,
-  Grid,
-  Typography,
-  Button,
-  Modal,
-  IconButton,
-  Collapse,
-  Card,
-  MenuItem,
-  Select,
-  FormControl,
-  InputLabel
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, EffectFade } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/effect-fade";
+import { motion, AnimatePresence } from "framer-motion";
+
+// --- Design System Utilities ---
+// Mapping visual hierarchy to opacity instead of color
+const TEXT_PRIMARY = "opacity-100";
+const TEXT_SECONDARY = "opacity-70";
+const TEXT_TERTIARY = "opacity-50";
+
+// --- Components ---
+
+const SectionHeader = () => (
+  <motion.header
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    className="flex flex-col items-center text-center max-w-4xl mx-auto mb-20 px-6"
+  >
+    <h1
+      className={`text-4xl md:text-5xl lg:text-6xl mb-8 ${TEXT_PRIMARY}`}
+      style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em', fontWeight: 400 }}
+    >
+      Events
+    </h1>
+    <p
+      className={`text-lg md:text-xl max-w-xl leading-relaxed ${TEXT_SECONDARY}`}
+      style={{ fontFamily: 'var(--font-reading)' }}
+    >
+      Curated experiences for the entrepreneurial mind.
+      Connect, learn, and grow with our ecosystem.
+    </p>
+  </motion.header>
+);
+
+const FilterTabs = ({ selectedMonth, setSelectedMonth, selectedYear, setSelectedYear, events }) => {
+  const years = ["", ...new Set(events.map(e => new Date(e.eventDate).getFullYear()))];
+  const months = [
+    { val: "", label: "All Months" },
+    ...Array.from({ length: 12 }, (_, i) => ({
+      val: String(i + 1).padStart(2, "0"),
+      label: new Date(2000, i).toLocaleString("default", { month: "long" })
+    }))
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-24 px-6"
+    >
+      {/* Year Filter */}
+      <div className="flex gap-6 overflow-x-auto pb-2 no-scrollbar">
+        {years.map(year => (
+          <button
+            key={year || "all"}
+            onClick={() => setSelectedYear(year ? String(year) : "")}
+            className={`relative pb-1 transition-all duration-300 ease-out text-sm uppercase tracking-widest ${String(selectedYear) === String(year) ? TEXT_PRIMARY : TEXT_TERTIARY
+              }`}
+            style={{ fontFamily: 'var(--font-ui)' }}
+          >
+            {year || "All Years"}
+            {String(selectedYear) === String(year) && (
+              <motion.div layoutId="year-underline" className="absolute bottom-0 left-0 right-0 h-px bg-current" />
+            )}
+          </button>
+        ))}
+      </div>
+
+      <div className={`hidden md:block w-px h-4 bg-current ${TEXT_TERTIARY}`} />
+
+      {/* Month Filter */}
+      <div className="group relative">
+        <select
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}
+          className={`appearance-none bg-transparent border-b border-current pb-1 pr-8 text-sm uppercase tracking-widest cursor-pointer outline-none focus:opacity-100 transition-opacity ${selectedMonth ? TEXT_PRIMARY : TEXT_SECONDARY
+            }`}
+          style={{ fontFamily: 'var(--font-ui)' }}
+        >
+          {months.map((m) => (
+            <option key={m.val} value={m.val} className="text-black bg-white">
+              {m.label}
+            </option>
+          ))}
+        </select>
+        <span className={`pointer-events-none absolute right-0 bottom-1.5 text-[0.6em] transform rotate-90 ${TEXT_TERTIARY}`}>▶</span>
+      </div>
+    </motion.div>
+  );
+};
+
+const EventCard = ({ event, index }) => {
+  const createSlug = (name) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return {
+      day: date.getDate(),
+      month: date.toLocaleString("default", { month: "short" }).toUpperCase(),
+      year: date.getFullYear()
+    };
+  };
+
+  const { day, month, year } = formatDate(event.eventDate);
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className="group flex flex-col h-full relative"
+    >
+      {/* Image Container */}
+      <Link to={`/Events/${createSlug(event.eventName)}`} className="block overflow-hidden mb-6 aspect-[4/3] bg-gray-100">
+        <motion.img
+          src={event.imageUrl}
+          alt={event.eventName}
+          className="w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105"
+        />
+      </Link>
+
+      {/* Meta Data */}
+      <div className={`flex items-baseline gap-3 mb-3 text-xs tracking-widest uppercase ${TEXT_SECONDARY}`} style={{ fontFamily: 'var(--font-ui)' }}>
+        <span>{month} {day}, {year}</span>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 flex flex-col justify-start">
+        <h3
+          className={`text-2xl mb-4 leading-tight group-hover:underline decoration-1 underline-offset-4 ${TEXT_PRIMARY}`}
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
+          <Link to={`/Events/${createSlug(event.eventName)}`}>
+            {event.eventName}
+          </Link>
+        </h3>
+
+        <p
+          className={`text-sm leading-relaxed mb-6 line-clamp-3 ${TEXT_TERTIARY}`}
+          style={{ fontFamily: 'var(--font-ui)' }}
+        >
+          {event.eventDescription || event.eventTitle}
+        </p>
+
+        <div className="mt-auto">
+          <Link
+            to={`/Events/${createSlug(event.eventName)}`}
+            className={`inline-block text-xs uppercase tracking-widest border-b border-transparent group-hover:border-current transition-colors duration-300 ${TEXT_PRIMARY}`}
+            style={{ fontFamily: 'var(--font-ui)' }}
+          >
+            Read More
+          </Link>
+        </div>
+      </div>
+    </motion.article>
+  );
+};
+
+const EventsGrid = ({ events }) => {
+  if (events.length === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+        className="text-center py-20"
+      >
+        <p className={`text-lg ${TEXT_TERTIARY}`} style={{ fontFamily: 'var(--font-ui)' }}>
+          No events found matching your criteria.
+        </p>
+      </motion.div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20">
+      {events.map((event, index) => (
+        <EventCard key={event._id} event={event} index={index} />
+      ))}
+    </div>
+  );
+};
 
 export default function Events() {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [expanded, setExpanded] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
 
@@ -45,15 +208,6 @@ export default function Events() {
     };
     fetchEvents();
   }, []);
-
-  const createSlug = (name) => {
-    return name
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/[\s_-]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-  };
 
   useEffect(() => {
     if (!selectedMonth && !selectedYear) {
@@ -71,317 +225,25 @@ export default function Events() {
     }
   }, [selectedMonth, selectedYear, events]);
 
-  const handleOpenModal = (event) => {
-    setSelectedEvent(event);
-    setExpanded(false);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedEvent(null);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.toLocaleString("default", { month: "short" });
-    const year = date.getFullYear();
-    return `${month} ${day}, ${year}`;
-  };
-
-  const trimText = (text, wordLimit) => {
-    if (!text) return "";
-    const words = text.split(" ");
-    if (words.length <= wordLimit) return text;
-    return words.slice(0, wordLimit).join(" ") + " ...";
-  };
-
   return (
-    <Box sx={{ background: "#f9f9f9", minHeight: "100vh", pb: "4vw", pt: { xs: "30vw", sm: "30vw", md: "10vw", lg: "5vw" } }}>
-      {/* 🌟 CAROUSEL */}
-      {/* <Box sx={{ width: "100%", height: { xs: "40vh", sm: "50vh", md: "70vh" }, mb: 4 }}>
-        <Swiper
-          modules={[Autoplay, Navigation, EffectFade]}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          navigation
-          effect="fade"
-          loop
-          style={{ height: "100%" }}
-        >
-          {filteredEvents.map(event => (
-            <SwiperSlide key={event._id}>
-              <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
-                <Box
-                  component="img"
-                  src={event.imageUrl}
-                  alt={event.eventName}
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                    margin: "auto",
-                    background: "#000"
-                  }}
-                />
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background: "rgba(0,0,0,0.5)",
-                    color: "#fff",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    p: 2,
-                    textAlign: "center",
-                    zIndex: 2
-                  }}
-                >
-                  <Typography variant="h4" fontWeight="bold" sx={{ fontSize: { xs: "6vw", sm: "4vw", md: "2.5vw" } }}>
-                    {event.eventName}
-                  </Typography>
-                  <Typography variant="h6" sx={{ fontSize: { xs: "4vw", sm: "2.5vw", md: "1.5vw" }, mb: 1 }}>
-                    {event.eventTitle}
-                  </Typography>
-                  <Typography variant="subtitle2" sx={{ fontSize: { xs: "3vw", sm: "1.8vw", md: "1vw" } }}>
-                    {formatDate(event.eventDate)}
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      mt: 2,
-                      color: "#fff",
-                      borderColor: "#fff",
-                      fontSize: { xs: "2.5vw", sm: "1.2vw" }
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenModal(event);
-                    }}
-                  >
-                    View Details
-                  </Button>
-                </Box>
-              </Box>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Box> */}
+    <main className="min-h-screen w-full pb-32" style={{
+      backgroundColor: 'var(--color-bg-main)',
+      color: 'var(--color-foreground)',
+      paddingTop: 'calc(var(--space-xl) * 1.5)'
+    }}>
+      <SectionHeader />
 
-      {/* 🔤 HEADING */}
-      <Typography
-        variant="h4"
-        textAlign="center"
-        fontWeight="bold"
-        mb={2}
-        sx={{ fontSize: { xs: "7vw", sm: "5vw", md: "3vw" }, mt: { xs: "4vw", md: "2vw", lg: "1vw" } }}
-      >
-        Events
-      </Typography>
+      <section className="max-w-[90vw] lg:max-w-7xl mx-auto px-4 md:px-8">
+        <FilterTabs
+          selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth}
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
+          events={events}
+        />
 
-      {/* 🎯 FILTER BELOW HEADING */}
-      <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mb: 4 }}>
-        <FormControl size="small">
-          <InputLabel>Month</InputLabel>
-          <Select
-            value={selectedMonth}
-            label="Month"
-            onChange={(e) => setSelectedMonth(e.target.value)}
-            sx={{ minWidth: 100 }}
-          >
-            <MenuItem value="">All</MenuItem>
-            {[
-              "01", "02", "03", "04", "05", "06",
-              "07", "08", "09", "10", "11", "12"
-            ].map((month, i) => (
-              <MenuItem key={month} value={month}>
-                {new Date(2000, i).toLocaleString("default", { month: "long" })}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl size="small">
-          <InputLabel>Year</InputLabel>
-          <Select
-            value={selectedYear}
-            label="Year"
-            onChange={(e) => setSelectedYear(e.target.value)}
-            sx={{ minWidth: 100 }}
-          >
-            <MenuItem value="">All</MenuItem>
-            {[...new Set(events.map(e => new Date(e.eventDate).getFullYear()))].map(year => (
-              <MenuItem key={year} value={year.toString()}>{year}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-
-      {/* 📅 EVENT GRID */}
-      <Box sx={{ maxWidth: "95vw", mx: "auto", px: 2 }}>
-        {filteredEvents.length === 0 ? (
-          <Typography textAlign="center" color="text.secondary" fontSize="1.2rem" mt={5}>
-            No events found for selected filter.
-          </Typography>
-        ) : (
-          <Grid container spacing={4} justifyContent="center">
-            {filteredEvents.map((event) => (
-              <Grid item xs={12} sm={10} md={6} lg={5} key={event._id}>
-                <Card
-                  sx={{
-                    display: "flex",
-                    flexDirection: { xs: "column", sm: "row" },
-                    borderRadius: 3,
-                    boxShadow: 3,
-                    overflow: "hidden",
-                    background: "#fff",
-                    width: { xs: "70vw", lg: "40vw" },
-                    height: { xs: "auto", sm: "16vw", lg: "16vw" },
-                    minHeight: "200px"
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={event.imageUrl}
-                    alt={event.eventName}
-                    sx={{
-                      width: { xs: "100%", sm: "40%" },
-                      height: { xs: "50vw", sm: "100%" },
-                      objectFit: "cover",
-                      flexShrink: 0
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      flex: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      p: { xs: 2, sm: 3 }
-                    }}
-                  >
-                    <Box>
-                      <Typography variant="subtitle2" color="text.secondary" mb={0.5}>
-                        {formatDate(event.eventDate)}
-                      </Typography>
-                      <Typography
-                        fontWeight="bold"
-                        sx={{ fontSize: { xs: "4.2vw", sm: "2vw", md: "1.2vw" }, mb: 1 }}
-                      >
-                        {event.eventName}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontSize: { xs: "3.5vw", sm: "1.3vw", md: "1vw" },
-                          color: "#555"
-                        }}
-                      >
-                        {trimText(event.eventTitle, 20)}
-                      </Typography>
-                    </Box>
-
-                    <Button
-                      component={Link}
-                      to={`/Events/${createSlug(event.eventName)}`}
-                      size="small"
-                      variant="contained"
-                      sx={{
-                        background: "#8B0000",
-                        textTransform: "none",
-                        fontWeight: "bold",
-                        mt: 2,
-                        fontSize: { xs: "3.5vw", sm: "1.1vw" },
-                        alignSelf: "flex-start",
-                        "&:hover": { background: "#B22222" }
-                      }}
-                    >
-                      Read More
-                    </Button>
-                  </Box>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        )}
-      </Box>
-
-      {/* 🔍 MODAL */}
-      <Modal open={!!selectedEvent} onClose={handleCloseModal}>
-        <Box
-          sx={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            bgcolor: "rgba(0,0,0,0.85)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            p: 2
-          }}
-        >
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              borderRadius: 3,
-              p: 3,
-              maxWidth: 700,
-              width: "100%",
-              textAlign: "center",
-              boxShadow: 10,
-              position: "relative",
-              maxHeight: "90vh",
-              overflowY: "auto"
-            }}
-          >
-            <IconButton
-              onClick={handleCloseModal}
-              sx={{ position: "absolute", top: 10, right: 10 }}
-            >
-              <CloseIcon />
-            </IconButton>
-
-            {selectedEvent && (
-              <>
-                <Box
-                  component="img"
-                  src={selectedEvent.imageUrl}
-                  alt={selectedEvent.eventName}
-                  sx={{
-                    width: "100%",
-                    maxHeight: 300,
-                    objectFit: "cover",
-                    borderRadius: 2,
-                    mb: 2
-                  }}
-                />
-                <Typography variant="h5" fontWeight="bold" mb={1}>
-                  {selectedEvent.eventName}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary" mb={1}>
-                  {selectedEvent.eventTitle}
-                </Typography>
-                <Typography variant="body2" fontStyle="italic" mb={2}>
-                  {new Date(selectedEvent.eventDate).toDateString()}
-                </Typography>
-                <IconButton onClick={() => setExpanded(!expanded)}>
-                  {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                </IconButton>
-                <Collapse in={expanded}>
-                  <Typography textAlign="left" mt={1}>
-                    {selectedEvent.eventDescription || "No details available."}
-                  </Typography>
-                </Collapse>
-              </>
-            )}
-          </Box>
-        </Box>
-      </Modal>
-    </Box>
+        <EventsGrid events={filteredEvents} />
+      </section>
+    </main>
   );
 }
