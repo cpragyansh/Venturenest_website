@@ -195,7 +195,7 @@ export default function EventDetails() {
                                 fontWeight: 400,
                                 color: "#1a1a1a",
                                 mb: 4,
-                                fontSize: { xs: "1.8rem", md: "2.5rem" },
+                                fontSize: { xs: "1.2rem", md: "2rem" },
                                 fontStyle: "italic",
                                 wordBreak: "break-word",
                                 overflowWrap: "break-word"

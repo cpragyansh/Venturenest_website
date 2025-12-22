@@ -12,17 +12,14 @@ body {
 
 /* Define a CSS variable for the navbar height */
 :root {
-    /* --navbar-height: 4em;  */
-    /* Adjust this to match your navbar's height */
-  }
-  
-  /* Ensure that the main content starts below the fixed navbar */
-  .main-content {
-    /* margin-top: var(--navbar-height); */
-    /* padding-top: 1em;  */
-    /* Optional: adds extra spacing */
+  /* --navbar-height: 4em;  */
+  /* Adjust this to match your navbar's height */
+}
 
-  }
+/* Ensure that the main content starts below the fixed navbar */
+.main-content {
+  /* margin-top: var(--navbar-height); */
+  /* padding-top: 1em;  */
+  /* Optional: adds extra spacing */
 
-  
-  
+}

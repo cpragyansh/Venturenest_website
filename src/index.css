@@ -1,17 +1,78 @@
 @tailwind base;
 @tailwind Components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-body {
-  margin: 0;padding: 0;
-  
-    /* cursor: url('../public/assets/cursor/cursor2.png') 1 1 , auto; */
+/* Default Typography Imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&display=swap');
+/* Legacy Support (Optional - can be removed if fully migrating) */
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
 
+:root {
+  /* -- Typography Stack -- */
+  --font-display: "Playfair Display SC", serif;
+  /* Hero / Section Openers */
+  --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Navigation / Cards */
+  --font-reading: "Times New Roman", Times, serif;
+  /* Articles / Long Reads */
 
+  /* -- Design Tokens: 'Quiet Power' -- */
+  /* User Requested Palette */
+  --color-bg-main: #ffffff;
+  /* Clean White */
+  --color-foreground: #000000;
+  /* Black */
+  --color-primary: #A40C1A;
+  /* Deep Red */
+  --color-secondary: #1A4880;
+  /* Deep Blue */
 
+  --color-muted: #4a4a4a;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.6);
+
+  /* Spacing - Editorial rhythm */
+  --space-unit: 8px;
+  --space-sm: 16px;
+  --space-md: 32px;
+  --space-lg: 64px;
+  --space-xl: 128px;
 }
 
-/* code {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-ui);
+  background-color: var(--color-bg-main);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-} */
+/* Base Editorial Styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  /* Editorial feels often use lighter/regular weights for display */
+  margin: 0;
+  line-height: 1.1;
+}
+
+p,
+span,
+li,
+a {
+  /* Default to UI font, override for 'reading' sections */
+  letter-spacing: -0.01em;
+}
+
+/* Utility for Long Reads */
+.font-reading {
+  font-family: var(--font-reading);
+}
