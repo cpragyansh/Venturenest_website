@@ -18,16 +18,19 @@ const SectionHeader = () => (
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-    className="flex flex-col items-center text-center max-w-4xl mx-auto -mt-40 mb-20 px-6"
+    className="relative flex flex-col items-center text-center max-w-4xl mx-auto -mt-40 mb-24 px-6 "
   >
+    {/* Subtle Background Blob */}
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-b from-[#A40C1A]/5 to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
+
     <h1
-      className={`text-4xl md:text-5xl lg:text-6xl mb-12 ${TEXT_PRIMARY}`}
-      style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em', fontWeight: 400 }}
+      className={`text-3xl md:text-3xl lg:text-5xl mb-4 ${TEXT_PRIMARY}`}
+      style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em', fontWeight: 400 }}
     >
       Events
     </h1>
     <p
-      className={`text-lg md:text-xl max-w-xl leading-relaxed ${TEXT_SECONDARY}`}
+      className={`text-lg md:text-xl max-w-2xl leading-relaxed ${TEXT_SECONDARY}`}
       style={{ fontFamily: 'var(--font-reading)' }}
     >
       Curated experiences for the entrepreneurial mind.
@@ -92,7 +95,6 @@ const FilterTabs = ({ selectedMonth, setSelectedMonth, selectedYear, setSelected
     </motion.div>
   );
 };
-
 const EventCard = ({ event, index }) => {
   const createSlug = (name) => {
     return name
@@ -120,28 +122,32 @@ const EventCard = ({ event, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="group flex flex-col h-full relative"
+      className="group flex flex-col h-full bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden border border-gray-100"
     >
       {/* Image Container */}
-      <Link to={`/Events/${createSlug(event.eventName)}`} className="block overflow-hidden mb-6 aspect-[4/3] bg-gray-100">
+      <Link to={`/Events/${createSlug(event.eventName)}`} className="relative block h-64 overflow-hidden">
         <motion.img
           src={event.imageUrl}
           alt={event.eventName}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105"
         />
+        {/* Subtle Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+
+        {/* Floating Date Badge */}
+        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-xl shadow-lg flex flex-col items-center min-w-[60px]">
+          <span className="text-xs font-bold text-[#A40C1A] uppercase tracking-wider">{month}</span>
+          <span className="text-xl font-bold text-gray-900 leading-none">{day}</span>
+          <span className="text-[10px] text-gray-500 font-medium">{year}</span>
+        </div>
       </Link>
 
-      {/* Meta Data */}
-      <div className={`flex items-baseline gap-3 mb-3 text-xs tracking-widest uppercase ${TEXT_SECONDARY}`} style={{ fontFamily: 'var(--font-ui)' }}>
-        <span>{month} {day}, {year}</span>
-      </div>
-
       {/* Content */}
-      <div className="flex-1 flex flex-col justify-start">
+      <div className="flex-1 flex flex-col p-8">
         <h3
-          className={`text-2xl mb-4 leading-tight group-hover:underline decoration-1 underline-offset-4 ${TEXT_PRIMARY}`}
+          className={`text-2xl mb-3 leading-tight text-[#A40C1A] group-hover:text-[#1A4880] transition-colors duration-300 ${TEXT_PRIMARY}`}
           style={{ fontFamily: 'var(--font-display)' }}
         >
           <Link to={`/Events/${createSlug(event.eventName)}`}>
@@ -150,19 +156,20 @@ const EventCard = ({ event, index }) => {
         </h3>
 
         <p
-          className={`text-sm leading-relaxed mb-6 line-clamp-3 ${TEXT_TERTIARY}`}
+          className={`text-sm leading-relaxed mb-6 line-clamp-3 text-gray-600`}
           style={{ fontFamily: 'var(--font-ui)' }}
         >
           {event.eventDescription || event.eventTitle}
         </p>
 
-        <div className="mt-auto">
+        <div className="mt-auto flex items-center justify-between border-t border-gray-100 pt-6">
           <Link
             to={`/Events/${createSlug(event.eventName)}`}
-            className={`inline-block text-xs uppercase tracking-widest border-b border-transparent group-hover:border-current transition-colors duration-300 ${TEXT_PRIMARY}`}
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#1A4880] hover:text-[#A40C1A] transition-colors duration-300 group/link"
             style={{ fontFamily: 'var(--font-ui)' }}
           >
-            Read More
+            Read Details
+            <span className="transform group-hover/link:translate-x-1 transition-transform duration-300">→</span>
           </Link>
         </div>
       </div>
