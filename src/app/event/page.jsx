@@ -11,16 +11,17 @@ const TEXT_SECONDARY = "opacity-70";
 const TEXT_TERTIARY = "opacity-50";
 
 // --- Components ---
+// I want the Header section to bit closer to top
 
 const SectionHeader = () => (
   <motion.header
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-    className="flex flex-col items-center text-center max-w-4xl mx-auto mb-20 px-6"
+    className="flex flex-col items-center text-center max-w-4xl mx-auto -mt-40 mb-20 px-6"
   >
     <h1
-      className={`text-4xl md:text-5xl lg:text-6xl mb-8 ${TEXT_PRIMARY}`}
+      className={`text-4xl md:text-5xl lg:text-6xl mb-12 ${TEXT_PRIMARY}`}
       style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em', fontWeight: 400 }}
     >
       Events
@@ -126,6 +127,8 @@ const EventCard = ({ event, index }) => {
         <motion.img
           src={event.imageUrl}
           alt={event.eventName}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105"
         />
       </Link>
@@ -167,7 +170,178 @@ const EventCard = ({ event, index }) => {
   );
 };
 
-const EventsGrid = ({ events }) => {
+const SkeletonCard = () => (
+  <div className="flex flex-col h-full animate-pulse">
+    {/* Image Placeholder */}
+    <div className="mb-6 aspect-[4/3] bg-gray-200/50 w-full" />
+
+    {/* Meta Data Placeholder */}
+    <div className="flex gap-3 mb-3">
+      <div className="h-3 w-24 bg-gray-200 rounded" />
+    </div>
+
+    {/* Content Placeholders */}
+    <div className="flex-1 flex flex-col justify-start space-y-4">
+      <div className="h-8 w-3/4 bg-gray-200 rounded" />
+      <div className="space-y-2">
+        <div className="h-4 w-full bg-gray-200 rounded" />
+        <div className="h-4 w-full bg-gray-200 rounded" />
+        <div className="h-4 w-2/3 bg-gray-200 rounded" />
+      </div>
+
+      <div className="mt-auto pt-4">
+        <div className="h-3 w-20 bg-gray-200 rounded" />
+      </div>
+    </div>
+  </div>
+);
+
+const SkeletonGrid = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20">
+    {[...Array(6)].map((_, i) => (
+      <SkeletonCard key={i} />
+    ))}
+  </div>
+);
+
+const Countdown = ({ targetDate }) => {
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  function calculateTimeLeft() {
+    const difference = +new Date(targetDate) - +new Date();
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+    return timeLeft;
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
+
+  const timerComponents = [];
+
+  Object.keys(timeLeft).forEach((interval) => {
+    timerComponents.push(
+      <div key={interval} className="flex flex-col items-center mx-2 md:mx-4">
+        <span className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
+          {timeLeft[interval] < 10 ? `0${timeLeft[interval]}` : timeLeft[interval]}
+        </span>
+        <span className="text-xs uppercase tracking-widest text-gray-400 mt-2">{interval}</span>
+      </div>
+    );
+  });
+
+  return (
+    <div className="flex justify-center md:justify-start mt-8">
+      {timerComponents.length ? timerComponents : <span className="text-xl">Event Started!</span>}
+    </div>
+  );
+};
+
+const UpcomingEvents = ({ events }) => {
+  let upcomingEvent = events
+    .filter(event => new Date(event.eventDate) > new Date())
+    .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))[0];
+
+  // Fallback Gimmick Data if no future event exists
+  if (!upcomingEvent) {
+    const nextMonth = new Date();
+    nextMonth.setDate(nextMonth.getDate() + 74); // 2 weeks from now
+
+    upcomingEvent = {
+      eventName: "VentureNest Prerna 2.0",
+      eventDate: nextMonth.toISOString(),
+      imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2670&auto=format&fit=crop",
+      eventDescription: "On the Occasion of Women's Day Join world's leading Women innovators, investors, and entrepreneurs for a 2-day immersive experience redefining the future of startups. Featuring keynotes from industry giants and exclusive networking opportunities.",
+      eventTitle: "The Future of Entrepreneurship"
+    };
+  }
+
+  const createSlug = (name) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="relative w-full rounded-3xl overflow-hidden shadow-2xl mb-24 bg-[#0a0a0a]"
+    >
+      {/* Background Gradient & Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#A40C1A] via-black to-[#1A4880] opacity-80" />
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 mix-blend-overlay"></div>
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#A40C1A] rounded-full blur-[128px] opacity-40 animate-pulse"></div>
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[#1A4880] rounded-full blur-[128px] opacity-40 animate-pulse" style={{ animationDelay: '2s' }}></div>
+
+      <div className="relative z-10 flex flex-col md:flex-row items-center p-8 md:p-16 gap-12 text-white">
+
+        {/* Visual Content */}
+        <div className="w-full md:w-1/2 relative group">
+          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.1)]">
+            <motion.img
+              src={upcomingEvent.imageUrl}
+              alt={upcomingEvent.eventName}
+              className="w-full h-full object-cover aspect-video transform group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          </div>
+          <div className="absolute -z-10 top-4 -right-4 w-full h-full border border-white/20 rounded-2xl"></div>
+        </div>
+
+        {/* Text Content */}
+        <div className="w-full md:w-1/2 text-center md:text-left">
+          <div className="inline-block px-4 py-1 rounded-full border border-[#f2a365] text-[#f2a365] text-xs font-bold tracking-[0.2em] uppercase mb-6 shadow-[0_0_15px_rgba(242,163,101,0.3)]">
+            Next Major Event
+          </div>
+
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 font-display leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">
+            {upcomingEvent.eventName}
+          </h2>
+
+          <p className="text-lg text-gray-300 mb-8 max-w-xl mx-auto md:mx-0 font-light leading-relaxed">
+            {upcomingEvent.eventDescription ? (upcomingEvent.eventDescription.length > 150 ? upcomingEvent.eventDescription.substring(0, 150) + "..." : upcomingEvent.eventDescription) : upcomingEvent.eventTitle}
+          </p>
+
+          <Countdown targetDate={upcomingEvent.eventDate} />
+
+          <div className="mt-10">
+            <Link
+              to={`/Events/${createSlug(upcomingEvent.eventName)}`}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm hover:bg-[#f2a365] transition-all duration-300 rounded-sm hover:shadow-[0_0_30px_rgba(242,163,101,0.5)] transform hover:-translate-y-1"
+            >
+              Reserve Your Spot
+              <span className="text-lg">→</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const EventsGrid = ({ events, loading }) => {
+  if (loading) {
+    return <SkeletonGrid />;
+  }
+
   if (events.length === 0) {
     return (
       <motion.div
@@ -195,6 +369,7 @@ export default function Events() {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -204,6 +379,8 @@ export default function Events() {
         setFilteredEvents(response.data);
       } catch (error) {
         console.error("Error fetching events:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchEvents();
@@ -234,6 +411,8 @@ export default function Events() {
       <SectionHeader />
 
       <section className="max-w-[90vw] lg:max-w-7xl mx-auto px-4 md:px-8">
+        <UpcomingEvents events={events} />
+
         <FilterTabs
           selectedMonth={selectedMonth}
           setSelectedMonth={setSelectedMonth}
@@ -242,7 +421,7 @@ export default function Events() {
           events={events}
         />
 
-        <EventsGrid events={filteredEvents} />
+        <EventsGrid events={filteredEvents} loading={loading} />
       </section>
     </main>
   );
