@@ -1,46 +1,49 @@
-.patent-main-bg-container
-{
-    background-image: url('../../../public/assets/cec-vv-bg-table.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    object-fit: fill;
-    background-size: cover;
-    
+.patent-main-bg-container {
+  background-image: url('../../../public/assets/cec-vv-bg-table.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: fill;
+  background-size: cover;
+
 }
 
-.patent-information-para{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    margin: auto;
-    margin-top: 4em;
-    gap: 2em;
-    text-align: justify;
-    flex-direction: column;
-    margin-bottom: 4em;
-    
+.patent-information-para {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin: auto;
+  margin-top: 4em;
+  gap: 2em;
+  text-align: justify;
+  flex-direction: column;
+  margin-bottom: 4em;
+
 }
-.entries-info{
+
+.entries-info {
   color: White;
   font-size: 1vw;
   font-weight: 600;
 }
-.materials-heading{
-    font-size: 3.5vh;
-    font-weight: 600;
-    color:#a00534 ;
+
+.materials-heading {
+  font-size: 3.5vh;
+  font-weight: 600;
+  color: #a00534;
 
 }
-.material-para{
-    font-size: 20px;
-    font-weight: 400;
-    padding: 2em;
+
+.material-para {
+  font-size: 20px;
+  font-weight: 400;
+  padding: 2em;
 }
-.material{
-    background-color: rgb(244, 239, 239);
-    padding: 2em;
-    /* border-radius: 20px; */
+
+.material {
+  background-color: rgb(244, 239, 239);
+  padding: 2em;
+  /* border-radius: 20px; */
 }
 
 
@@ -77,7 +80,8 @@
 .table-wrapper {
   width: 100%;
   max-width: 100%;
-  overflow-x: auto; /* Makes the table scrollable on small screens */
+  overflow-x: auto;
+  /* Makes the table scrollable on small screens */
   margin: 1rem 0;
 }
 
@@ -118,7 +122,8 @@
   font-size: 1rem;
   font-weight: 600;
   border: 1px solid white;
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap;
+  /* Prevents text from wrapping */
 }
 
 /* No Data Styling */
@@ -130,8 +135,15 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 /* Pagination Buttons */
@@ -192,13 +204,14 @@
 }
 
 @media (max-width:768px) {
-  .portfolio-page-main-top-page-heading{
+  .portfolio-page-main-top-page-heading {
     margin-top: 40vw;
     padding-top: 40vw;
   }
-  .entries-info{
-  color: White;
-  font-size: 4vw;
-  font-weight: 600;
-}
+
+  .entries-info {
+    color: White;
+    font-size: 4vw;
+    font-weight: 600;
+  }
 }

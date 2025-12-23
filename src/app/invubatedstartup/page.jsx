@@ -53,7 +53,7 @@ export default function Startups() {
   const [sortType, setSortType] = useState("all");
 
   useEffect(() => {
-      AOS.init({ duration: 1200, once: true });
+    AOS.init({ duration: 1200, once: true });
     const fetchData = async () => {
       try {
         const response = await axios.get('https://venturenest.onrender.com/getstartup');
@@ -101,42 +101,42 @@ export default function Startups() {
   return (
     <>
       {/* <MainPage headingText="Incubated Ventures" className="portfolio-page-main-top-page-heading"/> */}
-      
-   <section className="w-full py-8 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-         <Typography variant="h4" textAlign="center" fontWeight="bold" pt={4} mb={2} sx={{pt:{xs:"20%",lg:"2vw"}}}>
-        Incubated Ventures
-      </Typography>
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={20}
-          slidesPerView={3}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 600, disableOnInteraction: false }}
-          loop={true}
-          breakpoints={{
-            320: { slidesPerView: 2, spaceBetween: 10 },
-            640: { slidesPerView: 3, spaceBetween: 20 },
-            1024: { slidesPerView: 5, spaceBetween: 30 },
-          }}
-        >
-          {logos.map((logo, index) => (
-            <SwiperSlide key={index}>
-              <div className="flex justify-center items-center p-6 mb-12" >
-                <div className="w-28 h-28 bg-white rounded-xl shadow-md flex items-center justify-center transition-transform duration-300 hover:scale-105">
-                  <img
-                    src={logo}
-                    alt={`Startup Logo ${index + 1}`}
-                    className="max-w-full max-h-full object-contain"
-                  />
+
+      <section className="w-full py-8 ">
+        <div className="max-w-7xl mx-auto px-4">
+          <Typography variant="h4" textAlign="center" fontWeight="bold" pt={4} mb={2} sx={{ pt: { xs: "20%", lg: "2vw" } }}>
+            Incubated Ventures
+          </Typography>
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={20}
+            slidesPerView={3}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 600, disableOnInteraction: false }}
+            loop={true}
+            breakpoints={{
+              320: { slidesPerView: 2, spaceBetween: 10 },
+              640: { slidesPerView: 3, spaceBetween: 20 },
+              1024: { slidesPerView: 5, spaceBetween: 30 },
+            }}
+          >
+            {logos.map((logo, index) => (
+              <SwiperSlide key={index}>
+                <div className="flex justify-center items-center p-6 mb-12" >
+                  <div className="w-28 h-28 bg-white rounded-xl shadow-md flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                    <img
+                      src={logo}
+                      alt={`Startup Logo ${index + 1}`}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </section>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
 
 
       <div className="patent-main-bg-container">
@@ -180,7 +180,7 @@ export default function Startups() {
             <tbody>
               {currentData.length > 0 ? (
                 currentData.map((item, index) => (
-                  <tr key={item._id}  data-aos-delay={index * 100}>
+                  <tr key={item._id} data-aos-delay={index * 100}>
                     <td>{startEntry + index}</td>
                     <td>{item.StartupName}</td>
                     {/* <td>{item.CIN}</td> */}
