@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Image, OrbitControls, Environment, Float } from '@react-three/drei'
+import { Image, OrbitControls, Environment, Float, Loader } from '@react-three/drei'
 import * as THREE from 'three'
 
 function Frames({ images, radius = 4, onImageClick }) {
@@ -73,13 +73,16 @@ function Frame({ data, position, onClick }) {
 
 export default function DomeGallery({ images = [], onImageClick }) {
     return (
-        <div style={{ width: '100%', height: '100%', minHeight: '500px', overflow: 'hidden', background: '#000' }}>
+        <div style={{ width: '100%', height: '100%', minHeight: '500px', overflow: 'hidden', background: '#000', position: 'relative' }}>
             <Canvas camera={{ position: [0, 0, 25], fov: 50 }}>
                 <color attach="background" args={['#050505']} />
                 <ambientLight intensity={0.5} />
                 <spotLight position={[20, 20, 20]} angle={0.15} penumbra={1} />
 
-                <Frames images={images} radius={8} onImageClick={onImageClick} />
+                <Suspense fallback={null}>
+                    <Frames images={images} radius={8} onImageClick={onImageClick} />
+                    <Environment preset="city" />
+                </Suspense>
 
                 <OrbitControls
                     autoRotate
@@ -89,8 +92,36 @@ export default function DomeGallery({ images = [], onImageClick }) {
                     minDistance={15}
                     maxDistance={45}
                 />
-                <Environment preset="city" />
             </Canvas>
+            <Loader
+                containerStyles={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: '#050505',
+                    zIndex: 100
+                }}
+                barStyles={{
+                    height: '4px',
+                    background: '#a40c1a',
+                    width: '100%'
+                }}
+                innerStyles={{
+                    width: '50vw',
+                    backgroundColor: '#222'
+                }}
+                dataStyles={{
+                    color: '#a40c1a',
+                    fontSize: '1.2rem',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em'
+                }}
+                dataInterpolation={(p) => `Loading Memories ${p.toFixed(0)}%`}
+            />
         </div>
     )
 }
