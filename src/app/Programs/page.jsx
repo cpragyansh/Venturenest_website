@@ -1,31 +1,127 @@
+// "use client";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Change this line
+import { Link } from "react-router-dom";
 import axios from "axios";
-import {
-  Box,
-  Grid,
-  Typography,
-  Button,
-  Modal,
-  IconButton,
-  Collapse,
-  Card
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-
-// Swiper imports
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import { ArrowRight, CalendarToday, AccessTime } from "@mui/icons-material";
+
+// --- Components ---
+
+const SectionHeader = () => (
+  <motion.header
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    className="relative flex flex-col items-center text-center max-w-4xl mx-auto pt-16 mb-24 px-6"
+  >
+    {/* Subtle Background Blob */}
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-b from-[#A40C1A]/5 to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
+
+    <h1
+      className={`text-4xl md:text-5xl lg:text-6xl mb-6 font-bold text-[#A40C1A]`}
+      style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+    >
+      Our Programs
+    </h1>
+    <p
+      className={`text-lg md:text-xl max-w-2xl leading-relaxed text-gray-600`}
+      style={{ fontFamily: 'var(--font-reading)' }}
+    >
+      Empowering innovators with structured pathways to success.
+      From ideation to scaling, find the program that fits your journey.
+    </p>
+  </motion.header>
+);
+
+const ProgramCard = ({ program, index }) => {
+  const createSlug = (name) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return {
+      day: date.getDate(),
+      month: date.toLocaleString("default", { month: "short" }).toUpperCase(),
+      year: date.getFullYear()
+    };
+  };
+
+  const { day, month, year } = formatDate(program.programDate);
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className="group flex flex-col h-full bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden border border-gray-100 relative"
+    >
+      {/* Image Container */}
+      <Link to={`/Programs/${createSlug(program.programName)}`} className="relative block h-64 overflow-hidden">
+        <motion.img
+          src={program.imageUrl}
+          alt={program.programName}
+          className="w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+
+        {/* Date Badge - Inspired by Event Details */}
+        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-2 rounded-xl shadow-lg flex flex-col items-center min-w-[60px] border border-gray-100">
+          <span className="text-xs font-bold text-[#A40C1A] uppercase tracking-wider">{month}</span>
+          <span className="text-2xl font-bold text-gray-900 leading-none font-display">{day}</span>
+          <span className="text-[10px] text-gray-500 font-medium">{year}</span>
+        </div>
+      </Link>
+
+      <div className="flex-1 flex flex-col p-8">
+        <h3
+          className={`text-2xl font-bold leading-tight text-[#A40C1A] group-hover:text-[#1A4880] transition-colors duration-300 mb-2`}
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
+          <Link to={`/Programs/${createSlug(program.programName)}`}>
+            {program.programName}
+          </Link>
+        </h3>
+
+        <h4 className="text-sm font-semibold text-gray-500 mb-4 uppercase tracking-wide">
+          {program.programTitle}
+        </h4>
+
+        <p
+          className={`text-sm leading-relaxed mb-6 line-clamp-3 text-gray-600`}
+          style={{ fontFamily: 'var(--font-ui)' }}
+        >
+          {program.programDescription}
+        </p>
+
+        <div className="mt-auto pt-6 border-t border-gray-100">
+          <Link
+            to={`/Programs/${createSlug(program.programName)}`}
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#1A4880] hover:text-[#A40C1A] transition-colors duration-300 group/link"
+          >
+            Explore Program
+            <ArrowRight className="text-lg transform group-hover/link:translate-x-1 transition-transform duration-300" />
+          </Link>
+        </div>
+      </div>
+    </motion.article>
+  );
+};
 
 export default function Programs() {
   const [programs, setPrograms] = useState([]);
-  const [selectedProgram, setSelectedProgram] = useState(null);
-  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const fetchPrograms = async () => {
@@ -39,267 +135,85 @@ export default function Programs() {
     fetchPrograms();
   }, []);
 
-  const handleOpenModal = (program) => {
-    setSelectedProgram(program);
-    setExpanded(false);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProgram(null);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.toLocaleString("default", { month: "short" });
-    const year = date.getFullYear();
-    return `${month} ${day}, ${year}`;
-  };
-
-  const trimText = (text, wordLimit) => {
-    if (!text) return "";
-    const words = text.split(" ");
-    if (words.length <= wordLimit) return text;
-    return words.slice(0, wordLimit).join(" ") + " ...";
-  };
-
-  // Helper function to create slug
   const createSlug = (name) => {
-    return name
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/[\s_-]+/g, "-")
-      .replace(/^-+|-+$/g, "");
+    if (!name) return "";
+    return name.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").replace(/^-+|-+$/g, "");
   };
+
 
   return (
-    <Box sx={{ background: "#f9f9f9", minHeight: "100vh", pb: "4vw" }}>
-      <Typography variant="h3" textAlign="center" fontWeight="bold" pt={4} mb={2} sx={{ pt: { xs: "20%", lg: "2vw" } }}>
-        Programs
-      </Typography>
+    <main className="min-h-screen w-full pb-32" style={{
+      color: 'var(--color-foreground)',
+    }}>
+      <SectionHeader />
 
-      {/* 🔥 Top Highlight Carousel */}
-      <Box sx={{ width: "100%", maxWidth: "90vw", mx: "auto", mb: 4 }}>
-        <Swiper
-          modules={[Autoplay, Pagination, EffectFade]}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          effect="fade"
-          loop
-          style={{ borderRadius: "12px" }}
-        >
-          {programs.map((program) => (
-            <SwiperSlide key={program._id}>
-              <Box
-                sx={{
-                  position: "relative",
-                  width: "100%",
-                  height: { xs: "40vh", md: "70vh" },
-                  overflow: "hidden",
-                  borderRadius: 3
-                }}
-              >
-                <Box
-                  component="img"
-                  src={program.imageUrl}
-                  alt={program.programName}
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: { xs: "cover", lg: "cover" },
-                    objectPosition: "center"
-                  }}
-                />
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    width: "100%",
-                    bgcolor: "rgba(0,0,0,0.5)",
-                    color: "#fff",
-                    p: 2
-                  }}
-                >
-                  <Typography variant="h5" fontWeight="bold">
-                    {program.programTitle}
-                  </Typography>
-                  <Typography variant="subtitle1">{program.programName}</Typography>
-                </Box>
-              </Box>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Box>
-
-      {/* Program Cards Grid */}
-      <Box sx={{ maxWidth: "90vw", mx: "auto", px: 2 }}>
-        <Grid container spacing={6} sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
-          {programs.map((program) => (
-            <Grid item xs={12} md={6} key={program._id}>
-              <Card
-                sx={{
-                  display: "flex",
-                  flexDirection: { xs: "column", md: "row" },
-                  borderRadius: 3,
-                  boxShadow: 3,
-                  overflow: "hidden",
-                  background: "#fff",
-                  height: { md: 300 },
-                  width: "80vw",
-                  mx: "auto"
-                }}
-                onClick={() => handleOpenModal(program)}
-              >
-                <Box
-                  component="img"
-                  src={program.imageUrl}
-                  alt={program.programName}
-                  sx={{
-                    width: { xs: "100%", md: "40%" },
-                    height: { xs: 200, md: "100%" },
-                    objectFit: "cover"
-                  }}
-                />
-                <Box
-                  sx={{
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    p: 2
-                  }}
-                >
-                  <Box>
-                    <Typography variant="subtitle2" color="text.secondary" mb={0.5}>
-                      {formatDate(program.programDate)}
-                    </Typography>
-                    <Typography variant="h6" fontWeight="bold">
-                      {program.programName}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                        fontSize: { xs: "5vw", lg: "1vw" },
-                        width: { xs: "100%", lg: "22vw" }
-                      }}
-                    >
-                      {trimText(program.programTitle, 20)}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      mb={1}
-                      sx={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden"
-                      }}
-                    >
-                      {trimText(program.programDescription, 20)}
-                    </Typography>
-                  </Box>
-                  <Button
-                    component={Link}
-                    to={`/Programs/${createSlug(program.programName)}`}
-                    onClick={(e) => e.stopPropagation()}
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      color: "#c8102e",
-                      borderColor: "#c8102e",
-                      textTransform: "none",
-                      fontWeight: "bold",
-                      alignSelf: "flex-start"
-                    }}
-                  >
-                    Read More
-                  </Button>
-                </Box>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-
-      {/* Modal */}
-      <Modal open={!!selectedProgram} onClose={handleCloseModal}>
-        <Box
-          sx={{
-            position: "fixed",
-            top: 40,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            bgcolor: "rgba(0,0,0,0.85)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            p: 2
-          }}
-        >
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              borderRadius: 3,
-              p: 3,
-              maxWidth: 1000,
-              width: "100%",
-              textAlign: "center",
-              boxShadow: 10,
-              position: "relative",
-              maxHeight: "90vh",
-              overflowY: "auto"
-            }}
+      {/* Featured Carousel */}
+      {programs.length > 0 && (
+        <section className="max-w-[95vw] lg:max-w-7xl mx-auto px-4 md:px-8 mb-24">
+          <Swiper
+            modules={[Autoplay, Pagination, EffectFade, Navigation]}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            pagination={{ clickable: true, dynamicBullets: true }}
+            effect="fade"
+            loop
+            className="rounded-3xl shadow-2xl overflow-hidden aspect-[16/9] md:aspect-[21/9]"
           >
-            <IconButton
-              onClick={handleCloseModal}
-              sx={{ position: "absolute", top: 10, right: 10 }}
-            >
-              <CloseIcon />
-            </IconButton>
-
-            {selectedProgram && (
-              <>
-                <Box
-                  component="img"
-                  src={selectedProgram.imageUrl}
-                  alt={selectedProgram.programName}
-                  sx={{
-                    width: "100%",
-                    maxHeight: 500,
-                    objectFit: "contain",
-                    borderRadius: 2,
-                    mb: 2
-                  }}
+            {programs.slice(0, 5).map((program) => (
+              <SwiperSlide key={program._id} className="relative w-full h-full bg-black">
+                <img
+                  src={program.imageUrl}
+                  alt={program.programName}
+                  className="absolute inset-0 w-full h-full object-cover opacity-80"
                 />
-                <Typography variant="h4" fontWeight="bold" mb={1}>
-                  {selectedProgram.programName}
-                </Typography>
-                <Typography variant="h6" color="text.secondary" mb={1}>
-                  {selectedProgram.programTitle}
-                </Typography>
-                <Typography variant="body2" fontStyle="italic" mb={2}>
-                  {new Date(selectedProgram.programDate).toDateString()}
-                </Typography>
-                <IconButton onClick={() => setExpanded(!expanded)}>
-                  {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                </IconButton>
-                <Collapse in={expanded}>
-                  <Typography textAlign="left" mt={1}>
-                    {selectedProgram.programDescription || "No details available."}
-                  </Typography>
-                </Collapse>
-              </>
-            )}
-          </Box>
-        </Box>
-      </Modal>
-    </Box>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
+                <div className="absolute bottom-0 left-0 p-8 md:p-16 w-full md:w-2/3">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <span className="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest text-white uppercase bg-[#c8102e] rounded-full">
+                      Featured Program
+                    </span>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-display leading-tight">
+                      {program.programName}
+                    </h2>
+                    <p className="text-gray-200 text-lg mb-8 line-clamp-2 max-w-xl">
+                      {program.programDescription}
+                    </p>
+                    <Link
+                      to={`/Programs/${createSlug(program.programName)}`}
+                      className="inline-flex items-center px-8 py-3 bg-white text-[#A40C1A] font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg"
+                    >
+                      View Details
+                    </Link>
+                  </motion.div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </section>
+      )}
+
+      {/* Programs Grid */}
+      <section className="max-w-[90vw] lg:max-w-7xl mx-auto px-4 md:px-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {programs.map((program, index) => (
+            <ProgramCard key={program._id} program={program} index={index} />
+          ))}
+        </motion.div>
+
+        {programs.length === 0 && (
+          <div className="text-center py-20 text-gray-500">
+            Loading programs...
+          </div>
+        )}
+      </section>
+
+    </main>
   );
 }

@@ -28,7 +28,7 @@ const ContactSection = () => {
       sx={{
         py: 10,
         px: 3,
-        background: 'linear-gradient(to bottom right, #eef2f3, #8e9eab)',
+        // background: 'linear-gradient(to bottom right, #eef2f3, #8e9eab)',
         minHeight: '100vh',
       }}
     >

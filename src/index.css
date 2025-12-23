@@ -48,6 +48,27 @@ body {
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  /* Fixed so it doesn't scroll away */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./BG.jpg');
+  /* Access from local src folder */
+  background-size: 350px;
+  background-repeat: repeat;
+  opacity: 0.1;
+  /* Increased opacity for visibility */
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Base Editorial Styles */

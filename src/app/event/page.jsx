@@ -290,7 +290,7 @@ const UpcomingEvents = ({ events }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: "easeOut" }}
-      className="relative w-full rounded-3xl overflow-hidden shadow-2xl mb-24 bg-[#0a0a0a]"
+      className="relative w-full rounded-3xl overflow-hidden shadow-2xl mb-24 "
     >
       {/* Background Gradient & Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#A40C1A] via-black to-[#1A4880] opacity-80" />
@@ -411,7 +411,7 @@ export default function Events() {
 
   return (
     <main className="min-h-screen w-full pb-32" style={{
-      backgroundColor: 'var(--color-bg-main)',
+      // backgroundColor: 'var(--color-bg-main)',
       color: 'var(--color-foreground)',
       paddingTop: 'calc(var(--space-xl) * 1.5)'
     }}>

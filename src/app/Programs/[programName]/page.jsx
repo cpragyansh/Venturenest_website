@@ -72,7 +72,11 @@ export default function ProgramDetails() {
     const year = dateObj.getFullYear();
 
     return (
-        <Box sx={{ minHeight: "100vh", bgcolor: "#fdfdfd", pb: 12 }}>
+        <Box sx={{
+            minHeight: "100vh",
+            //    bgcolor: "#fdfdfd", 
+            pb: 12
+        }}>
             <style>
                 {`
                     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
