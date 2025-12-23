@@ -59,6 +59,21 @@ export default function JoinUs() {
   return (
     <main className="incubate-page">
 
+      {/* Global Background Overlay for Depth & Meteors */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 0,
+        pointerEvents: 'none',
+        background: 'rgba(202, 202, 202, 0.25)', /* Translucent dark overlay */
+        overflow: 'hidden'
+      }}>
+        <Meteors number={40} />
+      </div>
+
       {/* 1. HERO & MISSION (Side by Side) */}
       <section className="section-container">
         <div className="hero-wrapper">

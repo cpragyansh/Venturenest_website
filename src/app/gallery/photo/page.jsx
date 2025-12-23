@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import MainPage from "../../Components/Mainpage/Mainpage";
 import axios from "axios";
 // import Image from "next/image";
+import DomeGallery from "../../Components/ui/DomeGallery";
 import './Photo.css';
 import {
   Box,
@@ -24,7 +25,15 @@ export default function Photos() {
     const fetchData = async () => {
       try {
         const response = await axios.get("https://venturenest.onrender.com/photos");
-        SetPath(response.data);
+        let photos = response.data;
+        if (photos.length > 0) {
+          // Fill gallery to ~100 items by repeating the existing photos
+          while (photos.length < 200) {
+            photos = [...photos, ...response.data];
+          }
+          photos = photos.slice(0, 200); // Limit to 100
+        }
+        SetPath(photos);
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
@@ -41,37 +50,35 @@ export default function Photos() {
     setPopupVisible(false);
   };
 
+  // Skeleton data for initial load
+  const skeletons = Array(50).fill({ skeleton: true });
+  const displayImages = Path.length > 0 ? Path : skeletons;
+
   return (
-    <>
-      <Typography variant="h4" textAlign="center" fontWeight="bold" pt={4} mb={2} sx={{ pt: { xs: "20%", lg: "2vw" } }}>
+    <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#fff' }}>
+      <Typography variant="h4" textAlign="center" fontWeight="bold" sx={{ py: 2, color: '#a40c1a', zIndex: 10, borderBottom: '1px solid #eee' }}>
         Photos
       </Typography>
-      <div className="flex justify-center main-photo-container">
-        <div className="flex justify-center items-center flex-wrap ">
-          {Path.length > 0 ? (
-            Path.map((item, index) => (
-              <div key={item.id} onClick={() => handleImageClick(item)}>
-                <div className="gallery-container">
-                  <div className="gallerys">
-                    <div className={`gallery-row-one gallery-main ${index % 2 === 0 ? "big-box" : "small-box"}`}>
-                      <div className="gallery">
-                        <img
-                          className="background-image-vv-photo"
-                          src={item.imageUrl}
-                          alt={item.photoName}
-                        />
-                        <div className="head-gallery">{item.photoName}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div>Loading...</div>
-          )}
 
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden', position: 'relative' }}>
+
+        {/* Left Split (50%) - Theme White */}
+        <div style={{ width: '50%', height: '100%', position: 'relative', background: '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ padding: '4rem', maxWidth: '600px' }}>
+            <Typography variant="h3" sx={{ fontWeight: '800', color: '#a40c1a', mb: 2, lineHeight: 1 }}>
+              Capturing<br />Memories
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#555', fontSize: '1.2rem', lineHeight: 1.6 }}>
+              Explore the moments that define our journey. From workshops to bootcamps, every snapshot tells a story of innovation and growth at VentureNest.
+            </Typography>
+          </div>
         </div>
+
+        {/* Right Split (50%) - Dome Gallery */}
+        <div style={{ width: '50%', height: '100%' }}>
+          <DomeGallery images={displayImages} onImageClick={handleImageClick} />
+        </div>
+
       </div>
 
       {/* Popup for image */}
@@ -95,6 +102,6 @@ export default function Photos() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

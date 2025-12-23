@@ -29,6 +29,9 @@
     margin: 0 auto;
     padding: 0 6vw;
     /* Increased padding for more compact, editorial look */
+    position: relative;
+    z-index: 2;
+    /* Ensures content is above the meteor background */
 }
 
 /* -- 1. Hero Split Layout -- */
