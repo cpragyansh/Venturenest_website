@@ -7,7 +7,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { Container, Card, CardContent} from '@mui/material';
 import VerifiedIcon from '@mui/icons-material/Verified';
-
+import SplitText from "../Components/ui/SplitText";
 import Fade from '@mui/material/Fade';
 // Small SVG icons for style
 const CheckIcon = () => (
@@ -22,6 +22,9 @@ const CheckIcon = () => (
     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
   </svg>
 );
+const handleAnimationComplete = () => {
+  console.log('All letters have animated!');
+};
 
 export default function AboutPage() {
   useEffect(() => {
@@ -36,7 +39,7 @@ export default function AboutPage() {
   };
 
   return (
-    <Box sx={{ bgcolor: "#fdf6f7", minHeight: "100vh", fontFamily: "'Poppins', sans-serif",overflow:"hidden" }}>
+    <Box sx={{ bgcolor: "transparent", minHeight: "100vh", fontFamily: "'Poppins', sans-serif",overflow:"hidden" }}>
 
 
  
@@ -44,7 +47,7 @@ export default function AboutPage() {
       <Box
         sx={{
           height: isMobile ? 300 : 500,
-          backgroundImage: `linear-gradient(135deg, rgba(163,13,51,0.85), rgba(69,3,19,0.85)), url('/assets/hero-about.jpg')`,
+          backgroundImage: `linear-gradient(135deg, rgba(163,13,51,0.75), rgba(69,3,19,0.85)), url('/assets/hero-about.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "flex",
@@ -67,6 +70,26 @@ export default function AboutPage() {
           >
             VentureNest
           </Typography>
+        {/* <SplitText
+  text="VentureNest"
+  className={isMobile ? "text-3xl md:text-6xl font-black text-center" : "text-[5vw] font-black text-center"}
+  delay={100}
+  duration={0.6}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, y: 40 }}
+  to={{ opacity: 1, y: 0 }}
+  threshold={0.1}
+  rootMargin="-100px"
+  textAlign="center"
+  style={{
+    letterSpacing: "0.15em",
+    textTransform: "uppercase",
+    textShadow: "40px 0px 25px rgba(0,0,0,0.7)"
+  }}
+  onLetterAnimationComplete={handleAnimationComplete}
+/> */}
+
           <Typography
             variant={isMobile ? "h6" : "h4"}
             fontWeight={600}
@@ -92,7 +115,7 @@ export default function AboutPage() {
           </Button> */}
         </motion.div>
       </Box>
-      <section className="bg-white py-16 px-6 md:px-12 lg:px-20">
+      <section className="bg-transparent py-16 px-6 md:px-12 lg:px-20">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-12 max-w-[80vw] mx-auto">
         
         {/* Image Side */}
@@ -140,7 +163,7 @@ In an era defined by innovation and global interconnectivity, the focus remains 
         </div>
       </div>
     </section>
-      <section className="bg-white py-16 px-6 md:px-12 lg:px-20">
+      <section className="bg-transparent py-16 px-6 md:px-12 lg:px-20">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-12 max-w-[80vw] mx-auto">
          {/* Text Side */}
         <div className="w-full md:w-1/2 text-left">
@@ -188,7 +211,7 @@ With this, CGC University takes another firm step toward global relevance, reaff
       </div>
     </section>
 
-    <section className="bg-white py-16 px-6 md:px-12 lg:px-20">
+    <section className="bg-transparent py-16 px-6 md:px-12 lg:px-20">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-12 max-w-[80vw] mx-auto">
         
         {/* Image Side */}
@@ -444,7 +467,7 @@ Through VenturesNest, we envision empowering a new generation of entrepreneurs w
         </Button>
         </a>
       </Box>
-      <Box sx={{ bgcolor: '#f4f6f8', py: 8 }}>
+      <Box sx={{ bgcolor: 'transparent', py: 8 }}>
       <Container maxWidth="lg">
         <Fade in timeout={1000}>
           <Card elevation={4} sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, borderRadius: 3 }}>

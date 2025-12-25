@@ -11,13 +11,13 @@ const Footer = () => {
                     {/* </div> */}
                    
                     {/* <div className="ecell-logo-footer-section-column-1"> */}
-                        <img src="/assets/Footer-logo-parts/footer-logos-os-gauge.png" alt="" className="footer-logo-qsgauge-img" />
+                        {/* <img src="/assets/Footer-logo-parts/footer-logos-os-gauge.png" alt="" className="footer-logo-qsgauge-img" /> */}
                     {/* </div> */}
                     {/* <div className="ecell-logo-footer-section-column-1"> */}
-                        <img src="/assets/Footer-logo-parts/nirf-updated.png" alt="" className="footer-logo-nirf-img" />
+                        {/* <img src="/assets/Footer-logo-parts/nirf-updated.png" alt="" className="footer-logo-nirf-img" /> */}
                     {/* </div> */}
                     {/* <div className="ecell-logo-footer-section-column-1"> */}
-                        <img src="/assets/Footer-logo-parts/naac-updated.png" alt="" className="footer-logo-ecell-img" />
+                        {/* <img src="/assets/Footer-logo-parts/naac-updated.png" alt="" className="footer-logo-ecell-img" /> */}
                     {/* </div> */}
                     {/* <div className="ecell-logo-footer-section-column-1"> */}
                         {/* <img src="/assets/venture-nest-bg-less-white.png" alt="" className="footer-logo-ecell-img venturenest-mian-logo" /> */}

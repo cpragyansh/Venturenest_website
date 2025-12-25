@@ -2,7 +2,7 @@
 .events-section {
     position: relative;
     text-align: center;
-    background: white; /* Light Gray Background */
+    background: transparent; /* Light Gray Background */
     padding: 4vw 2vw;
     overflow: hidden;
   }

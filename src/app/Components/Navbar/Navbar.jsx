@@ -27,13 +27,13 @@ const Navbar = () => {
               className="cgc-university-logo-updated"
             />
           </a>
-          <a href="/">
+          {/* <a href="/">
             <img
               src="/assets/Logo_College_black_updated.png"
               alt="CGC University"
               className="logo-updated"
             />
-          </a>
+          </a> */}
           {/* <a href="/">
             <img
               src="/assets/cgc- University-logo-white.png"

@@ -27,7 +27,7 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   gap: "2vw",
-  backgroundColor: "white",
+  backgroundColor: "transparent",
 }));
 
 const SectionHeading = styled(Typography)(({ theme }) => ({
