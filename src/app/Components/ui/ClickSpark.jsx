@@ -34,16 +34,21 @@ const ClickSpark = ({
         osc.connect(gainNode);
         gainNode.connect(ctx.destination);
 
-        // Create a short, high-pitched "click" sound
+        // Standard UI Click
+        const t = ctx.currentTime;
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.01);
 
-        gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+        // Short, crisp high-to-low chirp
+        osc.frequency.setValueAtTime(800, t);
+        osc.frequency.exponentialRampToValueAtTime(400, t + 0.05);
 
-        osc.start(ctx.currentTime);
-        osc.stop(ctx.currentTime + 0.1);
+        // Instant attack, fast decay
+        gainNode.gain.setValueAtTime(0, t);
+        gainNode.gain.linearRampToValueAtTime(0.3, t + 0.005);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+
+        osc.start(t);
+        osc.stop(t + 0.05);
     }, []);
 
     useEffect(() => {

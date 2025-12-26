@@ -1,13 +1,19 @@
+
+
 // "use client"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import DomeGallery from "../../Components/ui/DomeGallery";
-import { Close, ZoomIn, ZoomOut, RestartAlt } from "@mui/icons-material";
+import FlowingMenu from "../../Components/ui/FlowingMenu";
+import Masonry from "../../Components/ui/Masonry";
+import { Close, ZoomIn, ZoomOut, RestartAlt, ViewInAr, GridView, ArrowBack } from "@mui/icons-material";
 
 export default function Photos() {
   const [Path, SetPath] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [viewMode, setViewMode] = useState('list'); // Default to 'list'
+  const [selectedCategory, setSelectedCategory] = useState(null); // For Masonry view
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,18 +21,32 @@ export default function Photos() {
         const response = await axios.get("https://venturenest.onrender.com/photos");
         let photos = response.data;
         if (photos.length > 0) {
-          // Fill gallery to ~150 items for density
-          while (photos.length < 150) {
-            photos = [...photos, ...response.data];
+          const originalPhotos = [...photos];
+          let domePhotos = [...photos];
+          while (domePhotos.length < 150) {
+            domePhotos = [...domePhotos, ...originalPhotos];
           }
-          photos = photos.slice(0, 150);
+          domePhotos = domePhotos.slice(0, 150);
+          SetPath(domePhotos);
         }
-        SetPath(photos);
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
     };
     fetchData();
+  }, []);
+
+  const [rawPhotos, setRawPhotos] = useState([]);
+  useEffect(() => {
+    const fetchRawData = async () => {
+      try {
+        const response = await axios.get("https://venturenest.onrender.com/photos");
+        setRawPhotos(response.data);
+      } catch (error) {
+        console.error("Error fetching raw photos", error);
+      }
+    }
+    fetchRawData();
   }, []);
 
   const handleImageClick = (image) => {
@@ -37,61 +57,170 @@ export default function Photos() {
     setSelectedImage(null);
   };
 
-  // Skeleton data for initial load
+  const uniqueCategories = useMemo(() => {
+    const map = new Map();
+    rawPhotos.forEach(photo => {
+      if (photo.photoName && !map.has(photo.photoName)) {
+        map.set(photo.photoName, photo);
+      }
+    });
+    return Array.from(map.values()).map((photo, index) => ({
+      link: "#",
+      text: photo.photoName,
+      image: photo.imageUrl,
+      id: photo._id || index
+    }));
+  }, [rawPhotos]);
+
+  const masonryItems = useMemo(() => {
+    if (!selectedCategory) return [];
+    return rawPhotos
+      .filter(p => p.photoName === selectedCategory)
+      .map((p, i) => ({
+        id: p._id || `${i}`,
+        img: p.imageUrl,
+        url: p.imageUrl,
+        height: Math.floor(Math.random() * (600 - 250 + 1) + 250)
+      }));
+  }, [selectedCategory, rawPhotos]);
+
   const skeletons = Array(50).fill({ skeleton: true });
   const displayImages = Path.length > 0 ? Path : skeletons;
 
+  const handleCategorySelect = (categoryName) => {
+    setSelectedCategory(categoryName);
+  };
+
   return (
-    <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#fff', position: 'relative' }}>
+    <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: viewMode === 'list' ? '#000' : '#fff', position: 'relative', transition: 'background 0.5s ease' }}>
 
       {/* Header Overlay */}
-      <div className="absolute top-0 left-0 w-full z-10 p-6 flex justify-between items-center bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none">
-        <div>
-          <h1 className="text-3xl font-bold text-[#A40C1A] font-display tracking-tight">Gallery</h1>
-          <p className="text-sm text-gray-500 font-medium">Immersive Collection</p>
+      <div className="absolute top-0 left-0 w-full z-20 p-4 flex justify-between items-center pointer-events-none">
+
+        {/* Title */}
+        <div className="bg-white/10 backdrop-blur-md p-3 rounded-lg border border-white/20 pointer-events-auto">
+          <h1 className={`text-xl font-bold ${viewMode === 'list' ? 'text-white' : 'text-[#A40C1A]'} font-display tracking-tight transition-colors duration-500`}>Gallery</h1>
+          <p className={`text-xs ${viewMode === 'list' ? 'text-gray-400' : 'text-gray-500'} font-medium transition-colors duration-500`}>{viewMode === 'globe' ? 'Immersive' : selectedCategory ? selectedCategory : 'Catalog'}</p>
         </div>
+
+        {/* View Switcher */}
+        <div className="flex gap-2 pointer-events-auto bg-white/10 backdrop-blur-md p-1.5 rounded-full border border-white/20">
+          <button
+            onClick={() => { setViewMode('globe'); setSelectedCategory(null); }}
+            className={`p-2 rounded-full transition-all duration-300 flex items-center gap-2 ${viewMode === 'globe' ? 'bg-[#A40C1A] text-white shadow-lg' : 'text-gray-500 hover:bg-white/20 hover:text-white'}`}
+          >
+            <ViewInAr fontSize="small" />
+            <span className={`text-[10px] font-bold leading-none ${viewMode === 'globe' ? 'block' : 'hidden'} md:block`}>IMMERSIVE</span>
+          </button>
+          <button
+            onClick={() => setViewMode('list')}
+            className={`p-2 rounded-full transition-all duration-300 flex items-center gap-2 ${viewMode === 'list' ? 'bg-white text-black shadow-lg' : 'text-gray-500 hover:bg-black/20 hover:text-black'}`}
+          >
+            <GridView fontSize="small" />
+            <span className={`text-[10px] font-bold leading-none ${viewMode === 'list' ? 'block' : 'hidden'} md:block`}>CATALOG</span>
+          </button>
+        </div>
+
       </div>
 
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden', position: 'relative' }}>
+      {/* Main Content Area */}
+      <div className="relative w-full h-full flex-1 overflow-hidden">
 
-        {/* Left Split (50%) - Editorial Description */}
-        <div className="w-1/2 h-full relative bg-white flex flex-col justify-center items-center px-12 lg:px-24">
-          {/* Decorative Elements */}
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#A40C1A] to-transparent opacity-20" />
-
+        {/* VIEW 1: GLOBE/DOME */}
+        {viewMode === 'globe' && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="max-w-xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full h-full flex"
           >
-            <h2 className="text-6xl lg:text-8xl font-bold text-[#A40C1A] mb-6 leading-[0.9] tracking-tighter font-display opacity-10 select-none absolute -top-24 -left-12">
-              PHOTOS
-            </h2>
-            <h2 className="text-4xl lg:text-6xl font-bold text-[#A40C1A] mb-8 leading-tight font-display">
-              Capturing<br />The Spirit
-            </h2>
-            <div className="w-20 h-1 bg-[#1A4880] mb-8" />
-            <p className="text-gray-600 text-lg lg:text-xl leading-relaxed font-ui font-light">
-              Explore the moments that define our journey. From sparky workshops to intensive bootcamps, every snapshot tells a story of innovation, resilience, and growth at VentureNest.
-            </p>
+            {/* Left Split (50%) - Editorial Description */}
+            <div className="w-1/2 h-full relative bg-white flex flex-col justify-center items-center px-12 lg:px-24">
+              {/* Decorative Elements */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#A40C1A] to-transparent opacity-20" />
 
-            <div className="mt-12 flex gap-4 text-sm text-gray-400 font-mono">
-              <span>// SCROLL TO ZOOM</span>
-              <span>// DRAG TO ROTATE</span>
-              <span>// CLICK TO EXPAND</span>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="max-w-xl"
+              >
+                <h2 className="text-6xl lg:text-8xl font-bold text-[#A40C1A] mb-6 leading-[0.9] tracking-tighter font-display opacity-10 select-none absolute -top-24 -left-12">
+                  PHOTOS
+                </h2>
+                <h2 className="text-4xl lg:text-6xl font-bold text-[#A40C1A] mb-8 leading-tight font-display">
+                  Capturing<br />The Spirit
+                </h2>
+                <div className="w-20 h-1 bg-[#1A4880] mb-8" />
+                <p className="text-gray-600 text-lg lg:text-xl leading-relaxed font-ui font-light">
+                  Explore the moments that define our journey. From sparky workshops to intensive bootcamps, every snapshot tells a story of innovation, resilience, and growth at VentureNest.
+                </p>
+
+                <div className="mt-12 flex gap-4 text-sm text-gray-400 font-mono">
+                  <span>// SCROLL TO ZOOM</span>
+                  <span>// DRAG TO ROTATE</span>
+                  <span>// CLICK TO EXPAND</span>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Split (50%) - Dome Gallery */}
+            <div style={{ width: '50%', height: '100%' }}>
+              <DomeGallery images={displayImages} onImageClick={handleImageClick} />
             </div>
           </motion.div>
-        </div>
+        )}
 
-        {/* Right Split (50%) - Dome Gallery */}
-        <div style={{ width: '50%', height: '100%' }}>
-          <DomeGallery images={displayImages} onImageClick={handleImageClick} />
-        </div>
+
+        {/* VIEW 2: LIST (Flowing Menu + Accordion Masonry) */}
+        {viewMode === 'list' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="w-full h-full relative pt-20"
+          >
+            {/* Accordion Menu */}
+            <div className="w-full h-full text-white">
+              <FlowingMenu
+                items={uniqueCategories.map(cat => ({
+                  ...cat,
+                  children: (
+                    <div className="w-full h-[600px] overflow-y-auto scrollbar-hide p-4 md:p-12"> {/* Fixed height container for Masonry inside accordion */}
+                      <Masonry
+                        items={rawPhotos
+                          .filter(p => p.photoName === cat.text)
+                          .map((p, i) => ({
+                            id: p._id || `${i}`,
+                            img: p.imageUrl,
+                            url: p.imageUrl,
+                            height: Math.floor(Math.random() * (600 - 300 + 1) + 300), // Taller images
+                            photoName: p.photoName // Pass metadata
+                          }))
+                        }
+                        onImageClick={(item) => handleImageClick({ imageUrl: item.img, photoName: item.photoName })}
+                        ease="power3.out"
+                        duration={0.6}
+                        stagger={0.05}
+                        animateFrom="bottom"
+                        scaleOnHover={true}
+                        hoverScale={0.95}
+                        blurToFocus={true}
+                        colorShiftOnHover={false}
+                      />
+                    </div>
+                  )
+                }))}
+                expandedId={selectedCategory}
+                onMenuItemClick={(id) => setSelectedCategory(id === selectedCategory ? null : id)}
+              />
+            </div>
+          </motion.div>
+        )}
 
       </div>
 
-      {/* Premium Image Modal */}
+      {/* Premium Image Modal (Global) */}
       <AnimatePresence>
         {selectedImage && (
           <ModalContent
