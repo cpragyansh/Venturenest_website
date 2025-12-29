@@ -115,8 +115,8 @@ export default function AboutPage() {
           </Button> */}
         </motion.div>
       </Box>
-      <section className="bg-transparent py-16 px-6 md:px-12 lg:px-20">
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-12 max-w-[80vw] mx-auto">
+      <section className="bg-transparent py-8 px-6 md:px-12 lg:px-10">
+      <div className="flex flex-col md:flex-row items-center pt-16 md:items-start gap-2 max-w-[80vw] mx-auto">
         
         {/* Image Side */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-start">

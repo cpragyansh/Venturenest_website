@@ -108,7 +108,8 @@ export default function ProgramDetails() {
                             color: "#c8102e",
                             fontWeight: 600,
                             display: "block",
-                            mb: 2
+                            mb: 2,
+                            textAlign: "center"
                         }}
                     >
                         Program Details
@@ -122,7 +123,10 @@ export default function ProgramDetails() {
                             fontSize: { xs: "2.5rem", md: "4.5rem" },
                             lineHeight: 1.1,
                             maxWidth: "900px",
-                            mx: "auto"
+                            mx: "auto",
+                            textAlign: "center",
+                            wordBreak: "break-word",
+                            overflowWrap: "break-word"
                         }}
                     >
                         {program.programName}
@@ -191,10 +195,12 @@ export default function ProgramDetails() {
                                 fontWeight: 400,
                                 color: "#1a1a1a",
                                 mb: 4,
-                                fontSize: { xs: "1.8rem", md: "2.5rem" },
+                                fontSize: { xs: "1.2rem", md: "1.5rem" },
                                 fontStyle: "italic",
                                 wordBreak: "break-word",
-                                overflowWrap: "break-word"
+                                overflowWrap: "break-word",
+                                display: "block",
+                                width: "100%"
                             }}
                         >
                             "{program.programTitle}"
@@ -214,14 +220,16 @@ export default function ProgramDetails() {
                         </Typography>
 
                         <Box sx={{ mt: 10 }}>
-                            <Typography
+                             <Typography
                                 variant="h6"
                                 sx={{
                                     fontFamily: "'Inter', sans-serif",
                                     fontWeight: 600,
                                     mb: 4,
                                     borderBottom: "1px solid #eee",
-                                    pb: 2
+                                    pb: 2,
+                                    wordBreak: "break-word",
+                                    overflowWrap: "break-word"
                                 }}
                             >
                                 A Glimpse Of {program.programName.split(":")[0]}

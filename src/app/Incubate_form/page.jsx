@@ -131,7 +131,7 @@ export default function JoinUs() {
                 justifyContent: 'center'
               }}
             >
-              <p style={{ marginBottom: '1rem', fontWeight: 'bold', fontSize: '1.5rem', color: '#fff' }}>
+              <p style={{ marginBottom: '1rem', fontWeight: 'bold', fontSize: '1.5rem', color: '#fff', fontFamily: 'var(--font-display)' }}>
                 WELCOME TO CGC VENTURENEST
               </p>
               <p style={{ marginBottom: '1rem', color: '#f8fafc', fontSize: '1.1rem', lineHeight: '1.6' }}>
@@ -285,7 +285,7 @@ export default function JoinUs() {
             "Innovators in tech, AI/ML, sustainability, healthtech, edtech and more",
             "Whether you're at the prototype stage or looking to raise your first round — VentureNest is the place for you."
           ].map((item, index) => (
-            <motion.div key={index} className="check-card" variants={scaleVariants}>
+            <motion.div key={index} className="check-card p-6" variants={scaleVariants}>
               <CheckCircle sx={{ color: 'var(--color-primary)', fontSize: 24, marginRight: '10px', marginTop: '2px' }} />
               <span className="check-text">{item}</span>
             </motion.div>

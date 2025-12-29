@@ -73,7 +73,7 @@
 }
 
 .mission-text {
-    font-family: var(--font-reading);
+    font-family: var(--font-ui);
     font-size: 1.1rem;
     line-height: 1.5;
     color: var(--color-foreground);
@@ -181,7 +181,7 @@
 }
 
 .card-title {
-    font-family: var(--font-ui);
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.15rem;
     color: var(--color-primary);
@@ -224,7 +224,7 @@
 }
 
 .check-text {
-    font-family: var(--font-reading);
+    font-family: var(--font-ui);
     font-size: 1.05rem;
     color: var(--color-foreground);
     line-height: 1.35;
@@ -335,7 +335,7 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: var(--space-sm);
-    font-family: var(--font-reading);
+    font-family: var(--font-ui);
     font-size: 1.1rem;
 }
 

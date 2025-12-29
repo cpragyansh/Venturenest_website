@@ -103,11 +103,11 @@ const Navbar = () => {
           <li className="dropdown">
             <a href="#" onClick={(e) => e.preventDefault()}>Council Members</a>
             <ul className="dropdown-menu">
-              <li><a href="/Advisory" onClick={closeMenu}>Advisory-council</a></li>
-              <li><a href="/Investment-and-Funding" onClick={closeMenu}>Investment & Funding council</a></li>
-              <li><a href="/LegalCompliance" onClick={closeMenu}>Legal and Compliance council</a></li>
-              <li><a href="/Mentorship" onClick={closeMenu}>Mentorship council</a></li>
-              <li><a href="/Technology-and-inovation" onClick={closeMenu}>Technology & Innovation council</a></li>
+              <li><a href="/Advisory" onClick={closeMenu}>Advisory-Council</a></li>
+              <li><a href="/Investment-and-Funding" onClick={closeMenu}>Investment & Funding Council</a></li>
+              <li><a href="/LegalCompliance" onClick={closeMenu}>Legal and Compliance Council</a></li>
+              <li><a href="/Mentorship" onClick={closeMenu}>Mentorship Council</a></li>
+              <li><a href="/Technology-and-inovation" onClick={closeMenu}>Technology & Innovation Council</a></li>
             </ul>
           </li>
 
