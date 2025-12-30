@@ -40,6 +40,7 @@ export default function Eco() {
               <div className="partner-card" key={index}>
                 {/* Use Cloudinary URL directly */}
                 <img src={partner.imgpath} alt={partner.Name} className="ecosystem-partners-main-photo-direct" />
+                <div className="partner-name">{partner.Name}</div>
               </div>
             ))
           ) : (

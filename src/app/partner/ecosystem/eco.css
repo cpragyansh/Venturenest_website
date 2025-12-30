@@ -48,16 +48,18 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 90vh;/* Ensure background image covers the initial space */
-    min-height: 480px; 
+    height: 100%; /* Cover full container height */
     object-fit: cover;
     z-index: -999;
 }
-.eco-partners-title{
-    font-size: 34px;
-    font-weight: 500;
-    color: white;
+.eco-partners-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: white; /* Changed for better contrast on red background */
     text-align: center;
+    margin-bottom: 0.5em;
+    font-family: var(--font-display);
+    width: 100%;
 }
 
 .ecosystem-partners-main-photo-direct{
@@ -89,27 +91,65 @@
 /* Partner Cards */
 .partner-card {
     background: white;
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 14vw;
-    width: 14vw;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-    border: 4px solid #A30D33;
+    height: 180px;
+    width: 200px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.partner-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #A30D33;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
 }
 
 .partner-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
+.partner-card:hover::after {
+    transform: scaleX(1);
+}
+
+.partner-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(133, 0, 44, 0.9);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.partner-card:hover .partner-name {
+    transform: translateY(0);
+}
 .partner-card img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
 }
+
 
 /* Ensure container expands dynamically */
 .partners-container::after {
@@ -118,50 +158,20 @@
     height: 50px; /* Extra space below */
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    
-}
-
 @media (max-width: 768px) {
-    /* .partners-grid {
-        grid-template-columns: repeat(2, 1fr);
-    } */
-
-    .partners-container {
-        min-height: auto; /* Allow the section to expand */
-        padding-bottom: 100px; /* Extra spacing for smaller screens */
+    .eco-partners-title {
+        text-align: center;
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-    .partners-grid {
-        /* grid-template-columns: repeat(1, 1fr); */
-            /* display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
-            /* gap: 10px; Spacing between items */
-           /* */ 
 
-    }
-    .partner-card {
-        background: rgb(224, 220, 220);
-        border-radius: 10px;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height:11em;
-        width: 42vw;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out;
-        border: 2px solid #A30D33;
-    }
     .partners-grid {
-        display: flex;            /* Convert to Flexbox */
-        flex-wrap: wrap;          /* Allows items to wrap */
-        justify-content: center;  /* Center items */
-        align-items: center;      /* Align items properly */
-        gap: 6vw;                /* Keep spacing between items */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6vw;
         margin-top: 20px;
     }
     .background-image {
@@ -169,9 +179,13 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 50vh;/* Ensure background image covers the initial space */
+        height: 50vh;
         min-height: 380px; 
         object-fit: cover;
         z-index: 0;
+    }
+
+    .eco-partners-title {
+        color: #1a1a1a; /* Dark text for mobile if bg is light */
     }
 }
