@@ -4,6 +4,16 @@ import "./Navbar.css";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Sound effects logic
+  const playSound = (url) => {
+    const audio = new Audio(url);
+    audio.volume = 0.3;
+    audio.play().catch(err => console.log("Sound play error:", err));
+  };
+
+  const hoverSound = "https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"; // Subtle hover
+  const clickSound = "https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"; // Clean click
+
   useEffect(() => {
     // Optional scroll logic
   }, []);
@@ -124,7 +134,27 @@ const Navbar = () => {
           <li><a href="/Programs" onClick={closeMenu}>Programs</a></li>
           <li><a href="/Startups" onClick={closeMenu}>Portfolio</a></li>
 
-          <li><a href="/Events" onClick={closeMenu}>Events</a></li>
+          <li className="dropdown">
+            <a href="/Events" onClick={closeMenu}>Events</a>
+            <ul className="dropdown-menu">
+              <li><a href="/Events" onClick={closeMenu}>All Events</a></li>
+              <li><a href="/VenturePulse" onClick={closeMenu}>VenturePulse</a></li>
+            </ul>
+          </li>
+
+          <li className="ecell-nav-item">
+            <a 
+              href="/ecell" 
+              className="ecell-highlight-link"
+              onClick={(e) => {
+                playSound(clickSound);
+                closeMenu();
+              }}
+              onMouseEnter={() => playSound(hoverSound)}
+            >
+              E-Cell
+            </a>
+          </li>
 
           <li className="dropdown">
             <a href="#" onClick={(e) => e.preventDefault()}>Gallery</a>

@@ -32,6 +32,8 @@ import Startups from "./app/invubatedstartup/page";
 import SuccessStories from "./app/successstories/page";
 import ProgramDetails from "./app/Programs/[programName]/page";
 import StoryDetails from "./app/successstories/seperatesuccess";
+import ECellPage from "./app/ecell/page";
+import VenturePulsePage from "./app/vp/page";
 
 // import Values from "./about/Values";
 
@@ -73,6 +75,8 @@ function App() {
           <Route path="/Startups" element={< Startups />} />
           <Route path="/success" element={< SuccessStories />} />
           <Route path="/success/:id" element={< StoryDetails />} />
+          <Route path="/ecell" element={<ECellPage />} />
+          <Route path="/VenturePulse" element={<VenturePulsePage />} />
 
 
 

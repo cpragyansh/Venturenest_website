@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+:root {
+  --ecell-bg: #0a0a0a;
+  --ecell-text: #ffffff;
+  --ecell-muted: #666666;
+  --ecell-border: rgba(255, 255, 255, 0.1);
+  --ecell-dashed: rgba(255, 255, 255, 0.05);
+}
+
+.ecell-coming-soon-container {
+  min-height: 100vh;
+  background-color: var(--ecell-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--ecell-text);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Minimalist Dashed Border Grid */
+.ecell-grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grid-line {
+  position: absolute;
+  border: 0.5px dashed var(--ecell-dashed);
+}
+
+.line-v-1 { left: 10%; top: 0; bottom: 0; width: 1px; }
+.line-v-2 { left: 50%; top: 0; bottom: 0; width: 1px; }
+.line-v-3 { right: 10%; top: 0; bottom: 0; width: 1px; }
+.line-h-1 { top: 15%; left: 0; right: 0; height: 1px; }
+.line-h-2 { bottom: 15%; left: 0; right: 0; height: 1px; }
+
+.ecell-content {
+  z-index: 10;
+  text-align: center;
+  max-width: 600px;
+  width: 90%;
+}
+
+.ecell-logo-minimal {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 3rem;
+  opacity: 0.8;
+  filter: grayscale(1);
+}
+
+.ecell-title-minimal {
+  font-size: clamp(3rem, 10vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  margin-bottom: 1rem;
+  color: var(--ecell-text);
+}
+
+.ecell-statement {
+  font-size: 1.1rem;
+  color: var(--ecell-muted);
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 4rem;
+}
+
+.ecell-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: static-pulse 2s infinite;
+}
+
+@keyframes static-pulse {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+.status-text {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--ecell-muted);
+}
+
+.minimal-btn {
+  background: transparent;
+  border: 1px solid var(--ecell-border);
+  color: var(--ecell-text);
+  padding: 1rem 2.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.minimal-btn:hover {
+  background: white;
+  color: black;
+  border-color: white;
+}

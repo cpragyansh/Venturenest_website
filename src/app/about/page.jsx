@@ -39,7 +39,7 @@ export default function AboutPage() {
   };
 
   return (
-    <Box sx={{ bgcolor: "transparent", minHeight: "100vh", fontFamily: "'Poppins', sans-serif",overflow:"hidden" }}>
+    <Box sx={{ bgcolor: "transparent", minHeight: "100vh", fontFamily: "var(--font-ui)", overflow: "hidden" }}>
 
 
  
@@ -66,7 +66,12 @@ export default function AboutPage() {
           <Typography
             variant={isMobile ? "h4" : "h1"}
             fontWeight={900}
-            sx={{ letterSpacing: "0.15em", textTransform: "uppercase", textShadow: "4px 4px 15px rgba(0,0,0,0.7)" }}
+            sx={{ 
+              fontFamily: "var(--font-display)",
+              letterSpacing: "0.15em", 
+              textTransform: "uppercase", 
+              textShadow: "4px 4px 15px rgba(0,0,0,0.7)" 
+            }}
           >
             VentureNest
           </Typography>
@@ -92,10 +97,18 @@ export default function AboutPage() {
 
           <Typography
             variant={isMobile ? "h6" : "h4"}
-            fontWeight={600}
-            sx={{ mt: 1, maxWidth: 600, mx: "auto", letterSpacing: "0.05em", lineHeight: 1.5 }}
+            fontWeight={500}
+            sx={{ 
+              mt: 1, 
+              maxWidth: 600, 
+              mx: "auto", 
+              letterSpacing: "0.05em", 
+              lineHeight: 1.5,
+              fontFamily: "var(--font-ui)",
+              opacity: 0.9
+            }}
           >
-            The premier Entrepreneurship Incubation Centre at CGC University,  Mohali.
+            The premier Entrepreneurship Incubation Centre at CGC University, Mohali.
           </Typography>
           {/* <Button
             variant="contained"
@@ -115,8 +128,8 @@ export default function AboutPage() {
           </Button> */}
         </motion.div>
       </Box>
-      <section className="bg-transparent py-8 px-6 md:px-12 lg:px-10">
-      <div className="flex flex-col md:flex-row items-center pt-16 md:items-start gap-2 max-w-[80vw] mx-auto">
+      <section className="bg-transparent py-4 px-6 md:px-12 lg:px-10">
+      <div className="flex flex-col md:flex-row items-center pt-8 md:items-start gap-8 max-w-[80vw] mx-auto backdrop-blur-[2px] bg-white/30 rounded-3xl p-6 shadow-sm border border-white/20">
         
         {/* Image Side */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-start">
@@ -134,10 +147,10 @@ export default function AboutPage() {
 
         {/* Text Side */}
         <div className="w-full md:w-1/2 text-left">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#9A0036]">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C] font-display" style={{ fontFamily: 'var(--font-display)' }}>
             S. Rashpal Singh Dhaliwal
           </h2>
-          <p className="text-sm font-semibold text-gray-800 uppercase mt-1 mb-4">
+          <p className="text-sm font-semibold text-gray-950 uppercase mt-1 mb-4" style={{ fontFamily: 'var(--font-ui)' }}>
             Chancellor, CGC University, Mohali
           </p>
 
@@ -149,7 +162,7 @@ export default function AboutPage() {
           </div>
 
           {/* Message Paragraph */}
-          <p className="text-black text-[1.02vw] text-justify font-[400]  chairmans-main-paragraph">
+          <p className="text-gray-900 text-[1.02vw] text-justify font-[450] chairmans-main-paragraph" style={{ fontFamily: 'var(--font-ui)', lineHeight: '1.6' }}>
             Welcome to VenturesNest Association
             <br /><br />
             The entrepreneurial association at CGC University, dedicated to fostering innovation, leadership, and startup culture among students.
@@ -163,14 +176,14 @@ In an era defined by innovation and global interconnectivity, the focus remains 
         </div>
       </div>
     </section>
-      <section className="bg-transparent py-16 px-6 md:px-12 lg:px-20">
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-12 max-w-[80vw] mx-auto">
+      <section className="bg-transparent py-4 px-6 md:px-12 lg:px-20">
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-8 max-w-[80vw] mx-auto backdrop-blur-[2px] bg-white/30 rounded-3xl p-6 shadow-sm border border-white/20">
          {/* Text Side */}
         <div className="w-full md:w-1/2 text-left">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#9A0036]">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C]" style={{ fontFamily: 'var(--font-display)' }}>
             Mr. Arsh Dhaliwal
           </h2>
-          <p className="text-sm font-semibold text-gray-800 uppercase mt-1 mb-4">
+          <p className="text-sm font-semibold text-gray-955 uppercase mt-1 mb-4" style={{ fontFamily: 'var(--font-ui)' }}>
             Managing Director, CGC University, Mohali
           </p>
 
@@ -182,7 +195,7 @@ In an era defined by innovation and global interconnectivity, the focus remains 
           </div>
 
           {/* Message Paragraph */}
-          <p className=" text-black text-[1.02vw] text-justify font-[400]  chairmans-main-paragraph">
+          <p className="text-gray-900 text-[1.02vw] text-justify font-[450] chairmans-main-paragraph" style={{ fontFamily: 'var(--font-ui)', lineHeight: '1.6' }}>
 At CGC University, we have always stood for innovation, quality education, and student success. Today, I am proud to introduce the VenturesNest Association — A strategic initiative to cultivate entrepreneurship, industry collaboration, and real-world innovation within our campus.
 <br /><br />
 VenturesNest is envisioned as a launchpad for aspiring entrepreneurs and a hub for startup incubation and global partnerships. It reflects our goal of bridging academic learning with practical impact, empowering students to become visionary leaders and changemakers.       
@@ -211,8 +224,8 @@ With this, CGC University takes another firm step toward global relevance, reaff
       </div>
     </section>
 
-    <section className="bg-transparent py-16 px-6 md:px-12 lg:px-20">
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-12 max-w-[80vw] mx-auto">
+    <section className="bg-transparent py-4 px-6 md:px-12 lg:px-20">
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-8 max-w-[80vw] mx-auto backdrop-blur-[2px] bg-white/30 rounded-3xl p-6 shadow-sm border border-white/20">
         
         {/* Image Side */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-start">
@@ -230,11 +243,11 @@ With this, CGC University takes another firm step toward global relevance, reaff
 
         {/* Text Side */}
         <div className="w-full md:w-1/2 text-left">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#9A0036]">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C]" style={{ fontFamily: 'var(--font-display)' }}>
             Dr. Ati Priye
           </h2>
-          <p className="text-sm font-semibold text-gray-800 uppercase mt-1 mb-4">
-           CEO, Incubator & Startups - CGC University, Mohali
+          <p className="text-sm font-semibold text-gray-955 uppercase mt-1 mb-4" style={{ fontFamily: 'var(--font-ui)' }}>
+            CEO, Incubator & Startups - CGC University, Mohali
           </p>
 
           {/* Custom Decorative Line */}
@@ -245,7 +258,7 @@ With this, CGC University takes another firm step toward global relevance, reaff
           </div>
 
           {/* Message Paragraph */}
-          <p className="text-black text-[1.02vw] text-justify font-[400]  chairmans-main-paragraph">
+          <p className="text-gray-900 text-[1.02vw] text-justify font-[450] chairmans-main-paragraph" style={{ fontFamily: 'var(--font-ui)', lineHeight: '1.6' }}>
 At CGC University, innovation is a way of life. I am proud to introduce the VenturesNest Association, a transformative initiative under our Incubation Center that aims to foster entrepreneurship and drive startup growth across campus.
             <br /><br />
 VenturesNest is designed to be a catalyst for student-led innovation—providing mentorship, infrastructure, funding guidance, and industry exposure to turn promising ideas into scalable ventures. It brings together talent, technology, and teamwork to build a thriving startup ecosystem within CGC University.
@@ -328,10 +341,10 @@ Through VenturesNest, we envision empowering a new generation of entrepreneurs w
           <Grid
             container
             key={idx}
-            spacing="4vw"
+            spacing="2vw"
              direction={isMobile ? "column" : reverse ? "row-reverse" : "row"}
             sx={{
-              my: 10,
+              my: 6,
               // flexDirection: isMobile ? "column" : reverse ? "row-reverse" : "row",
               alignItems: "center",
               }}
@@ -366,14 +379,14 @@ Through VenturesNest, we envision empowering a new generation of entrepreneurs w
             {/* Text Content */}
             <Grid item xs={12} md={6}>
               <Typography
-                // variant={isMobile ? "h5" : "h4"}
                 fontWeight={700}
                 sx={{
                   mb: 3,
-                  color: "#A30D33",
+                  color: "#85002C",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  fontSize:{xs:"8vw",sm:"0.9vw",md:"2vw",lg:"2vw"}
+                  fontSize:{xs:"8vw",sm:"0.9vw",md:"2vw",lg:"2vw"},
+                  fontFamily: "var(--font-display)"
                 }}
               >
                 {title}
@@ -387,10 +400,11 @@ Through VenturesNest, we envision empowering a new generation of entrepreneurs w
                     mb: 3,
                     fontSize: {sm:"1rem" , md:"1vw",lg:"1.15rem"},
                     fontWeight: 500,
-                    color: "#4a4a4a",
+                    color: "#1a1a1a",
                     lineHeight: 1.8,
                     width:{xs:"100%" , md:"50vw",lg:"35vw"},
-                     fontSize:{xs:"4.6vw",sm:"0.9vw",md:"2vw",lg:"1.3vw"}
+                     fontSize:{xs:"4.6vw",sm:"0.9vw",md:"2vw",lg:"1.3vw"},
+                     fontFamily: "var(--font-ui)"
                   }}
                 >
                   {para}
@@ -406,7 +420,8 @@ Through VenturesNest, we envision empowering a new generation of entrepreneurs w
                       display: "flex",
                       alignItems: "center",
                       mb: 1.5,
-                      color: "#6f1d3f",
+                      color: "#4a0520",
+                      fontFamily: "var(--font-ui)",
                       fontWeight: 600,
                       fontSize: {sm:"1rem" , lg:"1.1rem"},
                           width:{xs:"100%" , lg:"40vw"}
@@ -428,8 +443,8 @@ Through VenturesNest, we envision empowering a new generation of entrepreneurs w
       {/* Final Call to Action Section */}
       <Box
         sx={{
-          mt: 10,
-          py: 8,
+          mt: 8,
+          py: 6,
           bgcolor: "#A30D33",
           color: "white",
           textAlign: "center",
@@ -438,13 +453,14 @@ Through VenturesNest, we envision empowering a new generation of entrepreneurs w
           mx: "auto",
           maxWidth: 800,
           boxShadow: "0 12px 40px rgba(163,13,51,0.7)",
+          fontFamily: "var(--font-ui)"
         }}
         data-aos="zoom-in"
       >
-        <Typography variant={isMobile ? "h5" : "h3"} fontWeight={900} gutterBottom>
+        <Typography variant={isMobile ? "h5" : "h3"} fontWeight={900} gutterBottom sx={{ fontFamily: "var(--font-display)" }}>
           Ready to Turn Your Idea into Reality?
         </Typography>
-        <Typography variant="body1" sx={{ mb: 4, fontWeight: 600, fontSize: "1.1rem" }}>
+        <Typography variant="body1" sx={{ mb: 4, fontWeight: 600, fontSize: "1.1rem", fontFamily: "var(--font-ui)" }}>
           Join VentureNest today and take the first step toward building a successful startup with our expert guidance and network.
         </Typography>
         
@@ -467,7 +483,7 @@ Through VenturesNest, we envision empowering a new generation of entrepreneurs w
         </Button>
         </a>
       </Box>
-      <Box sx={{ bgcolor: 'transparent', py: 8 }}>
+      <Box sx={{ bgcolor: 'transparent', py: 4 }}>
       <Container maxWidth="lg">
         <Fade in timeout={1000}>
           <Card elevation={4} sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, borderRadius: 3 }}>
@@ -490,11 +506,11 @@ Through VenturesNest, we envision empowering a new generation of entrepreneurs w
             <CardContent sx={{ p: 4, flex: 1 }}>
               <Box display="flex" alignItems="center" mb={2}>
                 <VerifiedIcon sx={{ fontSize: 40, color: '#2e7d32', mr: 2 }} />
-                <Typography variant="h5" fontWeight="bold">
+                <Typography variant="h5" fontWeight="bold" sx={{ fontFamily: "var(--font-display)", color: "#1a1a1a" }}>
                   ISO 9001:2015 Certified
                 </Typography>
               </Box>
-              <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem' }}>
+              <Typography variant="body1" sx={{ fontSize: '1.1rem', color: "#222", fontFamily: "var(--font-ui)" }}>
                 We are proud to be ISO 9001:2015 certified, reflecting our commitment to maintaining the highest standards in quality management and continuous improvement. This certification ensures that we consistently deliver exceptional services and value to our stakeholders.
               </Typography>
             </CardContent>

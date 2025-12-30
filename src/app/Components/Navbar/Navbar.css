@@ -419,10 +419,10 @@
     display: none;
   }
 
-  .navbar-links-joinus-btn-text {}
-
-  .navbar {
-    /* height: 20vw; */
+  .navbar-links-joinus-btn-text {
+    /* Refined Button Style */
+    color: white;
+    text-align: center;
   }
 
   .nav-links .dropdown-menu {
@@ -538,4 +538,63 @@
     padding: 0;
   }
 
+  }
+
+
+/* E-Cell Highlighted Navbar Option - Refined Theme */
+.ecell-highlight-link {
+  background: rgba(163, 13, 51, 0.05);
+  color: #A30D33 !important;
+  padding: 8px 18px !important;
+  border-radius: 4px; /* More architectural sharp corners */
+  border: 1.5px solid #A30D33;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 2px !important;
+  transition: all 0.3s ease-in-out !important;
+  position: relative;
+  overflow: visible;
+}
+
+.ecell-highlight-link::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 1px dashed rgba(163, 13, 51, 0.3);
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ecell-highlight-link:hover {
+  background: #A30D33;
+  color: white !important;
+  box-shadow: 0 0 20px rgba(163, 13, 51, 0.3);
+  transform: translateY(-1px);
+}
+
+.ecell-highlight-link:hover::before {
+  opacity: 1;
+}
+
+/* Ensure dropdown works for highlighted item if needed */
+.ecell-nav-item {
+  display: flex;
+  align-items: center;
+  margin-left: 1vw;
+}
+
+@media (max-width: 1250px) {
+  .ecell-highlight-link {
+    width: auto;
+    margin: 15px 0;
+    padding: 10px 30px !important;
+  }
+  .ecell-nav-item {
+    margin-left: 0;
+  }
 }
