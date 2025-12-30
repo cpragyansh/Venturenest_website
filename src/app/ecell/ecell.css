@@ -1,123 +1,182 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap');
 
 :root {
-  --ecell-bg: #0a0a0a;
-  --ecell-text: #ffffff;
-  --ecell-muted: #666666;
-  --ecell-border: rgba(255, 255, 255, 0.1);
-  --ecell-dashed: rgba(255, 255, 255, 0.05);
+  --neo-white: #FFFFFF;
+  --neo-black: #000000;
+  --neo-red: #A30D33;
+  --neo-navy: #000080;
+  --neo-border: 4px solid #000000;
+  --neo-border-thick: 8px solid #000000;
+  --neo-shadow: 12px 12px 0px 0px #000000;
 }
 
-.ecell-coming-soon-container {
+.ecell-full-container {
   min-height: 100vh;
-  background-color: var(--ecell-bg);
+  background-color: var(--neo-white);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--ecell-text);
-  font-family: 'Inter', sans-serif;
-  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
   position: relative;
 }
 
-/* Minimalist Dashed Border Grid */
-.ecell-grid-overlay {
+/* Ticker/Marquee for "Work in Progress" feel */
+.neo-ticker {
+  background-color: var(--neo-black);
+  color: var(--neo-white);
+  padding: 1rem 0;
+  border-bottom: var(--neo-border);
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker 30s linear infinite;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1.2rem;
+}
+
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* Full Width Sections */
+.neo-hero-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 4rem 2rem;
+  background: 
+    repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(0,0,128,0.03) 30px, rgba(0,0,128,0.03) 60px);
+}
+
+.neo-full-block {
+  width: 100%;
+  max-width: 1400px;
+  background: var(--neo-white);
+  border: var(--neo-border-thick);
+  box-shadow: var(--neo-shadow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.block-header {
+  border-bottom: var(--neo-border);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--neo-navy);
+  color: white;
+}
+
+.block-content {
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.neo-big-title {
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 800;
+  line-height: 0.85;
+  color: var(--neo-black);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  letter-spacing: -0.05em;
+}
+
+.neo-highlight-span {
+  background-color: var(--neo-red);
+  color: white;
+  padding: 0 1rem;
+  border: var(--neo-border);
+  display: inline-block;
+  transform: rotate(-1deg);
+}
+
+.neo-status-text {
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--neo-navy);
+  margin-bottom: 2rem;
+  border: var(--neo-border);
+  padding: 1rem 2rem;
+  background: var(--neo-white);
+}
+
+.neo-description-full {
+  font-size: 1.5rem;
+  max-width: 800px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--neo-black);
+  margin-bottom: 4rem;
+}
+
+/* Dashed architectural integration */
+.neo-dashed-grid {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  border: 2px dashed rgba(0,0,0,0.1);
+  margin: 20px;
   pointer-events: none;
-  z-index: 1;
 }
 
-.grid-line {
-  position: absolute;
-  border: 0.5px dashed var(--ecell-dashed);
-}
-
-.line-v-1 { left: 10%; top: 0; bottom: 0; width: 1px; }
-.line-v-2 { left: 50%; top: 0; bottom: 0; width: 1px; }
-.line-v-3 { right: 10%; top: 0; bottom: 0; width: 1px; }
-.line-h-1 { top: 15%; left: 0; right: 0; height: 1px; }
-.line-h-2 { bottom: 15%; left: 0; right: 0; height: 1px; }
-
-.ecell-content {
-  z-index: 10;
-  text-align: center;
-  max-width: 600px;
-  width: 90%;
-}
-
-.ecell-logo-minimal {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 3rem;
-  opacity: 0.8;
-  filter: grayscale(1);
-}
-
-.ecell-title-minimal {
-  font-size: clamp(3rem, 10vw, 5rem);
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  margin-bottom: 1rem;
-  color: var(--ecell-text);
-}
-
-.ecell-statement {
-  font-size: 1.1rem;
-  color: var(--ecell-muted);
-  line-height: 1.6;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  margin-bottom: 4rem;
-}
-
-.ecell-status-bar {
+.neo-cta-row {
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3rem;
+  border-top: var(--neo-border);
 }
 
-.status-dot {
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  animation: static-pulse 2s infinite;
-}
-
-@keyframes static-pulse {
-  0% { opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { opacity: 0.2; }
-}
-
-.status-text {
-  font-size: 0.7rem;
+.neo-btn-full {
+  flex: 1;
+  padding: 2rem;
+  font-size: 1.2rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  color: var(--ecell-muted);
-}
-
-.minimal-btn {
-  background: transparent;
-  border: 1px solid var(--ecell-border);
-  color: var(--ecell-text);
-  padding: 1rem 2.5rem;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+  text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  background: var(--neo-white);
+  color: var(--neo-black);
+  text-decoration: none;
+  border-right: var(--neo-border);
 }
 
-.minimal-btn:hover {
-  background: white;
-  color: black;
-  border-color: white;
+.neo-btn-full:last-child {
+  border-right: none;
+}
+
+.neo-btn-full.active {
+  background: var(--neo-red);
+  color: white;
+}
+
+.neo-btn-full:hover {
+  background: var(--neo-black);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .neo-big-title { font-size: 5rem; }
+  .neo-cta-row { flex-direction: column; }
+  .neo-btn-full { border-right: none; border-bottom: var(--neo-border); }
+  .neo-btn-full:last-child { border-bottom: none; }
 }

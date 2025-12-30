@@ -3,47 +3,62 @@ import React from "react";
 import { motion } from "framer-motion";
 import "./ecell.css";
 
-const ECellComingSoon = () => {
+const ECellFullPage = () => {
   return (
-    <div className="ecell-coming-soon-container">
-      {/* Architectural Grid */}
-      <div className="ecell-grid-overlay">
-        <div className="grid-line line-v-1"></div>
-        <div className="grid-line line-v-2"></div>
-        <div className="grid-line line-v-3"></div>
-        <div className="grid-line line-h-1"></div>
-        <div className="grid-line line-h-2"></div>
+    <div className="ecell-full-container">
+      {/* Top Ticker */}
+      <div className="neo-ticker">
+        <div className="ticker-content">
+          WORK IN PROGRESS • COMING SOON • ENTREPRENEURSHIP CELL • CGC UNIVERSITY • INNOVATION HUB • WORK IN PROGRESS • COMING SOON • ENTREPRENEURSHIP CELL • CGC UNIVERSITY • INNOVATION HUB
+        </div>
       </div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        className="ecell-content"
-      >
-        <img 
-          src="/assets/ecell-logo-with-bg.jpg" 
-          alt="E-Cell" 
-          className="ecell-logo-minimal"
-        />
-        
-        <h1 className="ecell-title-minimal">E-CELL</h1>
-        
-        <p className="ecell-statement">
-          Building the foundation for high-performance entrepreneurship.
-        </p>
+      <div className="neo-hero-section">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+          className="neo-full-block"
+        >
+          <div className="neo-dashed-grid"></div>
+          
+          <div className="block-header">
+            <span style={{ fontWeight: 800 }}>EST. 2024</span>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <div style={{ width: '15px', height: '15px', background: 'white', border: '2px solid black' }}></div>
+              <div style={{ width: '15px', height: '15px', background: '#A30D33', border: '2px solid black' }}></div>
+            </div>
+          </div>
 
-        <div className="ecell-status-bar">
-          <div className="status-dot"></div>
-          <span className="status-text">In Development</span>
+          <div className="block-content">
+            <div className="neo-status-text">COMMING SOON</div>
+            
+            <h1 className="neo-big-title">
+              E-CELL<br/>
+              <span className="neo-highlight-span">CGC</span>
+            </h1>
+
+            <p className="neo-description-full">
+              We are building the most advanced student-led entrepreneurship cell in the region. 
+              Architecting the future of campus startups.
+            </p>
+          </div>
+
+          <div className="neo-cta-row">
+            <a href="/" className="neo-btn-full active">INDEX</a>
+            <div className="neo-btn-full">WORK IN PROGRESS</div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Bottom Ticker */}
+      <div className="neo-ticker" style={{ borderTop: '4px solid black', borderBottom: 'none' }}>
+        <div className="ticker-content" style={{ animationDirection: 'reverse' }}>
+          ARCHITECTING THE FUTURE • BUILDING THE HUB • GROUND ZERO • STARTUP CULTURE • ARCHITECTING THE FUTURE • BUILDING THE HUB • GROUND ZERO • STARTUP CULTURE
         </div>
-
-        <a href="/">
-          <button className="minimal-btn">Index</button>
-        </a>
-      </motion.div>
+      </div>
     </div>
   );
 };
 
-export default ECellComingSoon;
+export default ECellFullPage;
