@@ -2,7 +2,7 @@
   /* background-color: #a8193d; */
   background-color: white;
   width: 100%;
-  z-index: 9999999999;
+  z-index: 5000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,7 +21,7 @@
   /* position: fixed; */
   background-color: white;
   width: 100%;
-  z-index: 99999999;
+  z-index: 4999;
   margin-bottom: 5vw;
 
 }
@@ -78,7 +78,7 @@
   color: black;
   align-items: center;
   /* margin-top: 2vw; */
-  z-index: 999999999999999999999999999999999;
+  z-index: 5001;
 }
 
 .nav-links li a {

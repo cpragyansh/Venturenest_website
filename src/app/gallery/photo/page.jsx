@@ -1,6 +1,4 @@
-
-
-// "use client"
+"use client";
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +10,7 @@ import { Close, ZoomIn, ZoomOut, RestartAlt, ViewInAr, GridView, ArrowBack } fro
 export default function Photos() {
   const [Path, SetPath] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [viewMode, setViewMode] = useState('list'); // Default to 'list'
+  const [viewMode, setViewMode] = useState('globe'); // Default changed from 'list' to 'globe'
   const [selectedCategory, setSelectedCategory] = useState(null); // For Masonry view
 
   useEffect(() => {
@@ -106,14 +104,19 @@ export default function Photos() {
         {/* View Switcher */}
         <div className="flex gap-2 pointer-events-auto bg-white/10 backdrop-blur-md p-1.5 rounded-full border border-white/20">
           <button
-            onClick={() => { setViewMode('globe'); setSelectedCategory(null); }}
+            onClick={() => {
+              setViewMode('globe'); 
+              setSelectedCategory(null); 
+            }}
             className={`p-2 rounded-full transition-all duration-300 flex items-center gap-2 ${viewMode === 'globe' ? 'bg-[#A40C1A] text-white shadow-lg' : 'text-gray-500 hover:bg-white/20 hover:text-white'}`}
           >
             <ViewInAr fontSize="small" />
             <span className={`text-[10px] font-bold leading-none ${viewMode === 'globe' ? 'block' : 'hidden'} md:block`}>IMMERSIVE</span>
           </button>
           <button
-            onClick={() => setViewMode('list')}
+            onClick={() => {
+              setViewMode('list');
+            }}
             className={`p-2 rounded-full transition-all duration-300 flex items-center gap-2 ${viewMode === 'list' ? 'bg-white text-black shadow-lg' : 'text-gray-500 hover:bg-black/20 hover:text-black'}`}
           >
             <GridView fontSize="small" />

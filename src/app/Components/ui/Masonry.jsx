@@ -171,6 +171,10 @@ const Masonry = ({
     }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 
     const handleMouseEnter = (e, item) => {
+        const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3");
+        audio.volume = 0.3;
+        audio.play().catch(() => {});
+
         const element = e.currentTarget;
         const selector = `[data-key="${item.id}"]`;
 
@@ -224,7 +228,12 @@ const Masonry = ({
                         key={item.id}
                         data-key={item.id}
                         className="item-wrapper"
-                        onClick={() => onImageClick ? onImageClick(item) : null}
+                        onClick={() => {
+                            const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
+                            audio.volume = 0.5;
+                            audio.play().catch(() => {});
+                            if(onImageClick) onImageClick(item);
+                        }}
                         onMouseEnter={e => handleMouseEnter(e, item)}
                         onMouseLeave={e => handleMouseLeave(e, item)}
                     >

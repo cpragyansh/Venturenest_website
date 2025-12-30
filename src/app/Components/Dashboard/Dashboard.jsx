@@ -16,6 +16,40 @@ import StarredEvents from '../StarredEvents/StarredEvents';
 import InspirationalStories from '../Inspirational_stories/Inspirational_stories';
 import HowWeSupportYou from '../HowWeWork/HowWeWork';
 import Video from '../VideoCorosuel/Video';
+import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
+
+const MagneticButton = ({ children, className }) => {
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const springConfig = { damping: 15, stiffness: 150 };
+    const dx = useSpring(mouseX, springConfig);
+    const dy = useSpring(mouseY, springConfig);
+
+    const handleMouseMove = (e) => {
+        const { clientX, clientY, currentTarget } = e;
+        const { left, top, width, height } = currentTarget.getBoundingClientRect();
+        const x = clientX - (left + width / 2);
+        const y = clientY - (top + height / 2);
+        mouseX.set(x * 0.4);
+        mouseY.set(y * 0.4);
+    };
+
+    const handleMouseLeave = () => {
+        mouseX.set(0);
+        mouseY.set(0);
+    };
+
+    return (
+        <motion.div
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ x: dx, y: dy }}
+        >
+            {children}
+        </motion.div>
+    );
+};
 // import Slider from 'react-slick';
 // import Slider from '../swiperslider/swiperjs';
 
@@ -312,7 +346,7 @@ const Dashboard = () => {
 
 <div className="application-section-container" data-aos="fade-up" data-aos-duration="1000">
     <hr className="hr-below-section-5-heading upper" />
-    <h1 className='application-section-heading animated-element' data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300">
+    <h1 className='application-section-heading animated-element' data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300" style={{color: '#A30D33'}}>
         <img src="assets/application-heading.svg" alt="" className="application-container-bg" />
         Application Process
     </h1>
@@ -375,9 +409,11 @@ const Dashboard = () => {
 
     {/* ✅ Apply Now Button */}
     <div className="apply-now-button-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1100">
-        <a href="/IncubateWithUs" className="fancy-apply-button">
-            Apply Now
-        </a>
+        <MagneticButton>
+            <a href="/IncubateWithUs" className="fancy-apply-button">
+                Apply Now
+            </a>
+        </MagneticButton>
     </div>
 </div>
 

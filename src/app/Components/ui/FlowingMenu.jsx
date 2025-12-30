@@ -44,7 +44,32 @@ function MenuItem({ link, text, image, isExpanded, onClick, children }) {
         return xDiff * xDiff + yDiff * yDiff;
     };
 
+    const hoverAudioRef = React.useRef(null);
+    const clickAudioRef = React.useRef(null);
+
+    React.useEffect(() => {
+        hoverAudioRef.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3");
+        clickAudioRef.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
+        hoverAudioRef.current.volume = 0.5;
+        clickAudioRef.current.volume = 0.6;
+    }, []);
+
+    const playHover = () => {
+        if (hoverAudioRef.current) {
+            hoverAudioRef.current.currentTime = 0;
+            hoverAudioRef.current.play().catch(() => {});
+        }
+    };
+
+    const playClick = () => {
+        if (clickAudioRef.current) {
+            clickAudioRef.current.currentTime = 0;
+            clickAudioRef.current.play().catch(() => {});
+        }
+    };
+
     const handleMouseEnter = ev => {
+        playHover();
         if (!headerRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
         const rect = headerRef.current.getBoundingClientRect();
         const x = ev.clientX - rect.left;
@@ -73,6 +98,7 @@ function MenuItem({ link, text, image, isExpanded, onClick, children }) {
 
     const handleClick = (e) => {
         e.preventDefault();
+        playClick();
         if (onClick) {
             onClick();
         }
@@ -97,7 +123,7 @@ function MenuItem({ link, text, image, isExpanded, onClick, children }) {
                 onMouseLeave={handleMouseLeave}
                 onClick={handleClick}
             >
-                <a className="menu__item-link" href={link}>
+                <a className="menu__item-link" href={link} onMouseEnter={handleMouseEnter}>
                     {text}
                 </a>
                 <div className="marquee" ref={marqueeRef}>

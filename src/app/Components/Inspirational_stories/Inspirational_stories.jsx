@@ -1,263 +1,191 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Typography,
-  Avatar,
-  CircularProgress,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  IconButton,
-  Fade,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Box, Typography, Button } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
+import { Close, ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import axios from "axios";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import "./InspirationalStories.css";
 
 const StartupStories = () => {
-  const [starredStories, setStarredStories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [show, setShow] = useState(true);
-  const [selectedStory, setSelectedStory] = useState(null);
+    const [starredStories, setStarredStories] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [selectedStory, setSelectedStory] = useState(null);
 
-  useEffect(() => {
-    AOS.init({ duration: 1200 });
-    fetchStarredStories();
-  }, []);
+    useEffect(() => {
+        fetchStarredStories();
+    }, []);
 
-  const fetchStarredStories = async () => {
-    try {
-      const response = await axios.get("https://venturenest.onrender.com/starred-stories");
-      setStarredStories(response.data);
-    } catch (err) {
-      console.error("Error fetching starred stories:", err);
-      setError("Failed to load stories.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    const fetchStarredStories = async () => {
+        try {
+            const response = await axios.get("https://venturenest.onrender.com/starred-stories");
+            setStarredStories(response.data);
+        } catch (err) {
+            console.error("Error fetching starred stories:", err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  useEffect(() => {
-    if (starredStories.length > 0) {
-      const interval = setInterval(() => {
-        setShow(false); // trigger fade out
-        setTimeout(() => {
-          setCurrentIndex((prev) => (prev + 1) % starredStories.length);
-          setShow(true); // trigger fade in
-        }, 500);
-      }, 4000); // change story every 4s
-      return () => clearInterval(interval);
-    }
-  }, [starredStories]);
+    useEffect(() => {
+        if (starredStories.length > 0 && !selectedStory) {
+            const interval = setInterval(() => {
+                setCurrentIndex((prev) => (prev + 1) % starredStories.length);
+            }, 6000);
+            return () => clearInterval(interval);
+        }
+    }, [starredStories, selectedStory]);
 
-  const handleOpenPopup = (story) => {
-    setSelectedStory(story);
-  };
+    const nextStory = () => setCurrentIndex((prev) => (prev + 1) % starredStories.length);
+    const prevStory = () => setCurrentIndex((prev) => (prev - 1 + starredStories.length) % starredStories.length);
 
-  const handleClosePopup = () => {
-    setSelectedStory(null);
-  };
+    if (loading) return null;
 
-  const story = starredStories[currentIndex];
+    const story = starredStories[currentIndex];
 
-  return (
-    <Box sx={{ width: {xs:"100%",sm:"100%" , lg:"80%"}, minHeight: "100vh", display: "flex", flexDirection: "column",justifyContent:"center",alignItems:"center",margin:"auto" }}>
-       <Typography sx={{fontFamily: "var(--font-display)", mb:"4vw", fontSize:{xs:"6vw",sm:"6vw",lg:"2vw"},mt:"2vw"}} className="section-title "> Inspirational Stories</Typography>
-      {loading ? (
-        <Box display="flex" justifyContent="center" alignItems="center" py={4}>
-          <CircularProgress size={50} />
-        </Box>
-      ) : error ? (
-        <Typography color="error" textAlign="center">
-          {error}
-        </Typography>
-      ) : story ? (
-        <Fade in={show} timeout={500}>
-          <Box
-            onClick={() => handleOpenPopup(story)}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              borderRadius: 2,
-              overflow: "hidden",
-              boxShadow: 3,
-              cursor: "pointer",
-              width:{xs:"90%",sm:"100%" , lg:"70vw"}
-            }}
-          >
-            {/* Top section */}
-            <Box
-              sx={{
-                backgroundColor: "#fff",
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                alignItems:{xs:"center",sm:"start",md:"start",lg:"center"},
-                p: 3,
-              }}
-            >
-              <Box flex={1}>
-                <Box  sx={{height:{xs:"14vw",sm:"10vw",lg:"12vw"},width:{xs:"32vw",sm:"25vw" , lg:"14vw"},objectFit:"cover",mb:{xs:"8vw",lg:"4vw"}}}>
-                <img
-                  src={story.FounderLogoImg || "assets/logo-placeholder.png"}
-                  alt="Startup Logo"
-                  style={{ height:{xs:"8vw",sm:"10vw",lg:"8vw"},mb:"8vw",width:{xs:"4vw",sm:"8vw" , lg:"8vw"},objectFit:"cover" }}
-                />
-              </Box>
-                <Typography variant="body1" color="red">
-                  Success
-                </Typography>
-                <Typography variant="h4" fontWeight="bold" sx={{fontFamily: "var(--font-display)"}}>
-                  {story.StartupName}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary" sx={{fontFamily: "var(--font-ui)"}}>
-                  Creating the World’s Largest Community <br /> for Entrepreneurs and Investors
-                </Typography>
-              </Box>
-              <Box
-                flex={1}
-                display="flex"
-                justifyContent="center"
-                mt={{ xs: 2, md: 0 }}
+    return (
+        <Box className="stories-outer-section">
+            <Typography 
+                className="stories-global-heading"
                 sx={{
-                  backgroundImage: `url(${story.FounderImg || "assets/default.jpg"})`,
-                  backgroundSize: "cover",
-                  backgroundRepeat:"no-repeat",
-                  backgroundPosition: "center",
-                  borderRadius: 2,
-                  width: {xs:"110%",sm:"100%" , lg:"26vw"} ,
-                  minHeight: 500,
-                  
+                    fontFamily: "var(--font-display)",
+                    fontSize: { xs: "2rem", lg: "3.5rem" },
+                    mb: 4,
+                    textAlign: "center",
+                    color: "#A30D33", 
+                    textTransform: "uppercase"
                 }}
-              ></Box>
-            </Box>
-
-            {/* Bottom red section */}
-            <Box
-              sx={{
-                backgroundColor: "#e94b5e",
-                color: "#fff",
-                p: 3,
-              }}
             >
-              
-              <Typography variant="body1" sx={{fontFamily: "var(--font-ui)"}}>
-                {story.StartupAbout}
-              </Typography>
-            </Box>
-          </Box>
-        </Fade>
-      ) : (
-        <Typography textAlign="center">No starred stories available.</Typography>
-      )}
-
-      {/* Popup */}
-      <Dialog
-  open={Boolean(selectedStory)}
-  onClose={handleClosePopup}
-  maxWidth="md"
-  fullWidth
-  PaperProps={{
-    sx: {
-      borderRadius: 4,
-      backgroundColor: "#fff",
-      p: { xs: 2, sm: 4 },
-      boxShadow: 10,
-      position: "relative",
-    },
-  }}
->
-  {selectedStory && (
-    <Box>
-      {/* Close Button */}
-      <IconButton
-        aria-label="close"
-        onClick={handleClosePopup}
-        sx={{
-          position: "absolute",
-          right: 16,
-          top: 16,
-          color: "grey.500",
-          zIndex: 1,
-        }}
-      >
-        <CloseIcon />
-      </IconButton>
-
-      {/* Header Section */}
-      <Box
-        display="flex"
-        flexDirection={{ xs: "column", md: "row" }}
-        alignItems={{ xs: "center", md: "flex-start" }}
-        gap={3}
-        mb={3}
-      >
-        {/* Founder Image */}
-        <Box
-          sx={{
-            width: { xs: "100%", md: "40%" },
-            height: { xs: 200, md: 300 },
-            backgroundImage: `url(${selectedStory.FounderImg || "assets/default.jpg"})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            borderRadius: 2,
-          }}
-        />
-
-        {/* Info Section */}
-        <Box flex={1}>
-          <Box display="flex" alignItems="center" gap={2} mb={1}>
-            <Avatar
-              src={selectedStory.StartupLogo || "assets/logo-placeholder.png"}
-              alt="Startup Logo"
-              sx={{ width: 56, height: 56 }}
-              variant="rounded"
-            />
-            <Typography variant="h5" fontWeight="bold" sx={{fontFamily: "var(--font-display)"}}>
-              {selectedStory.StartupName}
+                Inspirational Stories
             </Typography>
-          </Box>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            mb={2}
-            fontStyle="italic"
-            sx={{fontFamily: "var(--font-ui)"}}
-          >
-            Creating the World’s Largest Community for Entrepreneurs and Investors
-          </Typography>
 
-          <Box
-            component="hr"
-            sx={{
-              border: "none",
-              borderTop: "1px solid #eee",
-              my: 2,
-            }}
-          />
-          <Typography
-            variant="body2"
-            sx={{
-              fontFamily: "var(--font-ui)",
-              color: "text.secondary",
-              lineHeight: 1.6,
-              fontSize: "1rem",
-              whiteSpace: "pre-line",
-            }}
-          >
-            {selectedStory.StartupAbout}
-          </Typography>
+            <div className="stories-viewport">
+                {/* Floating Navigation */}
+                <button className="nav-btn prev" onClick={(e) => { e.stopPropagation(); prevStory(); }}>
+                    <ArrowBackIos />
+                </button>
+                
+                <AnimatePresence mode="wait">
+                    {story && (
+                        <motion.div
+                            key={story._id}
+                            className="story-main-hero"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            onClick={() => setSelectedStory(story)}
+                        >
+                            <div className="story-image-side">
+                                <img src={story.FounderImg || "assets/default.jpg"} alt={story.StartupName} />
+                                <div className="story-floating-badge">Success Story</div>
+                            </div>
+                            
+                            <div className="story-content-side">
+                                <div className="startup-brand-row">
+                                    <div className="startup-logo-container">
+                                        <img src={story.StartupLogo || story.FounderLogoImg || "assets/logo-placeholder.png"} alt="Logo" />
+                                    </div>
+                                    <div className="startup-tag-pill">Incubated</div>
+                                </div>
+                                <h2 className="startup-name">{story.StartupName}</h2>
+                                <p className="startup-tagline">Innovation & Growth</p>
+                                <p className="startup-excerpt">
+                                    {story.StartupAbout ? (story.StartupAbout.substring(0, 140) + "...") : "Read about this incredible journey of entrepreneurship and innovation."}
+                                </p>
+                                <div className="story-action-row">
+                                    <button className="story-read-btn">Read Journey</button>
+                                    <div className="story-dots">
+                                        {starredStories.map((_, idx) => (
+                                            <div key={idx} className={`dot ${idx === currentIndex ? 'active' : ''}`} onClick={() => setCurrentIndex(idx)} />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                <button className="nav-btn next" onClick={(e) => { e.stopPropagation(); nextStory(); }}>
+                    <ArrowForwardIos />
+                </button>
+            </div>
+
+            {starredStories.length > 4 && (
+                <Box sx={{ mt: 6, textAlign: "center" }}>
+                    <button className="more-news-btn" onClick={() => window.location.href='/success'}>
+                        Explore More Stories
+                    </button>
+                </Box>
+            )}
+
+            {/* Premium Full-Screen Modal */}
+            <AnimatePresence>
+                {selectedStory && (
+                    <motion.div 
+                        className="story-modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedStory(null)}
+                    >
+                        <motion.div 
+                            className="story-modal-content"
+                            initial={{ y: "100%" }}
+                            animate={{ y: 0 }}
+                            exit={{ y: "100%" }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button className="story-modal-close" onClick={() => setSelectedStory(null)}>
+                                <Close />
+                            </button>
+
+                            <div className="modal-inner-scroll-flexible">
+                                <div className="modal-hero-column">
+                                    <img src={selectedStory.FounderImg || "assets/default.jpg"} alt={selectedStory.StartupName} className="flexible-img" />
+                                    <div className="hero-overlay-flexible">
+                                        <div className="hero-content">
+                                            <img src={selectedStory.StartupLogo || selectedStory.FounderLogoImg} alt="" className="modal-logo" />
+                                            <h1>{selectedStory.StartupName}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="modal-body-content-flexible">
+                                    <div className="story-meta-row">
+                                        <div className="meta-item">
+                                            <span>Industry</span>
+                                            <strong>Technology</strong>
+                                        </div>
+                                        <div className="meta-item">
+                                            <span>Focus</span>
+                                            <strong>Innovation</strong>
+                                        </div>
+                                        <div className="meta-item">
+                                            <span>Status</span>
+                                            <strong>Incubated</strong>
+                                        </div>
+                                    </div>
+
+                                    <div className="story-detailed-text">
+                                        <h3>The Journey</h3>
+                                        <p>{selectedStory.StartupAbout}</p>
+                                        
+                                        <h3>About the Founder</h3>
+                                        <p>A visionary leader driving change in the entrepreneurial ecosystem, bringing years of expertise to solve real-world problems.</p>
+                                    </div>
+
+                                    <div className="modal-footer-actions">
+                                        <button className="back-btn" onClick={() => setSelectedStory(null)}>Back to Stories</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </Box>
-      </Box>
-    </Box>
-  )}
-</Dialog>
-
-
-    </Box>
-  );
+    );
 };
 
 export default StartupStories;
