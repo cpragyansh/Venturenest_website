@@ -11,6 +11,7 @@
     text-align: left;
     margin-top: 2vw;
     z-index: 9999999999999999999999999999999999999;
+    font-family: var(--font-ui);
 }
 .footer-section-column-1{
     display: flex;
@@ -53,30 +54,36 @@
 
 /* Useful Links Section */
 .usefull-links-footer-section-heading {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: goldenrod;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .usefull-links-para {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 400;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
+    opacity: 0.8;
 }
 
 .usefull-links-para:hover {
     color: goldenrod;
-    transform: translateX(5px); /* Slide effect on hover */
+    transform: translateX(5px);
+    opacity: 1;
 }
 
 /* Contact Section */
 .footer-section-contact-heading {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: goldenrod;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .footer-section-contact-text-part {
@@ -85,8 +92,9 @@
 }
 
 .section-1-footer-name {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
 }
 
 .cgc-address-para-footer-section p {
@@ -105,15 +113,18 @@
 
 /* Connect Section */
 .footer-section-connect-heading {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: goldenrod;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .footer-section-connecting-social-media-para {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.8;
 }
 
 .social-media-icons-footer-section {
@@ -139,11 +150,13 @@
     background-color: rgb(2, 5, 15);
     padding: 1.5rem 0;
     text-align: center;
+    font-family: var(--font-ui);
 }
 
 .copyright-footer-section-para {
-    color: goldenrod;
-    font-size: 1.2rem;
+    color: white;
+    opacity: 0.6;
+    font-size: 0.8rem;
     letter-spacing: 1px;
 }
 
@@ -257,7 +270,7 @@
     /* flex-direction: row; */
 }
     .usefull-links-footer-section-heading, .footer-section-contact-heading, .footer-section-connect-heading {
-        font-size: 1vw;
+        font-size: 0.8vw;
     }
     .footer-logo-nirf-img{
         width: 5.4vw;

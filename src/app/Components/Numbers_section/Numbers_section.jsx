@@ -47,6 +47,7 @@ const NumberSection = () => {
       <Typography
         variant="h4"
         sx={{
+          fontFamily: "var(--font-display)",
           color: "white",
           fontWeight: "bold",
           mb: 4,
@@ -88,13 +89,14 @@ const NumberSection = () => {
                 <Typography
                   fontWeight="bold"
                   color="black"
-                  sx={{ fontSize: "1.6rem" }}
+                  sx={{ fontFamily: "var(--font-ui)", fontSize: "1.6rem" }}
                 >
                   {item.value}
                 </Typography>
                 <Typography
                   color="#A01D3F"
                   sx={{
+                    fontFamily: "var(--font-ui)",
                     mt: 1,
                     fontSize: "0.9rem",
                     fontWeight: "bold",
@@ -141,13 +143,14 @@ const NumberSection = () => {
               <Typography
                 fontWeight="bold"
                 color="black"
-                sx={{ fontSize: "1.8rem" }}
+                sx={{ fontFamily: "var(--font-ui)", fontSize: "1.8rem" }}
               >
                 {item.value}
               </Typography>
               <Typography
                 color="#A01D3F"
                 sx={{
+                  fontFamily: "var(--font-ui)",
                   mt: 1,
                   fontSize: "1rem",
                   fontWeight: "bold",

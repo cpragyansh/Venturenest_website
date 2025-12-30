@@ -38,7 +38,7 @@ const StarredEvents = () => {
 
   return (
     <Box className="events-section" sx={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center",width:"100%" }}>
-      <Typography  sx={{fontSize:{xs:"6vw",sm:"6vw",lg:"3vw"}}} className="section-title">News and Events</Typography>
+      <Typography  sx={{fontFamily: "var(--font-display)", fontSize:{xs:"6vw",sm:"6vw",lg:"3vw"}}} className="section-title">News and Events</Typography>
 
       {/* Background Video */}
       {/* <video src="/assets/starred-events-animated-image.mp4" className="background-video" autoPlay loop muted playsInline /> */}
@@ -51,7 +51,7 @@ const StarredEvents = () => {
               <Box className="event-card large">
                 <img src={events[currentIndex].imageUrl} alt={events[currentIndex].eventTitle} className="event-image" />
                 <Box className="event-overlay">
-                  <Typography className="event-title">{events[currentIndex].eventTitle}</Typography>
+                  <Typography sx={{fontFamily: "var(--font-ui)"}} className="event-title">{events[currentIndex].eventTitle}</Typography>
                   {/* <Button className="read-more">Read More</Button> */}
                 </Box>
               </Box>
@@ -66,7 +66,7 @@ const StarredEvents = () => {
                       <Box className="event-card small" onClick={() => handleEventClick(index)} sx={{ cursor: "pointer" }}>
                         <img src={event.imageUrl} alt={event.eventTitle} className="event-image" />
                         <Box className="event-overlay">
-                          <Typography className="event-title">{event.eventTitle}</Typography>
+                          <Typography sx={{fontFamily: "var(--font-ui)"}} className="event-title">{event.eventTitle}</Typography>
                           {/* <Button className="read-more">Read More</Button> */}
                         </Box>
                       </Box>

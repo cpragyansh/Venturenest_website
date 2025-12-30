@@ -31,6 +31,7 @@ const SectionContainer = styled(Box)(({ theme }) => ({
 }));
 
 const SectionHeading = styled(Typography)(({ theme }) => ({
+  fontFamily: "var(--font-display)",
   fontSize: "clamp(1.6rem, 2.5vw, 2rem)",
   textTransform: "uppercase",
   fontWeight: 700,
@@ -105,6 +106,7 @@ const StyledImage = styled("img")(({ theme }) => ({
 }));
 
 const ProgramTitle = styled(Typography)(({ theme }) => ({
+  fontFamily: "var(--font-ui)",
   fontWeight: 600,
   fontSize: "clamp(1rem, 1.1vw, 1.5rem)",
   marginTop: "0.5rem",
@@ -115,6 +117,7 @@ const ProgramTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const ProgramDescription = styled(Typography)(({ theme }) => ({
+  fontFamily: "var(--font-ui)",
   textAlign: "center",
   fontSize: "clamp(0.95rem, 1vw, 1.25rem)",
   fontWeight: 400,

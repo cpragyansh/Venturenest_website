@@ -40,15 +40,16 @@ const PartnersSection = () => {
         {/* Heading */}
         <Typography
           variant="h4"
-          fontWeight="bold"
-          color="white"
           sx={{
+            fontFamily: "var(--font-display)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             gap: 2,
             fontSize: { xs: "1.5rem", sm: "2rem", md: "2.4rem" },
             mb: { xs: 3, md: 4 },
+            fontWeight: "bold",
+            color: "white",
           }}
         >
           <img

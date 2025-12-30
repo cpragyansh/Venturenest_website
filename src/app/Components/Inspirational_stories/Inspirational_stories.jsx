@@ -65,7 +65,7 @@ const StartupStories = () => {
 
   return (
     <Box sx={{ width: {xs:"100%",sm:"100%" , lg:"80%"}, minHeight: "100vh", display: "flex", flexDirection: "column",justifyContent:"center",alignItems:"center",margin:"auto" }}>
-       <Typography sx={{mb:"4vw", fontSize:{xs:"6vw",sm:"6vw",lg:"2vw"},mt:"2vw"}} className="section-title "> Inspirational Stories</Typography>
+       <Typography sx={{fontFamily: "var(--font-display)", mb:"4vw", fontSize:{xs:"6vw",sm:"6vw",lg:"2vw"},mt:"2vw"}} className="section-title "> Inspirational Stories</Typography>
       {loading ? (
         <Box display="flex" justifyContent="center" alignItems="center" py={4}>
           <CircularProgress size={50} />
@@ -109,10 +109,10 @@ const StartupStories = () => {
                 <Typography variant="body1" color="red">
                   Success
                 </Typography>
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h4" fontWeight="bold" sx={{fontFamily: "var(--font-display)"}}>
                   {story.StartupName}
                 </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
+                <Typography variant="subtitle1" color="text.secondary" sx={{fontFamily: "var(--font-ui)"}}>
                   Creating the World’s Largest Community <br /> for Entrepreneurs and Investors
                 </Typography>
               </Box>
@@ -143,7 +143,7 @@ const StartupStories = () => {
               }}
             >
               
-              <Typography variant="body1">
+              <Typography variant="body1" sx={{fontFamily: "var(--font-ui)"}}>
                 {story.StartupAbout}
               </Typography>
             </Box>
@@ -215,7 +215,7 @@ const StartupStories = () => {
               sx={{ width: 56, height: 56 }}
               variant="rounded"
             />
-            <Typography variant="h5" fontWeight="bold">
+            <Typography variant="h5" fontWeight="bold" sx={{fontFamily: "var(--font-display)"}}>
               {selectedStory.StartupName}
             </Typography>
           </Box>
@@ -224,6 +224,7 @@ const StartupStories = () => {
             color="text.secondary"
             mb={2}
             fontStyle="italic"
+            sx={{fontFamily: "var(--font-ui)"}}
           >
             Creating the World’s Largest Community for Entrepreneurs and Investors
           </Typography>
@@ -239,6 +240,7 @@ const StartupStories = () => {
           <Typography
             variant="body2"
             sx={{
+              fontFamily: "var(--font-ui)",
               color: "text.secondary",
               lineHeight: 1.6,
               fontSize: "1rem",

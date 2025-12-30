@@ -125,8 +125,6 @@
 
 .section-2-inner-part-heading {
     color: rgb(109, 22, 22);
-    text-shadow: 2px 2px 4px rgb(247, 97, 97);
-    /* font-size: 4em; */
     font-weight: 700;
     display: flex;
     gap: 0.5em;
@@ -135,7 +133,6 @@
     justify-content: start;
     margin-bottom: 1em;
     width: 40vw;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .section-2-para {
@@ -398,15 +395,8 @@ border-radius: 40px;
     justify-content: center;
     align-items: center;
     padding-top: 1em;
-    font-size: 5vw;
-    font-weight: bold;
-    /* transform: rotateX(100deg); */
-    /* opacity: 0; */
-    /* text-decoration: un; */
-    /* transform-origin: bottom; */
-    /* perspective: 1000px; */
-    /* transition: transform 1s ease-in-out, opacity 2s ease; */
-    /* text-shadow: 4px 2.5px 0px rgba(170, 8, 8, 0.6), 5px 3.5px 1px rgb(217, 230, 203); */
+    font-size: 3.5vw;
+    font-weight: 700;
 }
 
 /* .section-3-heading.animate_1 {
@@ -485,7 +475,7 @@ border-radius: 40px;
 
 @media (min-width: 1024px) {
     .section-3-heading {
-        font-size: 2vw;
+        font-size: 2.5vw;
     }
 
     .section-3-h1-logo {
@@ -493,7 +483,7 @@ border-radius: 40px;
     }
 
     .section-3-heading-2 {
-        font-size: 1.38vw;
+        font-size: 1.5vw;
     }
 
     .section-3-para {
@@ -1105,16 +1095,10 @@ margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2vw;
+    font-size: 2.5vw;
     text-transform: uppercase;
     font-weight: 700;
-    text-shadow: 2px 2px 0px rgba(197, 73, 73, 0.6), 5px 3.5px 1px rgb(217, 230, 203);
     color: rgb(133, 41, 41);
-    /* position: relative; */
-    /* z-index: 2; */
-    /* transition: transform 1s ease-in-out; */
-    /* opacity: 1; */
-    /* transform: translateX(-40%); */
 }
 
 .application-container-bg {
@@ -1161,6 +1145,7 @@ padding-bottom: 2em;    /* position: relative; */
 .application-step-1-heading,
 .application-step-2-heading,
 .application-step-3-heading {
+    font-family: var(--font-display);
     font-size:1.3vw;
     font-weight: 700;
     margin: 0;
