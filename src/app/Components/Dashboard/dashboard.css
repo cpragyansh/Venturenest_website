@@ -1,15 +1,26 @@
 .corosuel-image-dashboard{
     width: 100%;
+    /* background-color: red; */
+    /* background-image: url("../../../../public/assets/corosuel-bg.png"); */
     object-fit: contain;
     object-position: center;
     background-repeat: no-repeat;
-    width: 100vw; 
+    width: 100vw; /* Full width of the viewport */
+    /* height: 80vh;  */
     height: 70%; 
+    /* Full height of the viewport */
+    
     background-image: url("../../../../public/assets/corosuel-bg.png");
-    background-size: cover; 
-    background-position: center; 
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents repeating the image */
     margin: auto;
     margin-bottom:2vw;
+    /* margin-top: -5.4vw; */
+    /* z-index: -1; */
+    /* z-index: 99999999; */
+    /* background-color: red; */
+    padding-top: 2vw;
 }
 .dashboard-image-corosuel-text{
     color: white;
@@ -54,7 +65,7 @@
         background-image: url("../../../../public/assets/corosuel-bg.png");
         width: 100%; /* Full width of the viewport */
         height: 45vh; 
-        /*  */
+        /* */
         /* Ensures the image covers the entire area */
         margin-bottom:4em;
         /* background-color: red; */
@@ -789,8 +800,7 @@ transition: transform 1s ease-in-out, opacity 2s ease
     top: 0;
     transform: rotateZ(180deg);
 } */
-/* 
-.slider::before {
+/* .slider::before {
     left: 0;
     top: 0;
 } */
@@ -1147,6 +1157,26 @@ padding-bottom: 2em;    /* position: relative; */
     font-size: 1.1vw;
     text-align: justify;
     width: 40vw;
+    /* Added Box Styling Below */
+    padding: 20px;
+    border-radius: 20px;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width calculations */
+}
+
+/* Specific Colors based on Parent Wrapper */
+.application-step-1 #appplication-para {
+    background-color: #2F80ED; /* Blue */
+}
+
+.application-step-2 #appplication-para {
+    background-color: #6C757D; /* Gray */
+}
+
+.application-step-3 #appplication-para {
+    background-color: #A30D33; /* Red */
 }
 
 /* Step 1 Styling */

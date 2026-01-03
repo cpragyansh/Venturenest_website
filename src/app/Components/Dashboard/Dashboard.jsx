@@ -157,7 +157,7 @@ const Dashboard = () => {
             </div>
 
         </div> */}
-         <div className="section-3-vv" data-aos="fade-in" data-aos-duration="1200" data-aos-easing="ease-out">
+         {/* <div className="section-3-vv" data-aos="fade-in" data-aos-duration="1200" data-aos-easing="ease-out">
     <div className="section-3-text-overlay" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" data-aos-easing="ease-out">
         <span className="keyhighlight-animation">
             <h1 className="section-3-heading" data-aos="fade-right" data-aos-duration="1000" data-aos-easing="ease-in-out">
@@ -171,7 +171,7 @@ const Dashboard = () => {
             </p>
         </span>
     </div>
-</div>
+</div> */}
 
 
             {/* <div className="section-4-main">
@@ -345,11 +345,10 @@ const Dashboard = () => {
     <hr className="hr-below-section-5-heading" />
 
     <div className="application-steps-process-text">
-        {/* Step 1 */}
         <div className="application-step-1" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="500">
             <div className="step-1-text">
                 <h1 className='application-step-1-heading'>Online Application</h1>
-                <p className='application-step-1-para' id='appplication-para'>
+                <p className='application-step-1-para ' id='appplication-para'>
                     <strong>Kickstart Your Journey</strong> <br />
                     Startups can easily apply via our intuitive online portal. Just share your innovative business concept, core team details, market traction and the current stage of your venture’s development.
                 </p>
@@ -362,12 +361,11 @@ const Dashboard = () => {
             </div>
         </div>
 
-        {/* Step 2 */}
         <div className="application-step-2" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="700">
             <div className="application-step-2-inner">
                 <div className="step-2-sub-part">
                     <h1 className='application-step-2-heading'>Screening & Evaluation</h1>
-                    <p className='application-step-2-para' id='appplication-para'>
+                    <p className='application-step-2-para step-box-gray' id='appplication-para'>
                         <strong>Your Idea, Our Insights</strong> <br />
                         Once you apply, our expert panel evaluates your submission based on the strength of your idea, team synergy, scalability and market readiness. Every application gets the attention it deserves.
                     </p>
@@ -381,11 +379,10 @@ const Dashboard = () => {
             </div>
         </div>
 
-        {/* Step 3 */}
         <div className="application-step-3" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="900">
             <div className="step-3-text">
                 <h1 className='application-step-3-heading'>Selection & Onboarding</h1>
-                <p className='application-step-3-para' id='appplication-para'>
+                <p className='application-step-3-para step-box-red' id='appplication-para'>
                     <strong>Welcome to Growth</strong> <br />
                     Selected startups are onboarded into our ecosystem, gaining access to tailored mentorship, strategic resources and hands-on support to scale efficiently and sustainably.
                 </p>
@@ -399,7 +396,6 @@ const Dashboard = () => {
         </div>
     </div>
 
-    {/* ✅ Apply Now Button */}
     <div className="apply-now-button-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1100">
         <MagneticButton>
             <a href="/IncubateWithUs" className="fancy-apply-button">
