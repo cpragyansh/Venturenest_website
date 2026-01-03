@@ -83,6 +83,48 @@ const Navbar = () => {
           <span className="hamburger-line"></span>
         </button>
 
+<div className="bothnavbar-wrapper">
+        <ul className={`nav-links ${isMenuOpen ? "nav-active" : ""}`}>
+          <li className="ecell-nav-item">
+            <a 
+              href="/ecell" 
+              className="ecell-highlight-link"
+              onClick={(e) => {
+                playSound(clickSound);
+                closeMenu();
+              }}
+              onMouseEnter={() => playSound(hoverSound)}
+            >
+              E-Cell
+            </a>
+          </li>
+          <li className="ecell-nav-item">
+            <a 
+              href="/VenturePulse" 
+              className="ecell-highlight-link"
+              onClick={(e) => {
+                playSound(clickSound);
+                closeMenu();
+              }}
+              onMouseEnter={() => playSound(hoverSound)}
+            >
+             Venture Pulse
+            </a>
+          </li>
+
+        
+          {/* <li><a href="https://e-cell-blush-nine.vercel.app/" onClick={closeMenu}>E-cell</a></li> */}
+          <li className="join-us-btn-navbar-extra">
+            <a href="/IncubateWithUs" className="navbar-links-joinus-btn-text" onClick={closeMenu}>
+              Join Us
+            </a>
+          </li>
+          <li className="join-us-btn-navbar-extra upper-navbar-menu-incubate-btn">
+            <a href="/IncubateWithUs" className="navbar-links-joinus-btn-text" onClick={closeMenu}>
+              Incubate with us
+            </a>
+          </li>
+        </ul>
         <ul className={`nav-links ${isMenuOpen ? "nav-active" : ""}`}>
           <li>
             <a href="/" onClick={closeMenu}>Home</a>
@@ -138,11 +180,11 @@ const Navbar = () => {
             <a href="/Events" onClick={closeMenu}>Events</a>
             <ul className="dropdown-menu">
               <li><a href="/Events" onClick={closeMenu}>All Events</a></li>
-              <li><a href="/VenturePulse" onClick={closeMenu}>VenturePulse</a></li>
+              {/* <li><a href="/VenturePulse"    onClick={closeMenu}>VenturePulse</a></li> */}
             </ul>
           </li>
 
-          <li className="ecell-nav-item">
+          {/* <li className="ecell-nav-item">
             <a 
               href="/ecell" 
               className="ecell-highlight-link"
@@ -154,7 +196,7 @@ const Navbar = () => {
             >
               E-Cell
             </a>
-          </li>
+          </li> */}
 
           <li className="dropdown">
             <a href="#" onClick={(e) => e.preventDefault()}>Gallery</a>
@@ -165,12 +207,13 @@ const Navbar = () => {
           </li>
 
           {/* <li><a href="https://e-cell-blush-nine.vercel.app/" onClick={closeMenu}>E-cell</a></li> */}
-          <li className="join-us-btn-navbar-extra">
+          {/* <li className="join-us-btn-navbar-extra">
             <a href="/IncubateWithUs" className="navbar-links-joinus-btn-text" onClick={closeMenu}>
               Join Us
             </a>
-          </li>
+          </li> */}
         </ul>
+        </div>
       </nav>
     </div>
   );

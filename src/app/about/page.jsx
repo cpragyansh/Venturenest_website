@@ -141,13 +141,13 @@ export default function AboutPage() {
               height={600}
               className="rounded-lg object-cover"
               priority
-            />
+            />x``
           </div>
         </div>
 
         {/* Text Side */}
         <div className="w-full md:w-1/2 text-left">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C] font-display" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C] font-display text-transform: uppercase " style={{ fontFamily: 'var(--font-display)' }}>
             S. Rashpal Singh Dhaliwal
           </h2>
           <p className="text-sm font-semibold text-gray-950 uppercase mt-1 mb-4" style={{ fontFamily: 'var(--font-ui)' }}>
@@ -180,7 +180,7 @@ In an era defined by innovation and global interconnectivity, the focus remains 
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 max-w-[80vw] mx-auto backdrop-blur-[2px] bg-white/30 rounded-3xl p-6 shadow-sm border border-white/20">
          {/* Text Side */}
         <div className="w-full md:w-1/2 text-left">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C]" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C] text-transform: uppercase" style={{ fontFamily: 'var(--font-display)' }}>
             Mr. Arsh Dhaliwal
           </h2>
           <p className="text-sm font-semibold text-gray-955 uppercase mt-1 mb-4" style={{ fontFamily: 'var(--font-ui)' }}>
@@ -243,7 +243,7 @@ With this, CGC University takes another firm step toward global relevance, reaff
 
         {/* Text Side */}
         <div className="w-full md:w-1/2 text-left">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C]" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C] text-transform: uppercase" style={{ fontFamily: 'var(--font-display)' }}>
             Dr. Ati Priye
           </h2>
           <p className="text-sm font-semibold text-gray-955 uppercase mt-1 mb-4" style={{ fontFamily: 'var(--font-ui)' }}>
