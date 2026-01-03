@@ -1,26 +1,15 @@
 .corosuel-image-dashboard{
     width: 100%;
-    /* background-color: red; */
-    /* background-image: url("../../../../public/assets/corosuel-bg.png"); */
     object-fit: contain;
     object-position: center;
     background-repeat: no-repeat;
-    width: 100vw; /* Full width of the viewport */
-    /* height: 80vh;  */
+    width: 100vw; 
     height: 70%; 
-    /* Full height of the viewport */
-    
     background-image: url("../../../../public/assets/corosuel-bg.png");
-    background-size: cover; /* Ensures the image covers the entire area */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents repeating the image */
+    background-size: cover; 
+    background-position: center; 
     margin: auto;
     margin-bottom:2vw;
-    /* margin-top: -5.4vw; */
-    /* z-index: -1; */
-    /* z-index: 99999999; */
-    /* background-color: red; */
-    padding-top: 2vw;
 }
 .dashboard-image-corosuel-text{
     color: white;
