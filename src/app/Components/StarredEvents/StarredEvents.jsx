@@ -79,7 +79,7 @@ const StarredEvents = () => {
         <Box sx={{ py: 10, textAlign: "center", opacity: 0.5 }}>Loading events...</Box>
       ) : (
         <MagicBento 
-          items={events.slice(0, 5)}
+          items={events.slice(0, 4)}
           enableStars={true}
           enableSpotlight={true}
           enableBorderGlow={true}
