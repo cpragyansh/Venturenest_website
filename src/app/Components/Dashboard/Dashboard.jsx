@@ -9,7 +9,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import axios from 'axios'; // Import axios for API calls
-import Mslider from '../MainSlider/Mslider';
+import HeroCarousel from '../MainSlider/HeroCarousel';
 import PartnersSection from '../partners_slider/partners_slider';
 import NumberSection from '../Numbers_section/Numbers_section';
 import StarredEvents from '../StarredEvents/StarredEvents';
@@ -97,13 +97,13 @@ const Dashboard = () => {
     return (
         <div className="home-top-main-div">
 
-            <div className=" corosuel-image-dashboard " >
+            <div className="md:mb-8" >
                 {/* <HeroSection /> */}
                  {/* <Swiperjs /> */}
               {/* <Slider/> */}
               {/* <Video/> */}
               {/* <h1 className='dashboard-image-corosuel-text'>Innovation . Entrepreneurship . Growth</h1> */}
-              <Mslider  />
+              <HeroCarousel />
               
             </div>
 
