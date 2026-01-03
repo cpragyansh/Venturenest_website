@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@gsap/react": "^2.1.2",
-    "@mui/icons-material": "^7.1.1",
-    "@mui/material": "^7.1.0",
+    "@mui/icons-material": "^7.3.6",
+    "@mui/material": "^7.3.6",
     "@mux/mux-player-react": "^3.4.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
@@ -32,7 +32,7 @@
     "sass": "^1.78.0",
     "scss": "^0.2.4",
     "slick-carousel": "^1.8.1",
-    "swiper": "^11.2.5",
+    "swiper": "^11.2.10",
     "three": "^0.182.0",
     "web-vitals": "^2.1.4"
   },
