@@ -1,5 +1,14 @@
+:root {
+  --nav-height: 140px;
+}
+
+@media (max-width: 1250px) {
+  :root {
+    --nav-height: 80px;
+  }
+}
+
 .navbar {
-  /* background-color: #a8193d; */
   background-color: white;
   width: 100%;
   z-index: 5000;
@@ -7,36 +16,38 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  height: 10vh;
+  height: var(--nav-height);
   transition: background-color 0.3s ease;
-  /* margin-top: 0.5vw; */
-  /* background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); */
-  /* backdrop-filter: blur(1px); */
   position: fixed;
-  margin-top: -5vw;
-
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
+
 .navbar-main-experimental-setup {
-  /* position: fixed; */
   background-color: white;
   width: 100%;
   z-index: 4999;
-  margin-bottom: 5vw;
-
+  height: var(--nav-height);
 }
 
 .navbar.scrolled {
   background-color: rgba(160, 5, 52, 0.8);
   /* margin-top:8em ; */
 }
+.bothnavbar-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
 
 .venture-nest-logo-bg-removed {
-  height: 8vh;
+  /* height: 8vh; */
   background-color: white;
   border-radius: 100%;
   border: 2px solid white;
-  width: 4vw;
+  width: 10vw;
   padding: 0;
   margin: 0;
   padding: 0;
@@ -53,7 +64,7 @@
   align-items: center;
   object-fit: contain;
   object-position: center;
-  gap: 1em;
+  gap: 4em;
   /* margin-top: 2vw; */
 }
 
@@ -262,7 +273,22 @@
   height: 5vh;
 
 }
+.join-us-btn-navbar-extra {
+  background-color: #A30D33;
+  color: white;
+  border-radius: 30px;
+  width: auto;
+  text-align: center;
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
 
+}
+/* .upper-navbar-menu-incubate-btn {
+  width: auto;
+} */
 .navbar-links-joinus-btn-text {
   color: white;
   text-align: center;
@@ -270,8 +296,10 @@
 
 
 .cgc-university-logo-updated {
-  width: 7.6vw;
-  height: 3.4vw;
+  /* width: 7.6vw; */
+  /* height: 3.4vw; */
+  width: 12vw;
+  /* height: ; */
 }
 
 /* Responsive styles */
@@ -282,16 +310,14 @@
 
   .nav-links {
     position: fixed;
-    top: 103px;
+    top: var(--nav-height);
     right: 0;
     background-color: #a00534;
     flex-direction: column;
     width: 100%;
     margin: auto;
     justify-content: center;
-
-
-    height: calc(100vh - 60px);
+    height: calc(100vh - var(--nav-height));
     transform: translateX(100%);
     transition: transform 0.3s ease;
     z-index: 9999999999999;
@@ -353,12 +379,12 @@
 
   .nav-links {
     position: fixed;
-    top: 60px;
+    top: var(--nav-height);
     right: 0;
     background-image: url("../../../../public/assets/corosuel-bg.png");
     flex-direction: column;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - var(--nav-height));
     transform: translateX(100%);
     transition: transform 0.3s ease;
     z-index: 9999999999999;
@@ -513,7 +539,7 @@
   .navbar-logo {
     display: flex;
     align-items: center;
-    gap: 0.5em;
+    gap: 2em;
   }
 
   .logo {
@@ -528,11 +554,11 @@
   }
 
   .venture-nest-logo-bg-removed {
-    height: 7.8vh;
+    /* height: 7.8vh; */
     background-color: white;
     border-radius: 100%;
     border: 2px solid white;
-    width: 4vw;
+    width: 7vw;
     padding: 0;
     margin: 0;
     padding: 0;

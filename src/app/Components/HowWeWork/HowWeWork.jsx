@@ -48,7 +48,7 @@ const SectionHeading = styled(Typography)(({ theme }) => ({
 const StyledCard = styled(Card)(({ theme }) => ({
   padding: "1.5rem 0.1rem",
   borderRadius: "30px",
-  border: "3px solid #A30D33",
+  border: "2px solid #1b4880",
   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
   transition:
     "transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease",
@@ -75,22 +75,19 @@ const StyledCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     width: "20vw",
     height: "80%",
-    border: "4px solid #A30D33",
+    border: "4px solid #1b4880",
     textAlign: "center"
   },
 
   "&:hover": {
     transform: "translateY(-10px)",
     boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
-    backgroundColor: "#A30D33",
+    // backgroundColor: "#A30D33",
     color: "white",
-    "& .MuiTypography-root": {
-      color: "white",
-    },
+    border:"8px solid #1b4880",
+   
   },
-  "&:hover img": {
-    filter: "brightness(0) saturate(100%) invert(100%)",
-  },
+  
 }));
 
 

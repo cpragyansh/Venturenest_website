@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { Close } from "@mui/icons-material";
+import MagicBento from "./MagicBento";
 import "./StarredEvents.css";
 
 const StarredEvents = () => {
@@ -77,42 +78,39 @@ const StarredEvents = () => {
       {loading ? (
         <Box sx={{ py: 10, textAlign: "center", opacity: 0.5 }}>Loading events...</Box>
       ) : (
-        <motion.div 
-          className="bento-grid-container"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {events.length > 0 ? (
-            events.slice(0, 4).map((event, index) => (
-              <motion.div 
-                key={event._id}
-                className={`bento-box item-${index + 1}`}
-                variants={itemVariants}
-                onClick={() => handleOpenEvent(event)}
-                onMouseEnter={playHoverSound}
-              >
-                <div className="bento-image-wrapper">
-                  <img src={event.imageUrl} alt={event.eventName} />
-                  <div className="bento-overlay-content">
-                    <div className="bento-date">
-                      {new Date(event.eventDate).toLocaleDateString(undefined, { day: '2-digit', month: 'short' })}
-                    </div>
-                    <div className="bento-text-data">
-                      <h3 className="bento-event-name">{event.eventName}</h3>
-                      <p className="bento-event-title">{event.eventTitle}</p>
-                    </div>
-                  </div>
+        <MagicBento 
+          items={events.slice(0, 4)}
+          enableStars={true}
+          enableSpotlight={true}
+          enableBorderGlow={true}
+          enableTilt={true}
+          enableMagnetism={true}
+          clickEffect={true}
+          glowColor="163, 13, 51"
+          renderCardContent={(event) => (
+            <>
+              <img 
+                src={event.imageUrl} 
+                alt={event.eventName} 
+                className="bento-card-bg-img" 
+              />
+              <div className="magic-bento-card__header">
+                <div className="bento-date">
+                  {new Date(event.eventDate).toLocaleDateString(undefined, { day: '2-digit', month: 'short' })}
                 </div>
-              </motion.div>
-            ))
-          ) : (
-            <Typography sx={{ gridColumn: "1/-1", textAlign: "center", opacity: 0.5 }}>
-              No recent news or events to display.
-            </Typography>
+                <div className="magic-bento-card__label">News & Events</div>
+              </div>
+              <div className="magic-bento-card__content">
+                <h2 className="magic-bento-card__title">{event.eventName}</h2>
+                <p className="magic-bento-card__description">{event.eventTitle}</p>
+              </div>
+            </>
           )}
-        </motion.div>
+          itemsProps={(event) => ({
+            onClick: () => handleOpenEvent(event),
+            onMouseEnter: playHoverSound
+          })}
+        />
       )}
 
       {events.length > 5 && (

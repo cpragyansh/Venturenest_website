@@ -9,7 +9,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import axios from 'axios'; // Import axios for API calls
-import Mslider from '../MainSlider/Mslider';
+import HeroCarousel from '../MainSlider/HeroCarousel';
 import PartnersSection from '../partners_slider/partners_slider';
 import NumberSection from '../Numbers_section/Numbers_section';
 import StarredEvents from '../StarredEvents/StarredEvents';
@@ -17,6 +17,7 @@ import InspirationalStories from '../Inspirational_stories/Inspirational_stories
 import HowWeSupportYou from '../HowWeWork/HowWeWork';
 import Video from '../VideoCorosuel/Video';
 import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
+import VentureNestIntro from '../../New_components/Component_2/Component_2';
 
 const MagneticButton = ({ children, className }) => {
     const mouseX = useMotionValue(0);
@@ -97,22 +98,23 @@ const Dashboard = () => {
     return (
         <div className="home-top-main-div">
 
-            <div className=" corosuel-image-dashboard " >
+            <div className="md:mb-8" >
                 {/* <HeroSection /> */}
                  {/* <Swiperjs /> */}
               {/* <Slider/> */}
               {/* <Video/> */}
               {/* <h1 className='dashboard-image-corosuel-text'>Innovation . Entrepreneurship . Growth</h1> */}
-              <Mslider  />
+              <HeroCarousel />
               
             </div>
 
 
+<VentureNestIntro/>
 
 
 
 
-<div className="section-2-bg" data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out">
+{/* <div className="section-2-bg" data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out">
     <div className="section-2-inner-part">
         <div className="section-2-inner-text" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300" data-aos-easing="ease-in-out">
             <h1 className="section-2-inner-part-heading" data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out">
@@ -126,12 +128,8 @@ const Dashboard = () => {
                 As a flagship initiative of CGC University, CGC VentureNest is dedicated to fostering an entrepreneurial culture among students, faculty and the broader community. Our incubator offers cutting-edge infrastructure, personalized mentorship from industry experts, strong networking opportunities and access to investors and funding resources. Whether you're launching a tech startup, social enterprise, or scalable business model, CGC VentureNest accelerates your journey from concept to market success.                </p>
             </div>
         </div>
-        {/* <video src="assets/section-1-video.mp4" className="cgc-venture-img" autoPlay controls loop></video> */}
-        {/* <img src="assets/section-1-video.mp4" alt="CGC Venture" className="cgc-venture-img" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000" data-aos-easing="ease-out" /> */}
         <div 
-        // style=
         
-        // {{ width: '100%', maxWidth: '900px', margin: '0 auto' }}
         
         >
       <video
@@ -140,17 +138,11 @@ const Dashboard = () => {
         loop
         muted
         playsInline
-        // style={{
-        //   width: '80vw',
-        //   height: 'auto',
-        //   objectFit: 'cover',
-        //   borderRadius: '8px', // Optional: Add rounded corners
-        //   display: 'block',
-        // }}
+      
       />
     </div>
     </div>
-</div>
+</div> */}
 
 
             {/* <div className="section-3-vv">
@@ -165,7 +157,7 @@ const Dashboard = () => {
             </div>
 
         </div> */}
-         <div className="section-3-vv" data-aos="fade-in" data-aos-duration="1200" data-aos-easing="ease-out">
+         {/* <div className="section-3-vv" data-aos="fade-in" data-aos-duration="1200" data-aos-easing="ease-out">
     <div className="section-3-text-overlay" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" data-aos-easing="ease-out">
         <span className="keyhighlight-animation">
             <h1 className="section-3-heading" data-aos="fade-right" data-aos-duration="1000" data-aos-easing="ease-in-out">
@@ -179,7 +171,7 @@ const Dashboard = () => {
             </p>
         </span>
     </div>
-</div>
+</div> */}
 
 
             {/* <div className="section-4-main">
@@ -353,11 +345,10 @@ const Dashboard = () => {
     <hr className="hr-below-section-5-heading" />
 
     <div className="application-steps-process-text">
-        {/* Step 1 */}
         <div className="application-step-1" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="500">
             <div className="step-1-text">
                 <h1 className='application-step-1-heading'>Online Application</h1>
-                <p className='application-step-1-para' id='appplication-para'>
+                <p className='application-step-1-para ' id='appplication-para'>
                     <strong>Kickstart Your Journey</strong> <br />
                     Startups can easily apply via our intuitive online portal. Just share your innovative business concept, core team details, market traction and the current stage of your venture’s development.
                 </p>
@@ -370,12 +361,11 @@ const Dashboard = () => {
             </div>
         </div>
 
-        {/* Step 2 */}
         <div className="application-step-2" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="700">
             <div className="application-step-2-inner">
                 <div className="step-2-sub-part">
                     <h1 className='application-step-2-heading'>Screening & Evaluation</h1>
-                    <p className='application-step-2-para' id='appplication-para'>
+                    <p className='application-step-2-para step-box-gray' id='appplication-para'>
                         <strong>Your Idea, Our Insights</strong> <br />
                         Once you apply, our expert panel evaluates your submission based on the strength of your idea, team synergy, scalability and market readiness. Every application gets the attention it deserves.
                     </p>
@@ -389,11 +379,10 @@ const Dashboard = () => {
             </div>
         </div>
 
-        {/* Step 3 */}
         <div className="application-step-3" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="900">
             <div className="step-3-text">
                 <h1 className='application-step-3-heading'>Selection & Onboarding</h1>
-                <p className='application-step-3-para' id='appplication-para'>
+                <p className='application-step-3-para step-box-red' id='appplication-para'>
                     <strong>Welcome to Growth</strong> <br />
                     Selected startups are onboarded into our ecosystem, gaining access to tailored mentorship, strategic resources and hands-on support to scale efficiently and sustainably.
                 </p>
@@ -407,7 +396,6 @@ const Dashboard = () => {
         </div>
     </div>
 
-    {/* ✅ Apply Now Button */}
     <div className="apply-now-button-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1100">
         <MagneticButton>
             <a href="/IncubateWithUs" className="fancy-apply-button">

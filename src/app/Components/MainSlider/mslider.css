@@ -3,10 +3,10 @@
     display: flex;
     justify-content: center;
     /* background-color: red; */
-    padding-top: 8vw;
+    /* padding-top: 8vw; */
     margin: auto;
     gap: 2em;
-    padding: 1em;
+    /* padding: 1em; */
   }
   
   .thumbnails {
