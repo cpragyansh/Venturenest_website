@@ -17,6 +17,7 @@ import InspirationalStories from '../Inspirational_stories/Inspirational_stories
 import HowWeSupportYou from '../HowWeWork/HowWeWork';
 import Video from '../VideoCorosuel/Video';
 import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
+import VentureNestIntro from '../../New_components/Component_2/Component_2';
 
 const MagneticButton = ({ children, className }) => {
     const mouseX = useMotionValue(0);
@@ -108,11 +109,12 @@ const Dashboard = () => {
             </div>
 
 
+<VentureNestIntro/>
 
 
 
 
-<div className="section-2-bg" data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out">
+{/* <div className="section-2-bg" data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out">
     <div className="section-2-inner-part">
         <div className="section-2-inner-text" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300" data-aos-easing="ease-in-out">
             <h1 className="section-2-inner-part-heading" data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out">
@@ -126,12 +128,8 @@ const Dashboard = () => {
                 As a flagship initiative of CGC University, CGC VentureNest is dedicated to fostering an entrepreneurial culture among students, faculty and the broader community. Our incubator offers cutting-edge infrastructure, personalized mentorship from industry experts, strong networking opportunities and access to investors and funding resources. Whether you're launching a tech startup, social enterprise, or scalable business model, CGC VentureNest accelerates your journey from concept to market success.                </p>
             </div>
         </div>
-        {/* <video src="assets/section-1-video.mp4" className="cgc-venture-img" autoPlay controls loop></video> */}
-        {/* <img src="assets/section-1-video.mp4" alt="CGC Venture" className="cgc-venture-img" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000" data-aos-easing="ease-out" /> */}
         <div 
-        // style=
         
-        // {{ width: '100%', maxWidth: '900px', margin: '0 auto' }}
         
         >
       <video
@@ -140,17 +138,11 @@ const Dashboard = () => {
         loop
         muted
         playsInline
-        // style={{
-        //   width: '80vw',
-        //   height: 'auto',
-        //   objectFit: 'cover',
-        //   borderRadius: '8px', // Optional: Add rounded corners
-        //   display: 'block',
-        // }}
+      
       />
     </div>
     </div>
-</div>
+</div> */}
 
 
             {/* <div className="section-3-vv">
