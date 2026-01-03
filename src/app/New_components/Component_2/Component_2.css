@@ -47,6 +47,7 @@
   padding: 20px 30px;
   margin: 0 0px;
   width: 70%;
+  padding-right: 0px;
   border-radius: 0px 200px 200px 0px;
 }
 
@@ -81,8 +82,8 @@
 }
 
 .vn-logo-placeholder {
-  width: 100%;
-  height: 100%;
+  width: 70%;
+  height: 70%;
   border-radius: 50%;
 }
 
@@ -97,6 +98,7 @@
   background: #b11226;
   color: #fff;
   padding: 50px;
+  padding-bottom: 4vw;
   border-radius: 120px 0 0 120px;
   margin-left: auto;
   width: 70%;

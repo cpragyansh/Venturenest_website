@@ -27,7 +27,7 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   gap: "2vw",
-  backgroundColor: "transparent",
+  backgroundColor: "white",
 }));
 
 const SectionHeading = styled(Typography)(({ theme }) => ({
@@ -60,7 +60,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
-  backgroundColor: "#fff",
+  backgroundColor: "#d9d9d9",
 
   [theme.breakpoints.up("xs")]: {
     width: "100%",

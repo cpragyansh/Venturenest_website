@@ -1,34 +1,149 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Typography, useMediaQuery } from "@mui/material";
-import Aos from "aos";
-import "aos/dist/aos.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { motion } from "framer-motion";
 import "swiper/css";
 
-const NumberSection = () => {
+/* ===============================
+   COUNT-UP + EASING (INLINE)
+================================ */
+const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+const useCountUp = (targetValue, start, duration = 2000) => {
+  const extractNumber = (value) => {
+    const number = parseFloat(value.replace(/[^0-9.]/g, ""));
+    const suffix = value.replace(/[0-9.]/g, "");
+    return { number, suffix };
+  };
+
+  const { number: target, suffix } = extractNumber(targetValue);
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
-    Aos.init({ duration: 1000 });
-  }, []);
+    if (!start) return;
+
+    let startTime = null;
+    let rafId;
+
+    const animate = (time) => {
+      if (!startTime) startTime = time;
+      const progress = Math.min((time - startTime) / duration, 1);
+      const eased = easeOutCubic(progress);
+      setCount(eased * target);
+
+      if (progress < 1) {
+        rafId = requestAnimationFrame(animate);
+      }
+    };
+
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, [start, target, duration]);
+
+  return `${target % 1 !== 0 ? count.toFixed(1) : Math.floor(count)}${suffix}`;
+};
+
+/* ===============================
+   NUMBER CIRCLE
+================================ */
+const NumberCircle = ({
+  value,
+  label,
+  size,
+  marginLeft,
+  zIndex,
+  animate,
+}) => {
+  const animatedValue = useCountUp(value, animate);
+
+  return (
+    <motion.div
+      initial={{ scale: 0.7, opacity: 0 }}
+      animate={animate ? { scale: 1, opacity: 1 } : {}}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      style={{ marginLeft, zIndex }}
+    >
+      <Box
+        sx={{
+          width: size,
+          height: size,
+          borderRadius: "50%",
+          backgroundColor: "white",
+          border: "6px solid #A01D3F",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0px 4px 15px rgba(0,0,0,0.2)",
+          transition: "transform 0.3s",
+          "&:hover": { transform: "scale(1.1)" },
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "var(--font-ui)",
+            fontSize: "1.8rem",
+            fontWeight: "bold",
+            color: "black",
+          }}
+        >
+          {animatedValue}
+        </Typography>
+
+        <Typography
+          sx={{
+            fontFamily: "var(--font-ui)",
+            fontSize: "1rem",
+            fontWeight: "bold",
+            color: "#A01D3F",
+            mt: 1,
+            textAlign: "center",
+          }}
+        >
+          {label}
+        </Typography>
+      </Box>
+    </motion.div>
+  );
+};
+
+/* ===============================
+   MAIN SECTION
+================================ */
+const NumberSection = () => {
+  const sectionRef = useRef(null);
+  const [inView, setInView] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   const isMobile = useMediaQuery("(max-width:480px)");
   const isTablet = useMediaQuery("(min-width:481px) and (max-width:1124px)");
-  const isDesktop = useMediaQuery("(min-width:1125px)");
+
+  /* Intersection Observer */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => entry.isIntersecting && setInView(true),
+      { threshold: 0.4 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const circleData = [
     { value: "20.5L", label: "Funding Secured" },
     { value: "70+", label: "Venture Incubated" },
-    { value: "685+", label: "Patent published" },
+    { value: "685+", label: "Patent Published" },
     { value: "100+", label: "Startups Mentored" },
     { value: "100+", label: "Mentors" },
   ];
 
-  const circleSize = isMobile || isTablet ? 280 : [190, 250, 290, 250, 190];
+  const circleSize = isMobile || isTablet ? 260 : [190, 250, 290, 250, 190];
   const marginLeftValues = ["-80px", "-40px", "-30px", "-30px", "-50px"];
   const zIndexes = [1, 2, 3, 2, 1];
 
   return (
     <Box
+      ref={sectionRef}
       sx={{
         width: "100%",
         minHeight: "60vh",
@@ -40,12 +155,11 @@ const NumberSection = () => {
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        overflow: "hidden",
         py: 4,
+        overflow: "hidden",
       }}
     >
       <Typography
-        variant="h4"
         sx={{
           fontFamily: "var(--font-display)",
           color: "white",
@@ -61,105 +175,37 @@ const NumberSection = () => {
         <Swiper
           modules={[Autoplay]}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
-          loop={true}
+          loop
           spaceBetween={20}
-          slidesPerView={isMobile ? 1 : isTablet ? 2.2 : 3}
+          slidesPerView={isMobile ? 1 : 2.2}
           style={{ width: "90%" }}
+          onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
         >
           {circleData.map((item, index) => (
             <SwiperSlide key={index}>
-              <Box
-                data-aos="zoom-in"
-                sx={{
-                  width: circleSize,
-                  height: circleSize,
-                  borderRadius: "50%",
-                  backgroundColor: "white",
-                  border: "6px solid #A01D3F",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0px 4px 15px rgba(0,0,0,0.2)",
-                  transition: "transform 0.3s",
-                  "&:hover": { transform: "scale(1.1)" },
-                  mx: "auto",
-                }}
-              >
-                <Typography
-                  fontWeight="bold"
-                  color="black"
-                  sx={{ fontFamily: "var(--font-ui)", fontSize: "1.6rem" }}
-                >
-                  {item.value}
-                </Typography>
-                <Typography
-                  color="#A01D3F"
-                  sx={{
-                    fontFamily: "var(--font-ui)",
-                    mt: 1,
-                    fontSize: "0.9rem",
-                    fontWeight: "bold",
-                    textAlign: "center",
-                  }}
-                >
-                  {item.label}
-                </Typography>
-              </Box>
+              <NumberCircle
+                value={item.value}
+                label={item.label}
+                size={circleSize}
+                marginLeft="0"
+                zIndex={1}
+                animate={inView && activeSlide === index}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexWrap: "nowrap",
-            gap: 0,
-          }}
-        >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           {circleData.map((item, index) => (
-            <Box
+            <NumberCircle
               key={index}
-              data-aos="zoom-in"
-              sx={{
-                width: circleSize[index],
-                height: circleSize[index],
-                borderRadius: "50%",
-                backgroundColor: "white",
-                border: "6px solid #A01D3F",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0px 4px 15px rgba(0,0,0,0.2)",
-                transition: "transform 0.3s",
-                "&:hover": { transform: "scale(1.1)" },
-                marginLeft: marginLeftValues[index],
-                zIndex: zIndexes[index],
-              }}
-            >
-              <Typography
-                fontWeight="bold"
-                color="black"
-                sx={{ fontFamily: "var(--font-ui)", fontSize: "1.8rem" }}
-              >
-                {item.value}
-              </Typography>
-              <Typography
-                color="#A01D3F"
-                sx={{
-                  fontFamily: "var(--font-ui)",
-                  mt: 1,
-                  fontSize: "1rem",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                {item.label}
-              </Typography>
-            </Box>
+              value={item.value}
+              label={item.label}
+              size={circleSize[index]}
+              marginLeft={marginLeftValues[index]}
+              zIndex={zIndexes[index]}
+              animate={inView}
+            />
           ))}
         </Box>
       )}
