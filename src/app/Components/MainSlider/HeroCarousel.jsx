@@ -46,7 +46,7 @@ const HeroCarousel = () => {
     if (slides.length === 0) return null;
 
     return (
-        <div className="relative w-full h-[60vh] md:h-[80vh] lg:h-[90vh] overflow-hidden group">
+        <div className="relative w-full h-[50vh] md:h-[70vh] lg:h-[80vh] overflow-hidden group">
             {/* Custom Styles for Progress Animation */}
             <style jsx>{`
                 @keyframes progressFill {
