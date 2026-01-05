@@ -80,7 +80,7 @@ const Mslider = () => {
       sx={{
         position: 'relative',
         width: '100%',
-        height: { xs: '350px', sm: '450px', md: '550px', lg: '700px' },
+        height: { xs: '300px', sm: '400px', md: '500px', lg: '650px' },
         borderRadius: { xs: 0, md: 0 }, // Removed border radius for a more "full width" immersive look
         overflow: 'hidden',
         boxShadow: '0 30px 60px rgba(0,0,0,0.15)',

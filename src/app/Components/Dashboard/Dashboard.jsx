@@ -98,7 +98,7 @@ const Dashboard = () => {
     return (
         <div className="home-top-main-div">
 
-            <div className="md:mb-8" >
+            <div className="mb-4" >
                 {/* <HeroSection /> */}
                  {/* <Swiperjs /> */}
               {/* <Slider/> */}
