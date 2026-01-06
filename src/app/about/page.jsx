@@ -1,523 +1,523 @@
-
-// // // "use client"
-import React, { useEffect } from "react";
-import { Box, Typography, Grid, Button, useMediaQuery } from "@mui/material";
+"use client";
+import React from "react";
+import {
+  Box,
+  Typography,
+  Grid,
+  Button,
+  Container,
+  Card,
+  CardContent,
+  Chip,
+  Paper,
+  useTheme,
+  useMediaQuery,
+  Avatar
+} from "@mui/material";
 import { motion } from "framer-motion";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { Container, Card, CardContent} from '@mui/material';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import SplitText from "../Components/ui/SplitText";
-import Fade from '@mui/material/Fade';
-// Small SVG icons for style
-const CheckIcon = () => (
-  <svg
-    style={{ marginRight: 10 }}
-    xmlns="http://www.w3.org/2000/svg"
-    fill="#A30D33"
-    height="24"
-    viewBox="0 0 24 24"
-    width="24"
-  >
-    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+import VerifiedIcon from "@mui/icons-material/Verified";
+import BoltIcon from "@mui/icons-material/Bolt";
+import GroupsIcon from "@mui/icons-material/Groups";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import HandshakeIcon from "@mui/icons-material/Handshake";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+
+// --- Assets & Config ---
+const BRAND_COLOR = "#A30D33";
+const BRAND_LIGHT = "#fff0f3";
+const TEXT_DARK = "#0a0a0a";
+const TEXT_MUTED = "#555";
+
+// --- Vector Components (Inline SVGs) ---
+const DotPattern = () => (
+  <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style={{ position: 'absolute', opacity: 0.15, zIndex: 0 }}>
+    <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="2" fill={BRAND_COLOR} />
+    </pattern>
+    <rect width="100" height="100" fill="url(#dots)" />
   </svg>
 );
-const handleAnimationComplete = () => {
-  console.log('All letters have animated!');
+
+const BlobShape = ({ color, style }) => (
+  <motion.div
+    animate={{ 
+      scale: [1, 1.1, 1], 
+      rotate: [0, 10, -10, 0],
+      borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "50% 50% 33% 67% / 55% 27% 73% 45%", "30% 70% 70% 30% / 30% 30% 70% 70%"] 
+    }}
+    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+    style={{
+      position: "absolute",
+      width: "300px",
+      height: "300px",
+      background: color,
+      filter: "blur(60px)",
+      opacity: 0.4,
+      zIndex: 0,
+      pointerEvents: "none",
+      ...style
+    }}
+  />
+);
+
+// --- Data ---
+const leadershipData = [
+  {
+    name: "S. Rashpal Singh Dhaliwal",
+    role: "Chancellor, CGC University",
+    image: "/assets/chairman.png", // Ensure path is correct
+    quote: "We build not just students, but the leaders of tomorrow.",
+    desc: "The entrepreneurial association at CGC University is dedicated to fostering innovation. VenturesNest was established to encourage entrepreneurial thinking and provide a dynamic platform for aspiring founders."
+  },
+  {
+    name: "Mr. Arsh Dhaliwal",
+    role: "Managing Director",
+    image: "/assets/md.png",
+    quote: "Innovation is the heartbeat of our campus.",
+    desc: "VenturesNest is envisioned as a launchpad for aspiring entrepreneurs. It reflects our goal of bridging academic learning with practical impact, empowering students to become visionary leaders."
+  },
+  {
+    name: "Dr. Ati Priye",
+    role: "CEO, Incubator & Startups",
+    image: "/assets/ceo-incubator.jpg",
+    quote: "This is more than an initiative—it’s a movement.",
+    desc: "VenturesNest is designed to be a catalyst for student-led innovation—providing mentorship, infrastructure, and funding guidance. It brings together talent, technology, and teamwork."
+  }
+];
+
+const features = [
+  {
+    title: "Ecosystem",
+    subtitle: "How We Work",
+    icon: <BoltIcon fontSize="inherit" />,
+    image: "/assets/about-how-we-work.jpg",
+    desc: "From ideation to IPO, we provide the complete roadmap for startups.",
+    stats: "End-to-End Support"
+  },
+  {
+    title: "Impact",
+    subtitle: "Proven Results",
+    icon: <EmojiEventsIcon fontSize="inherit" />,
+    image: "/assets/our-impact-img-photo.jpg",
+    desc: "Over 70+ ventures incubated with funding opportunities up to ₹12 Cr.",
+    stats: "70+ Startups"
+  },
+  {
+    title: "Infrastructure",
+    subtitle: "World Class",
+    icon: <GroupsIcon fontSize="inherit" />,
+    image: "/assets/aboutUs-support--infra-photo-updated.jpg",
+    desc: "24/7 Co-working spaces, Maker’s Labs, and High-Performance Computing.",
+    stats: "24/7 Access"
+  },
+  {
+    title: "Network",
+    subtitle: "Global Reach",
+    icon: <HandshakeIcon fontSize="inherit" />,
+    image: "/assets/partners-section-bg.jpg",
+    desc: "Partnerships with global accelerators, angel investors, and corporates.",
+    stats: "Global Partners"
+  }
+];
+
+// --- Sub-Components ---
+
+const LeaderProfile = ({ data, index }) => {
+  const isEven = index % 2 === 0;
+  const bgColors = [BRAND_COLOR, "#102a43", "#486581"]; // Red, Navy Blue, Grayish Blue
+  const bgColor = bgColors[index % 3];
+
+  return (
+    <Box 
+      sx={{ 
+        position: "relative", 
+        mb: { xs: 8, md: 12 },
+        py: 8,
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          [isEven ? "left" : "right"]: "-100vw", // Start from far edge
+          width: "calc(100vw + 70%)", // Span across
+          height: "100%",
+          bgcolor: bgColor,
+          opacity: 0.05, // Subtle background
+          zIndex: 0,
+          borderRadius: isEven ? "0 100px 100px 0" : "100px 0 0 100px"
+        }
+      }}
+    >
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+        <Box 
+          component={motion.div}
+          initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          sx={{ 
+            display: "flex",
+            flexDirection: { xs: "column", md: isEven ? "row" : "row-reverse" },
+            alignItems: "center",
+            gap: { xs: 4, md: 8 }
+          }}
+        >
+          {/* Decorative Background Strip (The one requested by user) */}
+          <Box 
+            sx={{
+              position: "absolute",
+              top: "10%",
+              bottom: "10%",
+              [isEven ? "left" : "right"]: { xs: "-5%", md: "-10%" },
+              width: "70%",
+              bgcolor: bgColor,
+              opacity: 0.1,
+              zIndex: -1,
+              borderRadius: isEven ? "0 40px 40px 0" : "40px 0 0 40px",
+              display: { xs: "none", md: "block" }
+            }}
+          />
+
+          {/* Image Side */}
+          <Box sx={{ flex: "0 0 40%", position: "relative", zIndex: 2 }}>
+            <Box 
+              sx={{ 
+                borderRadius: "24px", 
+                overflow: "hidden", 
+                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.25)",
+                transform: isEven ? "rotate(-2deg)" : "rotate(2deg)",
+                transition: "transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                "&:hover": { transform: "rotate(0deg) scale(1.05)" },
+                bgcolor: "white",
+                p: 1.5
+              }}
+            >
+              <Box 
+                component="img" 
+                src={data.image} 
+                alt={data.name}
+                sx={{ 
+                  width: "100%", 
+                  height: "450px", 
+                  objectFit: "cover", 
+                  borderRadius: "18px", 
+                  display: "block" 
+                }} 
+              />
+            </Box>
+            {/* Dot Pattern decoration */}
+            <Box sx={{ position: "absolute", bottom: -20, [isEven ? "right" : "left"]: -20, zIndex: -1 }}>
+              <DotPattern />
+            </Box>
+          </Box>
+
+          {/* Text Side */}
+          <Box sx={{ flex: 1, position: "relative", zIndex: 2 }}>
+            <FormatQuoteIcon sx={{ fontSize: 80, color: bgColor, opacity: 0.15, position: "absolute", top: -40, left: -20 }} />
+            <Typography variant="h3" sx={{ fontFamily: "var(--font-display)", fontWeight: 800, color: TEXT_DARK, mb: 1, fontSize: { xs: "2rem", md: "2.75rem" } }}>
+              {data.name}
+            </Typography>
+            <Typography variant="h6" sx={{ color: bgColor, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, mb: 4, opacity: 0.9 }}>
+              {data.role}
+            </Typography>
+            
+            <Paper elevation={0} sx={{ p: 3, bgcolor: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)", borderRadius: 4, mb: 4, borderLeft: `6px solid ${bgColor}` }}>
+              <Typography variant="h6" sx={{ fontStyle: "italic", color: "#333", fontWeight: 500, lineHeight: 1.6 }}>
+                "{data.quote}"
+              </Typography>
+            </Paper>
+
+            <Typography variant="body1" sx={{ color: TEXT_MUTED, lineHeight: 1.9, fontFamily: "var(--font-ui)", fontSize: "1.1rem" }}>
+              {data.desc}
+            </Typography>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
+  );
 };
 
 export default function AboutPage() {
-  useEffect(() => {
-    AOS.init({ duration: 1200, once: true });
-  }, []);
-
-  const isMobile = useMediaQuery("(max-width:768px)");
-
-  const hoverEffect = {
-    scale: 1.04,
-    boxShadow: "0 20px 45px rgba(163, 13, 51, 0.45)",
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Box sx={{ bgcolor: "transparent", minHeight: "100vh", fontFamily: "var(--font-ui)", overflow: "hidden" }}>
-
-
- 
-      {/* Hero Section */}
+    <Box sx={{ bgcolor: "#FDFDFD", overflowX: "hidden", minHeight: "100vh" }}>
+      
+      {/* --- HERO SECTION --- */}
       <Box
         sx={{
-          height: isMobile ? 300 : 500,
-          backgroundImage: `linear-gradient(135deg, rgba(163,13,51,0.75), rgba(69,3,19,0.85)), url('/assets/hero-about.jpg')`,
+          position: "relative",
+          height: { xs: "60vh", md: "75vh" },
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundImage: `linear-gradient(135deg, rgba(163,13,51,0.92), rgba(26,35,126,0.92)), url('/assets/hero-about.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           textAlign: "center",
-          color: "#fff",
-          px: 3,
+          color: "white",
+          px: 2,
         }}
       >
-        <motion.div
-          initial={{ opacity: 0, y: -60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-        >
-          <Typography
-            variant={isMobile ? "h4" : "h1"}
-            fontWeight={900}
-            sx={{ 
-              fontFamily: "var(--font-display)",
-              letterSpacing: "0.15em", 
-              textTransform: "uppercase", 
-              textShadow: "4px 4px 15px rgba(0,0,0,0.7)" 
-            }}
+         {/* Abstract geometric lines overlay */}
+         <Box sx={{ position: "absolute", inset: 0, opacity: 0.1, backgroundImage: "radial-gradient(circle at 50% 50%, white 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
+
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
-            VentureNest
-          </Typography>
-        {/* <SplitText
-  text="VentureNest"
-  className={isMobile ? "text-3xl md:text-6xl font-black text-center" : "text-[5vw] font-black text-center"}
-  delay={100}
-  duration={0.6}
-  ease="power3.out"
-  splitType="chars"
-  from={{ opacity: 0, y: 40 }}
-  to={{ opacity: 1, y: 0 }}
-  threshold={0.1}
-  rootMargin="-100px"
-  textAlign="center"
-  style={{
-    letterSpacing: "0.15em",
-    textTransform: "uppercase",
-    textShadow: "40px 0px 25px rgba(0,0,0,0.7)"
-  }}
-  onLetterAnimationComplete={handleAnimationComplete}
-/> */}
-
-          <Typography
-            variant={isMobile ? "h6" : "h4"}
-            fontWeight={500}
-            sx={{ 
-              mt: 1, 
-              maxWidth: 600, 
-              mx: "auto", 
-              letterSpacing: "0.05em", 
-              lineHeight: 1.5,
-              fontFamily: "var(--font-ui)",
-              opacity: 0.9
-            }}
-          >
-            The premier Entrepreneurship Incubation Centre at CGC University, Mohali.
-          </Typography>
-          {/* <Button
-            variant="contained"
-            sx={{
-              mt: 4,
-              bgcolor: "#A30D33",
-              px: 5,
-              py: 1.5,
-              fontWeight: 700,
-              borderRadius: 3,
-              boxShadow: "0 6px 20px rgba(163,13,51,0.5)",
-              "&:hover": { bgcolor: "#750928", boxShadow: "0 10px 30px rgba(163,13,51,0.7)" },
-            }}
-            whileHover={{ scale: 1.05 }}
-          >
-            Learn More
-          </Button> */}
-        </motion.div>
-      </Box>
-      <section className="bg-transparent py-4 px-6 md:px-12 lg:px-10">
-      <div className="flex flex-col md:flex-row items-center pt-8 md:items-start gap-8 max-w-[80vw] mx-auto backdrop-blur-[2px] bg-white/30 rounded-3xl p-6 shadow-sm border border-white/20">
-        
-        {/* Image Side */}
-        <div className="w-full md:w-1/2 flex justify-center md:justify-start">
-          <div className="shadow-2xl rounded-xl overflow-hidden border border-gray-200 p-2 bg-white max-w-lg">
-            <img
-              src="/assets/chairman.png"
-              alt="Chairman Rashpal Singh Dhaliwal"
-              width={600}
-              height={600}
-              className="rounded-lg object-cover"
-              priority
-            />x``
-          </div>
-        </div>
-
-        {/* Text Side */}
-        <div className="w-full md:w-1/2 text-left">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C] font-display text-transform: uppercase " style={{ fontFamily: 'var(--font-display)' }}>
-            S. Rashpal Singh Dhaliwal
-          </h2>
-          <p className="text-sm font-semibold text-gray-950 uppercase mt-1 mb-4" style={{ fontFamily: 'var(--font-ui)' }}>
-            Chancellor, CGC University, Mohali
-          </p>
-
-          {/* Custom Decorative Line */}
-          <div className="flex items-center mb-6">
-            <div className="h-1 w-20 bg-[#9A0036] mr-2"></div>
-            <div className="h-1 w-14 bg-gray-700 mr-2"></div>
-            <div className="h-1 w-6 bg-[#9A0036]"></div>
-          </div>
-
-          {/* Message Paragraph */}
-          <p className="text-gray-900 text-[1.02vw] text-justify font-[450] chairmans-main-paragraph" style={{ fontFamily: 'var(--font-ui)', lineHeight: '1.6' }}>
-            Welcome to VenturesNest Association
-            <br /><br />
-            The entrepreneurial association at CGC University, dedicated to fostering innovation, leadership, and startup culture among students.
-
-            <br /><br />
-
-VenturesNest Association was established with the purpose of encouraging entrepreneurial thinking and providing a dynamic platform for aspiring founders, innovators, and change makers at CGC. The association aims to inspire and guide students in transforming their ideas into impactful ventures.
-            <br /><br />
-In an era defined by innovation and global interconnectivity, the focus remains on building essential skills such as confidence, critical thinking, problem-solving, and research aptitude. Independent learning and proactive engagement are at the core of every initiative.          
-          </p>
-        </div>
-      </div>
-    </section>
-      <section className="bg-transparent py-4 px-6 md:px-12 lg:px-20">
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-8 max-w-[80vw] mx-auto backdrop-blur-[2px] bg-white/30 rounded-3xl p-6 shadow-sm border border-white/20">
-         {/* Text Side */}
-        <div className="w-full md:w-1/2 text-left">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C] text-transform: uppercase" style={{ fontFamily: 'var(--font-display)' }}>
-            Mr. Arsh Dhaliwal
-          </h2>
-          <p className="text-sm font-semibold text-gray-955 uppercase mt-1 mb-4" style={{ fontFamily: 'var(--font-ui)' }}>
-            Managing Director, CGC University, Mohali
-          </p>
-
-          {/* Custom Decorative Line */}
-          <div className="flex items-center mb-6">
-            <div className="h-1 w-20 bg-[#9A0036] mr-2"></div>
-            <div className="h-1 w-14 bg-gray-700 mr-2"></div>
-            <div className="h-1 w-6 bg-[#9A0036]"></div>
-          </div>
-
-          {/* Message Paragraph */}
-          <p className="text-gray-900 text-[1.02vw] text-justify font-[450] chairmans-main-paragraph" style={{ fontFamily: 'var(--font-ui)', lineHeight: '1.6' }}>
-At CGC University, we have always stood for innovation, quality education, and student success. Today, I am proud to introduce the VenturesNest Association — A strategic initiative to cultivate entrepreneurship, industry collaboration, and real-world innovation within our campus.
-<br /><br />
-VenturesNest is envisioned as a launchpad for aspiring entrepreneurs and a hub for startup incubation and global partnerships. It reflects our goal of bridging academic learning with practical impact, empowering students to become visionary leaders and changemakers.       
-     <br /><br /> 
-With this, CGC University takes another firm step toward global relevance, reaffirming our commitment to excellence and future-ready education.
-<br></br>
-{/* Thank you for your continued trust in us. */}
-</p>
-
-        </div>
-        {/* Image Side */}
-        <div className="w-full md:w-1/2 flex justify-center md:justify-start">
-          <div className="shadow-2xl rounded-xl overflow-hidden border border-gray-200 p-2 bg-white max-w-lg">
-            <img
-              src="/assets/md.png"
-              alt="Chairman Rashpal Singh Dhaliwal"
-              width={600}
-              height={600}
-              className="rounded-lg object-cover"
-              priority
-            />
-          </div>
-        </div>
-
-       
-      </div>
-    </section>
-
-    <section className="bg-transparent py-4 px-6 md:px-12 lg:px-20">
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-8 max-w-[80vw] mx-auto backdrop-blur-[2px] bg-white/30 rounded-3xl p-6 shadow-sm border border-white/20">
-        
-        {/* Image Side */}
-        <div className="w-full md:w-1/2 flex justify-center md:justify-start">
-          <div className="shadow-2xl rounded-xl overflow-hidden border border-gray-200 p-2 bg-white max-w-lg">
-            <img
-              src="/assets/ceo-incubator.jpg"
-              alt="Chairman Rashpal Singh Dhaliwal"
-              width={600}
-              height={600}
-              className="rounded-lg object-cover"
-              priority
-            />
-          </div>
-        </div>
-
-        {/* Text Side */}
-        <div className="w-full md:w-1/2 text-left">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#85002C] text-transform: uppercase" style={{ fontFamily: 'var(--font-display)' }}>
-            Dr. Ati Priye
-          </h2>
-          <p className="text-sm font-semibold text-gray-955 uppercase mt-1 mb-4" style={{ fontFamily: 'var(--font-ui)' }}>
-            CEO, Incubator & Startups - CGC University, Mohali
-          </p>
-
-          {/* Custom Decorative Line */}
-          <div className="flex items-center mb-6">
-            <div className="h-1 w-20 bg-[#9A0036] mr-2"></div>
-            <div className="h-1 w-14 bg-gray-700 mr-2"></div>
-            <div className="h-1 w-6 bg-[#9A0036]"></div>
-          </div>
-
-          {/* Message Paragraph */}
-          <p className="text-gray-900 text-[1.02vw] text-justify font-[450] chairmans-main-paragraph" style={{ fontFamily: 'var(--font-ui)', lineHeight: '1.6' }}>
-At CGC University, innovation is a way of life. I am proud to introduce the VenturesNest Association, a transformative initiative under our Incubation Center that aims to foster entrepreneurship and drive startup growth across campus.
-            <br /><br />
-VenturesNest is designed to be a catalyst for student-led innovation—providing mentorship, infrastructure, funding guidance, and industry exposure to turn promising ideas into scalable ventures. It brings together talent, technology, and teamwork to build a thriving startup ecosystem within CGC University.
-            <br /><br />
-Through VenturesNest, we envision empowering a new generation of entrepreneurs who are equipped to tackle real-world challenges and create meaningful impact. This is more than an initiative—it’s a movement to build the future.
-          </p>
-        </div>
-      </div>
-    </section>
-
-
-      {/* Content Sections */}
-      <Box sx={{ maxWidth: {xs:"100%", sm:"100%",lg:"80%"}, mx: "auto", mt: { xs: 6, md: 10 }, px: 3 }}>
-        {[
-
-          {
-            title: "How We Work",
-            image: "/assets/about-how-we-work.jpg",
-            description: [
-              "VentureNest operates as a dynamic startup ecosystem designed to empower visionary entrepreneurs and early-stage startups.",
-              "Our programs are structured to guide startups from ideation and validation to market entry and growth.",
-            ],
-            features: [
-              "Comprehensive mentorship from industry experts",
-              "Access to cutting-edge tech resources",
-              "Workshops on funding, marketing and legal aspects",
-              "Networking events with investors and corporates",
-            ],
-            reverse: false,
-          },
-
-          {
-            title: "Our Impact",
-            image: "/assets/our-impact-img-photo.jpg",
-            description: [
-              "Since inception, we've empowered over 70+ ventures by connecting them with right mentorship, funding and strategic partnerships.",
-              "Our ventures span sectors like technology, healthcare, education and sustainability.",
-            ],
-            features: [
-              "70+ Ventures incubated",
-              "20+ successful product launches",
-              "Global accelerator collaborations",
-              "Provided funding opportunities up to ₹12 Cr",
-            ],
-            reverse: true,
-          },
-
-          {
-            title: "Support & Infrastructure",
-            image: "/assets/team-collab.heic",
-            description: [
-              "Our co-working space offers high-speed internet, Meeting Rooms, and Tech Infrastructure to nurture startups professionally.",
-              "We provide legal, financial and technical guidance via our expert team.",
-            ],
-            features: [
-              "24*7 access to workspace",
-              "Dedicated tech & business mentors",
-              "State-of-the-art meeting room, Maker’s Space, Networking Hall, Business Strategy Room, Happiness Center, and Tech Infrastructure. ",
-              "IPR Legal , Menoring services and all other services.",
-            ],
-            reverse: false,
-          },
-
-          {
-            title: "Collaborations & Events",
-            image: "/assets/event-support.heic",
-            description: [
-              "We host regular pitch sessions, workshops, and networking events that connect founders with investors and industry leaders.",
-              "Our global partnerships help drive innovation and provide startups access to wider markets.",
-            ],
-            features: [
-              "Monthly pitch events",
-              "Workshops by industry leaders",
-              "Partnerships with accelerators & corporates",
-              "Exclusive investor meetups",
-            ],
-            reverse: true,
-          },
-        ].map(({ title, image, description, features, reverse }, idx) => (
-          <Grid
-            container
-            key={idx}
-            spacing="2vw"
-             direction={isMobile ? "column" : reverse ? "row-reverse" : "row"}
-            sx={{
-              my: 6,
-              // flexDirection: isMobile ? "column" : reverse ? "row-reverse" : "row",
-              alignItems: "center",
+            <Typography
+              variant={isMobile ? "h2" : "h1"}
+              sx={{
+                fontWeight: 900,
+                fontFamily: "var(--font-display)",
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+                mb: 2,
+                fontSize: { xs: "3rem", md: "5rem" }
               }}
-            data-aos={reverse ? "fade-left" : "fade-right"}
-          >
-            {/* Image */}
-            <Grid item xs={12} md={6}>
-              <motion.div
-                whileHover={hoverEffect}
-                transition={{ duration: 0.4 }}
-                style={{
-                  borderRadius: 16,
-                  overflow: "hidden",
-                  boxShadow: "0 15px 40px rgba(163,13,51,0.25)",
-                  cursor: "pointer",
-                }}
-              >
-               <Box
-  component="img"
-  src={image}
-  alt={title}
-  loading="lazy"
-  sx={{
-    width: { sm: "100%", md:"",lg: "30vw" },
-    height: 400,
-    objectFit: "cover"
-  }}
-/>
-              </motion.div>
-            </Grid>
+            >
+              VentureNest
+            </Typography>
+            
+            <Box 
+              component={motion.div} 
+              initial={{ width: 0 }} 
+              animate={{ width: "120px" }} 
+              transition={{ delay: 0.5, duration: 0.8 }}
+              sx={{ height: 6, bgcolor: "white", mx: "auto", mb: 4, borderRadius: 3 }} 
+            />
 
-            {/* Text Content */}
-            <Grid item xs={12} md={6}>
-              <Typography
-                fontWeight={700}
-                sx={{
-                  mb: 3,
-                  color: "#85002C",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  fontSize:{xs:"8vw",sm:"0.9vw",md:"2vw",lg:"2vw"},
-                  fontFamily: "var(--font-display)"
-                }}
-              >
-                {title}
-              </Typography>
+            <Typography
+              variant={isMobile ? "h6" : "h4"}
+              sx={{
+                fontWeight: 300,
+                maxWidth: "850px",
+                mx: "auto",
+                lineHeight: 1.5,
+                opacity: 0.95,
+                letterSpacing: 1
+              }}
+            >
+              The Premier Entrepreneurship Incubation Centre <br /> at CGC University, Mohali.
+            </Typography>
+          </motion.div>
+        </Container>
 
-              {description.map((para, i) => (
-                <Typography
-                  key={i}
-                  variant="body1"
-                  sx={{
-                    mb: 3,
-                    fontSize: {sm:"1rem" , md:"1vw",lg:"1.15rem"},
-                    fontWeight: 500,
-                    color: "#1a1a1a",
-                    lineHeight: 1.8,
-                    width:{xs:"100%" , md:"50vw",lg:"35vw"},
-                     fontSize:{xs:"4.6vw",sm:"0.9vw",md:"2vw",lg:"1.3vw"},
-                     fontFamily: "var(--font-ui)"
-                  }}
-                >
-                  {para}
-                </Typography>
-              ))}
+        {/* Wave Divider at Bottom */}
+        <Box sx={{ position: "absolute", bottom: -1, left: 0, right: 0, lineHeight: 0, color: "#FDFDFD" }}>
+            <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </Box>
+      </Box>
 
-              {/* Features list */}
-              <Box sx={{ mt: 2 }}>
-                {features.map((feat, i) => (
-                  <Box
-                    key={i}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      mb: 1.5,
-                      color: "#4a0520",
-                      fontFamily: "var(--font-ui)",
-                      fontWeight: 600,
-                      fontSize: {sm:"1rem" , lg:"1.1rem"},
-                          width:{xs:"100%" , lg:"40vw"}
-                    }}
-                  >
-                    <CheckIcon />
-                    {feat}
-                  </Box>
-                ))}
-              </Box>
-            </Grid>
-          </Grid>
+      {/* --- LEADERSHIP SECTION --- */}
+      <Box sx={{ pt: 15, pb: 5 }}>
+        <Container maxWidth="lg">
+          <Box sx={{ textAlign: "center", mb: 12 }}>
+            <Chip 
+              label="OUR VISIONARIES" 
+              sx={{ 
+                bgcolor: BRAND_LIGHT, 
+                color: BRAND_COLOR, 
+                fontWeight: 800, 
+                px: 2, 
+                py: 2.5,
+                borderRadius: "8px",
+                letterSpacing: 2,
+                mb: 3 
+              }} 
+            />
+            <Typography variant="h2" sx={{ fontWeight: 900, fontFamily: "var(--font-display)", color: TEXT_DARK, letterSpacing: -1 }}>
+              Leadership
+            </Typography>
+          </Box>
+        </Container>
 
-
-
+        {leadershipData.map((leader, index) => (
+          <LeaderProfile key={index} data={leader} index={index} />
         ))}
       </Box>
 
-      {/* Final Call to Action Section */}
-      <Box
-        sx={{
-          mt: 8,
-          py: 6,
-          bgcolor: "#A30D33",
-          color: "white",
-          textAlign: "center",
-          px: 3,
-          borderRadius: 4,
-          mx: "auto",
-          maxWidth: 800,
-          boxShadow: "0 12px 40px rgba(163,13,51,0.7)",
-          fontFamily: "var(--font-ui)"
-        }}
-        data-aos="zoom-in"
-      >
-        <Typography variant={isMobile ? "h5" : "h3"} fontWeight={900} gutterBottom sx={{ fontFamily: "var(--font-display)" }}>
-          Ready to Turn Your Idea into Reality?
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 4, fontWeight: 600, fontSize: "1.1rem", fontFamily: "var(--font-ui)" }}>
-          Join VentureNest today and take the first step toward building a successful startup with our expert guidance and network.
-        </Typography>
+      {/* --- WHY CHOOSE US (Bento Grid) --- */}
+      <Box sx={{ bgcolor: "white", py: 15, position: "relative", overflow: "hidden" }}>
+        {/* Background Gradients */}
+        <Box sx={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", opacity: 0.3, background: "radial-gradient(circle at 10% 10%, #fff0f3 0%, transparent 30%), radial-gradient(circle at 90% 90%, #e0f2fe 0%, transparent 30%)" }} />
         
-        <a href="/IncubateWithUs">
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            bgcolor: "#fff",
-            color: "#A30D33",
-            fontWeight: 700,
-            px: 6,
-            py: 1.5,
-            borderRadius: 3,
-            "&:hover": { bgcolor: "#f7c1c9", color: "#6f1d3f" },
-            boxShadow: "0 8px 30px rgba(255,255,255,0.4)",
-          }}
-        >
-          Apply Now
-        </Button>
-        </a>
-      </Box>
-      <Box sx={{ bgcolor: 'transparent', py: 4 }}>
-      <Container maxWidth="lg">
-        <Fade in timeout={1000}>
-          <Card elevation={4} sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, borderRadius: 3 }}>
-            {/* Image Section */}
-            <Box
-              component="img"
-              src="/assets/iso-certified.png"
-              alt="ISO Certified"
-              sx={{
-                width: { xs: '50%', md: '20%' },
-                objectFit: 'cover',
-                borderTopLeftRadius: 12,
-                borderBottomLeftRadius: { md: 12 },
-                borderTopRightRadius: { xs: 12, md: 0 },
-                padding:"1vw"
-              }}
-            />
-
-            {/* Content Section */}
-            <CardContent sx={{ p: 4, flex: 1 }}>
-              <Box display="flex" alignItems="center" mb={2}>
-                <VerifiedIcon sx={{ fontSize: 40, color: '#2e7d32', mr: 2 }} />
-                <Typography variant="h5" fontWeight="bold" sx={{ fontFamily: "var(--font-display)", color: "#1a1a1a" }}>
-                  ISO 9001:2015 Certified
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
+            <Box sx={{ mb: 10, display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 4 }}>
+                <Box>
+                    <Typography variant="overline" sx={{ color: BRAND_COLOR, fontWeight: 800, letterSpacing: 3, display: "block", mb: 1 }}>
+                        THE ADVANTAGE
+                    </Typography>
+                    <Typography variant="h2" sx={{ fontWeight: 900, fontFamily: "var(--font-display)", color: TEXT_DARK, letterSpacing: -1 }}>
+                        Why VentureNest?
+                    </Typography>
+                </Box>
+                <Typography variant="h6" sx={{ maxWidth: 500, color: TEXT_MUTED, fontWeight: 400, lineHeight: 1.6 }}>
+                    We don't just provide space; we provide the ecosystem, mentorship, and funding to scale your dreams.
                 </Typography>
-              </Box>
-              <Typography variant="body1" sx={{ fontSize: '1.1rem', color: "#222", fontFamily: "var(--font-ui)" }}>
-                We are proud to be ISO 9001:2015 certified, reflecting our commitment to maintaining the highest standards in quality management and continuous improvement. This certification ensures that we consistently deliver exceptional services and value to our stakeholders.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Fade>
-      </Container>
-    </Box>
+            </Box>
+
+            <Grid container spacing={4}>
+                {features.map((item, i) => (
+                    <Grid item xs={12} sm={6} md={3} key={i}>
+                        <motion.div 
+                          whileHover={{ y: -15 }} 
+                          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                        >
+                            <Card 
+                                elevation={0}
+                                sx={{ 
+                                    height: "100%", 
+                                    borderRadius: 5, 
+                                    border: "1px solid #f0f0f0",
+                                    bgcolor: "#FFF",
+                                    transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    overflow: "hidden",
+                                    "&:hover": { 
+                                        boxShadow: "0 30px 60px rgba(0,0,0,0.12)",
+                                        borderColor: BRAND_COLOR,
+                                        "& .card-image": { transform: "scale(1.1)" }
+                                    }
+                                }}
+                            >
+                                {/* Card Image */}
+                                <Box sx={{ height: 180, overflow: "hidden", position: "relative" }}>
+                                  <Box 
+                                    component="img" 
+                                    src={item.image} 
+                                    className="card-image"
+                                    sx={{ 
+                                      width: "100%", 
+                                      height: "100%", 
+                                      objectFit: "cover", 
+                                      transition: "transform 0.6s ease" 
+                                    }} 
+                                  />
+                                  <Box sx={{ position: "absolute", top: 15, left: 15, zIndex: 2 }}>
+                                    <Box 
+                                        sx={{ 
+                                            width: 45, 
+                                            height: 45, 
+                                            borderRadius: "12px", 
+                                            bgcolor: "white", 
+                                            color: BRAND_COLOR, 
+                                            display: "flex", 
+                                            alignItems: "center", 
+                                            justifyContent: "center",
+                                            fontSize: "1.5rem",
+                                            boxShadow: "0 8px 16px rgba(0,0,0,0.1)"
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </Box>
+                                  </Box>
+                                </Box>
+
+                                <CardContent sx={{ flexGrow: 1, p: 3 }}>
+                                    <Typography variant="caption" sx={{ color: BRAND_COLOR, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, display: "block", mb: 1 }}>
+                                        {item.subtitle}
+                                    </Typography>
+                                    <Typography variant="h5" sx={{ fontWeight: 800, fontFamily: "var(--font-display)", mb: 2, color: TEXT_DARK }}>
+                                        {item.title}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ color: TEXT_MUTED, lineHeight: 1.7, fontSize: "0.95rem" }}>
+                                        {item.desc}
+                                    </Typography>
+                                </CardContent>
+                                <Box sx={{ p: 3, pt: 0 }}>
+                                    <Chip 
+                                      size="small" 
+                                      icon={<VerifiedIcon style={{ fontSize: 16 }} />} 
+                                      label={item.stats} 
+                                      sx={{ 
+                                        bgcolor: BRAND_LIGHT, 
+                                        color: BRAND_COLOR, 
+                                        fontWeight: 700,
+                                        borderRadius: "6px",
+                                        "& .MuiChip-icon": { color: BRAND_COLOR }
+                                      }} 
+                                    />
+                                </Box>
+                            </Card>
+                        </motion.div>
+                    </Grid>
+                ))}
+            </Grid>
+        </Container>
+      </Box>
+
+
+      {/* --- ISO & CTA SECTION --- */}
+      <Box sx={{ py: 10, bgcolor: "#F8F9FA" }}>
+        <Container maxWidth="lg">
+            <Paper 
+                elevation={0}
+                sx={{ 
+                    borderRadius: 6, 
+                    overflow: "hidden", 
+                    bgcolor: "white", 
+                    border: "1px solid #eee",
+                    display: "flex",
+                    flexDirection: { xs: "column", md: "row" }
+                }}
+            >
+                {/* ISO Image Side */}
+                <Box 
+                    sx={{ 
+                        width: { xs: "100%", md: "30%" }, 
+                        bgcolor: "#e8f5e9", 
+                        display: "flex", 
+                        alignItems: "center", 
+                        justifyContent: "center", 
+                        p: 4 
+                    }}
+                >
+                    <Box component="img" src="/assets/iso-certified.png" alt="ISO" sx={{ width: "80%", maxWidth: 150 }} />
+                </Box>
+
+                {/* Content Side */}
+                <Box sx={{ p: { xs: 4, md: 6 }, flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
+                        <VerifiedIcon sx={{ color: "#2e7d32", fontSize: 32 }} />
+                        <Typography variant="h5" fontWeight="700">ISO 9001:2015 Certified</Typography>
+                    </Box>
+                    <Typography variant="body1" sx={{ color: TEXT_MUTED, mb: 4 }}>
+                        We are proud to be ISO certified, reflecting our commitment to maintaining the highest standards in quality management.
+                    </Typography>
+                    
+                    {/* Final CTA Button */}
+                    <Box>
+                         <Button
+                            href="/IncubateWithUs"
+                            variant="contained"
+                            size="large"
+                            endIcon={<ArrowForwardIcon />}
+                            sx={{
+                            bgcolor: BRAND_COLOR,
+                            py: 1.5,
+                            px: 5,
+                            borderRadius: 3,
+                            fontSize: "1rem",
+                            fontWeight: 700,
+                            boxShadow: "0 10px 20px rgba(163,13,51,0.3)",
+                            "&:hover": { bgcolor: "#800a26" }
+                            }}
+                        >
+                            Apply Now
+                        </Button>
+                    </Box>
+                </Box>
+            </Paper>
+        </Container>
+      </Box>
     </Box>
   );
 }
