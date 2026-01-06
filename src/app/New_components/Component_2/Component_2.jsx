@@ -27,7 +27,10 @@ const VentureNestIntro = () => {
             ventures.
           </p>
 
-        
+          <p>
+            CGC VentureNest is the premier business incubator at CGC University,
+            designed to empower innovation,
+          </p>
         </div>
 
         <div className="vn-right">

@@ -13,22 +13,13 @@ const Footer = () => {
 
                 <div className="footer-content-grid">
                     
+                    {/* Column 1: Brand Info & Apply Button */}
                     <div className="footer-column brand-column">
-                        
-                        <div className="footer-logo-row">
-                            <img 
-                                src="/assets/cgc_venturenest_logo_n1-modified.png" 
-                                alt="Venture Nest Logo" 
-                                className="footer-logo" 
-                            />
-                            {/* Corrected path: Removed /assets/ and /public/ */}
-                            <img 
-                                src="/assets/Footer-logo-parts/white_logo.jpg" 
-                                alt="Second Logo" 
-                                className="footer-logo" 
-                            />
-                        </div>
-
+                        <img 
+                            src="/assets/cgc_venturenest_logo_n1-modified.png" 
+                            alt="Venture Nest Logo" 
+                            className="footer-logo-main" 
+                        />
                         <p className="brand-description">
                             Welcome to Venture Nest, the premier incubation center at CGC University. 
                             We are dedicated to fostering innovation and entrepreneurship, providing 
@@ -39,6 +30,7 @@ const Footer = () => {
                             APPLY TODAY <span>&#8594;</span>
                         </a>
 
+                         {/* Social Icons moved here to fit the "Stay Connected" theme */}
                          <div className="footer-socials">
                             <a href="https://www.facebook.com/share/1C8yb6NvuN/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
                                 <img src="/assets/social-media/facebook-hd.png" alt="FB" className="social-icon" />
@@ -55,6 +47,7 @@ const Footer = () => {
                         </div>
                     </div>
 
+                    {/* Column 2: Quick Links */}
                     <div className="footer-column links-column">
                         <h3 className="footer-heading">Quick Links</h3>
                         <ul className="footer-links-list">
@@ -66,6 +59,7 @@ const Footer = () => {
                         </ul>
                     </div>
 
+                    {/* Column 3: Explore (More Links) */}
                     <div className="footer-column links-column">
                         <h3 className="footer-heading">Explore</h3>
                         <ul className="footer-links-list">
@@ -76,6 +70,7 @@ const Footer = () => {
                         </ul>
                     </div>
 
+                    {/* Column 4: Contact / Address */}
                     <div className="footer-column contact-column">
                         <h3 className="footer-heading">Contact Offices</h3>
                         
@@ -96,6 +91,7 @@ const Footer = () => {
                 </div>
             </div>
 
+            {/* Copyright Section */}
             <div className="footer-copyright">
                 <p>© 2025 Copyright Venture Nest. All Rights Reserved.</p>
             </div>

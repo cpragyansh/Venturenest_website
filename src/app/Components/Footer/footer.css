@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
 :root {
-    --footer-bg: #050505;
-    --footer-text: #b0b0b0;
-    --footer-heading: #a40f19;
-    --footer-white: #ffffff;
-    --footer-border: #222222;
+    --footer-bg: #050505;        /* Deep Black */
+    --footer-text: #b0b0b0;      /* Light Grey for body text */
+    --footer-heading: #a40f19;   /* The Red color you requested */
+    --footer-white: #ffffff;     /* Pure white for specific accents */
+    --footer-border: #222222;    /* Dark border color */
 }
 
+/* --- Layout Wrapper --- */
 .footer-wrapper {
     width: 100%;
     background-color: var(--footer-bg);
     color: var(--footer-text);
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    /* Using a clean system font stack to match the reference image */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.6;
 }
@@ -23,6 +23,7 @@
     padding: 4rem 2rem;
 }
 
+/* --- Top Header Section --- */
 .footer-top-header {
     margin-bottom: 2.5rem;
     border-bottom: 1px solid var(--footer-border);
@@ -32,7 +33,7 @@
 .stay-connected-heading {
     color: var(--footer-text);
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 400;
     margin: 0;
     opacity: 0.8;
 }
@@ -44,6 +45,7 @@
     margin: 0.5rem 0 0 0;
 }
 
+/* --- Grid Content --- */
 .footer-content-grid {
     display: flex;
     flex-wrap: wrap;
@@ -51,6 +53,7 @@
     gap: 3rem;
 }
 
+/* --- Columns --- */
 .footer-column {
     flex: 1;
     min-width: 200px;
@@ -59,38 +62,33 @@
 }
 
 .brand-column {
-    flex: 1.5;
+    flex: 1.5; /* Makes the first column slightly wider */
     min-width: 280px;
 }
 
-.footer-logo-row {
-    display: flex;
-    align-items: center; 
-    gap: 2rem;        /* Increased gap slightly for better spacing */
+/* --- Column 1: Brand --- */
+.footer-logo-main {
+    width: 150px; /* Adjust based on your logo aspect ratio */
+    height: auto;
     margin-bottom: 1.5rem;
-}
-
-.footer-logo {
-    height: 85px;
-    width: auto;
-    object-fit: contain;
+    /* Removed background-color: white per instructions */
 }
 
 .brand-description {
     margin-bottom: 1.5rem;
     font-size: 0.9rem;
-    font-weight: 400;
     color: var(--footer-text);
     max-width: 90%;
     text-align: justify;
 }
 
+/* The Red Button */
 .apply-today-btn {
     display: inline-block;
     background-color: var(--footer-heading);
     color: var(--footer-white);
     padding: 10px 24px;
-    border-radius: 50px;
+    border-radius: 50px; /* Pill shape like the image */
     font-weight: 700;
     text-decoration: none;
     font-size: 0.85rem;
@@ -105,9 +103,10 @@
 
 .apply-today-btn:hover {
     transform: translateX(5px);
-    background-color: #c4121e;
+    background-color: #c4121e; /* Slightly brighter red on hover */
 }
 
+/* --- Social Icons --- */
 .footer-socials {
     display: flex;
     gap: 1rem;
@@ -116,6 +115,7 @@
 .social-icon {
     width: 24px;
     height: 24px;
+    /* Invert to white to match dark theme */
     filter: brightness(0) invert(1);
     opacity: 0.7;
     transition: opacity 0.3s ease;
@@ -125,6 +125,7 @@
     opacity: 1;
 }
 
+/* --- Headings for Links/Contact --- */
 .footer-heading {
     color: var(--footer-heading);
     font-size: 1rem;
@@ -133,6 +134,7 @@
     text-transform: capitalize;
 }
 
+/* --- Links Lists --- */
 .footer-links-list {
     list-style: none;
     padding: 0;
@@ -147,7 +149,6 @@
     text-decoration: none;
     color: var(--footer-text);
     font-size: 0.9rem;
-    font-weight: 500;
     transition: color 0.3s ease;
 }
 
@@ -155,6 +156,7 @@
     color: var(--footer-white);
 }
 
+/* --- Contact Column --- */
 .contact-block {
     margin-bottom: 1.5rem;
 }
@@ -183,11 +185,12 @@
     color: var(--footer-heading);
 }
 
+/* --- Copyright --- */
 .footer-copyright {
     margin-top: 3rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--footer-border);
-    text-align: left;
+    text-align: left; /* Image has copyright on left usually, or center */
     padding-left: 2rem;
 }
 
@@ -196,6 +199,7 @@
     opacity: 0.5;
 }
 
+/* --- Responsive --- */
 @media (max-width: 768px) {
     .footer-content-grid {
         flex-direction: column;
