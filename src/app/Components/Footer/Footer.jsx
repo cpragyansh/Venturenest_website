@@ -6,7 +6,6 @@ const Footer = () => {
         <footer className="footer-wrapper">
             <div className="footer-main-container">
                 
-                {/* Top Heading Section */}
                 <div className="footer-top-header">
                     <h2 className="stay-connected-heading">Stay Connected</h2>
                     <h2 className="stay-connected-subheading">Stay Connected with Venture Nest</h2>

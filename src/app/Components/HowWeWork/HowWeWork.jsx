@@ -82,6 +82,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
     boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
     border: "8px solid #1b4880",
   },
+  
 }));
 
 const StyledImage = styled("img")(({ theme }) => ({
