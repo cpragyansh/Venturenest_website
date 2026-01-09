@@ -114,11 +114,11 @@ const Navbar = () => {
 
         
           {/* <li><a href="https://e-cell-blush-nine.vercel.app/" onClick={closeMenu}>E-cell</a></li> */}
-          <li className="join-us-btn-navbar-extra">
+          {/* <li className="join-us-btn-navbar-extra">
             <a href="/IncubateWithUs" className="navbar-links-joinus-btn-text" onClick={closeMenu}>
               Join Us
             </a>
-          </li>
+          </li> */}
           <li className="join-us-btn-navbar-extra upper-navbar-menu-incubate-btn">
             <a href="/IncubateWithUs" className="navbar-links-joinus-btn-text" onClick={closeMenu}>
               Incubate with us
