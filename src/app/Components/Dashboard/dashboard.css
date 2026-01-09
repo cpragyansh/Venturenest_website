@@ -1141,7 +1141,7 @@ padding-bottom: 2em;    /* position: relative; */
 }
 
 .application-step-1-heading {
-    color: #3092DD;
+    color: #1b4880;
 }
 
 .application-step-2-heading {
@@ -1168,7 +1168,7 @@ padding-bottom: 2em;    /* position: relative; */
 
 /* Specific Colors based on Parent Wrapper */
 .application-step-1 #appplication-para {
-    background-color: #2F80ED; /* Blue */
+    background-color: #1b4880; /* Blue */
 }
 
 .application-step-2 #appplication-para {
