@@ -15,7 +15,7 @@ const HeroCarousel = () => {
     const [slides, setSlides] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     const swiperRef = useRef(null);
-    const AUTOPLAY_DELAY = 5000;
+    const AUTOPLAY_DELAY = 5001;
 
     useEffect(() => {
         const fetchSlides = async () => {
