@@ -27,17 +27,39 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   gap: "2vw",
+<<<<<<< Updated upstream
   backgroundColor: "white",
+=======
+  position: "relative",
+  zIndex: 0,
+  boxShadow: "0 8px 20px rgba(0, 0, 0, 0.5)",
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundImage: `url("/legacy.jpg")`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed",
+    opacity: 0.25,
+    zIndex: -1,
+  },
+>>>>>>> Stashed changes
 }));
 
 const SectionHeading = styled(Typography)(({ theme }) => ({
-  fontFamily: "var(--font-display)",
-  fontSize: "clamp(1.6rem, 2.5vw, 2rem)",
+  fontFamily: '"Plus Jakarta Sans", sans-serif',
+  fontSize: "clamp(3.5rem, 2.5vw, 2rem)",
   textTransform: "uppercase",
-  fontWeight: 700,
+  fontWeight: 999,
   textAlign: "center",
+  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.42)",
   letterSpacing: "0.1em",
-  color: "rgb(133, 41, 41)",
+  color: "rgba(27, 72, 128, 1)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -48,10 +70,16 @@ const SectionHeading = styled(Typography)(({ theme }) => ({
 const StyledCard = styled(Card)(({ theme }) => ({
   padding: "1.5rem 0.1rem",
   borderRadius: "30px",
+<<<<<<< Updated upstream
   border: "2px solid #1b4880",
   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
   transition:
     "transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease",
+=======
+  border: "0px solid #A30D33",
+  boxShadow: "0 4px 12px rgba(27, 72, 128, 0.42)",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease",
+>>>>>>> Stashed changes
   textAlign: "center",
   height: "100%",
   width: "100%", // Default width
@@ -74,20 +102,31 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
   [theme.breakpoints.up("lg")]: {
     width: "20vw",
+<<<<<<< Updated upstream
     height: "80%",
     border: "4px solid #1b4880",
     textAlign: "center"
+=======
+    height: "90%",
+    border: "0px solid #A30D33",
+    textAlign: "center",
+>>>>>>> Stashed changes
   },
 
   "&:hover": {
     transform: "translateY(-10px)",
+<<<<<<< Updated upstream
     boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
     // backgroundColor: "#A30D33",
     color: "white",
     border:"8px solid #1b4880",
    
+=======
+    boxShadow: "0 8px 24px rgba(27, 72, 128, 0.42)",
+    // border: "6px solid rgba(27, 72, 128, 1)",
+>>>>>>> Stashed changes
   },
-  
+
 }));
 
 
@@ -220,10 +259,14 @@ const HowWeSupportYou = () => {
         data-aos-easing="ease-out"
       >
         <img
-          src="/assets/helpyou-section-2-img.svg"
+          src="/assets/newImage.svg"
           alt="Icon"
-          width={isTabletOrMobile ? 30 : 40}
-          height={isTabletOrMobile ? 30 : 40}
+          style={{
+            color: "rgba(27, 72, 128, 0.42)",
+            marginRight: "-30px",
+          }}
+          width={isTabletOrMobile ? 150 : 160}
+          height={isTabletOrMobile ? 150 : 160}
         />
         HOW WE SUPPORT YOU
       </SectionHeading>
