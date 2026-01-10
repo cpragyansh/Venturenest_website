@@ -47,7 +47,7 @@ const StartupStories = () => {
             <Typography 
                 className="stories-global-heading"
                 sx={{
-                    fontFamily: "var(--font-display)",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
                     fontSize: { xs: "2rem", lg: "3.5rem" },
                     mb: 4,
                     textAlign: "center",

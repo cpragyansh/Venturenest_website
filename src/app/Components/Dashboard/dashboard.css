@@ -2162,7 +2162,9 @@ padding-bottom: 50vh;
 
 .apply-now-button-container {
     text-align: center;
-    margin-top: 0.1vw;
+    /* margin-top: 0.1vw; */
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 /* Designer Gradient Button */

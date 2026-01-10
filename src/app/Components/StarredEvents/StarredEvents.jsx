@@ -63,13 +63,14 @@ const StarredEvents = () => {
     <Box className="events-outer-container">
       <Typography 
         sx={{
-          fontFamily: "var(--font-display)", 
+          fontFamily: "'Plus Jakarta Sans', sans-serif", 
           fontSize: { xs: "2rem", lg: "3.5rem" },
           mb: 6,
           textAlign: "center",
           color: "#A30D33", 
           letterSpacing: "-0.01em",
-          textTransform: "uppercase"
+          textTransform: "uppercase",
+          fontWeight: 800
         }}
       >
         Latest News & Events
