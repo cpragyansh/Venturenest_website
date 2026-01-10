@@ -18,6 +18,97 @@ import HowWeSupportYou from '../HowWeWork/HowWeWork';
 import Video from '../VideoCorosuel/Video';
 import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
 import VentureNestIntro from '../../New_components/Component_2/Component_2';
+import { Box, Typography } from '@mui/material';
+
+// --- Colors for Background ---
+const COLORS = {
+    red: "#a40f19",
+    blue: "#1b4880",
+    grey: "#515257",
+    lightGrey: "#f4f6f8",
+    white: "#ffffff",
+};
+
+// --- Background Elements ---
+const Bubble = ({ color, size, top, left, right, bottom, duration, delay }) => (
+    <Box
+        component={motion.div}
+        animate={{
+            y: [0, -30, 0],
+            x: [0, 15, -15, 0],
+            scale: [1, 1.1, 1],
+        }}
+        transition={{
+            duration: duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: delay,
+        }}
+        sx={{
+            position: "absolute",
+            top: top, left: left, right: right, bottom: bottom,
+            width: size, height: size,
+            borderRadius: "50%",
+            bgcolor: color,
+            opacity: 0.05,
+            zIndex: 0,
+            pointerEvents: "none",
+        }}
+    />
+);
+
+const FloatingSquare = ({ color, size, top, left, right, bottom, duration, delay }) => (
+    <Box
+        component={motion.div}
+        animate={{
+            rotate: [0, 90, 180, 270, 360],
+            y: [0, -20, 0],
+        }}
+        transition={{
+            duration: duration,
+            repeat: Infinity,
+            ease: "linear",
+            delay: delay,
+        }}
+        sx={{
+            position: "absolute",
+            top: top, left: left, right: right, bottom: bottom,
+            width: size, height: size,
+            border: `2px solid ${color}`,
+            opacity: 0.08,
+            zIndex: 0,
+            pointerEvents: "none",
+            borderRadius: "8px",
+        }}
+    />
+);
+
+const FloatingTriangle = ({ color, size, top, left, right, bottom, duration, delay }) => (
+    <Box
+        component={motion.div}
+        animate={{
+            rotate: [0, -10, 10, 0],
+            y: [0, 15, 0],
+        }}
+        transition={{
+            duration: duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: delay,
+        }}
+        sx={{
+            position: "absolute",
+            top: top, left: left, right: right, bottom: bottom,
+            width: 0, height: 0,
+            borderLeft: `${size / 2}px solid transparent`,
+            borderRight: `${size / 2}px solid transparent`,
+            borderBottom: `${size}px solid ${color}`,
+            opacity: 0.08,
+            zIndex: 0,
+            pointerEvents: "none",
+        }}
+    />
+);
 
 const MagneticButton = ({ children, className }) => {
     const mouseX = useMotionValue(0);
@@ -589,126 +680,46 @@ const Dashboard = () => {
 
 </div> */}
 
-            <StarredEvents />
+            {/* Premium Background Container for both News and Stories */}
+            <Box sx={{ 
+                position: 'relative', 
+                overflow: 'hidden', 
+                bgcolor: '#fafafa',
+                pb: 10,
+                borderTop: '1px solid rgba(0,0,0,0.05)'
+            }}>
+                {/* Background Grid Pattern */}
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundImage: `
+                            linear-gradient(rgba(27, 72, 128, 0.1) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(27, 72, 128, 0.1) 1px, transparent 1px)
+                        `,
+                        backgroundSize: '40px 40px',
+                        zIndex: 0,
+                        pointerEvents: 'none',
+                    }}
+                />
 
+                {/* Floating Elements distributed across both sections */}
+                <Bubble color={COLORS.red} size={250} top="5%" left="-50px" duration={15} delay={0} />
+                <FloatingSquare color={COLORS.blue} size={100} top="15%" right="10%" duration={25} delay={1} />
+                <FloatingTriangle color={COLORS.red} size={60} top="40%" left="15%" duration={12} delay={2} />
+                
+                <Bubble color={COLORS.blue} size={200} bottom="20%" right="-50px" duration={18} delay={3} />
+                <FloatingSquare color={COLORS.red} size={120} bottom="10%" left="5%" duration={30} delay={4} />
+                <FloatingTriangle color={COLORS.blue} size={80} bottom="5%" right="15%" duration={14} delay={5} />
 
-
-            {/* Accouncements Section */}
-
-
-            {/* <div className="announcements-section-main-container">
-<h1 className="announcement-heading">Announcements</h1>
-<div className="announcemets-text">
-<div className="announcement-text-container-box-1">
-    <div className="announcement-first-row">
-        <h1 className="announcement-box-head">Topic_Name</h1>
-        <h1 className="announcement-date">8 Sept</h1>
-    </div>
-    <div className="announcement-box-description">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et illum quam nam necessitatibus numquam at error delectus rem architecto? Nostrum?
-    </div>
-</div>
-
-<div className="announcement-text-container-box-1">
-    <div className="announcement-first-row">
-        <h1 className="announcement-box-head">Topic_Name</h1>
-        <h1 className="announcement-date">8 Sept</h1>
-    </div>
-    <div className="announcement-box-description ">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et illum quam nam necessitatibus numquam at error delectus rem architecto? Nostrum?
-    </div>
-</div>
-<div className="announcement-text-container-box-1">
-    <div className="announcement-first-row">
-        <h1 className="announcement-box-head">Topic_Name</h1>
-        <h1 className="announcement-date">8 Sept</h1>
-    </div>
-    <div className="announcement-box-description">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et illum quam nam necessitatibus numquam at error delectus rem architecto? Nostrum?
-    </div>
-</div>
-
-
-</div>
-<img src="assets/bg1.jpg" alt="" className="announcements-section-bg-img" />
-</div> */}
-            {/* end */}
-
-
-            {/* inspirational stories Section */}
-
-            {/* <div className="inspirational-stories-section">
-<img src="assets/partners-section-bg.jpg" alt="" className="success-stories-background-img" />
-<div className="stories-main-container">
-<h1 className='stories-heading'>Inspirational Stories</h1>
-
-<div className="stories-division">
-    <div className="story-main-box">
-        <img src="assets/pulkesh.jpg" alt="" className="story-1-person-image" />
-         <div className="stories-person-data">
-            <h1 className="story-person-name">NAME:PULKESH GAUTAM</h1>
-            <h1 className="story-person-post">POST:DHUND RAHA HU</h1>
-            <h1 className="story-person-company-name">COMAPANY:PATA NAHI</h1>
-         </div>
-    </div>
-    <div className="story-main-box">
-        <img src="assets/pulkesh.jpg" alt="" className="story-1-person-image" />
-         <div className="stories-person-data">
-            <h1 className="story-person-name">NAME:PULKESH GAUTAM</h1>
-            <h1 className="story-person-post">POST:DHUND RAHA HU</h1>
-            <h1 className="story-person-company-name">COMAPANY:PATA NAHI</h1>
-         </div>
-    </div>
-    <div className="story-main-box">
-        <img src="assets/pulkesh.jpg" alt="" className="story-1-person-image" />
-         <div className="stories-person-data">
-            <h1 className="story-person-name">NAME:PULKESH GAUTAM</h1>
-            <h1 className="story-person-post">POST:DHUND RAHA HU</h1>
-            <h1 className="story-person-company-name">COMAPANY:PATA NAHI</h1>
-         </div>
-    </div>
-    <div className="story-main-box">
-        <img src="assets/pulkesh.jpg" alt="" className="story-1-person-image" />
-         <div className="stories-person-data">
-            <h1 className="story-person-name">NAME:PULKESH GAUTAM</h1>
-            <h1 className="story-person-post">POST:DHUND RAHA HU</h1>
-            <h1 className="story-person-company-name">COMAPANY:PATA NAHI</h1>
-         </div>
-    </div>
-    <div className="story-main-box">
-        <img src="assets/pulkesh.jpg" alt="" className="story-1-person-image" />
-         <div className="stories-person-data">
-            <h1 className="story-person-name">NAME:PULKESH GAUTAM</h1>
-            <h1 className="story-person-post">POST:DHUND RAHA HU</h1>
-            <h1 className="story-person-company-name">COMAPANY:PATA NAHI</h1>
-         </div>
-    </div>
-</div>
-</div>
-</div> */}
-
-            {/* <div className="inspirational-stories-section" data-aos="fade-up" data-aos-duration="1200">
-    <div className="stories-main-container">
-        <h1 className="stories-heading" data-aos="fade-right" data-aos-duration="1200">Inspirational Stories</h1>
-        <div className="stories-slideshow">
-            <div className="slideshow-track">
-                {starredStories.length > 0 ? (
-                    starredStories.map((story, index) => (
-                        <div className="story-main-box" key={index} data-aos="zoom-in" data-aos-duration="1000" data-aos-delay={`${index * 200}`}>
-                            <img src={story.FounderImg || 'assets/default.jpg'} alt="Story Image" className="story-person-image" />
-                            <div className="stories-person-data">
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p>No starred stories available.</p>
-                )}
-            </div>
-        </div>
-    </div>
-</div> */}
-
-            <InspirationalStories />
+                <Box sx={{ position: 'relative', zIndex: 1 }}>
+                    <StarredEvents />
+                    <InspirationalStories />
+                </Box>
+            </Box>
 
 
 
