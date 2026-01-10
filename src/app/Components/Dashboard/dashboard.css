@@ -1,4 +1,66 @@
+.welcome-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.vn-title-icon-placeholder {
+    width: clamp(100px, 12vw, 180px);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-section-2-mian-head-logo-img-direct {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+    display: block;
+}
+
+.welcome-text {
+    font-family: 'NgeticModern', sans-serif;
+    font-size: clamp(2rem, 5.5vw, 5rem);
+    line-height: normal;
+    margin: 0;
+    font-weight: 900;
+    white-space: nowrap;
+    display: flex;
+    gap: 0.3em;
+}
+
+.welcome-blue {
+    color: #23409d; /* Darker Deep Blue */
+    letter-spacing: 0.5rem;
+    text-shadow: 2px 2px 0px #A40C1A; /* Solid Red Offset */
+}
+
+.welcome-red {
+    color: #A40C1A; /* Deep Red */
+    letter-spacing: 0.5rem;
+    text-shadow: 2px 2px 0px #1A4880; /* Solid Blue Offset */
+}
+
+@keyframes welcomeFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 .corosuel-image-dashboard{
+
     width: 100%;
     /* background-color: red; */
     /* background-image: url("../../../../public/assets/corosuel-bg.png"); */
