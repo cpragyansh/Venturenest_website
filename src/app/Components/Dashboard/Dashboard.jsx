@@ -105,11 +105,20 @@ const Dashboard = () => {
                 {/* <Video/> */}
                 {/* <h1 className='dashboard-image-corosuel-text'>Innovation . Entrepreneurship . Growth</h1> */}
                 <HeroCarousel />
-
             </div>
 
+            <div className="welcome-container" data-aos="fade-up">
+                <div className="vn-title-icon-placeholder">
+                    <img src="/assets/section-2-logo.png" alt="Nest Logo" className='new-section-2-mian-head-logo-img-direct' />
+                </div>
+                <h1 className="welcome-text">
+                    <span className="welcome-blue">Welcome to</span>
+                    <span className="welcome-red"> Venturenest</span>
+                </h1>
+            </div>
 
             <VentureNestIntro />
+
 
 
 

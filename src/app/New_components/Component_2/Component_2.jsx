@@ -5,14 +5,8 @@ const VentureNestIntro = () => {
   return (
     <section className="vn-wrapper">
 
-      {/* ===== TOP TITLE STRIP ===== */}
-      <div className="vn-title-strip">
-        <div className="vn-title-icon-placeholder"><img src="assets/section-2-logo.png" alt=""  className='new-section-2-mian-head-logo-img-direct' /></div>
+      {/* Old welcome strip removed as it is now in Dashboard.jsx */}
 
-        <h1>
-          Welcome To CGC <br/> <span>Venturenest</span>
-        </h1>
-      </div>
 
       {/* ===== WHO ARE WE SECTION ===== */}
       <div className="vn-blue-section">
