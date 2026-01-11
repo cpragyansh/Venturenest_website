@@ -713,7 +713,6 @@ export default function AboutPage() {
 
       {/* --- WHY CHOOSE US (Dynamic Alternating Section) --- */}
       <Box sx={{ bgcolor: "transparent", pt: 20, pb: 10, position: "relative", overflow: "hidden" }}>
-        {/* Premium Vector Background */}
         <Box sx={{ position: "absolute", inset: 0, zIndex: 0 }}>
           {/* Subtle Grid */}
           <Box sx={{
