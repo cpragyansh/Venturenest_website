@@ -58,6 +58,133 @@ const BlobShape = ({ color, style }) => (
   />
 );
 
+const LineArt = () => (
+  <Box sx={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", opacity: 0.3 }}>
+    <svg width="100%" height="100%" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', top: 0, left: 0 }}>
+      <motion.path
+        initial={{ pathLength: 0 }}
+        whileInView={{ pathLength: 1 }}
+        transition={{ duration: 2, ease: "easeInOut" }}
+        d="M-100 200 C 200 100, 400 500, 700 300 S 1200 100, 1600 400"
+        stroke={BRAND_COLOR}
+        strokeWidth="0.5"
+        strokeDasharray="10 10"
+        opacity="0.2"
+      />
+      <motion.path
+        initial={{ pathLength: 0 }}
+        whileInView={{ pathLength: 1 }}
+        transition={{ duration: 3, ease: "easeInOut", delay: 0.5 }}
+        d="M-100 600 C 300 400, 600 800, 900 500 S 1300 700, 1600 300"
+        stroke="#1a237e"
+        strokeWidth="0.5"
+        strokeDasharray="15 5"
+        opacity="0.15"
+      />
+      <motion.circle
+        animate={{ scale: [1, 1.05, 1], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 8, repeat: Infinity }}
+        cx="200" cy="150" r="120" stroke={BRAND_COLOR} strokeWidth="0.3"
+      />
+      <motion.circle
+        animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.15, 0.1] }}
+        transition={{ duration: 10, repeat: Infinity, delay: 1 }}
+        cx="1200" cy="650" r="180" stroke="#1a237e" strokeWidth="0.3"
+      />
+      <motion.rect
+        animate={{ rotate: 360 }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        x="100" y="400" width="40" height="40" stroke={BRAND_COLOR} strokeWidth="0.5" opacity="0.1"
+      />
+
+      {/* Circuit-like connections */}
+      <g opacity="0.1">
+        <path d="M50 50 L150 50 L150 150" stroke="currentColor" strokeWidth="1" />
+        <motion.circle
+          animate={{ r: [3, 5, 3] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          cx="150" cy="150" r="3" fill="currentColor"
+        />
+        <path d="M1400 750 L1300 750 L1300 650" stroke="currentColor" strokeWidth="1" />
+        <motion.circle
+          animate={{ r: [3, 5, 3] }}
+          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+          cx="1300" cy="650" r="3" fill="currentColor"
+        />
+      </g>
+    </svg>
+  </Box>
+);
+
+
+const GlobalVectorBackground = () => (
+  <Box sx={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden" }}>
+    {/* Animated Wave Paths */}
+    <svg width="100%" height="100%" viewBox="0 0 1440 2000" fill="none" style={{ position: 'absolute', top: 0, left: 0, opacity: 0.1 }}>
+      <motion.path
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 0.3 }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        d="M-100 300 Q 400 600 900 300 T 1600 300"
+        stroke={BRAND_COLOR} strokeWidth="1"
+      />
+      <motion.path
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 0.2 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 2 }}
+        d="M1600 800 Q 1100 500 600 800 T -100 800"
+        stroke="#1a237e" strokeWidth="1"
+      />
+      <motion.path
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 0.2 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear", delay: 5 }}
+        d="M-100 1500 Q 500 1200 1000 1500 T 1600 1500"
+        stroke={BRAND_COLOR} strokeWidth="1"
+      />
+    </svg>
+
+    {/* Floating Abstract Icons/Shapes */}
+    {[...Array(6)].map((_, i) => (
+      <Box
+        key={i}
+        component={motion.div}
+        animate={{
+          y: [0, -40, 0],
+          x: [0, 20, 0],
+          rotate: [0, 10, 0],
+          opacity: [0.05, 0.15, 0.05]
+        }}
+        transition={{
+          duration: 8 + i * 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: i * 1.5
+        }}
+        sx={{
+          position: "absolute",
+          top: `${15 + i * 15}%`,
+          left: `${(i * 17) % 90}%`,
+          color: i % 2 === 0 ? BRAND_COLOR : "#1a237e",
+          fontSize: "4rem",
+          zIndex: 0
+        }}
+      >
+        {i % 3 === 0 ? <BoltIcon fontSize="inherit" /> : i % 3 === 1 ? <GroupsIcon fontSize="inherit" /> : <EmojiEventsIcon fontSize="inherit" />}
+      </Box>
+    ))}
+
+    {/* Subtle Grid Overlay */}
+    <Box sx={{
+      position: "absolute",
+      inset: 0,
+      backgroundImage: `radial-gradient(${BRAND_COLOR}05 1px, transparent 1px)`,
+      backgroundSize: "60px 60px",
+      opacity: 0.4
+    }} />
+  </Box>
+);
+
 // --- Data ---
 const leadershipData = [
   {
@@ -472,7 +599,8 @@ export default function AboutPage() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Box sx={{ bgcolor: "#FDFDFD", overflowX: "hidden", minHeight: "100vh" }}>
+    <Box sx={{ bgcolor: "#FDFDFD", overflowX: "hidden", minHeight: "100vh", position: "relative" }}>
+      <GlobalVectorBackground />
 
       {/* --- HERO SECTION --- */}
       <Box
@@ -499,41 +627,51 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <Typography
-              variant={isMobile ? "h2" : "h1"}
-              sx={{
-                fontWeight: 900,
-                fontFamily: "var(--font-display)",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                mb: 2,
-                fontSize: { xs: "3rem", md: "5rem" }
-              }}
-            >
-              VentureNest
-            </Typography>
+            <Box sx={{
+              display: "inline-block",
+              p: { xs: 3, md: 5 },
+              borderRadius: 8,
+              bgcolor: "rgba(255,255,255,0.05)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "0 25px 50px rgba(0,0,0,0.1)"
+            }}>
+              <Typography
+                variant={isMobile ? "h2" : "h1"}
+                sx={{
+                  fontWeight: 900,
+                  fontFamily: "var(--font-display)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  mb: 2,
+                  fontSize: { xs: "3rem", md: "5rem" }
+                }}
+              >
+                VentureNest
+              </Typography>
 
-            <Box
-              component={motion.div}
-              initial={{ width: 0 }}
-              animate={{ width: "120px" }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              sx={{ height: 6, bgcolor: "white", mx: "auto", mb: 4, borderRadius: 3 }}
-            />
+              <Box
+                component={motion.div}
+                initial={{ width: 0 }}
+                animate={{ width: "120px" }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                sx={{ height: 6, bgcolor: "white", mx: "auto", mb: 4, borderRadius: 3 }}
+              />
 
-            <Typography
-              variant={isMobile ? "h6" : "h4"}
-              sx={{
-                fontWeight: 300,
-                maxWidth: "850px",
-                mx: "auto",
-                lineHeight: 1.5,
-                opacity: 0.95,
-                letterSpacing: 1
-              }}
-            >
-              The Premier Entrepreneurship Incubation Centre <br /> at CGC University, Mohali.
-            </Typography>
+              <Typography
+                variant={isMobile ? "h6" : "h4"}
+                sx={{
+                  fontWeight: 300,
+                  maxWidth: "850px",
+                  mx: "auto",
+                  lineHeight: 1.5,
+                  opacity: 0.95,
+                  letterSpacing: 1
+                }}
+              >
+                The Premier Entrepreneurship Incubation Centre <br /> at CGC University, Mohali.
+              </Typography>
+            </Box>
           </motion.div>
         </Container>
 
@@ -574,9 +712,25 @@ export default function AboutPage() {
       </Box>
 
       {/* --- WHY CHOOSE US (Dynamic Alternating Section) --- */}
-      <Box sx={{ bgcolor: "white", pt: 20, pb: 10, position: "relative", overflow: "hidden" }}>
-        {/* Background Gradients */}
-        <Box sx={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", opacity: 0.4, background: "radial-gradient(circle at 0% 0%, #fff0f3 0%, transparent 40%), radial-gradient(circle at 100% 100%, #e0f2fe 0%, transparent 40%)" }} />
+      <Box sx={{ bgcolor: "transparent", pt: 20, pb: 10, position: "relative", overflow: "hidden" }}>
+        {/* Premium Vector Background */}
+        <Box sx={{ position: "absolute", inset: 0, zIndex: 0 }}>
+          {/* Subtle Grid */}
+          <Box sx={{
+            position: "absolute",
+            inset: 0,
+            // backgroundImage: `radial-gradient(${BRAND_COLOR}10 1px, transparent 1px), radial-gradient(#1a237e10 1px, transparent 1px)`,
+            backgroundSize: "40px 40px, 60px 60px",
+            backgroundPosition: "0 0, 20px 20px",
+            opacity: 0.5
+          }} />
+
+          <LineArt />
+
+          {/* Gradient Accents */}
+          <Box sx={{ position: "absolute", top: "-10%", left: "-10%", width: "40%", height: "40%", background: `radial-gradient(circle, ${BRAND_COLOR}08 0%, transparent 70%)` }} />
+          <Box sx={{ position: "absolute", bottom: "-10%", right: "-10%", width: "50%", height: "50%", background: `radial-gradient(circle, #1a237e08 0%, transparent 70%)` }} />
+        </Box>
 
         <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, mb: 15 }}>
           <Box sx={{ textAlign: "center", maxWidth: 800, mx: "auto" }}>
