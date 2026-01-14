@@ -681,9 +681,9 @@ const Dashboard = () => {
 </div> */}
 
             {/* Premium Background Container for both News and Stories */}
-            <Box sx={{ 
-                position: 'relative', 
-                overflow: 'hidden', 
+            <Box sx={{
+                position: 'relative',
+                overflow: 'hidden',
                 bgcolor: '#fafafa',
                 pb: 10,
                 borderTop: '1px solid rgba(0,0,0,0.05)'
@@ -710,7 +710,7 @@ const Dashboard = () => {
                 <Bubble color={COLORS.red} size={250} top="5%" left="-50px" duration={15} delay={0} />
                 <FloatingSquare color={COLORS.blue} size={100} top="15%" right="10%" duration={25} delay={1} />
                 <FloatingTriangle color={COLORS.red} size={60} top="40%" left="15%" duration={12} delay={2} />
-                
+
                 <Bubble color={COLORS.blue} size={200} bottom="20%" right="-50px" duration={18} delay={3} />
                 <FloatingSquare color={COLORS.red} size={120} bottom="10%" left="5%" duration={30} delay={4} />
                 <FloatingTriangle color={COLORS.blue} size={80} bottom="5%" right="15%" duration={14} delay={5} />
