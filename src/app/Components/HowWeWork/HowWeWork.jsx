@@ -19,7 +19,7 @@ import "swiper/css/pagination";
 
 const SectionContainer = styled(Box)(({ theme }) => ({
   width: "100%",
-  padding: "4vh 1vw",
+  padding: "4vh 1vw 10vh 1vw",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -46,7 +46,7 @@ const SectionContainer = styled(Box)(({ theme }) => ({
 }));
 
 const SectionHeading = styled(Typography)(({ theme }) => ({
-  fontFamily: '"Plus Jakarta Sans", sans-serif',
+  fontFamily: 'var(--font-display)',
   fontSize: "clamp(3.5rem, 2.5vw, 2rem)",
   textTransform: "uppercase",
   fontWeight: 999,
@@ -63,8 +63,9 @@ const SectionHeading = styled(Typography)(({ theme }) => ({
 
 const StyledCard = styled(Card)(({ theme }) => ({
   padding: "1.5rem 0.1rem",
+  padding: "2.5rem",
   borderRadius: "30px",
-  border: "0px solid #A30D33",
+  border: "0px solid transparent",
   boxShadow: "0 4px 12px rgba(27, 72, 128, 0.42)",
   transition: "transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease",
   textAlign: "center",
@@ -88,18 +89,14 @@ const StyledCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     width: "20vw",
     height: "80%",
-    border: "0px solid #A30D33",
     textAlign: "center",
   },
   "&:hover": {
     transform: "translateY(-10px)",
-    boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
-    // backgroundColor: "#A30D33",
+    // Use inset box-shadow to simulate a border without changing dimensions
+    boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2), inset 0 0 0 8px #1b4880",
     color: "white",
-    border: "8px solid #1b4880",
-
   },
-
 }));
 
 const StyledImage = styled("img")(({ theme }) => ({
@@ -239,11 +236,13 @@ const HowWeSupportYou = () => {
         >
           {supportPrograms.map((program, index) => (
             <SwiperSlide key={index}>
-              <Box sx={{ p: 0, mb: 2 }}>
+              <Box sx={{ p: 0, mb: 2, height: "100%" }}>
                 <StyledCard>
                   <StyledImage src={program.img} alt={program.title} />
-                  <CardContent>
-                    <ProgramTitle variant="h6">{program.title}</ProgramTitle>
+                  <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
+                    <ProgramTitle variant="h6" className="program-title">
+                      {program.title}
+                    </ProgramTitle>
                     <ProgramDescription variant="body2">
                       {program.description}
                     </ProgramDescription>
@@ -271,8 +270,10 @@ const HowWeSupportYou = () => {
               <Box sx={{ height: "100%" }}>
                 <StyledCard>
                   <StyledImage src={program.img} alt={program.title} />
-                  <CardContent>
-                    <ProgramTitle variant="h6">{program.title}</ProgramTitle>
+                  <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
+                    <ProgramTitle variant="h6" className="program-title">
+                      {program.title}
+                    </ProgramTitle>
                     <ProgramDescription variant="body2">
                       {program.description}
                     </ProgramDescription>

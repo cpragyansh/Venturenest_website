@@ -16,15 +16,10 @@
 
 :root {
   /* -- Typography Stack -- */
-  /* --font-display: "Playfair Display SC", serif; */
-  --font-display: "Georgia";
-  /* font-family: 'Times New Roman', Times, serif; */
-  /* font-family:g; */
-  /* Hero / Section Openers */
-  --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  /* Navigation / Cards */
-  --font-reading: "Times New Roman", Times, serif;
-  /* Articles / Long Reads */
+  --font-plus: "Plus Jakarta Sans", sans-serif;
+  --font-display: var(--font-plus);
+  --font-ui: var(--font-plus);
+  --font-reading: var(--font-plus);
 
   /* -- Design Tokens: 'Quiet Power' -- */
   /* User Requested Palette */
@@ -49,7 +44,7 @@
   --space-lg: 64px;
   --space-xl: 128px;
 
---font-component-2: "Plus Jakarta Sans", "Poppins", system-ui, sans-serif;
+  --font-component-2: "Plus Jakarta Sans", "Poppins", system-ui, sans-serif;
 
 
 
