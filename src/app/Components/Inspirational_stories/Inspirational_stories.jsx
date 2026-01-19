@@ -44,15 +44,16 @@ const StartupStories = () => {
 
     return (
         <Box className="stories-outer-section">
-            <Typography 
+            <Typography
                 className="stories-global-heading"
                 sx={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     fontSize: { xs: "2rem", lg: "3.5rem" },
                     mb: 4,
                     textAlign: "center",
-                    color: "#A30D33", 
-                    textTransform: "uppercase"
+                    color: "#A30D33",
+                    textTransform: "uppercase",
+                    fontWeight: 800
                 }}
             >
                 Inspirational Stories
@@ -63,7 +64,7 @@ const StartupStories = () => {
                 <button className="nav-btn prev" onClick={(e) => { e.stopPropagation(); prevStory(); }}>
                     <ArrowBackIos />
                 </button>
-                
+
                 <AnimatePresence mode="wait">
                     {story && (
                         <motion.div
@@ -79,7 +80,7 @@ const StartupStories = () => {
                                 <img src={story.FounderImg || "assets/default.jpg"} alt={story.StartupName} />
                                 <div className="story-floating-badge">Success Story</div>
                             </div>
-                            
+
                             <div className="story-content-side">
                                 <div className="startup-brand-row">
                                     <div className="startup-logo-container">
@@ -112,7 +113,7 @@ const StartupStories = () => {
 
             {starredStories.length > 4 && (
                 <Box sx={{ mt: 6, textAlign: "center" }}>
-                    <button className="more-news-btn" onClick={() => window.location.href='/success'}>
+                    <button className="more-news-btn" onClick={() => window.location.href = '/success'}>
                         Explore More Stories
                     </button>
                 </Box>
@@ -121,14 +122,14 @@ const StartupStories = () => {
             {/* Premium Full-Screen Modal */}
             <AnimatePresence>
                 {selectedStory && (
-                    <motion.div 
+                    <motion.div
                         className="story-modal-overlay"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setSelectedStory(null)}
                     >
-                        <motion.div 
+                        <motion.div
                             className="story-modal-content"
                             initial={{ y: "100%" }}
                             animate={{ y: 0 }}
@@ -170,7 +171,7 @@ const StartupStories = () => {
                                     <div className="story-detailed-text">
                                         <h3>The Journey</h3>
                                         <p>{selectedStory.StartupAbout}</p>
-                                        
+
                                         <h3>About the Founder</h3>
                                         <p>A visionary leader driving change in the entrepreneurial ecosystem, bringing years of expertise to solve real-world problems.</p>
                                     </div>
