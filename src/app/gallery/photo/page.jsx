@@ -105,8 +105,8 @@ export default function Photos() {
         <div className="flex gap-2 pointer-events-auto bg-white/10 backdrop-blur-md p-1.5 rounded-full border border-white/20">
           <button
             onClick={() => {
-              setViewMode('globe'); 
-              setSelectedCategory(null); 
+              setViewMode('globe');
+              setSelectedCategory(null);
             }}
             className={`p-2 rounded-full transition-all duration-300 flex items-center gap-2 ${viewMode === 'globe' ? 'bg-[#A40C1A] text-white shadow-lg' : 'text-gray-500 hover:bg-white/20 hover:text-white'}`}
           >
@@ -169,7 +169,13 @@ export default function Photos() {
 
             {/* Right Split (50%) - Dome Gallery */}
             <div style={{ width: '50%', height: '100%' }}>
-              <DomeGallery images={displayImages} onImageClick={handleImageClick} />
+              <DomeGallery
+                images={displayImages}
+                fit={0.85}
+                minRadius={600}
+                segments={22}
+                dragDampening={4}
+              />
             </div>
           </motion.div>
         )}
