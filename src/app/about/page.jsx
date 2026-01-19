@@ -233,7 +233,7 @@ const features = [
     title: "Infrastructure",
     subtitle: "WORLD CLASS",
     icon: <GroupsIcon fontSize="inherit" />,
-    image: "/assets/aboutUs-support--infra-photo-updated.jpg",
+    image: "/assets/mission-updated.jpg",
     desc: "24/7 Co-working spaces, Maker's Labs, and High-Performance Computing. Our state-of-the-art facilities are designed to foster creativity and technical excellence round the clock.",
     stats: "24/7 Access",
     color: "#2e7d32"
@@ -242,7 +242,7 @@ const features = [
     title: "Network",
     subtitle: "GLOBAL REACH",
     icon: <HandshakeIcon fontSize="inherit" />,
-    image: "/assets/partners-section-bg.jpg",
+    image: "/assets/partners-section-hands-image.png",
     desc: "Partnerships with global accelerators, angel investors, and corporates. We bridge the gap between local innovation and global opportunities, providing founders with an unparalleled network.",
     stats: "Global Partners",
     color: "#ff6f00"
