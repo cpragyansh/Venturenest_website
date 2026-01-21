@@ -8,7 +8,7 @@ import Layout from './Layout';  // Import the Layout component
 // import Contact from "./contact/Contact";
 // import About from "./about/About";
 import AboutPage from "./app/about/page";
-import Dashboard from "./app/Components/Dashboard/Dashboard";
+import DashboardRev from "./app/Components/Dashboard/DashboardRev";
 import Member from "./app/Components/Members/Member";
 import Contact from "./app/contact/page";
 import Events from "./app/event/page";
@@ -48,8 +48,8 @@ function App() {
 
       <Layout>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<DashboardRev />} />
+          <Route path="/dashboard" element={<DashboardRev />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/aboutUs" element={<AboutPage />} />
           <Route path="/Members" element={<Member />} />
