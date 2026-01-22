@@ -1,822 +1,220 @@
 "use client";
 import React from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Container,
-  Chip,
-  Paper,
-  useTheme,
-  useMediaQuery,
-  Avatar
-} from "@mui/material";
-import { motion } from "framer-motion";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import BoltIcon from "@mui/icons-material/Bolt";
-import GroupsIcon from "@mui/icons-material/Groups";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import HandshakeIcon from "@mui/icons-material/Handshake";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import { Link } from "react-router-dom";
 
-// --- Assets & Config ---
-const BRAND_COLOR = "#A30D33";
-const BRAND_LIGHT = "#fff0f3";
-const TEXT_DARK = "#0a0a0a";
-const TEXT_MUTED = "#555";
-
-// --- Vector Components (Inline SVGs) ---
-const DotPattern = () => (
-  <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style={{ position: 'absolute', opacity: 0.15, zIndex: 0 }}>
-    <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="2" fill={BRAND_COLOR} />
-    </pattern>
-    <rect width="100" height="100" fill="url(#dots)" />
-  </svg>
-);
-
-const BlobShape = ({ color, style }) => (
-  <motion.div
-    animate={{
-      scale: [1, 1.1, 1],
-      rotate: [0, 10, -10, 0],
-      borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "50% 50% 33% 67% / 55% 27% 73% 45%", "30% 70% 70% 30% / 30% 30% 70% 70%"]
-    }}
-    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-    style={{
-      position: "absolute",
-      width: "300px",
-      height: "300px",
-      background: color,
-      filter: "blur(60px)",
-      opacity: 0.4,
-      zIndex: 0,
-      pointerEvents: "none",
-      ...style
-    }}
-  />
-);
-
-const LineArt = () => (
-  <Box sx={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", opacity: 0.3 }}>
-    <svg width="100%" height="100%" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', top: 0, left: 0 }}>
-      <motion.path
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        transition={{ duration: 2, ease: "easeInOut" }}
-        d="M-100 200 C 200 100, 400 500, 700 300 S 1200 100, 1600 400"
-        stroke={BRAND_COLOR}
-        strokeWidth="0.5"
-        strokeDasharray="10 10"
-        opacity="0.2"
-      />
-      <motion.path
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        transition={{ duration: 3, ease: "easeInOut", delay: 0.5 }}
-        d="M-100 600 C 300 400, 600 800, 900 500 S 1300 700, 1600 300"
-        stroke="#1a237e"
-        strokeWidth="0.5"
-        strokeDasharray="15 5"
-        opacity="0.15"
-      />
-      <motion.circle
-        animate={{ scale: [1, 1.05, 1], opacity: [0.1, 0.2, 0.1] }}
-        transition={{ duration: 8, repeat: Infinity }}
-        cx="200" cy="150" r="120" stroke={BRAND_COLOR} strokeWidth="0.3"
-      />
-      <motion.circle
-        animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.15, 0.1] }}
-        transition={{ duration: 10, repeat: Infinity, delay: 1 }}
-        cx="1200" cy="650" r="180" stroke="#1a237e" strokeWidth="0.3"
-      />
-      <motion.rect
-        animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        x="100" y="400" width="40" height="40" stroke={BRAND_COLOR} strokeWidth="0.5" opacity="0.1"
-      />
-
-      {/* Circuit-like connections */}
-      <g opacity="0.1">
-        <path d="M50 50 L150 50 L150 150" stroke="currentColor" strokeWidth="1" />
-        <motion.circle
-          animate={{ r: [3, 5, 3] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          cx="150" cy="150" r="3" fill="currentColor"
-        />
-        <path d="M1400 750 L1300 750 L1300 650" stroke="currentColor" strokeWidth="1" />
-        <motion.circle
-          animate={{ r: [3, 5, 3] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-          cx="1300" cy="650" r="3" fill="currentColor"
-        />
-      </g>
-    </svg>
-  </Box>
-);
-
-
-const GlobalVectorBackground = () => (
-  <Box sx={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden" }}>
-    {/* Animated Wave Paths */}
-    <svg width="100%" height="100%" viewBox="0 0 1440 2000" fill="none" style={{ position: 'absolute', top: 0, left: 0, opacity: 0.1 }}>
-      <motion.path
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.3 }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        d="M-100 300 Q 400 600 900 300 T 1600 300"
-        stroke={BRAND_COLOR} strokeWidth="1"
-      />
-      <motion.path
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.2 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 2 }}
-        d="M1600 800 Q 1100 500 600 800 T -100 800"
-        stroke="#1a237e" strokeWidth="1"
-      />
-      <motion.path
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.2 }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear", delay: 5 }}
-        d="M-100 1500 Q 500 1200 1000 1500 T 1600 1500"
-        stroke={BRAND_COLOR} strokeWidth="1"
-      />
-    </svg>
-
-    {/* Floating Abstract Icons/Shapes */}
-    {[...Array(6)].map((_, i) => (
-      <Box
-        key={i}
-        component={motion.div}
-        animate={{
-          y: [0, -40, 0],
-          x: [0, 20, 0],
-          rotate: [0, 10, 0],
-          opacity: [0.05, 0.15, 0.05]
-        }}
-        transition={{
-          duration: 8 + i * 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: i * 1.5
-        }}
-        sx={{
-          position: "absolute",
-          top: `${15 + i * 15}%`,
-          left: `${(i * 17) % 90}%`,
-          color: i % 2 === 0 ? BRAND_COLOR : "#1a237e",
-          fontSize: "4rem",
-          zIndex: 0
-        }}
-      >
-        {i % 3 === 0 ? <BoltIcon fontSize="inherit" /> : i % 3 === 1 ? <GroupsIcon fontSize="inherit" /> : <EmojiEventsIcon fontSize="inherit" />}
-      </Box>
-    ))}
-
-    {/* Subtle Grid Overlay */}
-    <Box sx={{
-      position: "absolute",
-      inset: 0,
-      backgroundImage: `radial-gradient(${BRAND_COLOR}05 1px, transparent 1px)`,
-      backgroundSize: "60px 60px",
-      opacity: 0.4
-    }} />
-  </Box>
-);
-
-// --- Data ---
-const leadershipData = [
-  {
-    name: "S. Rashpal Singh Dhaliwal",
-      role: "Chancellor, CGC University, Mohali",
-      image: "/assets/chairman.png",
-      quote: "Greetings!",
-      desc: "I extend a warm welcome to all at the CGC University, Mohali. Our University was established with the primary goal of providing quality education to all, recognizing its crucial role in social mobility and economic development. In today's globalized world, our focus is on fostering students' confidence, self-motivation, and independent thinking. Join us at CGC University, where we strive to provide a comprehensive and globally relevant education.",
-  },
-  {
-    name: "Mr. Arsh Dhaliwal",
-    role: "Managing Director",
-    image: "/assets/md.png",
-    quote: "Innovation is the heartbeat of our campus.",
-    desc: "VenturesNest is envisioned as a launchpad for aspiring entrepreneurs. It reflects our goal of bridging academic learning with practical impact, empowering students to become visionary leaders."
-  },
-  {
-    name: "Dr. Ati Priye",
-    role: "CEO, Incubator & Startups",
-    image: "/assets/ceo-incubator.jpg",
-    quote: "This is more than an initiative—it’s a movement.",
-    desc: "VenturesNest is designed to be a catalyst for student-led innovation—providing mentorship, infrastructure, and funding guidance. It brings together talent, technology, and teamwork."
-  }
-];
-
-const features = [
-  {
-    title: "Ecosystem",
-    subtitle: "HOW WE WORK",
-    icon: <BoltIcon fontSize="inherit" />,
-    image: "/assets/about-how-we-work.jpg",
-    desc: "From ideation to IPO, we provide the complete roadmap for startups. Our comprehensive lifecycle support ensures that every founder has the tools, mentorship, and resources needed at every stage of their journey.",
-    stats: "End-to-End Support",
-    color: "#A30D33"
-  },
-  {
-    title: "Impact",
-    subtitle: "PROVEN RESULTS",
-    icon: <EmojiEventsIcon fontSize="inherit" />,
-    image: "/assets/our-impact-img-photo.jpg",
-    desc: "Over 70+ ventures incubated with funding opportunities up to ₹12 Cr. We take pride in building businesses that create real-world impact and sustainable value in the global market.",
-    stats: "70+ Startups",
-    color: "#1a237e"
-  },
-  {
-    title: "Infrastructure",
-    subtitle: "WORLD CLASS",
-    icon: <GroupsIcon fontSize="inherit" />,
-    image: "/assets/mission-updated.jpg",
-    desc: "24/7 Co-working spaces, Maker's Labs, and High-Performance Computing. Our state-of-the-art facilities are designed to foster creativity and technical excellence round the clock.",
-    stats: "24/7 Access",
-    color: "#2e7d32"
-  },
-  {
-    title: "Network",
-    subtitle: "GLOBAL REACH",
-    icon: <HandshakeIcon fontSize="inherit" />,
-    image: "/assets/partners-section-hands-image.png",
-    desc: "Partnerships with global accelerators, angel investors, and corporates. We bridge the gap between local innovation and global opportunities, providing founders with an unparalleled network.",
-    stats: "Global Partners",
-    color: "#ff6f00"
-  }
-];
-
-const FeatureSection = ({ item, index }) => {
-  const isImageRight = index % 2 === 0; // Alternating layout
-
-  return (
-    <Box
-      sx={{
-        position: "relative",
-        mb: { xs: 15, md: 25 },
-        "&:last-of-type": { mb: 10 }
-      }}
-    >
-      {/* Morphing Background Blob */}
-      <Box
-        component={motion.div}
-        animate={{
-          scale: [1, 1.1, 1],
-          rotate: [0, 45, 0],
-          borderRadius: ["40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%"]
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        sx={{
-          position: "absolute",
-          top: "10%",
-          [isImageRight ? "right" : "left"]: "-5%",
-          width: "40%",
-          height: "60%",
-          bgcolor: item.color,
-          opacity: 0.05,
-          filter: "blur(80px)",
-          zIndex: 0,
-          display: { xs: "none", md: "block" }
-        }}
-      />
-
-      <Container maxWidth="lg">
-        <Box
-          component={motion.div}
-          initial={{ opacity: 0, y: 150, scale: 0.9 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: false, amount: 0.15 }}
-          transition={{
-            duration: 1,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: isImageRight ? "row" : "row-reverse" },
-            alignItems: "center",
-            gap: { xs: 6, md: 10 },
-            position: "relative",
-            zIndex: 1
-          }}
-        >
-          {/* Text Content */}
-          <Box
-            sx={{
-              flex: 1,
-              textAlign: { xs: "center", md: isImageRight ? "left" : "right" },
-              order: { xs: 2, md: 1 }
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, x: isImageRight ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
-              <Chip
-                label={item.subtitle}
-                sx={{
-                  bgcolor: `${item.color}15`,
-                  color: item.color,
-                  fontWeight: 800,
-                  letterSpacing: 2,
-                  mb: 3,
-                  borderRadius: "8px",
-                  fontSize: "0.75rem"
-                }}
-              />
-              <Typography
-                variant="h2"
-                sx={{
-                  fontWeight: 900,
-                  fontFamily: "var(--font-display)",
-                  color: TEXT_DARK,
-                  mb: 3,
-                  fontSize: { xs: "2.5rem", md: "3.5rem" },
-                  lineHeight: 1.1,
-                  letterSpacing: -1
-                }}
-              >
-                {item.title}
-              </Typography>
-              <Typography
-                variant="h6"
-                sx={{
-                  color: TEXT_MUTED,
-                  lineHeight: 1.8,
-                  fontWeight: 400,
-                  mb: 5,
-                  maxWidth: 600,
-                  ml: { xs: "auto", md: isImageRight ? 0 : "auto" },
-                  mr: { xs: "auto", md: isImageRight ? "auto" : 0 }
-                }}
-              >
-                {item.desc}
-              </Typography>
-
-              <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                alignItems: { xs: "center", md: isImageRight ? "flex-start" : "flex-end" }
-              }}>
-                <Paper
-                  elevation={0}
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 2,
-                    p: 2,
-                    pl: 3,
-                    pr: 4,
-                    borderRadius: "100px",
-                    bgcolor: "white",
-                    border: "1px solid #eee",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.05)"
-                  }}
-                >
-                  <Avatar sx={{ bgcolor: item.color, width: 32, height: 32 }}>
-                    <VerifiedIcon sx={{ fontSize: 18 }} />
-                  </Avatar>
-                  <Typography variant="subtitle2" sx={{ fontWeight: 700, color: TEXT_DARK }}>
-                    {item.stats}
-                  </Typography>
-                </Paper>
-              </Box>
-            </motion.div>
-          </Box>
-
-          {/* Image Side */}
-          <Box
-            sx={{
-              flex: 1.1,
-              position: "relative",
-              width: "100%",
-              order: { xs: 1, md: 2 }
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, x: isImageRight ? 100 : -100 }}
-              whileInView={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              style={{ position: "relative", zIndex: 2 }}
-            >
-              <Box
-                sx={{
-                  position: "relative",
-                  "&::before": {
-                    content: '""',
-                    position: "absolute",
-                    inset: { xs: -10, md: -20 },
-                    border: `2px solid ${item.color}`,
-                    borderRadius: "40px",
-                    opacity: 0.2,
-                    zIndex: -1,
-                    transform: isImageRight ? "rotate(3deg) scale(1.02)" : "rotate(-3deg) scale(1.02)"
-                  }
-                }}
-              >
-                <Box
-                  sx={{
-                    borderRadius: { xs: "24px", md: "40px" },
-                    overflow: "hidden",
-                    boxShadow: `0 40px 80px -20px ${item.color}30`,
-                    aspectRatio: "16/11",
-                    bgcolor: "white",
-                    p: { xs: 1, md: 1.5 }
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={item.image}
-                    alt={item.title}
-                    sx={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: { xs: "18px", md: "30px" },
-                      transition: "transform 0.6s ease",
-                      "&:hover": { transform: "scale(1.05)" }
-                    }}
-                  />
-                </Box>
-
-                {/* Floating Icon Badge */}
-                <Box
-                  component={motion.div}
-                  animate={{ y: [0, -15, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  sx={{
-                    position: "absolute",
-                    top: -30,
-                    [isImageRight ? "right" : "left"]: -30,
-                    width: 80,
-                    height: 80,
-                    borderRadius: "24px",
-                    bgcolor: "white",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "2.5rem",
-                    color: item.color,
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-                    zIndex: 3,
-                    display: { xs: "none", md: "flex" }
-                  }}
-                >
-                  {item.icon}
-                </Box>
-              </Box>
-            </motion.div>
-          </Box>
-        </Box>
-      </Container>
-    </Box>
-  );
-};
-
-
-// --- Sub-Components ---
-
-const LeaderProfile = ({ data, index }) => {
+const LeadershipCard = ({ leader, index }) => {
   const isEven = index % 2 === 0;
-  const bgColors = [BRAND_COLOR, "#102a43", "#486581"]; // Red, Navy Blue, Grayish Blue
+  const bgColors = ["bg-[#003366]", "bg-[#333333]", "bg-black"];
   const bgColor = bgColors[index % 3];
 
   return (
-    <Box
-      sx={{
-        position: "relative",
-        mb: { xs: 8, md: 12 },
-        py: 8,
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          top: 0,
-          [isEven ? "left" : "right"]: "-100vw", // Start from far edge
-          width: "calc(100vw + 70%)", // Span across
-          height: "100%",
-          bgcolor: bgColor,
-          opacity: 0.05, // Subtle background
-          zIndex: 0,
-          borderRadius: isEven ? "0 100px 100px 0" : "100px 0 0 100px"
-        }
-      }}
-    >
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-        <Box
-          component={motion.div}
-          initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: isEven ? "row" : "row-reverse" },
-            alignItems: "center",
-            gap: { xs: 4, md: 8 }
-          }}
-        >
-          {/* Decorative Background Strip (The one requested by user) */}
-          <Box
-            sx={{
-              position: "absolute",
-              top: "10%",
-              bottom: "10%",
-              [isEven ? "left" : "right"]: { xs: "-5%", md: "-10%" },
-              width: "70%",
-              bgcolor: bgColor,
-              opacity: 0.1,
-              zIndex: -1,
-              borderRadius: isEven ? "0 40px 40px 0" : "40px 0 0 40px",
-              display: { xs: "none", md: "block" }
-            }}
-          />
+    <div className="relative mb-20">
+      {/* Title Section with Red Bar - Scaled Down */}
+      <div className={`container mx-auto px-4 mb-6`}>
+        <div className={`flex flex-col ${isEven ? 'items-start' : 'items-end'}`}>
+          <div className={`flex items-start gap-3 ${isEven ? 'flex-row' : 'flex-row-reverse text-right'}`}>
+            <div className="w-1.5 h-12 bg-[#9E0203]"></div>
+            <div>
+              <h3 className="text-3xl md:text-4xl font-black font-jakarta text-[#9E0203] uppercase tracking-tight leading-none">
+                {leader.name}
+              </h3>
+              <p className="text-gray-700 font-bold text-sm mt-1 uppercase tracking-widest pl-0.5">
+                {leader.role}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          {/* Image Side */}
-          <Box sx={{ flex: "0 0 40%", position: "relative", zIndex: 2 }}>
-            <Box
-              sx={{
-                borderRadius: "24px",
-                overflow: "hidden",
-                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.25)",
-                transform: isEven ? "rotate(-2deg)" : "rotate(2deg)",
-                transition: "transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-                "&:hover": { transform: "rotate(0deg) scale(1.05)" },
-                bgcolor: "white",
-                p: 1.5
-              }}
-            >
-              <Box
-                component="img"
-                src={data.image}
-                alt={data.name}
-                sx={{
-                  width: "100%",
-                  height: "450px",
-                  objectFit: "cover",
-                  borderRadius: "18px",
-                  display: "block"
-                }}
-              />
-            </Box>
-            {/* Dot Pattern decoration */}
-            <Box sx={{ position: "absolute", bottom: -20, [isEven ? "right" : "left"]: -20, zIndex: -1 }}>
-              <DotPattern />
-            </Box>
-          </Box>
+      {/* Content Section - Compact Height */}
+      <div className="relative min-h-[320px] flex items-center">
+        {/* The Colored Container - Scaled to 80% */}
+        <div 
+          className={`absolute top-0 bottom-0 ${isEven ? 'left-0' : 'right-0'} w-[80%] ${bgColor} z-0 shadow-xl`}
+        ></div>
 
-          {/* Text Side */}
-          <Box sx={{ flex: 1, position: "relative", zIndex: 2 }}>
-            <FormatQuoteIcon sx={{ fontSize: 80, color: bgColor, opacity: 0.15, position: "absolute", top: -40, left: -20 }} />
-            <Typography variant="h3" sx={{ fontFamily: "var(--font-display)", fontWeight: 800, color: TEXT_DARK, mb: 1, fontSize: { xs: "2rem", md: "2.75rem" } }}>
-              {data.name}
-            </Typography>
-            <Typography variant="h6" sx={{ color: bgColor, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, mb: 4, opacity: 0.9 }}>
-              {data.role}
-            </Typography>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
+            {/* Text Side - Professional Font Sizes */}
+            <div className={`w-full md:w-3/5 py-8 ${isEven ? 'md:pr-10' : 'md:pl-10'} text-white`}>
+              <p className="text-base md:text-lg leading-relaxed italic opacity-95">
+                <span className="text-2xl font-black mr-1">{leader.quote}</span> {leader.desc}
+              </p>
+            </div>
+            
+            {/* Image Side - Perfectly Scaled */}
+            <div className={`w-full md:w-2/5 flex ${isEven ? 'justify-end' : 'justify-start'}`}>
+              <div className="relative w-full h-[350px] md:h-[400px] overflow-visible">
+                <img 
+                  src={leader.image} 
+                  alt={leader.name} 
+                  className={`absolute bottom-[-10px] ${isEven ? 'right-0' : 'left-0'} h-[105%] w-auto object-contain max-w-none transform ${isEven ? 'translate-x-[5%]' : 'translate-x-[-5%]'}`}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-            <Paper elevation={0} sx={{ p: 3, bgcolor: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)", borderRadius: 4, mb: 4, borderLeft: `6px solid ${bgColor}` }}>
-              <Typography variant="h6" sx={{ fontStyle: "italic", color: "#333", fontWeight: 500, lineHeight: 1.6 }}>
-                "{data.quote}"
-              </Typography>
-            </Paper>
+const FeatureSection = ({ feature, index }) => {
+  const isEven = index % 2 === 0;
+  // Use slightly different colors but same logic as leadership
+  const bgColors = ["bg-[#9E0203]", "bg-black", "bg-[#003366]", "bg-[#333333]"];
+  const bgColor = bgColors[index % 4];
+  
+  return (
+    <div className="relative mb-24">
+      {/* Title Section with Red Bar (Black if red bg) */}
+      <div className={`container mx-auto px-4 mb-6`}>
+        <div className={`flex flex-col ${isEven ? 'items-start' : 'items-end'}`}>
+          <div className={`flex items-start gap-3 ${isEven ? 'flex-row' : 'flex-row-reverse text-right'}`}>
+            <div className={`w-1.5 h-12 ${bgColor === 'bg-[#9E0203]' ? 'bg-black' : 'bg-[#9E0203]'}`}></div>
+            <div>
+              <h3 className={`text-3xl md:text-4xl font-black font-jakarta ${bgColor === 'bg-[#9E0203]' ? 'text-black' : 'text-[#9E0203]'} uppercase tracking-tight leading-none`}>
+                {feature.title}
+              </h3>
+              <p className="text-gray-700 font-bold text-sm mt-1 uppercase tracking-widest pl-0.5">
+                {feature.subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <Typography variant="body1" sx={{ color: TEXT_MUTED, lineHeight: 1.9, fontFamily: "var(--font-ui)", fontSize: "1.1rem" }}>
-              {data.desc}
-            </Typography>
-          </Box>
-        </Box>
-      </Container>
-    </Box>
+      {/* Content Section */}
+      <div className="relative min-h-[300px] flex items-center">
+        <div 
+          className={`absolute top-0 bottom-0 ${isEven ? 'left-0' : 'right-0'} w-[85%] ${bgColor} z-0 shadow-xl`}
+        ></div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
+            {/* Text Side */}
+            <div className={`w-full md:w-3/5 py-10 ${isEven ? 'md:pr-12' : 'md:pl-12'} text-white`}>
+               <div className="mb-4">
+                  <div className={`w-10 h-10 flex items-center justify-center font-bold bg-white text-black rounded-full shadow-lg`}>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" /></svg>
+                  </div>
+               </div>
+               <p className="text-base md:text-xl leading-relaxed font-medium">
+                  {feature.desc}
+               </p>
+               <div className="mt-4 pt-4 border-t border-white/20">
+                  <span className="font-black uppercase tracking-widest text-xs opacity-80">{feature.stats}</span>
+               </div>
+            </div>
+            
+            {/* Image Side */}
+            <div className={`w-full md:w-2/5 flex ${isEven ? 'justify-end' : 'justify-start'}`}>
+              <div className="relative w-full h-[280px] md:h-[320px] overflow-visible">
+                <img 
+                  src={feature.image} 
+                  alt={feature.title} 
+                  className={`absolute bottom-[-10px] ${isEven ? 'right-0' : 'left-0'} h-[110%] w-auto object-contain max-w-none transform ${isEven ? 'translate-x-[5%]' : 'translate-x-[5%]'} rounded-lg shadow-2xl`}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default function AboutPage() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const leadershipData = [
+    {
+      name: "S. Rashpal Singh Dhaliwal",
+      role: "Chancellor, CGC University, Mohali",
+      image: "/assets/chairman.png",
+      quote: "Greetings!",
+      desc: "I extend a warm welcome to all at the CGC University, Mohali. Our University was established with the primary goal of providing quality education to all, recognizing its crucial role in social mobility and economic development. In today's globalized world, our focus is on fostering students' confidence, self-motivation, and independent thinking. Join us at CGC University, where we strive to provide a comprehensive and globally relevant education.",
+    },
+    {
+      name: "Mr. Arsh Dhaliwal",
+      role: "Managing Director, CGC University, Mohali",
+      image: "/assets/md.png",
+      quote: "Trust is the foundation,",
+      desc: "of educational excellence. As Managing Director, I am committed to making CGC University synonymous with agility, quality, and innovation. We have evolved significantly in delivering quality education, and our goal remains steadfast: to foster independent thinking and creative problem-solving in our students. Join us on this journey.",
+    },
+    {
+      name: "Dr. Ati Priye",
+      role: "CEO, Incubator & Startups",
+      image: "/assets/ceo-incubator.jpg",
+      quote: "Innovation creates impact.",
+      desc: "it's about making ideas a reality. At Venturenest, we are committed to building a movement that empowers founders. Our mission is to provide more than just infrastructure; we provide a platform for growth, mentorship, and excellence that bridges the gap between dreams and market-leading enterprises.",
+    }
+  ];
+
+  const features = [
+    { title: "Ecosystem", subtitle: "HOW WE WORK", image: "/assets/about-how-we-work.jpg", desc: "From ideation to IPO, we provide the complete roadmap for startups. Our comprehensive lifecycle support ensures every founder has the tools and mentorship needed.", stats: "End-to-End Support" },
+    { title: "Impact", subtitle: "PROVEN RESULTS", image: "/assets/our-impact-img-photo.jpg", desc: "Over 70+ ventures incubated with funding opportunities up to ₹12 Cr. We take pride in building businesses that create real-world impact.", stats: "70+ Startups" },
+    { title: "Infrastructure", subtitle: "WORLD CLASS", image: "/assets/mission-updated.jpg", desc: "24/7 Co-working spaces and Maker's Labs designed to foster creativity round the clock with high-performance computing.", stats: "24/7 Access" },
+    { title: "Network", subtitle: "GLOBAL REACH", image: "/assets/partners-section-hands-image.png", desc: "Partnerships with global accelerators bridge the gap between local innovation and global markets, providing unparalleled scale.", stats: "Global Partners" }
+  ];
 
   return (
-    <Box sx={{ bgcolor: "#FDFDFD", overflowX: "hidden", minHeight: "100vh", position: "relative" }}>
-      <GlobalVectorBackground />
+    <div className="min-h-screen bg-white font-jakarta">
+      {/* Title Section - Scaled to Professional Size */}
+      <section className="relative py-20 overflow-hidden border-b-4 border-black">
+        <div className="absolute inset-0 z-0">
+          <img src="https://api.builder.io/api/v1/image/assets/TEMP/6dc17279a912816601334e7ee397ef8cff70d812?width=1920" alt="University" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-lg bg-white/95 p-10 border-l-[12px] border-[#9E0203] shadow-xl">
+            <h1 className="text-black text-5xl md:text-6xl font-black uppercase tracking-tighter mb-2 leading-none">ABOUT <span className="text-[#9E0203]">US</span></h1>
+            <p className="text-[#9E0203] font-black uppercase tracking-[0.2em] text-xs mb-5">Venturenest • CGC University Mohali</p>
+            <div className="bg-black h-1.5 w-24 mb-6"></div>
+            <p className="text-black text-lg font-bold uppercase leading-tight">Empowering visionary founders through a world-class incubation ecosystem.</p>
+          </div>
+        </div>
+      </section>
 
-      {/* --- HERO SECTION --- */}
-      <Box
-        sx={{
-          position: "relative",
-          height: { xs: "60vh", md: "75vh" },
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundImage: `linear-gradient(135deg, rgba(163,13,51,0.92), rgba(26,35,126,0.92)), url('/assets/hero-about.jpg')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          textAlign: "center",
-          color: "white",
-          px: 2,
-        }}
-      >
-        {/* Abstract geometric lines overlay */}
-        <Box sx={{ position: "absolute", inset: 0, opacity: 0.1, backgroundImage: "radial-gradient(circle at 50% 50%, white 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
-
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            <Box sx={{
-              display: "inline-block",
-              p: { xs: 3, md: 5 },
-              borderRadius: 8,
-              bgcolor: "rgba(255,255,255,0.05)",
-              backdropFilter: "blur(12px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 25px 50px rgba(0,0,0,0.1)"
-            }}>
-              <Typography
-                variant={isMobile ? "h2" : "h1"}
-                sx={{
-                  fontWeight: 900,
-                  fontFamily: "var(--font-display)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  mb: 2,
-                  fontSize: { xs: "3rem", md: "5rem" }
-                }}
-              >
-                VentureNest
-              </Typography>
-
-              <Box
-                component={motion.div}
-                initial={{ width: 0 }}
-                animate={{ width: "120px" }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                sx={{ height: 6, bgcolor: "white", mx: "auto", mb: 4, borderRadius: 3 }}
-              />
-
-              <Typography
-                variant={isMobile ? "h6" : "h4"}
-                sx={{
-                  fontWeight: 300,
-                  maxWidth: "850px",
-                  mx: "auto",
-                  lineHeight: 1.5,
-                  opacity: 0.95,
-                  letterSpacing: 1
-                }}
-              >
-                The Premier Entrepreneurship Incubation Centre <br /> at CGC University, Mohali.
-              </Typography>
-            </Box>
-          </motion.div>
-        </Container>
-
-        {/* Wave Divider at Bottom */}
-        <Box sx={{ position: "absolute", bottom: -1, left: 0, right: 0, lineHeight: 0, color: "#FDFDFD" }}>
-          <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-            <path fill="currentColor" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-          </svg>
-        </Box>
-      </Box>
-
-      {/* --- LEADERSHIP SECTION --- */}
-      <Box sx={{ pt: 15, pb: 5 }}>
-        <Container maxWidth="lg">
-          <Box sx={{ textAlign: "center", mb: 12 }}>
-            <Chip
-              label="OUR VISIONARIES"
-              sx={{
-                bgcolor: BRAND_LIGHT,
-                color: BRAND_COLOR,
-                fontWeight: 800,
-                px: 2,
-                py: 2.5,
-                borderRadius: "8px",
-                letterSpacing: 2,
-                mb: 3
-              }}
-            />
-            <Typography variant="h2" sx={{ fontWeight: 900, fontFamily: "var(--font-display)", color: TEXT_DARK, letterSpacing: -1 }}>
-              Leadership
-            </Typography>
-          </Box>
-        </Container>
-
-        {leadershipData.map((leader, index) => (
-          <LeaderProfile key={index} data={leader} index={index} />
-        ))}
-      </Box>
-
-      {/* --- WHY CHOOSE US (Dynamic Alternating Section) --- */}
-      <Box sx={{ bgcolor: "transparent", pt: 20, pb: 10, position: "relative", overflow: "hidden" }}>
-        <Box sx={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          {/* Subtle Grid */}
-          <Box sx={{
-            position: "absolute",
-            inset: 0,
-            // backgroundImage: `radial-gradient(${BRAND_COLOR}10 1px, transparent 1px), radial-gradient(#1a237e10 1px, transparent 1px)`,
-            backgroundSize: "40px 40px, 60px 60px",
-            backgroundPosition: "0 0, 20px 20px",
-            opacity: 0.5
-          }} />
-
-          <LineArt />
-
-          {/* Gradient Accents */}
-          <Box sx={{ position: "absolute", top: "-10%", left: "-10%", width: "40%", height: "40%", background: `radial-gradient(circle, ${BRAND_COLOR}08 0%, transparent 70%)` }} />
-          <Box sx={{ position: "absolute", bottom: "-10%", right: "-10%", width: "50%", height: "50%", background: `radial-gradient(circle, #1a237e08 0%, transparent 70%)` }} />
-        </Box>
-
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, mb: 15 }}>
-          <Box sx={{ textAlign: "center", maxWidth: 800, mx: "auto" }}>
-            <Typography variant="overline" sx={{ color: BRAND_COLOR, fontWeight: 800, letterSpacing: 4, display: "block", mb: 2 }}>
-              THE VENTURENEST ADVANTAGE
-            </Typography>
-            <Typography variant="h2" sx={{ fontWeight: 900, fontFamily: "var(--font-display)", color: TEXT_DARK, letterSpacing: -2, mb: 3, fontSize: { xs: "3rem", md: "4.5rem" } }}>
-              Why Choose Us?
-            </Typography>
-            <Typography variant="h6" sx={{ color: TEXT_MUTED, fontWeight: 400, lineHeight: 1.6 }}>
-              We don't just provide space; we provide the ecosystem, mentorship, and funding to scale your dreams from a simple idea to a global powerhouse.
-            </Typography>
-          </Box>
-        </Container>
-
-        <Box sx={{ position: "relative" }}>
-          {features.map((item, i) => (
-            <FeatureSection key={i} item={item} index={i} />
+      {/* Leadership Section - Redesigned to be Perfectly Sized */}
+      <section className="py-20 bg-white space-y-24">
+        <div className="container mx-auto px-4 text-center">
+          <span className="text-[#9E0203] font-black uppercase tracking-[0.3em] text-[10px] block mb-2">Our Visionaries</span>
+          <h2 className="text-4xl md:text-5xl font-black font-jakarta text-black uppercase tracking-tighter border-b-4 border-black inline-block pb-2">The Leadership</h2>
+        </div>
+        
+        <div className="space-y-24">
+          {leadershipData.map((leader, index) => (
+            <LeadershipCard key={index} leader={leader} index={index} />
           ))}
-        </Box>
-      </Box>
+        </div>
+      </section>
 
+      {/* Features Section - Matches Leadership Layout */}
+      <section className="bg-white py-20">
+        <div className="container mx-auto px-4 text-center mb-20">
+             <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px] block mb-2">The Venturenest Advantage</span>
+             <h2 className="text-4xl md:text-6xl font-black font-jakarta text-black tracking-tighter uppercase leading-none border-b-4 border-black inline-block pb-2">Why Choose Us?</h2>
+        </div>
+        
+        <div className="space-y-32">
+          {features.map((feature, index) => (
+            <FeatureSection key={index} feature={feature} index={index} />
+          ))}
+        </div>
+      </section>
 
-
-      {/* --- ISO & CTA SECTION --- */}
-      <Box sx={{ py: 10, bgcolor: "#F8F9FA" }}>
-        <Container maxWidth="lg">
-          <Paper
-            elevation={0}
-            sx={{
-              borderRadius: 6,
-              overflow: "hidden",
-              bgcolor: "white",
-              border: "1px solid #eee",
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" }
-            }}
-          >
-            {/* ISO Image Side */}
-            <Box
-              sx={{
-                width: { xs: "100%", md: "30%" },
-                bgcolor: "#e8f5e9",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                p: 4
-              }}
-            >
-              <Box component="img" src="/assets/iso-certified.png" alt="ISO" sx={{ width: "80%", maxWidth: 150 }} />
-            </Box>
-
-            {/* Content Side */}
-            <Box sx={{ p: { xs: 4, md: 6 }, flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
-                <VerifiedIcon sx={{ color: "#2e7d32", fontSize: 32 }} />
-                <Typography variant="h5" fontWeight="700">ISO 9001:2015 Certified</Typography>
-              </Box>
-              <Typography variant="body1" sx={{ color: TEXT_MUTED, mb: 4 }}>
-                We are proud to be ISO certified, reflecting our commitment to maintaining the highest standards in quality management.
-              </Typography>
-
-              {/* Final CTA Button */}
-              <Box>
-                <Button
-                  href="/IncubateWithUs"
-                  variant="contained"
-                  size="large"
-                  endIcon={<ArrowForwardIcon />}
-                  sx={{
-                    bgcolor: BRAND_COLOR,
-                    py: 1.5,
-                    px: 5,
-                    borderRadius: 3,
-                    fontSize: "1rem",
-                    fontWeight: 700,
-                    boxShadow: "0 10px 20px rgba(163,13,51,0.3)",
-                    "&:hover": { bgcolor: "#800a26" }
-                  }}
-                >
-                  Apply Now
-                </Button>
-              </Box>
-            </Box>
-          </Paper>
-        </Container>
-      </Box>
-    </Box>
+      {/* Certification Section - Streamlined */}
+      <section className="bg-black py-20 border-t-8 border-[#9E0203]">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="w-full md:w-3/12"><div className="bg-white p-8"><img src="/assets/iso-certified.png" alt="ISO" className="w-full h-24 object-contain" /></div></div>
+            <div className="w-full md:w-9/12 space-y-6">
+              <div className="flex items-center space-x-5"><div className="w-12 h-12 bg-[#9E0203] text-white flex items-center justify-center font-bold rounded-sm"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div><h3 className="text-3xl md:text-4xl font-black font-jakarta text-white uppercase tracking-tighter">ISO 9001:2015</h3></div>
+              <p className="text-gray-400 text-lg font-bold uppercase tracking-tight leading-relaxed max-w-2xl">WE ARE PROUD TO BE ISO CERTIFIED, MAINTAINING THE HIGHEST STANDARDS COMPLIANCE.</p>
+              <div className="pt-4"><Link to="/IncubateWithUs" className="inline-block bg-[#9E0203] text-white px-10 py-4 font-black text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all">Apply Now</Link></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
