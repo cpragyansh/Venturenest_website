@@ -6,12 +6,34 @@ import Mslider from '../MainSlider/Mslider';
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const startupLogos = [
+    "1749710321866 - Aditya Raj Saxena.jpg",
+    "5(3 - Karan Agrawal.png",
+    "file_00000000fa6861f8b46d40c35e6646b9_conversation_id=67fe9c73-e260-8006-bab2-ec35ca4f9089 - Juara Organics.png",
+    "IMG-20231230-WA0023(2) - Anand Kumar.jpg",
+    "IMG-20250208-WA0007 - Shekhar kashyap.jpg",
+    "IMG-20250611-WA0000 - arpit kumar.jpg",
+    "IMG-20250612-WA0000 - JIGYASA GARG.jpg",
+    "IMG-20250612-WA0004 - Navneet Yaduvanshi.jpg",
+    "IMG-20250612-WA0004 - SHAGUN SHARMA.jpg",
+    "IMG-20250612-WA0005 - Mayank Dahiya.jpg",
+    "IMG_20250613_112419_040 - Vivek Singh.jpg",
+    "Logo - Harris Babbar.png",
+    "SAVE_20250611_152058 - Pulkesh Gautam.jpg",
+    "Screenshot_2025-03-06-23-58-39-73_6012fa4d4ddec268fc5c7112cbb265e7 - Aryan Mankotia.jpg",
+    "Screenshot_2025-06-12-18-15-12-052_com.whatsapp-edit - Vedant Daware.jpg",
+    "stacked wordmark black - ansh haritash.png",
+    "Techealth_logo - TecHealth.PNG",
+    "tHM LOGO - Abhishek Sharma.png",
+    "VeeGamma Logo Design in Gradient__endoftext__ - Vanshika.png"
+  ];
+
   return (
     <div className="min-h-screen bg-white font-jakarta">
       {/* Top Banner */}
-      <div className="bg-brand-dark text-white text-sm py-2 text-center font-jakarta font-medium">
+      {/* <div className="bg-brand-dark text-white text-sm py-2 text-center font-jakarta font-medium">
         Admissions open for B.Tech., BBA, BCA, M.tech. courses at CGC University, Mohali (2025-26)
-      </div>
+      </div> */}
 
       {/* Header */}
       <header className="relative">
@@ -20,81 +42,15 @@ export default function Index() {
           {/* Main Slider */}
           <Mslider />
 
-          {/* Semi-transparent overlay */}
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-[0px] pointer-events-none z-[5]"></div>
-          
-          {/* Navigation Overlay */}
-          <div className="absolute inset-x-0 top-0 z-20">
-            <nav className="container mx-auto px-4">
-              <div className="flex items-center justify-between py-6">
-                {/* Logo placeholder */}
-                <div className="text-white font-bold text-2xl">
-                  <img src="https://api.builder.io/api/v1/image/assets/TEMP/f61f92bba118c6f09b594955db094d536a13621c?width=434" alt="CGC Logo" className="h-16 w-auto" />
-                </div>
-
-                {/* Desktop Menu */}
-                <div className="hidden md:flex items-center space-x-8 text-white font-bold text-sm uppercase">
-                  <Link to="/" className="hover:opacity-80">Home</Link>
-                  <Link to="#about" className="hover:opacity-80">About</Link>
-                  <Link to="#council" className="hover:opacity-80">Council Members</Link>
-                  <Link to="#partners" className="hover:opacity-80">Partners</Link>
-                  <Link to="#programs" className="hover:opacity-80">Programs</Link>
-                  <Link to="#portfolio" className="hover:opacity-80">Portfolio</Link>
-                  <Link to="#events" className="hover:opacity-80">Events</Link>
-                </div>
-
-                {/* Right side actions */}
-                <div className="flex items-center space-x-4">
-                  {/* Social Icons */}
-                  <div className="hidden lg:flex items-center space-x-4">
-                    <a href="#" className="text-white hover:opacity-80">
-                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 16.84 5.44 20.87 10 21.8V15H8V12H10V9.5C10 7.57 11.57 6 13.5 6H16V9H14C13.45 9 13 9.45 13 10V12H16V15H13V21.95C18.05 21.45 22 17.19 22 12Z"/></svg>
-                    </a>
-                    <a href="#" className="text-white hover:opacity-80">
-                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6C21.69 6.35 20.86 6.58 20 6.69C20.88 6.16 21.56 5.32 21.88 4.31C21.05 4.81 20.13 5.16 19.16 5.36C18.37 4.5 17.26 4 16 4C13.65 4 11.73 5.92 11.73 8.29C11.73 8.63 11.77 8.96 11.84 9.27C8.28004 9.09 5.11004 7.38 3.00004 4.79C2.63004 5.42 2.42004 6.16 2.42004 6.94C2.42004 8.43 3.17004 9.75 4.33004 10.5C3.62004 10.5 2.96004 10.3 2.38004 10V10.03C2.38004 12.11 3.86004 13.85 5.82004 14.24C5.19088 14.4129 4.53008 14.4369 3.89004 14.31C4.16165 15.1625 4.69358 15.9084 5.41106 16.4429C6.12854 16.9775 6.99549 17.2737 7.89004 17.29C6.37371 18.4905 4.49405 19.1394 2.56004 19.13C2.22004 19.13 1.88004 19.11 1.54004 19.07C3.44004 20.29 5.70004 21 8.12004 21C16 21 20.33 14.46 20.33 8.79C20.33 8.6 20.33 8.42 20.32 8.23C21.16 7.63 21.88 6.87 22.46 6Z"/></svg>
-                    </a>
-                  </div>
-
-                  {/* Search */}
-                  <button className="text-white hover:opacity-80">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </button>
-
-                  {/* Incubate Now Button */}
-                  <button className="hidden md:block bg-brand-red text-white px-6 py-3 rounded-full font-bold text-lg hover:bg-brand-red-light transition-colors">
-                    Incubate Now
-                  </button>
-                </div>
-              </div>
-            </nav>
-          </div>
-
           {/* Hero Content Overlay */}
-          <div className="absolute inset-0 z-10 flex items-center">
+          {/* <div className="absolute inset-0 z-10 flex items-center">
             <div className="container mx-auto px-4 mt-20">
               <div className="max-w-2xl">
                 <p className="text-white text-3xl font-jakarta mb-4 drop-shadow-lg">The Ultimate Startup Hub</p>
                 <h1 className="text-white text-7xl font-bold font-jakarta mb-8 drop-shadow-2xl">Venturenest</h1>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Breadcrumb */}
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center space-x-2 text-sm font-lato">
-            <span className="text-blue-500 font-bold">Home</span>
-            <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 14 14">
-              <path d="M10.6387 7.49932C10.9108 7.22727 10.9108 6.77274 10.6387 6.49999L4.36151 0.206656C4.08597 -0.068885 3.63911 -0.068885 3.36427 0.206656C3.08873 0.482198 3.08873 0.929749 3.36427 1.20529L9.14285 6.99997L3.36357 12.794C3.08803 13.0702 3.08803 13.517 3.36357 13.7933C3.63911 14.0688 4.08597 14.0688 4.36081 13.7933L10.6387 7.49932Z"/>
-            </svg>
-            <span className="text-gray-700 font-bold">Placement</span>
-            <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 14 14">
-              <path d="M10.6387 7.49932C10.9108 7.22727 10.9108 6.77274 10.6387 6.49999L4.36151 0.206656C4.08597 -0.068885 3.63911 -0.068885 3.36427 0.206656C3.08873 0.482198 3.08873 0.929749 3.36427 1.20529L9.14285 6.99997L3.36357 12.794C3.08803 13.0702 3.08803 13.517 3.36357 13.7933C3.63911 14.0688 4.08597 14.0688 4.36081 13.7933L10.6387 7.49932Z"/>
-            </svg>
-            <span className="text-gray-700">Top Engineering Placement</span>
-          </div>
+          </div> */}
         </div>
       </header>
 
@@ -185,10 +141,40 @@ export default function Index() {
       </section>
 
       {/* Company Logos */}
-      <section className="border-y border-gray-200 py-8">
-        <div className="container mx-auto px-4">
-          <img src="https://api.builder.io/api/v1/image/assets/TEMP/d9a6c0bcef968e3c6c75cf259055384209d07278?width=3244" alt="Company Logos" className="mx-auto max-w-full h-auto" />
+      <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
+        <div className="container mx-auto px-4 mb-8 text-center">
+           <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span>
+           <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Incubated Startups</h3>
         </div>
+        
+        <div className="relative w-full overflow-hidden group">
+          <div className="flex gap-16 items-center animate-scroll whitespace-nowrap min-w-full">
+              {/* Duplicate list 3 times to ensure smooth scrolling on wide screens */}
+              {[...startupLogos, ...startupLogos, ...startupLogos].map((logo, idx) => (
+                  <div key={idx} className="flex-shrink-0 w-32 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 hover:scale-110">
+                    <img 
+                      src={`/assets/Start-up-logos/${logo}`} 
+                      alt="Startup Logo" 
+                      className="max-w-full max-h-full object-contain" 
+                    />
+                  </div>
+              ))}
+          </div>
+        </div>
+
+        <style>{`
+          @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-33.33%); }
+          }
+          .animate-scroll {
+            animation: scroll 40s linear infinite;
+            width: max-content;
+          }
+          .animate-scroll:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
       </section>
 
       {/* Student Cards Section */}
@@ -196,10 +182,11 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: 'Suraj Yadav', company: 'Paloalto', package: '1 Crore/PA', image: 'https://api.builder.io/api/v1/image/assets/TEMP/5b107c0fcde9dac9c7f9b96ae02a3a96d2ea6fd0?width=776', logo: 'https://api.builder.io/api/v1/image/assets/TEMP/41a56941529194c40e3e1a9e4e3b441705990de5?width=73' },
-              { name: 'Omm Kumar', company: 'ServiceNow', package: '44 LPA', image: 'https://api.builder.io/api/v1/image/assets/TEMP/2d6ec59491d1839c975f8d9e18985317b762bccf?width=544', logo: 'https://api.builder.io/api/v1/image/assets/TEMP/8e6fbe1c985255a11f081fe9111237f869e692c8?width=312' },
-              { name: 'Anmol Bhateja', company: 'Amazon', package: '45.5 LPA', image: 'https://api.builder.io/api/v1/image/assets/TEMP/1c0b5560729305d9056fc7875f05dbf4b28413bb?width=632', logo: 'https://api.builder.io/api/v1/image/assets/TEMP/4dcd0757c591056ea16dec4d3c1a43624c51531d?width=220' },
-              { name: 'Simran Saini', company: 'Autodesk', package: '33 LPA', image: 'https://api.builder.io/api/v1/image/assets/TEMP/746c91ef914a76d9d4e4704d181686b7525c7820?width=520', logo: 'https://api.builder.io/api/v1/image/assets/TEMP/2fc420fcd9dbcf49a3123d3c08006a4262c1b972?width=312' },
+              { name: 'Suraj Yadav', company: 'Paloalto', package: '1 Crore/PA', image: '/assets/succes-1.jpeg', logo: '/assets/Start-up-logos/Techealth_logo - TecHealth.PNG' },
+              { name: 'Omm Kumar', company: 'TechHealth', package: '44 LPA', image: '/assets/success-2.jpeg', logo: '/assets/Start-up-logos/Techealth_logo - TecHealth.PNG' },
+              { name: 'Anmol Bhateja', company: 'V2R', package: '45.5 LPA', image: '/assets/success-3.jpeg', logo: '/assets/GalleryImages/V2R.jpg' },
+              { name: 'Anmol Bhateja', company: 'Amazon', package: '45.5 LPA', image: '/assets/success-3.jpeg', logo: '/assets/GalleryImages/V2R.jpg' },
+              // { name: 'Simran Saini', company: 'Autodesk', package: '33 LPA', image: '/assets/success-4.jpeg', logo: '/assets/autodesk.png' },
             ].map((student, idx) => (
               <div key={idx} className="relative bg-gray-800 h-[530px] overflow-hidden group">
                 <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[386px] w-auto object-cover" />

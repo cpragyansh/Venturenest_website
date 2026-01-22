@@ -6,37 +6,10 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import {
-  Box,
-  Container,
-  Typography,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Chip,
-  useTheme,
-  useMediaQuery,
-  Avatar,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Pagination as MuiPagination
-} from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-import BusinessIcon from "@mui/icons-material/Business";
-import PeopleIcon from "@mui/icons-material/People";
 
-// --- Assets & Config ---
-const BRAND_COLOR = "#A30D33";
-const BRAND_LIGHT = "#fff0f3";
-const TEXT_DARK = "#0a0a0a";
-const TEXT_MUTED = "#555";
+// --- Design System Tokens ---
+const BRAND_RED = "#9E0203";
+const BRAND_NAVY = "#003366";
 
 const logos = [
   "/assets/Start-up-logos/5(3 - Karan Agrawal.png",
@@ -59,267 +32,221 @@ const logos = [
   "/assets/Start-up-logos/VeeGamma Logo Design in Gradient__endoftext__ - Vanshika.png",
 ];
 
-const GlobalVectorBackground = () => (
-  <Box sx={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden" }}>
-    <svg width="100%" height="100%" viewBox="0 0 1440 2000" fill="none" style={{ position: 'absolute', top: 0, left: 0, opacity: 0.08 }}>
-      <motion.path
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.3 }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        d="M-100 300 Q 400 600 900 300 T 1600 300"
-        stroke={BRAND_COLOR} strokeWidth="1"
-      />
-      <motion.path
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.2 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 2 }}
-        d="M1600 800 Q 1100 500 600 800 T -100 800"
-        stroke="#1a237e" strokeWidth="1"
-      />
-    </svg>
-    <Box sx={{
-      position: "absolute",
-      inset: 0,
-      backgroundImage: `radial-gradient(${BRAND_COLOR}05 1px, transparent 1px)`,
-      backgroundSize: "60px 60px",
-      opacity: 0.4
-    }} />
-  </Box>
+const StatBlock = ({ number, label, desc, color }) => (
+  <div className={`p-10 ${color === 'red' ? 'bg-[#9E0203]' : 'bg-[#003366]'} text-white relative overflow-hidden group`}>
+    <div className="absolute -bottom-4 -right-4 text-9xl font-black opacity-10 transform group-hover:scale-110 transition-transform">{number}</div>
+    <div className="relative z-10 space-y-4">
+      <div className="text-5xl md:text-7xl font-black font-jakarta tracking-tighter uppercase">{number}</div>
+      <div className="space-y-1">
+        <h4 className="text-xl font-black uppercase tracking-widest">{label}</h4>
+        <p className="text-white/60 text-sm font-medium uppercase tracking-tight">{desc}</p>
+      </div>
+    </div>
+  </div>
 );
 
-export default function Startups() {
+export default function IncubatedStartupsPage() {
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [entriesPerPage, setEntriesPerPage] = useState(10);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://venturenest.onrender.com/getstartup');
         setData(response.data);
+        setFilteredData(response.data);
       } catch (error) {
         console.error('Error fetching startups:', error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
 
-  const totalPages = Math.ceil(data.length / entriesPerPage);
-  const startIndex = (currentPage - 1) * entriesPerPage;
-  const currentData = data.slice(startIndex, startIndex + entriesPerPage);
+  useEffect(() => {
+    if (!searchQuery) {
+      setFilteredData(data);
+    } else {
+      const query = searchQuery.toLowerCase();
+      setFilteredData(data.filter(item => 
+        item.StartupName.toLowerCase().includes(query) || 
+        item.FounderName.toLowerCase().includes(query) ||
+        (item.ProductName && item.ProductName.toLowerCase().includes(query))
+      ));
+    }
+  }, [searchQuery, data]);
 
   return (
-    <Box sx={{ bgcolor: "#FDFDFD", overflowX: "hidden", minHeight: "100vh", position: "relative" }}>
-      <GlobalVectorBackground />
+    <div className="min-h-screen bg-white font-jakarta">
+      {/* 1. MAJESTIC SPLIT HERO */}
+      <section className="relative bg-black py-24 md:py-32 overflow-hidden border-b-[12px] border-[#9E0203]">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#9E0203]/5 skew-x-[-20deg] transform translate-x-1/3 pointer-events-none"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+            <div className="w-full md:w-5/12 space-y-8 text-left">
+              <div className="flex items-center space-x-4">
+                <div className="h-1 bg-[#9E0203] w-12"></div>
+                <span className="text-white/60 font-black uppercase tracking-[0.5em] text-[10px]">Ecosystem Portfolio</span>
+              </div>
+              <h1 className="text-white text-6xl md:text-8xl font-black font-jakarta uppercase tracking-tighter leading-[0.85]">
+                INCUBATED <br />
+                <span className="text-[#9E0203]">VENTURES</span>
+              </h1>
+              <div className="space-y-4">
+                <div className="h-1 w-32 bg-white"></div>
+                <p className="text-gray-400 text-xl font-bold uppercase tracking-tight leading-snug max-w-md">
+                   Meet the architects of tomorrow, building high-impact solutions in our innovation labs.
+                </p>
+              </div>
+            </div>
 
-      {/* --- HERO SECTION --- */}
-      <Box
-        sx={{
-          position: "relative",
-          height: { xs: "50vh", md: "65vh" },
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundImage: `linear-gradient(135deg, rgba(163,13,51,0.92), rgba(26,35,126,0.92)), url('/assets/partners-section-bg.jpg')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          textAlign: "center",
-          color: "white",
-          px: 2,
-        }}
-      >
-        <Box sx={{ position: "absolute", inset: 0, opacity: 0.1, backgroundImage: "radial-gradient(circle at 50% 50%, white 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            <Box sx={{
-              display: "inline-block",
-              p: { xs: 3, md: 5 },
-              borderRadius: 8,
-              bgcolor: "rgba(255,255,255,0.05)",
-              backdropFilter: "blur(12px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 25px 50px rgba(0,0,0,0.1)"
-            }}>
-              <Typography
-                variant={isMobile ? "h3" : "h1"}
-                sx={{
-                  fontWeight: 900,
-                  fontFamily: "var(--font-display)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  mb: 2,
-                  fontSize: { xs: "2.5rem", md: "4.5rem" }
-                }}
-              >
-                Incubated Ventures
-              </Typography>
-              <Box
-                component={motion.div}
-                initial={{ width: 0 }}
-                animate={{ width: "120px" }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                sx={{ height: 5, bgcolor: "white", mx: "auto", mb: 3, borderRadius: 3 }}
-              />
-              <Typography variant="h6" sx={{ fontWeight: 300, opacity: 0.9 }}>
-                Meet the innovators building the future at VentureNest.
-              </Typography>
-            </Box>
-          </motion.div>
-        </Container>
-        <Box sx={{ position: "absolute", bottom: -1, left: 0, right: 0, lineHeight: 0, color: "#FDFDFD" }}>
-          <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-            <path fill="currentColor" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-          </svg>
-        </Box>
-      </Box>
+            <div className="w-full md:w-7/12 relative">
+              <div className="absolute -inset-4 border-2 border-white/5 rounded-3xl translate-x-4 translate-y-4"></div>
+              <div className="relative overflow-hidden rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]">
+                <img 
+                  src="/assets/incubated_hero.png" 
+                  alt="Boardroom" 
+                  className="w-full h-full object-cover aspect-[16/9]"
+                />
+              </div>
+              <div className="absolute -bottom-8 -left-8 bg-[#9E0203] p-8 shadow-2xl border-4 border-black">
+                 <div className="text-white font-black text-4xl uppercase tracking-tighter leading-none">BUILDING<br/>LEGACIES</div>
+                 <div className="text-white/70 text-[10px] uppercase font-bold tracking-widest mt-2">Scale-Ready Portfolio</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* --- LOGO SLIDER SECTION --- */}
-      <Box sx={{ py: 10, px: 2 }}>
-        <Container maxWidth="lg">
-          <Box sx={{
-            bgcolor: "white",
-            borderRadius: 6,
-            p: 4,
-            boxShadow: "0 20px 40px rgba(0,0,0,0.03)",
-            border: "1px solid #f0f0f0"
-          }}>
-            <Swiper
+      {/* 2. PORTFOLIO INSIGHTS - Signature Blocks */}
+      <section className="grid grid-cols-1 md:grid-cols-3">
+         <StatBlock number="60+" label="Ventures" desc="Active Incubated Startups" color="red" />
+         <StatBlock number="500+" label="Jobs" desc="Employment Opportunities Created" color="navy" />
+         <StatBlock number="20Cr+" label="Funding" desc="Total Ecosystem Capital Raised" color="red" />
+      </section>
+
+      {/* 3. LOGO CLOUD - Premium Slider */}
+      <section className="py-24 bg-gray-50 border-y border-gray-200">
+        <div className="container mx-auto px-4">
+           <div className="text-center mb-16">
+              <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px]">Brand Identity</span>
+              <h2 className="text-3xl font-black uppercase tracking-tighter mt-2">The Foundry Network</h2>
+           </div>
+           
+           <Swiper
               modules={[Navigation, Pagination, Autoplay]}
-              spaceBetween={30}
+              spaceBetween={50}
               slidesPerView={2}
-              autoplay={{ delay: 2500, disableOnInteraction: false }}
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
               loop={true}
               breakpoints={{
                 640: { slidesPerView: 3 },
                 900: { slidesPerView: 4 },
                 1200: { slidesPerView: 6 },
               }}
+              className="px-10"
             >
               {logos.map((logo, index) => (
                 <SwiperSlide key={index}>
-                  <Box
-                    sx={{
-                      height: 100,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      p: 2,
-                      filter: "grayscale(100%)",
-                      opacity: 0.6,
-                      transition: "all 0.4s ease",
-                      "&:hover": { filter: "grayscale(0%)", opacity: 1, transform: "scale(1.1)" }
-                    }}
-                  >
-                    <Box component="img" src={logo} sx={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
-                  </Box>
+                  <div className="h-24 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer group">
+                    <img src={logo} alt="Startup Logo" className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform" />
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
-          </Box>
-        </Container>
-      </Box>
+        </div>
+      </section>
 
-      {/* --- TABLE SECTION --- */}
-      <Box sx={{ pb: 15 }}>
-        <Container maxWidth="lg">
-          <Box sx={{ mb: 4, display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: { xs: "column", sm: "row" }, gap: 2 }}>
-            <Typography variant="h4" sx={{ fontWeight: 800, color: TEXT_DARK }}>Portfolio</Typography>
-            <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-              <Typography variant="body2" sx={{ color: TEXT_MUTED }}>Show</Typography>
-              <Select
-                value={entriesPerPage}
-                onChange={(e) => setEntriesPerPage(e.target.value)}
-                size="small"
-                sx={{ borderRadius: 2, minWidth: 80 }}
-              >
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-                <MenuItem value={20}>20</MenuItem>
-              </Select>
-            </Box>
-          </Box>
+      {/* 4. VENTURE INVENTORY - The Modern Grid/List */}
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between mb-20 gap-8">
+            <div className="space-y-2 text-center md:text-left">
+               <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px] block">Inventory</span>
+               <h2 className="text-4xl md:text-6xl font-black font-jakarta text-black uppercase tracking-tighter border-b-4 border-black inline-block pb-2">Venture Portfolio</h2>
+            </div>
+            
+            <div className="relative w-full md:w-96">
+                <input 
+                  type="text" 
+                  placeholder="SEARCH PORTFOLIO..." 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white border-2 border-black p-4 text-[10px] font-black tracking-widest uppercase focus:outline-none focus:bg-black focus:text-white transition-all placeholder:text-gray-300 shadow-[4px_4px_0px_rgba(0,0,0,0.1)]"
+                />
+            </div>
+          </div>
 
-          <TableContainer
-            component={Paper}
-            elevation={0}
-            sx={{
-              borderRadius: 4,
-              border: "1px solid #eee",
-              overflow: "hidden",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-              background: "rgba(255,255,255,0.7)",
-              backdropFilter: "blur(10px)"
-            }}
-          >
-            <Table>
-              <TableHead sx={{ bgcolor: BRAND_COLOR }}>
-                <TableRow>
-                  <TableCell sx={{ color: "white", fontWeight: 700 }}>Sr.</TableCell>
-                  <TableCell sx={{ color: "white", fontWeight: 700 }}>Venture Name</TableCell>
-                  <TableCell sx={{ color: "white", fontWeight: 700 }}>Founders</TableCell>
-                  <TableCell sx={{ color: "white", fontWeight: 700 }}>Overview</TableCell>
-                  <TableCell sx={{ color: "white", fontWeight: 700 }}>Status</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <AnimatePresence mode="wait">
-                  {currentData.map((item, index) => (
-                    <TableRow
-                      key={item._id}
-                      component={motion.tr}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ delay: index * 0.05 }}
-                      sx={{ "&:hover": { bgcolor: "rgba(163,13,51,0.02)" } }}
-                    >
-                      <TableCell>{startIndex + index + 1}</TableCell>
-                      <TableCell sx={{ fontWeight: 600, color: TEXT_DARK }}>{item.StartupName}</TableCell>
-                      <TableCell>{item.FounderName}</TableCell>
-                      <TableCell sx={{ maxWidth: 300, color: TEXT_MUTED }}>
-                        <Typography variant="body2" noWrap sx={{ overflow: "hidden", textOverflow: "ellipsis" }}>
-                          {item.ProductName}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Chip
-                          label={item.RegistrationStatus || "Unknown"}
-                          size="small"
-                          sx={{
-                            bgcolor: item.RegistrationStatus?.includes("Registered") ? "#e8f5e9" : "#fff3e0",
-                            color: item.RegistrationStatus?.includes("Registered") ? "#2e7d32" : "#e65100",
-                            fontWeight: 700,
-                            borderRadius: "6px"
-                          }}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </AnimatePresence>
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="border-b-4 border-black text-left">
+                  <th className="py-6 px-4 text-[11px] font-black uppercase tracking-widest text-gray-400">#</th>
+                  <th className="py-6 px-4 text-[11px] font-black uppercase tracking-widest text-[#9E0203]">Venture Name</th>
+                  <th className="py-6 px-4 text-[11px] font-black uppercase tracking-widest text-black">Founders</th>
+                  <th className="py-6 px-4 text-[11px] font-black uppercase tracking-widest text-black hidden lg:table-cell">Brief</th>
+                  <th className="py-6 px-4 text-[11px] font-black uppercase tracking-widest text-black">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {loading ? (
+                   [1,2,3,4,5].map(i => (
+                     <tr key={i} className="animate-pulse">
+                        <td colSpan="5" className="h-16 bg-gray-50 mb-2"></td>
+                     </tr>
+                   ))
+                ) : (
+                  filteredData.map((item, index) => (
+                    <tr key={item._id} className="group hover:bg-gray-50 transition-colors">
+                      <td className="py-8 px-4 text-sm font-black text-gray-300">{(index + 1).toString().padStart(2, '0')}</td>
+                      <td className="py-8 px-4">
+                        <div className="text-xl font-black uppercase tracking-tighter text-black group-hover:text-[#9E0203] transition-colors">{item.StartupName}</div>
+                      </td>
+                      <td className="py-8 px-4">
+                        <div className="text-sm font-bold uppercase text-gray-600">{item.FounderName}</div>
+                      </td>
+                      <td className="py-8 px-4 hidden lg:table-cell">
+                        <div className="text-sm font-medium text-gray-400 max-w-xs truncate">{item.ProductName || "Stealth Mode Venture"}</div>
+                      </td>
+                      <td className="py-8 px-4">
+                        <span className={`inline-block px-3 py-1 text-[9px] font-black uppercase tracking-widest border ${item.RegistrationStatus?.includes('Registered') ? 'border-green-500 text-green-500 bg-green-50' : 'border-[#9E0203] text-[#9E0203] bg-red-50'}`}>
+                          {item.RegistrationStatus || "INCUBATED"}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
 
-          <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
-            <MuiPagination
-              count={totalPages}
-              page={currentPage}
-              onChange={(_, v) => setCurrentPage(v)}
-              color="primary"
-              sx={{
-                "& .Mui-selected": { bgcolor: BRAND_COLOR, "&:hover": { bgcolor: BRAND_COLOR } }
-              }}
-            />
-          </Box>
-        </Container>
-      </Box>
-    </Box>
+            {!loading && filteredData.length === 0 && (
+               <div className="text-center py-20">
+                  <p className="text-gray-400 font-black uppercase tracking-widest">No matching ventures found.</p>
+               </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. FINAL ACTION */}
+      <section className="bg-black py-24 border-t-8 border-[#003366]">
+         <div className="container mx-auto px-4 text-center space-y-10">
+            <h2 className="text-white text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">JOIN THE <span className="text-[#9E0203]">FOUNDRY</span></h2>
+            <p className="text-gray-400 max-w-xl mx-auto font-bold uppercase tracking-tight text-xl">We are looking for the next generation of builders.</p>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+               <a href="/Incubate_form" className="bg-[#9E0203] text-white px-12 py-5 font-black text-xl uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-2xl">
+                  Apply for Incubation
+               </a>
+               <a href="/contact" className="border-2 border-white text-white px-12 py-5 font-black text-xl uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                  Contact Us
+               </a>
+            </div>
+         </div>
+      </section>
+    </div>
   );
 }
 
