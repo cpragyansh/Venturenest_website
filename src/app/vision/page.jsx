@@ -1,374 +1,175 @@
-"use client";
-import React from "react";
-import {
-  Box,
-  Typography,
-  Container,
-  Chip,
-  Paper,
-  useTheme,
-  useMediaQuery,
-  Avatar
-} from "@mui/material";
-import { motion } from "framer-motion";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import BoltIcon from "@mui/icons-material/Bolt";
-import GroupsIcon from "@mui/icons-material/Groups";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import TrackChangesIcon from "@mui/icons-material/TrackChanges";
+  "use client";
+  import React from "react";
+import { Link } from "react-router-dom";
 
-// --- Assets & Config ---
-const BRAND_COLOR = "#A30D33";
-const BRAND_LIGHT = "#fff0f3";
-const TEXT_DARK = "#0a0a0a";
-const TEXT_MUTED = "#555";
+const ContentBlock = ({ item, index }) => {
+  const isEven = index % 2 === 0;
+  const bgColors = ["bg-[#003366]", "bg-[#333333]", "bg-black"];
+  const bgColor = bgColors[index % 3];
 
-// --- Vector Components (Inline SVGs) ---
-const DotPattern = () => (
-  <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style={{ position: 'absolute', opacity: 0.15, zIndex: 0 }}>
-    <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="2" fill={BRAND_COLOR} />
-    </pattern>
-    <rect width="100" height="100" fill="url(#dots)" />
-  </svg>
-);
+    return (
+    <div className="relative mb-20 last:mb-0">
+      {/* Title Section with Red Bar */}
+      <div className={`container mx-auto px-4 mb-6`}>
+        <div className={`flex flex-col ${isEven ? 'items-start' : 'items-end'}`}>
+          <div className={`flex items-start gap-3 ${isEven ? 'flex-row' : 'flex-row-reverse text-right'}`}>
+            <div className="w-1.5 h-12 bg-[#9E0203]"></div>
+            <div>
+              <h3 className="text-3xl md:text-4xl font-black font-jakarta text-[#9E0203] uppercase tracking-tight leading-none">
+                {item.title}
+              </h3>
+              <p className="text-gray-700 font-bold text-sm mt-1 uppercase tracking-widest pl-0.5">
+                {item.subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-const LineArt = () => (
-  <Box sx={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", opacity: 0.3 }}>
-    <svg width="100%" height="100%" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', top: 0, left: 0 }}>
-      <motion.path
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        transition={{ duration: 2, ease: "easeInOut" }}
-        d="M-100 200 C 200 100, 400 500, 700 300 S 1200 100, 1600 400"
-        stroke={BRAND_COLOR}
-        strokeWidth="0.5"
-        strokeDasharray="10 10"
-        opacity="0.2"
-      />
-      <motion.path
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        transition={{ duration: 3, ease: "easeInOut", delay: 0.5 }}
-        d="M-100 600 C 300 400, 600 800, 900 500 S 1300 700, 1600 300"
-        stroke="#1a237e"
-        strokeWidth="0.5"
-        strokeDasharray="15 5"
-        opacity="0.15"
-      />
-    </svg>
-  </Box>
-);
+      {/* Content Section */}
+      <div className="relative min-h-[320px] flex items-center">
+        {/* The Colored Container - Spans from side */}
+        <div 
+          className={`absolute top-0 bottom-0 ${isEven ? 'left-0' : 'right-0'} w-[82%] ${bgColor} z-0 shadow-xl`}
+        ></div>
 
-const GlobalVectorBackground = () => (
-  <Box sx={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden" }}>
-    <svg width="100%" height="100%" viewBox="0 0 1440 2000" fill="none" style={{ position: 'absolute', top: 0, left: 0, opacity: 0.1 }}>
-      <motion.path
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.3 }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        d="M-100 300 Q 400 600 900 300 T 1600 300"
-        stroke={BRAND_COLOR} strokeWidth="1"
-      />
-      <motion.path
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.2 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 2 }}
-        d="M1600 800 Q 1100 500 600 800 T -100 800"
-        stroke="#1a237e" strokeWidth="1"
-      />
-    </svg>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
+            {/* Text Side */}
+            <div className={`w-full md:w-3/5 py-10 ${isEven ? 'md:pr-12' : 'md:pl-12'} text-white`}>
+              <p className="text-lg md:text-xl leading-relaxed italic opacity-95 first-letter:text-3xl first-letter:font-black first-letter:mr-1">
+                {item.desc}
+              </p>
+              {item.extended && (
+                <p className="text-base mt-4 text-white/80 leading-relaxed hidden md:block">
+                  {item.extended}
+                </p>
+              )}
+            </div>
 
-    {[...Array(4)].map((_, i) => (
-      <Box
-        key={i}
-        component={motion.div}
-        animate={{
-          y: [0, -40, 0],
-          x: [0, 20, 0],
-          rotate: [0, 10, 0],
-          opacity: [0.05, 0.15, 0.05]
-        }}
-        transition={{
-          duration: 8 + i * 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: i * 1.5
-        }}
-        sx={{
-          position: "absolute",
-          top: `${20 + i * 20}%`,
-          left: `${(i * 25) % 90}%`,
-          color: i % 2 === 0 ? BRAND_COLOR : "#1a237e",
-          fontSize: "4rem",
-          zIndex: 0
-        }}
-      >
-        {i % 2 === 0 ? <RocketLaunchIcon fontSize="inherit" /> : <TrackChangesIcon fontSize="inherit" />}
-      </Box>
-    ))}
+            {/* Image Side */}
+            <div className={`w-full md:w-2/5 flex ${isEven ? 'justify-end' : 'justify-start'}`}>
+              <div className="relative w-full h-[350px] md:h-[400px] overflow-visible">
+                <img 
+                    src={item.image}
+                    alt={item.title}
+                  className={`absolute bottom-[-15px] ${isEven ? 'right-0' : 'left-0'} h-[108%] w-auto object-contain max-w-none transform ${isEven ? 'translate-x-[5%]' : 'translate-x-[-5%]'}`}
+                  />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    );
+  };
 
-    <Box sx={{
-      position: "absolute",
-      inset: 0,
-      backgroundImage: `radial-gradient(${BRAND_COLOR}05 1px, transparent 1px)`,
-      backgroundSize: "60px 60px",
-      opacity: 0.4
-    }} />
-  </Box>
-);
+  export default function VisionPage() {
+  const visionMissionData = [
+      {
+        title: "Our Vision",
+        subtitle: "THE FUTURE WE SEE",
+        desc: "To be a premier incubation hub that fuels technological innovation, nurtures high-potential startups, and drives sustainable entrepreneurial success at regional and national levels.",
+      extended: "We envision an ecosystem where every revolutionary idea has the support and resources to scale into a market-leading enterprise, contributing significantly to the nation's economic growth and technological advancement.",
+        image: "/assets/vision-updated.jpg",
+      },
+      {
+        title: "Our Mission",
+        subtitle: "OUR PURPOSE",
+      desc: "To empower early-stage ventures by providing structured mentorship, access to funding, cutting-edge infrastructure, and a collaborative ecosystem that fosters innovation and accelerates business growth.",
+      extended: "Our mission is to bridge the gap between academic research and commercial viability, ensuring that the next generation of founders has the discipline, network, and tools required to navigate the complex global market.",
+        image: "/assets/mission-updated.jpg",
+      }
+    ];
 
-const FeatureSection = ({ item, index }) => {
-  const isImageRight = index % 2 === 0;
+    return (
+    <div className="min-h-screen bg-white font-jakarta">
+      {/* New Majestic Title Section - Split Layout */}
+      <section className="relative bg-black py-24 md:py-32 overflow-hidden border-b-[12px] border-[#9E0203]">
+        {/* Decorative Slashed Background Accent */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#9E0203]/5 skew-x-[-20deg] transform translate-x-1/3 pointer-events-none"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+            {/* Left Content Column */}
+            <div className="w-full md:w-5/12 space-y-8 text-left">
+              <div className="flex items-center space-x-4">
+                <div className="h-1 bg-[#9E0203] w-12"></div>
+                <span className="text-white/60 font-black uppercase tracking-[0.5em] text-[10px]">Institutional Charter</span>
+              </div>
+              
+              <h1 className="text-white text-6xl md:text-8xl font-black font-jakarta uppercase tracking-tighter leading-[0.9]">
+                MISSION <br />
+                <span className="text-[#9E0203]">& VISION</span>
+              </h1>
+              
+              <div className="space-y-4">
+                <div className="h-1 w-32 bg-white"></div>
+                <p className="text-gray-400 text-xl font-bold uppercase tracking-tight leading-snug max-w-md">
+                  NURTURING HIGH-POTENTIAL VENTURES AT CGC UNIVERSITY MOHALI.
+                </p>
+              </div>
+            </div>
 
-  return (
-    <Box
-      sx={{
-        position: "relative",
-        mb: { xs: 10, md: 15 },
-        "&:last-of-type": { mb: 5 }
-      }}
-    >
-      <Container maxWidth="lg">
-        <Box
-          component={motion.div}
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: isImageRight ? "row" : "row-reverse" },
-            alignItems: "center",
-            gap: { xs: 6, md: 10 },
-            position: "relative",
-            zIndex: 1
-          }}
-        >
-          {/* Text Content */}
-          <Box
-            sx={{
-              flex: 1,
-              textAlign: { xs: "center", md: isImageRight ? "left" : "right" },
-            }}
-          >
-            <Chip
-              label={item.subtitle}
-              sx={{
-                bgcolor: `${item.color}15`,
-                color: item.color,
-                fontWeight: 800,
-                letterSpacing: 2,
-                mb: 3,
-                borderRadius: "8px",
-                fontSize: "0.75rem"
-              }}
-            />
-            <Typography
-              variant="h2"
-              sx={{
-                fontWeight: 900,
-                fontFamily: "var(--font-display)",
-                color: TEXT_DARK,
-                mb: 3,
-                fontSize: { xs: "2.5rem", md: "3.5rem" },
-                lineHeight: 1.1,
-                letterSpacing: -1
-              }}
-            >
-              {item.title}
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                color: TEXT_MUTED,
-                lineHeight: 1.8,
-                fontWeight: 400,
-                mb: 4,
-                maxWidth: 600,
-                ml: { xs: "auto", md: isImageRight ? 0 : "auto" },
-                mr: { xs: "auto", md: isImageRight ? "auto" : 0 }
-              }}
-            >
-              {item.desc}
-            </Typography>
-          </Box>
-
-          {/* Image Side */}
-          <Box
-            sx={{
-              flex: 1.1,
-              position: "relative",
-              width: "100%",
-            }}
-          >
-            <Box
-              sx={{
-                position: "relative",
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  inset: { xs: -10, md: -20 },
-                  border: `2px solid ${item.color}`,
-                  borderRadius: "40px",
-                  opacity: 0.2,
-                  zIndex: -1,
-                  transform: isImageRight ? "rotate(3deg) scale(1.02)" : "rotate(-3deg) scale(1.02)"
-                }
-              }}
-            >
-              <Box
-                sx={{
-                  borderRadius: { xs: "24px", md: "40px" },
-                  overflow: "hidden",
-                  boxShadow: `0 40px 80px -20px ${item.color}30`,
-                  aspectRatio: "16/10",
-                  bgcolor: "white",
-                  p: { xs: 1, md: 1.5 }
-                }}
-              >
-                <Box
-                  component="img"
-                  src={item.image}
-                  alt={item.title}
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: { xs: "18px", md: "30px" },
-                  }}
+            {/* Right Image Column - Sharp & High Contrast */}
+            <div className="w-full md:w-7/12 relative">
+              <div className="absolute -inset-4 border-2 border-white/5 rounded-3xl translate-x-4 translate-y-4"></div>
+              <div className="relative overflow-hidden rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]">
+                <img 
+                  src="https://api.builder.io/api/v1/image/assets/TEMP/a83e0dfd399992f008892d19f4089906d91f4862?width=1200" 
+                  alt="Innovation Hub" 
+                  className="w-full h-full object-cover aspect-[16/9]"
                 />
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Container>
-    </Box>
-  );
-};
+              </div>
+              {/* Floating Badge */}
+              <div className="absolute -bottom-8 -left-8 bg-[#9E0203] p-8 shadow-2xl border-4 border-black">
+                 <div className="text-white font-black text-4xl uppercase tracking-tighter leading-none">VISION 2030</div>
+                 <div className="text-white/70 text-[10px] uppercase font-bold tracking-widest mt-2">Charting The Future</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-export default function VisionPage() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+      {/* Introduction Text - Institutional & Credible */}
+      <section className="py-20 bg-gray-50 border-b border-gray-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <h2 className="text-4xl font-black text-black uppercase tracking-tighter">The Gateway to Innovation</h2>
+            <div className="flex justify-center space-x-2">
+              <div className="h-1.5 w-20 bg-[#9E0203]"></div>
+              <div className="h-1.5 w-10 bg-black"></div>
+            </div>
+            <p className="text-gray-700 text-xl font-medium leading-relaxed italic">
+              VentureNest is the first entrepreneurship incubation centre at CGC University, founded to promote innovation, business development and entrepreneurship. Located at Block 3 of the campus, VentureNest is essentially one of the most vibrant hubs for entrepreneurship development with the necessary facilities for startup success.
+            </p>
+          </div>
+        </div>
+      </section>
 
-  const data = [
-    {
-      title: "Our Vision",
-      subtitle: "THE FUTURE WE SEE",
-      desc: "To be a premier incubation hub that fuels technological innovation, nurtures high-potential startups, and drives sustainable entrepreneurial success at regional and national levels.",
-      image: "/assets/vision-updated.jpg",
-      color: "#A30D33"
-    },
-    {
-      title: "Our Mission",
-      subtitle: "OUR PURPOSE",
-      desc: "To empower early-stage ventures by providing structured mentorship, access to funding, cutting-edge infrastructure, and a collaborative ecosystem that fosters innovation, accelerates business growth, and contributes meaningfully to the larger startup landscape.",
-      image: "/assets/mission-updated.jpg",
-      color: "#1a237e"
-    }
-  ];
+      {/* Vision & Mission Sections - Majestic Blocks */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="space-y-32">
+          {visionMissionData.map((item, index) => (
+            <ContentBlock key={index} item={item} index={index} />
+          ))}
+        </div>
+      </section>
 
-  return (
-    <Box sx={{ bgcolor: "#FDFDFD", overflowX: "hidden", minHeight: "100vh", position: "relative" }}>
-      <GlobalVectorBackground />
-
-      {/* --- HERO SECTION --- */}
-      <Box
-        sx={{
-          position: "relative",
-          height: { xs: "60vh", md: "70vh" },
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundImage: `linear-gradient(135deg, rgba(163,13,51,0.92), rgba(26,35,126,0.92)), url('/assets/corosuel-bg.png')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          textAlign: "center",
-          color: "white",
-          px: 2,
-        }}
-      >
-        <Box sx={{ position: "absolute", inset: 0, opacity: 0.1, backgroundImage: "radial-gradient(circle at 50% 50%, white 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
-
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            <Box sx={{
-              display: "inline-block",
-              p: { xs: 3, md: 5 },
-              borderRadius: 8,
-              bgcolor: "rgba(255,255,255,0.05)",
-              backdropFilter: "blur(12px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 25px 50px rgba(0,0,0,0.1)"
-            }}>
-              <Typography
-                variant={isMobile ? "h2" : "h1"}
-                sx={{
-                  fontWeight: 900,
-                  fontFamily: "var(--font-display)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  mb: 2,
-                  fontSize: { xs: "2.5rem", md: "4.5rem" }
-                }}
-              >
-                Mission & Vision
-              </Typography>
-              <Box
-                component={motion.div}
-                initial={{ width: 0 }}
-                animate={{ width: "100px" }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                sx={{ height: 4, bgcolor: "white", mx: "auto", mb: 4, borderRadius: 2 }}
-              />
-              <Typography
-                variant={isMobile ? "body1" : "h5"}
-                sx={{
-                  fontWeight: 300,
-                  maxWidth: "800px",
-                  mx: "auto",
-                  lineHeight: 1.6,
-                  opacity: 0.9,
-                }}
-              >
-                At VentureNest, we are dedicated to fostering innovation and empowering the next generation of visionary founders.
-              </Typography>
-            </Box>
-          </motion.div>
-        </Container>
-
-        <Box sx={{ position: "absolute", bottom: -1, left: 0, right: 0, lineHeight: 0, color: "#FDFDFD" }}>
-          <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-            <path fill="currentColor" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-          </svg>
-        </Box>
-      </Box>
-
-      {/* --- INTRODUCTION SECTION --- */}
-      <Box sx={{ pt: 15, pb: 10, position: "relative" }}>
-        <Container maxWidth="md">
-          <Box sx={{ textAlign: "center", position: "relative", zIndex: 1 }}>
-            <Typography variant="body1" sx={{ fontSize: "1.2rem", lineHeight: 1.8, color: TEXT_MUTED }}>
-              VentureNest is the first entrepreneurship incubation centre at CGC University, founded to promote innovation, business development and entrepreneurship. Located at Block 3 of the campus, VentureNest is essentially one of the most vibrant hubs for entrepreneurship development with the necessary facilities for startup success. We incubate and mentor creativity and innovation enabling idea developers to turn their visions into successful ventures.
-            </Typography>
-          </Box>
-        </Container>
-      </Box>
-
-      {/* --- VISION & MISSION SECTIONS --- */}
-      <Box sx={{ position: "relative", pb: 20 }}>
-        <LineArt />
-        {data.map((item, index) => (
-          <FeatureSection key={index} item={item} index={index} />
-        ))}
-      </Box>
-    </Box>
-  );
-}
-
+      {/* Bottom CTA Section */}
+      <section className="bg-black py-20 border-t-8 border-[#9E0203]">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-white text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8">Ready to <span className="text-[#9E0203]">IGNITE</span> Your Vision?</h2>
+          <div className="flex flex-col md:flex-row justify-center gap-6">
+            <Link to="/IncubateWithUs" className="inline-block bg-[#9E0203] text-white px-12 py-5 font-black text-xl uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-xl">
+              Incubate Now
+            </Link>
+            <Link to="/contact" className="inline-block border-2 border-white text-white px-12 py-5 font-black text-xl uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+    );
+  }

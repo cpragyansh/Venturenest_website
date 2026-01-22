@@ -189,10 +189,10 @@ const GlobalVectorBackground = () => (
 const leadershipData = [
   {
     name: "S. Rashpal Singh Dhaliwal",
-    role: "Chancellor, CGC University",
-    image: "/assets/chairman.png", // Ensure path is correct
-    quote: "We build not just students, but the leaders of tomorrow.",
-    desc: "The entrepreneurial association at CGC University is dedicated to fostering innovation. VenturesNest was established to encourage entrepreneurial thinking and provide a dynamic platform for aspiring founders."
+      role: "Chancellor, CGC University, Mohali",
+      image: "/assets/chairman.png",
+      quote: "Greetings!",
+      desc: "I extend a warm welcome to all at the CGC University, Mohali. Our University was established with the primary goal of providing quality education to all, recognizing its crucial role in social mobility and economic development. In today's globalized world, our focus is on fostering students' confidence, self-motivation, and independent thinking. Join us at CGC University, where we strive to provide a comprehensive and globally relevant education.",
   },
   {
     name: "Mr. Arsh Dhaliwal",

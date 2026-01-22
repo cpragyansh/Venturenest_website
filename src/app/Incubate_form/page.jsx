@@ -1,397 +1,259 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import './incubate.css';
-import { Meteors } from "../Components/ui/Meteors";
-import {
-  ArrowOutward,
-  Psychology,
-  MonetizationOn,
-  Apartment,
-  Hub,
-  CheckCircle,
-  HowToReg,
-  Assessment,
-  RocketLaunch,
-  School,
-  ArrowRight
-} from "@mui/icons-material";
+"use client";
+import React from "react";
+import { Link } from "react-router-dom";
 
-// Animation Variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1
-    }
-  }
-};
+const BenefitBlock = ({ item, index }) => {
+  const isEven = index % 2 === 0;
+  const bgColors = ["bg-[#003366]", "bg-[#333333]", "bg-black"];
+  const bgColor = bgColors[index % 3];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
-};
-
-const slideLeftVariants = {
-  hidden: { opacity: 0, x: 50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: "easeOut" }
-  }
-};
-
-const scaleVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.4, ease: "backOut" }
-  }
-};
-
-export default function JoinUs() {
   return (
-    <main className="incubate-page">
-
-      {/* Global Background Overlay for Depth & Meteors */}
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        zIndex: 0,
-        pointerEvents: 'none',
-        background: 'rgba(202, 202, 202, 0.25)', /* Translucent dark overlay */
-        overflow: 'hidden'
-      }}>
-        <Meteors number={40} />
+    <div className="relative mb-20 last:mb-0">
+      <div className={`container mx-auto px-4 mb-6`}>
+        <div className={`flex flex-col ${isEven ? 'items-start' : 'items-end'}`}>
+          <div className={`flex items-start gap-3 ${isEven ? 'flex-row' : 'flex-row-reverse text-right'}`}>
+            <div className="w-1.5 h-12 bg-[#9E0203]"></div>
+            <div>
+              <h3 className="text-3xl md:text-4xl font-black font-jakarta text-[#9E0203] uppercase tracking-tight leading-none">
+                {item.title}
+              </h3>
+              <p className="text-gray-700 font-bold text-sm mt-1 uppercase tracking-widest pl-0.5">
+                {item.subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* 1. HERO & MISSION (Side by Side) */}
-      <section className="section-container">
-        <div className="hero-wrapper">
-
-          {/* Left: Title & CTA */}
-          <motion.div
-            className="hero-left"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.h1 className="editorial-title" variants={itemVariants}>
-              Incubate<br />With Ourselves
-            </motion.h1>
-            <motion.p className="editorial-subtitle" variants={itemVariants}>
-              Where Innovation Begins & Entrepreneurs Rise.
-            </motion.p>
-            <motion.div variants={itemVariants}>
-              <a
-                href="https://forms.gle/pPt5qsTXHLEs8pbV9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-editorial"
-              >
-                Apply Now <ArrowOutward />
-              </a>
-            </motion.div>
-          </motion.div>
-
-          {/* Right: The Mission / Welcome */}
-          <motion.div
-            className="hero-right"
-            initial="hidden"
-            animate="visible"
-            variants={slideLeftVariants}
-            style={{
-              position: 'relative',
-              overflow: 'hidden',
-              borderRadius: '1.5rem',
-              boxShadow: '0 20px 50px -10px rgba(164, 12, 26, 0.5)'
-            }}
-          >
-            <div
-              className="mission-text"
-              style={{
-                position: 'relative',
-                zIndex: 10,
-                background: 'linear-gradient(135deg, #a40c1a 0%, #6d0610 100%)',
-                padding: '2.5rem',
-                borderRadius: '1.5rem',
-                border: '1px solid rgba(255,255,255,0.2)',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center'
-              }}
-            >
-              <p style={{ marginBottom: '1rem', fontWeight: 'bold', fontSize: '1.5rem', color: '#fff', fontFamily: 'var(--font-display)' }}>
-                WELCOME TO CGC VENTURENEST
+      <div className="relative min-h-[300px] flex items-center">
+        <div className={`absolute top-0 bottom-0 ${isEven ? 'left-0' : 'right-0'} w-[82%] ${bgColor} z-0 shadow-xl`}></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
+            <div className={`w-full md:w-3/5 py-10 ${isEven ? 'md:pr-12' : 'md:pl-12'} text-white`}>
+              <p className="text-lg md:text-xl leading-relaxed font-bold italic opacity-95">
+                {item.desc}
               </p>
-              <p style={{ marginBottom: '1rem', color: '#f8fafc', fontSize: '1.1rem', lineHeight: '1.6' }}>
-                Welcome to CGC University VentureNest – The Innovation Hub for Emerging Startups.
-                Looking to transform your startup dream into a thriving business?
-              </p>
-              <p style={{ marginBottom: '1rem', color: '#f8fafc', fontSize: '1.1rem', lineHeight: '1.6' }}>
-                CGC University VentureNest is your ultimate launchpad — an entrepreneurial ecosystem built to support and accelerate innovation, from ideation to execution.
-              </p>
-              <p style={{ color: '#f8fafc', fontSize: '1.1rem', lineHeight: '1.6' }}>
-                Join a dynamic community of changemakers, visionary mentors and investors ready to fuel your journey. Whether you're a student founder or a growth-stage startup, VentureNest offers everything you need to scale smarter, faster and stronger.
-              </p>
-
-              <div style={{ marginTop: '2rem' }}>
-                <button style={{
-                  background: '#fff',
-                  border: 'none',
-                  color: '#a40c1a',
-                  padding: '12px 28px',
-                  borderRadius: '9999px',
-                  cursor: 'pointer',
-                  fontSize: '1rem',
-                  fontWeight: '600',
-                  transition: 'all 0.3s ease',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
-                }}
-                  onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 15px rgba(0,0,0,0.3)'; }}
-                  onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)'; }}
-                >
-                  Explore
-                </button>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {item.points.map((point, i) => (
+                  <div key={i} className="bg-white/10 backdrop-blur-md px-4 py-2 border border-white/20 rounded-sm text-xs font-black uppercase tracking-widest">
+                    {point}
+                  </div>
+                ))}
               </div>
             </div>
-            <Meteors number={20} />
-          </motion.div>
-
-        </div>
-      </section>
-
-      {/* 2. ABOUT US (New Section) */}
-      <section className="section-container" style={{ marginTop: 'var(--space-lg)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 'var(--space-md)' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="section-header" style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>About CGC University VentureNest</h2>
-            <p className="card-desc" style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
-              At VentureNest, we empower startups at every stage — turning ambitious ideas into sustainable ventures.
-            </p>
-            <p className="card-desc" style={{ fontWeight: '600', marginBottom: '0.5rem' }}>
-              Our incubation program is designed to provide:
-            </p>
-            <ul className="about-list">
-              {[
-                "Strategic Mentorship from seasoned entrepreneurs and industry experts",
-                "Seed Funding & Investor Access to back your vision",
-                "Co-working Infrastructure that sparks productivity",
-                "Workshops & Training to sharpen your startup skills",
-                "Exposure to Ecosystem Networks, events and pitch opportunities"
-              ].map((item, i) => (
-                <li key={i} className="about-item">
-                  <ArrowRight className="about-icon" /> {item}
-                </li>
-              ))}
-            </ul>
-            <p className="card-desc" style={{ marginTop: '1rem', fontStyle: 'italic', color: 'var(--color-primary)' }}>
-              Our goal is to create future-ready entrepreneurs equipped with the tools, knowledge and confidence to lead the next wave of innovation.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 3. WHY CHOOSE VENTURENEST (Cards) */}
-      <section className="section-container" style={{ marginTop: 'var(--space-lg)' }}>
-        <motion.h2
-          className="section-header"
-          initial={{ opacity: 0, width: 0 }}
-          whileInView={{ opacity: 1, width: 'auto' }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-        >
-          Why Choose VentureNest?
-        </motion.h2>
-
-        <motion.div
-          className="glass-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {/* Card 1 */}
-          <motion.div className="glass-card" variants={scaleVariants}>
-            <Psychology className="card-icon" />
-            <h3 className="card-title">Expert Mentorship</h3>
-            <p className="card-desc">Get one-on-one guidance from startup veterans, industry leaders and domain experts.</p>
-          </motion.div>
-
-          {/* Card 2 */}
-          <motion.div className="glass-card" variants={scaleVariants}>
-            <MonetizationOn className="card-icon" />
-            <h3 className="card-title">Funding Access</h3>
-            <p className="card-desc">Connect with angel investors, venture capitalists and funding bodies to raise capital.</p>
-          </motion.div>
-
-          {/* Card 3 */}
-          <motion.div className="glass-card" variants={scaleVariants}>
-            <Apartment className="card-icon" />
-            <h3 className="card-title">World-Class Infrastructure</h3>
-            <p className="card-desc">Work in modern, tech-enabled office spaces that support focus, collaboration and creativity.</p>
-          </motion.div>
-
-          {/* Card 4 */}
-          <motion.div className="glass-card" variants={scaleVariants}>
-            <Hub className="card-icon" />
-            <h3 className="card-title">Powerful Networking</h3>
-            <p className="card-desc">Build valuable connections with fellow founders, investors, alumni and corporate partners.</p>
-          </motion.div>
-
-          {/* Card 5 */}
-          <motion.div className="glass-card" variants={scaleVariants}>
-            <School className="card-icon" />
-            <h3 className="card-title">Skill-Building Bootcamps</h3>
-            <p className="card-desc">Attend interactive masterclasses, startup workshops and intensive training sessions tailored to your growth stage.</p>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* 4. WHO SHOULD APPLY - Checklist Cards */}
-      <section className="section-container" style={{ marginTop: 'var(--space-lg)' }}>
-        <motion.h2
-          className="section-header"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-        >
-          Who Should Apply?
-        </motion.h2>
-        <motion.div
-          className="checklist-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {[
-            "Aspiring student entrepreneurs with big ideas Early-stage startups seeking traction and guidance",
-            "Growth-focused teams solving real-world problems",
-            "Innovators in tech, AI/ML, sustainability, healthtech, edtech and more",
-            "Whether you're at the prototype stage or looking to raise your first round — VentureNest is the place for you."
-          ].map((item, index) => (
-            <motion.div key={index} className="check-card p-6" variants={scaleVariants}>
-              <CheckCircle sx={{ color: 'var(--color-primary)', fontSize: 24, marginRight: '10px', marginTop: '2px' }} />
-              <span className="check-text">{item}</span>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
-
-      {/* 5. PROCESS - Tree / Timeline */}
-      <section className="section-container" style={{ marginTop: 'var(--space-lg)', marginBottom: 'var(--space-lg)' }}>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          variants={containerVariants}
-          style={{
-            position: 'relative',
-            overflow: 'hidden',
-            borderRadius: '1.5rem',
-            boxShadow: '0 20px 50px -10px rgba(164, 12, 26, 0.5)'
-          }}
-        >
-          <div style={{
-            position: 'relative',
-            zIndex: 10,
-            background: 'linear-gradient(135deg, #a40c1a 0%, #6d0610 100%)',
-            padding: '3rem 2rem',
-            borderRadius: '1.5rem',
-            border: '1px solid rgba(255,255,255,0.2)'
-          }}>
-
-            <motion.h2
-              className="section-header"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              style={{ color: '#fff', borderBottomColor: 'rgba(255,255,255,0.2)' }}
-            >
-              Application Process
-            </motion.h2>
-
-            <div className="timeline-container">
-              <motion.div
-                className="timeline-line"
-                initial={{ height: 0 }}
-                whileInView={{ height: '100%' }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                viewport={{ once: true }}
-                style={{ background: 'linear-gradient(to bottom, #fff, rgba(255,255,255,0.2))' }}
-              ></motion.div>
-
-              {[
-                { id: 1, title: 'Submit Your Application', icon: <HowToReg sx={{ color: '#a40c1a' }} />, text: 'Fill out our simple online form.' },
-                { id: 2, title: 'Screening & Evaluation', icon: <Assessment sx={{ color: '#a40c1a' }} />, text: 'We review and invite top candidates for interviews.' },
-                { id: 3, title: 'Selection & Onboarding', icon: <RocketLaunch sx={{ color: '#a40c1a' }} />, text: 'Join our program and start your journey.' }
-              ].map((step, idx) => (
-                <motion.div
-                  key={step.id}
-                  className="timeline-node"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.2, duration: 0.5 }}
-                >
-                  <div className="timeline-circle" style={{ background: '#fff', borderColor: '#fff', color: '#a40c1a' }}>{step.id}</div>
-                  <div className="timeline-content" style={{ background: 'rgba(255,255,255,0.95)', border: 'none', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                      {step.icon}
-                      <h3 className="timeline-title" style={{ margin: 0, fontSize: '1.1rem', color: '#a40c1a' }}>{step.title}</h3>
-                    </div>
-                    <p className="card-desc" style={{ fontSize: '1rem', color: '#333' }}>{step.text}</p>
-                  </div>
-                </motion.div>
-              ))}
-
+            <div className={`w-full md:w-2/5 flex ${isEven ? 'justify-end' : 'justify-start'}`}>
+              <div className="relative w-full h-[300px] md:h-[350px] overflow-visible">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className={`absolute bottom-[-15px] ${isEven ? 'right-0' : 'left-0'} h-[110%] w-auto object-contain max-w-none transform ${isEven ? 'translate-x-[5%]' : 'translate-x-[-5%]'}`}
+                />
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-            <motion.div
-              style={{ marginTop: '3rem', textAlign: 'center' }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <motion.a
+export default function IncubateFormPage() {
+  const benefitsData = [
+    {
+      title: "Strategic Mentorship",
+      subtitle: "EXPERT GUIDANCE",
+      desc: "Connect with seasoned entrepreneurs and industry veterans who have successfully navigated the startup journey from ideation to exit.",
+      points: ["1-on-1 Sessions", "Domain Experts", "Exit Strategy"],
+      image: "/assets/about-how-we-work.jpg",
+    },
+    {
+      title: "Funding & Investment",
+      subtitle: "CAPITAL ACCELERATION",
+      desc: "Access a robust network of angel investors, venture capitalists, and government grants specifically curated for the Venturenest ecosystem.",
+      points: ["Seed Funding", "VC Network", "Pitch Days"],
+      image: "/assets/our-impact-img-photo.jpg",
+    },
+    {
+      title: "Vibrant Infrastructure",
+      subtitle: "WORLD CLASS FACILITIES",
+      desc: "Work in a 24/7 high-performance environment equipped with modern labs, collaborative workspaces, and cutting-edge technical resources.",
+      points: ["24/7 Access", "Makers Lab", "Global Connectivity"],
+      image: "/assets/mission-updated.jpg",
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white font-jakarta">
+      {/* 1. NEW MAJESTIC HERO SECTION */}
+      <section className="relative bg-black py-24 md:py-32 overflow-hidden border-b-[12px] border-[#9E0203]">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#9E0203]/5 skew-x-[-20deg] transform translate-x-1/3 pointer-events-none"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+            <div className="w-full md:w-5/12 space-y-8 text-left">
+              <div className="flex items-center space-x-4">
+                <div className="h-1 bg-[#9E0203] w-12"></div>
+                <span className="text-white/60 font-black uppercase tracking-[0.5em] text-[10px]">Call for Founders</span>
+              </div>
+              <h1 className="text-white text-6xl md:text-8xl font-black font-jakarta uppercase tracking-tighter leading-[0.9]">
+                INCUBATE <br />
+                <span className="text-[#9E0203]">WITH US</span>
+              </h1>
+              <div className="space-y-4">
+                <div className="h-1 w-32 bg-white"></div>
+                <p className="text-gray-400 text-xl font-bold uppercase tracking-tight leading-snug max-w-md">
+                   Where visionary ideas transform into market-leading enterprises.
+                </p>
+              </div>
+              <div className="pt-6">
+                 <a 
+                   href="https://forms.gle/pPt5qsTXHLEs8pbV9"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="inline-block bg-[#9E0203] text-white px-12 py-5 font-black text-xl uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-2xl"
+                 >
+                   Apply Now
+                 </a>
+              </div>
+            </div>
+            <div className="w-full md:w-7/12 relative">
+              <div className="absolute -inset-4 border-2 border-white/5 rounded-3xl translate-x-4 translate-y-4"></div>
+              <div className="relative overflow-hidden rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]">
+                <img 
+                  src="https://api.builder.io/api/v1/image/assets/TEMP/4457b3ebf8e16b2f34e08b4bc4e55bb881f9f762?width=1200" 
+                  alt="Venturenest Hub" 
+                  className="w-full h-full object-cover aspect-[16/9]"
+                />
+              </div>
+              <div className="absolute -bottom-8 -right-8 bg-[#9E0203] p-8 shadow-2xl border-4 border-black">
+                 <div className="text-white font-black text-4xl uppercase tracking-tighter leading-none">JOIN THE<br/>ELITE</div>
+                 <div className="text-white/70 text-[10px] uppercase font-bold tracking-widest mt-2">Limited Slots Available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. BENTO GRID - ADDING SOMETHING FROM INTERNET TRENDS */}
+      <section className="py-24 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+             <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px] block mb-2">The Ecosystem Advantage</span>
+             <h2 className="text-4xl md:text-5xl font-black font-jakarta text-black uppercase tracking-tighter border-b-4 border-black inline-block pb-2">Why VentureNest?</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[600px]">
+            {/* Main Feature */}
+            <div className="md:col-span-2 md:row-span-2 bg-[#9E0203] p-10 flex flex-col justify-end group cursor-pointer relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
+                  <svg className="w-40 h-40 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+               </div>
+               <h3 className="text-4xl font-black text-white uppercase tracking-tighter mb-4">Unparalleled Growth</h3>
+               <p className="text-white/80 text-lg font-bold">We don't just provide space; we provide a high-velocity launchpad for ambitious founders.</p>
+               <div className="mt-8 border-t border-white/20 pt-4 flex items-center justify-between">
+                  <span className="text-white font-black uppercase tracking-widest text-xs">Explore Program</span>
+                  <div className="w-10 h-10 border border-white flex items-center justify-center rounded-full group-hover:bg-white group-hover:text-[#9E0203] transition-colors">
+                     →
+                  </div>
+               </div>
+            </div>
+            {/* Top Right */}
+            <div className="bg-black p-8 flex flex-col justify-center">
+               <div className="text-white font-black text-5xl mb-2">200+</div>
+               <div className="text-[#9E0203] font-black uppercase tracking-widest text-[10px]">Expert Mentors</div>
+               <p className="text-white/60 text-xs mt-4">Industry veterans from across the globe guiding your success.</p>
+            </div>
+            {/* Row 2 Right 1 */}
+            <div className="bg-white border-2 border-black p-8 flex flex-col justify-between group hover:bg-black transition-colors">
+               <h4 className="text-black font-black uppercase tracking-tighter text-xl group-hover:text-white transition-colors leading-tight">Fast-track <br/>Funding</h4>
+               <p className="text-gray-500 text-xs group-hover:text-gray-400">Direct pipeline to venture capital firms.</p>
+            </div>
+             {/* Bottom Right Span */}
+            <div className="md:col-span-2 bg-gray-200 p-8 flex items-center justify-between group cursor-pointer hover:bg-[#003366] transition-colors">
+               <div className="space-y-4">
+                  <h4 className="text-black font-black uppercase tracking-tighter text-2xl group-hover:text-white">State of the Art Infrastructure</h4>
+                  <p className="text-black/60 group-hover:text-white/60 text-sm max-w-xs">Access 24/7 dedicated workspaces and high-performance labs.</p>
+               </div>
+               <div className="w-16 h-16 bg-black flex items-center justify-center rounded-full shrink-0 group-hover:bg-[#9E0203] transition-colors">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. MAJESTIC ALTERNATING BLOCKS - BENEFITS */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 text-center mb-20">
+             <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px] block mb-2">Our Offerings</span>
+             <h2 className="text-4xl md:text-6xl font-black font-jakarta text-black tracking-tighter uppercase leading-none border-b-4 border-black inline-block pb-2">Founder Support</h2>
+        </div>
+        
+        <div className="space-y-32">
+          {benefitsData.map((item, index) => (
+            <BenefitBlock key={index} item={item} index={index} />
+          ))}
+        </div>
+      </section>
+
+      {/* 4. APPLICATION PROCESS - MAJESTIC TIMELINE */}
+      <section className="py-24 bg-black border-y-8 border-[#9E0203]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-20 space-y-6">
+             <h2 className="text-white text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">THE JOURNEY <br/> <span className="text-[#9E0203]">STARTS HERE</span></h2>
+             <div className="h-1 w-24 bg-[#9E0203] mx-auto"></div>
+             <p className="text-gray-400 font-bold uppercase tracking-widest text-sm">Transparency in every step of your onboarding.</p>
+          </div>
+
+          <div className="relative max-w-5xl mx-auto">
+             {/* Timeline Line */}
+             <div className="absolute left-[50%] top-0 bottom-0 w-1 bg-white/10 hidden md:block"></div>
+             
+             <div className="space-y-16">
+                {[
+                  { step: "01", title: "Submission", desc: "Submit your comprehensive application providing details of your vision and market potential." },
+                  { step: "02", title: "Evaluation", desc: "Our expert panel reviews your proposal for feasibility, impact, and founder capability." },
+                  { step: "03", title: "Selection", desc: "Shortlisted founders undergo an interview process to align goals and resource requirements." },
+                  { step: "04", title: "Acceleration", desc: "Get onboarded into the ecosystem and begin your journey towards scaling excellence." }
+                ].map((item, i) => (
+                  <div key={i} className={`flex flex-col md:flex-row items-center gap-10 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                    <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
+                       <div className="text-[#9E0203] font-black text-px font-jakarta opacity-20 text-[6rem] leading-none mb-[-2rem]">{item.step}</div>
+                       <h3 className="text-white text-4xl font-black uppercase tracking-tighter relative z-10">{item.title}</h3>
+                       <p className="text-gray-400 text-lg font-medium max-w-sm">{item.desc}</p>
+                    </div>
+                    <div className="hidden md:flex relative z-20 w-16 h-16 bg-white border-8 border-black rounded-full items-center justify-center shrink-0">
+                       <div className="w-4 h-4 bg-[#9E0203] rounded-full"></div>
+                    </div>
+                    <div className="w-full md:w-1/2"></div>
+                  </div>
+                ))}
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. FINAL ACTION BANNER */}
+      <section className="bg-white py-24">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12 border-4 border-black p-12 md:p-20 relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-2 h-full bg-[#9E0203]"></div>
+            <div className="space-y-6 max-w-xl">
+               <h2 className="text-black text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none">Ready to <span className="text-[#9E0203]">Disrupt</span> the Market?</h2>
+               <p className="text-gray-600 font-bold uppercase tracking-tight text-xl">The next legendary startup starts with a single application.</p>
+            </div>
+            <div className="shrink-0">
+              <a 
                 href="https://forms.gle/pPt5qsTXHLEs8pbV9"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-editorial"
-                style={{
-                  width: 'fit-content',
-                  background: '#fff',
-                  color: '#a40c1a',
-                  fontWeight: 'bold',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
-                }}
-                whileHover={{ scale: 1.05, backgroundColor: '#fff', boxShadow: '0 6px 20px rgba(0,0,0,0.3)' }}
-                whileTap={{ scale: 0.95 }}
+                className="inline-block bg-black text-white px-16 py-6 font-black text-2xl uppercase tracking-widest hover:bg-[#9E0203] transition-all transform hover:scale-105"
               >
-                Start Your Journey
-              </motion.a>
-            </motion.div>
-
+                APPLY NOW →
+              </a>
+            </div>
           </div>
-          <Meteors number={20} />
-        </motion.div>
+        </div>
       </section>
-    </main>
+    </div>
   );
 }
