@@ -1,5 +1,5 @@
-  "use client";
-  import React from "react";
+"use client";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const ContentBlock = ({ item, index }) => {
@@ -7,7 +7,7 @@ const ContentBlock = ({ item, index }) => {
   const bgColors = ["bg-[#003366]", "bg-[#333333]", "bg-black"];
   const bgColor = bgColors[index % 3];
 
-    return (
+  return (
     <div className="relative mb-20 last:mb-0">
       {/* Title Section with Red Bar */}
       <div className={`container mx-auto px-4 mb-6`}>
@@ -46,87 +46,67 @@ const ContentBlock = ({ item, index }) => {
                 </p>
               )}
             </div>
-
+            
             {/* Image Side */}
             <div className={`w-full md:w-2/5 flex ${isEven ? 'justify-end' : 'justify-start'}`}>
               <div className="relative w-full h-[350px] md:h-[400px] overflow-visible">
                 <img 
-                    src={item.image}
-                    alt={item.title}
+                  src={item.image} 
+                  alt={item.title} 
                   className={`absolute bottom-[-15px] ${isEven ? 'right-0' : 'left-0'} h-[108%] w-auto object-contain max-w-none transform ${isEven ? 'translate-x-[5%]' : 'translate-x-[-5%]'}`}
-                  />
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    );
-  };
+  );
+};
 
-  export default function VisionPage() {
+export default function VisionPage() {
   const visionMissionData = [
-      {
-        title: "Our Vision",
-        subtitle: "THE FUTURE WE SEE",
-        desc: "To be a premier incubation hub that fuels technological innovation, nurtures high-potential startups, and drives sustainable entrepreneurial success at regional and national levels.",
+    {
+      title: "Our Vision",
+      subtitle: "THE FUTURE WE SEE",
+      desc: "To be a premier incubation hub that fuels technological innovation, nurtures high-potential startups, and drives sustainable entrepreneurial success at regional and national levels.",
       extended: "We envision an ecosystem where every revolutionary idea has the support and resources to scale into a market-leading enterprise, contributing significantly to the nation's economic growth and technological advancement.",
-        image: "/assets/vision-updated.jpg",
-      },
-      {
-        title: "Our Mission",
-        subtitle: "OUR PURPOSE",
+      image: "/assets/vision-updated.jpg",
+    },
+    {
+      title: "Our Mission",
+      subtitle: "OUR PURPOSE",
       desc: "To empower early-stage ventures by providing structured mentorship, access to funding, cutting-edge infrastructure, and a collaborative ecosystem that fosters innovation and accelerates business growth.",
       extended: "Our mission is to bridge the gap between academic research and commercial viability, ensuring that the next generation of founders has the discipline, network, and tools required to navigate the complex global market.",
-        image: "/assets/mission-updated.jpg",
-      }
-    ];
+      image: "/assets/mission-updated.jpg",
+    }
+  ];
 
-    return (
+  return (
     <div className="min-h-screen bg-white font-jakarta">
-      {/* New Majestic Title Section - Split Layout */}
-      <section className="relative bg-black py-24 md:py-32 overflow-hidden border-b-[12px] border-[#9E0203]">
-        {/* Decorative Slashed Background Accent */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#9E0203]/5 skew-x-[-20deg] transform translate-x-1/3 pointer-events-none"></div>
+      {/* Title Section - Professional Campus Theme */}
+      <section className="relative py-28 overflow-hidden border-b-8 border-black">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://api.builder.io/api/v1/image/assets/TEMP/3d21804528e0cfd22fd4944defec35b289d09126?width=1920" 
+            alt="University Campus" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+        </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-            {/* Left Content Column */}
-            <div className="w-full md:w-5/12 space-y-8 text-left">
-              <div className="flex items-center space-x-4">
-                <div className="h-1 bg-[#9E0203] w-12"></div>
-                <span className="text-white/60 font-black uppercase tracking-[0.5em] text-[10px]">Institutional Charter</span>
-              </div>
-              
-              <h1 className="text-white text-6xl md:text-8xl font-black font-jakarta uppercase tracking-tighter leading-[0.9]">
-                MISSION <br />
-                <span className="text-[#9E0203]">& VISION</span>
-              </h1>
-              
-              <div className="space-y-4">
-                <div className="h-1 w-32 bg-white"></div>
-                <p className="text-gray-400 text-xl font-bold uppercase tracking-tight leading-snug max-w-md">
-                  NURTURING HIGH-POTENTIAL VENTURES AT CGC UNIVERSITY MOHALI.
-                </p>
-              </div>
-            </div>
-
-            {/* Right Image Column - Sharp & High Contrast */}
-            <div className="w-full md:w-7/12 relative">
-              <div className="absolute -inset-4 border-2 border-white/5 rounded-3xl translate-x-4 translate-y-4"></div>
-              <div className="relative overflow-hidden rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]">
-                <img 
-                  src="https://api.builder.io/api/v1/image/assets/TEMP/a83e0dfd399992f008892d19f4089906d91f4862?width=1200" 
-                  alt="Innovation Hub" 
-                  className="w-full h-full object-cover aspect-[16/9]"
-                />
-              </div>
-              {/* Floating Badge */}
-              <div className="absolute -bottom-8 -left-8 bg-[#9E0203] p-8 shadow-2xl border-4 border-black">
-                 <div className="text-white font-black text-4xl uppercase tracking-tighter leading-none">VISION 2030</div>
-                 <div className="text-white/70 text-[10px] uppercase font-bold tracking-widest mt-2">Charting The Future</div>
-              </div>
-            </div>
+          <div className="max-w-2xl bg-white/95 p-12 border-l-[16px] border-[#9E0203] shadow-2xl">
+            <h1 className="text-black text-6xl md:text-7xl font-black uppercase tracking-tighter mb-2 leading-none">
+              Mission & <span className="text-[#9E0203]">Vision</span>
+            </h1>
+            <p className="text-[#9E0203] font-black uppercase tracking-[0.3em] text-sm mb-6">
+              VENTURENEST • CGC UNIVERSITY MOHALI
+            </p>
+            <div className="bg-black h-2 w-32 mb-8"></div>
+            <p className="text-black text-xl font-bold uppercase leading-tight max-w-lg">
+              Fostering innovation and empowering the next generation of visionary founders.
+            </p>
           </div>
         </div>
       </section>
@@ -171,5 +151,5 @@ const ContentBlock = ({ item, index }) => {
         </div>
       </section>
     </div>
-    );
-  }
+  );
+}
