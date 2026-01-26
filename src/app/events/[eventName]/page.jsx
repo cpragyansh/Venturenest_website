@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { Box, Typography, CircularProgress, Button, Grid, Skeleton } from "@mui/material";
+import { Box, Typography, CircularProgress, Button, Grid } from "@mui/material";
 
 export default function EventDetails() {
     const { eventName } = useParams();
@@ -236,32 +236,46 @@ export default function EventDetails() {
                         )}
 
 
-                        <Box sx={{ mt: 10 }}>
-                            <Typography
-                                variant="h6"
-                                sx={{
-                                    fontFamily: "'Inter', sans-serif",
-                                    fontWeight: 600,
-                                    mb: 4,
-                                    borderBottom: "1px solid #eee",
-                                    pb: 2
-                                }}
-                            >
-                                A Glimpse Of {event.eventName.split(":")[0]}
-                            </Typography>
-                            <Grid container spacing={3}>
-                                {[1, 2, 3].map((item) => (
-                                    <Grid item xs={12} sm={4} key={item}>
-                                        <Skeleton
-                                            variant="rectangular"
-                                            width="100%"
-                                            height={200}
-                                            sx={{ borderRadius: "2px", bgcolor: "#f0f0f0" }}
-                                        />
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Box>
+                        {event.EventImages && event.EventImages.length > 0 && (
+                            <Box sx={{ mt: 10 }}>
+                                <Typography
+                                    variant="h6"
+                                    sx={{
+                                        fontFamily: "'Inter', sans-serif",
+                                        fontWeight: 600,
+                                        mb: 4,
+                                        borderBottom: "1px solid #eee",
+                                        pb: 2
+                                    }}
+                                >
+                                    A Glimpse Of {event.eventName.split(":")[0]}
+                                </Typography>
+                                <Grid container spacing={3}>
+                                    {event.EventImages.map((imageUrl, index) => (
+                                        <Grid item xs={12} sm={6} md={4} key={index}>
+                                            <Box
+                                                component="img"
+                                                src={imageUrl}
+                                                alt={`${event.eventName} - Image ${index + 1}`}
+                                                sx={{
+                                                    width: "100%",
+                                                    height: 250,
+                                                    objectFit: "cover",
+                                                    borderRadius: "4px",
+                                                    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                                                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                                                    cursor: "pointer",
+                                                    "&:hover": {
+                                                        transform: "scale(1.05)",
+                                                        boxShadow: "0 8px 24px rgba(0,0,0,0.15)"
+                                                    }
+                                                }}
+                                            />
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </Box>
+                        )}
 
                         <Box sx={{
                             display: "flex",
