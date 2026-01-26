@@ -52,37 +52,74 @@ const studentNames = [
 
 const StudentStories = () => {
   return (
-    <section className="bg-white py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-center mb-16">
-          <span className="text-brand-red text-5xl font-bold font-jakarta">Student </span>
-          <span className="text-brand-dark text-5xl font-bold font-jakarta">Stories</span>
-        </h2>
+    <section className="py-24 font-jakarta relative border-t-4 border-[#9E0203]">
+      
+      <div className="container mx-auto px-4 relative z-10">
+        
+        {/* Section Header */}
+        <div className="mb-20 flex flex-col items-center">
+            <span className="text-[#9E0203] font-bold uppercase tracking-[0.3em] text-xs block mb-4 bg-[#9E0203]/10 px-4 py-2 rounded-full border border-[#9E0203]/30">Success Stories</span>
+            <h2 className="text-black text-4xl md:text-6xl font-black uppercase tracking-tight text-center">
+               Student <span className="text-[#9E0203]">Chronicles</span>
+            </h2>
+            <div className="mt-6 w-24 h-1.5 bg-blue-900 rounded-full"></div>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {studentNames.slice(0, 8).map((student, idx) => (
-            <div key={idx} className="bg-gray-100 p-8 relative">
-              <svg className="absolute top-8 left-8 w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 40 40">
-                <path fillRule="evenodd" clipRule="evenodd" d="M14.8665 30.824C13.1838 31.368 11.2425 31.3573 9.65584 30.544C5.99184 28.6613 4.40517 23.808 5.87984 18.6666C6.54117 16.36 7.7065 14.12 10.1705 11.8613C12.6345 9.59998 16.0532 8.26665 17.6372 8.26665C17.7705 8.26453 17.9029 8.28874 18.0268 8.33788C18.1507 8.38702 18.2637 8.46014 18.3594 8.55304C18.455 8.64593 18.5313 8.75678 18.584 8.87924C18.6367 9.00169 18.6648 9.13334 18.6665 9.26665C18.6665 9.81865 18.1972 10.2666 17.6372 10.2666C15.8265 10.2666 14.2078 11.2533 12.2905 12.704C10.8238 13.816 9.67717 15.2373 9.04517 16.4746C7.83184 18.8426 7.79184 22.1813 9.75183 23.0693C10.2069 22.5528 10.7677 22.1403 11.3962 21.8596C12.0247 21.579 12.7062 21.4367 13.3945 21.4426C16.5945 21.4426 18.4798 24.016 18.3972 26.3466C18.3198 28.5733 16.9038 30.16 14.8665 30.824ZM30.8665 30.824C29.1838 31.368 27.2425 31.3573 25.6558 30.544C21.9918 28.6613 20.4052 23.808 21.8798 18.6666C22.5412 16.36 23.7065 14.12 26.1705 11.8613C28.6345 9.59998 32.0532 8.26665 33.6372 8.26665C33.7705 8.26453 33.9029 8.28874 34.0268 8.33788C34.1507 8.38702 34.2637 8.46014 34.3594 8.55304C34.455 8.64593 34.5313 8.75678 34.584 8.87924C34.6367 9.00169 34.6648 9.13334 34.6665 9.26665C34.6665 9.81865 34.1972 10.2666 33.6372 10.2666C31.8265 10.2666 30.2078 11.2533 28.2905 12.704C26.8238 13.816 25.6772 15.2373 25.0452 16.4746C23.8318 18.8426 23.7918 22.1813 25.7518 23.0693C26.6932 22.04 27.9225 21.4426 29.3945 21.4426C32.5945 21.4426 34.4798 24.016 34.3972 26.3466C34.3198 28.5733 32.9038 30.16 30.8665 30.824Z" fillOpacity="0.4"/>
-              </svg>
-              
-              <div className="mt-16 mb-6">
-                <p className="text-brand-dark leading-relaxed">
-                  "{student.Story}"
-                </p>
-              </div>
+        {/* SOLID GRID LAYOUT */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {studentNames.slice(0, 9).map((student, idx) => {
+             // Initials
+             const initials = student.FounderName.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase();
+            
+            return (
+              <div 
+                key={idx} 
+                className="group relative h-full flex flex-col"
+              >
+                {/* Decoration Accent Top */}
+                <div className="h-1 bg-gradient-to-r from-[#9E0203] to-blue-900 w-0 group-hover:w-full transition-all duration-500 ease-in-out"></div>
+                
+                {/* Card Container: Navy Blue Background */}
+                <div className="flex-1 bg-[#0B1120] border-l-4 border-[#9E0203] p-8 flex flex-col justify-between hover:bg-[#111827] transition-colors duration-300 relative overflow-hidden">
+                    
+                    {/* Subtle Background Number */}
+                     <span className="absolute -right-4 -top-8 text-[120px] font-black text-white/5 z-0 select-none">
+                        {idx + 1}
+                     </span>
 
-              <div className="flex items-center space-x-4 pt-6 border-t border-gray-400">
-                <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-gray-600">
-                  {student.FounderName.charAt(0)}
-                </div>
-                <div>
-                  <div className="text-brand-red font-bold">{student.FounderName}</div>
-                  <div className="text-gray-600 text-sm font-medium">Founder, {student.StartupName}</div>
+                    {/* Quote Icon */}
+                    <div className="relative z-10 text-[#9E0203] mb-6">
+                       <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.896 14.321 16.084 14.929 15.564C15.536 15.044 16.596 14.544 18.109 14.064V12.645C17.069 12.885 16.329 13.065 15.889 13.185C15.449 13.305 15.149 13.405 14.989 13.485V10.125C14.989 7.365 16.549 5.285 19.668 3.885L20.598 6.045C18.678 6.845 17.718 8.245 17.718 10.245V11.205C18.278 11.205 18.798 11.325 19.278 11.565C19.758 11.805 20.148 12.145 20.448 12.585C20.748 13.025 20.898 13.565 20.898 14.205C20.898 14.925 20.658 15.585 20.178 16.185C19.698 16.785 19.068 17.265 18.288 17.625C17.508 17.985 16.638 18.165 15.678 18.165C15.278 18.165 14.718 18.125 13.998 18.045V21H14.017ZM6.017 21L6.017 18C6.017 16.896 6.321 16.084 6.929 15.564C7.536 15.044 8.596 14.544 10.109 14.064V12.645C9.069 12.885 8.329 13.065 7.889 13.185C7.449 13.305 7.149 13.405 6.989 13.485V10.125C6.989 7.365 8.549 5.285 11.668 3.885L12.598 6.045C10.678 6.845 9.718 8.245 9.718 10.245V11.205C10.278 11.205 10.798 11.325 11.278 11.565C11.758 11.805 12.148 12.145 12.448 12.585C12.748 13.025 12.898 13.565 12.898 14.205C12.898 14.925 12.658 15.585 12.178 16.185C11.698 16.785 11.068 17.265 10.288 17.625C9.508 17.985 8.638 18.165 7.678 18.165C7.278 18.165 6.718 18.125 5.998 18.045V21H6.017Z" /></svg>
+                    </div>
+
+                    {/* Story Text */}
+                    <div className="relative z-10 mb-8 min-h-[80px]">
+                      <p className="text-gray-300 font-medium leading-relaxed text-lg">
+                        "{student.Story || "Helping us build the future with immense support."}"
+                      </p>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-full h-px bg-white/10 mb-6"></div>
+
+                    {/* Footer: User Details */}
+                    <div className="flex items-center space-x-4 relative z-10">
+                      {/* Avatar */}
+                      <div className="w-12 h-12 bg-blue-900/50 text-blue-200 border border-blue-800 flex items-center justify-center font-bold text-sm tracking-widest rounded-none shrink-0">
+                          {initials}
+                      </div>
+                      
+                      {/* Text Info */}
+                      <div className="overflow-hidden">
+                          <h4 className="font-bold text-white truncate uppercase text-sm tracking-wide">{student.FounderName.replace("Mr. ","").replace("Ms. ","")}</h4>
+                          <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest truncate mt-1">{student.StartupName}</p>
+                      </div>
+                    </div>
+
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
