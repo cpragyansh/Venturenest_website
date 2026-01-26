@@ -1,53 +1,138 @@
-// // "use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./eco.css";
 
-export default function Eco() {
+export default function EcosystemPartners() {
   const [partners, setPartners] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch only ecosystem partners
-    axios
-      .get("https://venturenest.onrender.com/getpartner?category=ecosystem") // Update API URL if needed
-      .then((response) => {
+    const fetchPartners = async () => {
+      try {
+        const response = await axios.get("https://venturenest.onrender.com/getpartner?category=ecosystem");
         setPartners(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching ecosystem partners:", error);
-      });
+      } catch (err) {
+        console.error("Error fetching partners:", err);
+        setError("Failed to load partners");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPartners();
   }, []);
 
   return (
-    <div className="partners-container">
-      {/* Background Image */}
-      <img src="/assets/corosuel-bg.png" alt="Background" className="background-image" />
-
-      {/* Content Overlay */}
-      <div className="partners-content">
-        <h2 className="eco-partners-title">Collaborative Ecosystem Partners</h2>
-        <div className="gov-description-wrapper">
-  <p className="gov-description">
-    We  <strong> are backed partners </strong> by a dynamic ecosystem of educational institutions, incubation centres, innovation labs and industry bodies that jointly contribute to capacity-building, research, knowledge-sharing and startup mentorship across sectors.
-
-
- </p>
-  <hr className="gov-divider" />
-</div>
-        <div className="partners-grid">
-          {partners.length > 0 ? (
-            partners.map((partner, index) => (
-              <div className="partner-card" key={index}>
-                {/* Use Cloudinary URL directly */}
-                <img src={partner.imgpath} alt={partner.Name} className="ecosystem-partners-main-photo-direct" />
-                <div className="partner-name">{partner.Name}</div>
+    <div className="min-h-screen bg-white font-jakarta">
+      {/* 1. HERO SECTION */}
+      <section className="relative bg-black py-24 md:py-32 overflow-hidden border-b-[12px] border-[#9E0203]">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#9E0203]/5 skew-x-[-20deg] transform translate-x-1/3 pointer-events-none"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+            <div className="w-full md:w-6/12 space-y-8 text-left">
+              <div className="flex items-center space-x-4">
+                <div className="h-1 bg-[#9E0203] w-12"></div>
+                <span className="text-white/60 font-black uppercase tracking-[0.5em] text-[10px]">Collaborative Network</span>
               </div>
-            ))
-          ) : (
-            <p>No ecosystem partners available.</p>
-          )}
+              <h1 className="text-white text-5xl md:text-7xl font-black font-jakarta uppercase tracking-tighter leading-[0.85]">
+                Ecosystem <br />
+                <span className="text-[#9E0203]">Partners</span>
+              </h1>
+              <div className="space-y-4">
+                <div className="h-1 w-32 bg-white"></div>
+                <p className="text-gray-400 text-lg font-medium leading-relaxed max-w-xl">
+                  We <strong className="text-white">are backed</strong> by a dynamic ecosystem of educational institutions, incubation centres, innovation labs, and industry bodies that jointly contribute to capacity-building, research, and startup mentorship.
+                </p>
+              </div>
+            </div>
+
+            <div className="w-full md:w-6/12 relative">
+               {/* Visual */}
+              <div className="absolute -inset-4 border-2 border-white/5 rounded-3xl translate-x-4 translate-y-4"></div>
+              <div className="relative overflow-hidden rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] bg-[#111] aspect-[16/9] flex items-center justify-center group">
+                 <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black opacity-90"></div>
+                 <div className="relative z-10 text-center p-8">
+                    <svg className="w-24 h-24 text-[#9E0203] mx-auto mb-4 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                    <h3 className="text-white text-xl font-bold uppercase tracking-widest">Global<br/>Connect</h3>
+                 </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* 2. PARTNERS GRID */}
+      <section className="py-24 bg-white relative">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+            <div className="space-y-2">
+               <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px] block">Alliances</span>
+               <h2 className="text-4xl md:text-5xl font-black font-jakarta text-black uppercase tracking-tighter border-b-4 border-black inline-block pb-2">
+                 Strategic Partners
+               </h2>
+            </div>
+          </div>
+
+          <div className="relative min-h-[400px]">
+             {loading && (
+              <div className="flex items-center justify-center h-64">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#9E0203]"></div>
+              </div>
+            )}
+
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong className="font-bold">Error! </strong>
+                <span className="block sm:inline">{error}</span>
+              </div>
+            )}
+
+            {!loading && !error && partners.length === 0 && (
+               <div className="text-center py-20 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+                  <p className="text-gray-400 font-black uppercase tracking-widest">No ecosystem partners found.</p>
+               </div>
+            )}
+
+            {!loading && !error && partners.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {partners.map((partner, index) => (
+                  <div key={index} className="group bg-white border border-gray-100 hover:border-[#9E0203] transition-all duration-300 p-8 flex flex-col items-center justify-center aspect-square shadow-sm hover:shadow-xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-gray-50 -mr-8 -mt-8 rounded-full transition-transform group-hover:scale-[10] group-hover:bg-[#9E0203]/5 duration-500 ease-in-out"></div>
+                    
+                    <div className="relative z-10 w-full h-full flex items-center justify-center p-4">
+                        <img 
+                          src={partner.imgpath} 
+                          alt={partner.Name} 
+                          className="max-w-full max-h-full object-contain transition-all duration-300 transform group-hover:scale-110 mx-auto" 
+                        />
+                    </div>
+                    
+                    <div className="relative z-10 mt-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute bottom-4 w-full">
+                        <span className="text-[#9E0203] text-xs font-bold uppercase tracking-widest">{partner.Name}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. CALL TO ACTION */}
+      <section className="bg-gray-50 py-24 border-t border-gray-200">
+         <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-black mb-6">Join The Network</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-10 text-lg">
+               Become part of a thriving ecosystem driving change and innovation.
+            </p>
+            <a href="/contact" className="inline-block bg-[#9E0203] text-white px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-black transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+               Connect Now
+            </a>
+         </div>
+      </section>
     </div>
   );
 }
