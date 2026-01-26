@@ -28,6 +28,56 @@ export default function Index() {
     "VeeGamma Logo Design in Gradient__endoftext__ - Vanshika.png"
   ];
 
+  const studentNames = [
+  { "FounderName": "Mr. RAJAT SONI", "StartupName": "V2R AUTOINFINITE PRIVATE LIMITED", "Story": "VentureNest provided the critical infrastructure we needed to prototype our automotive solutions. The mentorship on IP rights was invaluable." },
+  { "FounderName": "Mr. Akash Shrivastava", "StartupName": "Lorro Digital Pvt. Ltd.", "Story": "The networking opportunities at VentureNest helped us secure our first three major clients. It's the perfect launchpad for digital ventures." },
+  { "FounderName": "Mr. Vishal", "StartupName": "Jagdev Organics Pvt Ltd", "Story": "From lab access to market connect, VentureNest supported our organic product journey every step of the way. Truly a transformative experience." },
+  { "FounderName": "Mr Harrish Babber", "StartupName": "Escapekar", "Story": "Escapekar grew from a concept to a platform thanks to the business modeling workshops and funding guidance at VentureNest." },
+  { "FounderName": "Mr. Narinder Singh", "StartupName": "Nhanks Waste Recyclers Pvt.Ltd", "Story": "Sustainable solutions need specialized support. VentureNest's focus on social impact startups gave us the push we needed." },
+  { "FounderName": "Mr Karan Kumar Aggrawal", "StartupName": "Indi Tech", "Story": "The technical mentorship here is unmatched. We scaled our tech stack and team efficiently under the guidance of industry experts." },
+  { "FounderName": "Mr. Jaskaranpreet Singh", "StartupName": "Juniva Organics", "Story": "Juniva Organics found its footing here. The incubation support helped us navigate regulatory challenges and reach the market faster." },
+  { "FounderName": "Mr. Tanzil Arshad Khan", "StartupName": "Edshire Global Skills Pvt. Ltd.", "Story": "Edshire's vision to upskill the workforce was amplified by VentureNest's strategic partnerships and connection to educational networks." },
+  { "FounderName": "Ms. Arshpreet Ahluwalia", "StartupName": "Juara Organics", "Story": "The supportive environment at VentureNest allowed us to experiment and refine our products with confidence. A great place to grow." },
+  { "FounderName": "Mr. Vivek Kumar", "StartupName": "Groming Young Minds Innovative Pvt. Ltd" },
+  { "FounderName": "Mr. Nirdosh Arora", "StartupName": "Ashab Group" },
+  { "FounderName": "Mr. Ashish Chhabra", "StartupName": "EDS Wagon Tech Pvt. Ltd" },
+  { "FounderName": "Mr. Anand Kumar", "StartupName": "Kulhad" },
+  { "FounderName": "Mr. Risahbh Naithani", "StartupName": "Veritex Innovations" },
+  { "FounderName": "Mr. Shreyansh Tiwari", "StartupName": "Tarang" },
+  { "FounderName": "Mr. Yuvraj Bhadauriya", "StartupName": "Armbot" },
+  { "FounderName": "Mr. Surya N", "StartupName": "NIL" },
+  { "FounderName": "Mr. Shivang Tiwari", "StartupName": "Techealth Apex Pvt. Ltd" },
+  { "FounderName": "Mr. Divyansh Sood", "StartupName": "Videlec" },
+  { "FounderName": "Mr. Tejinder Pal Singh Jassal", "StartupName": "Dulcimer Innovations Pvt. Ltd." },
+  { "FounderName": "Mr. Pratham Arora", "StartupName": "Start Spark Pvt. Ltd." },
+  { "FounderName": "Mr. Harkanwar Singh", "StartupName": "Tics Food Works Pvt. Ltd." },
+  { "FounderName": "Mr. Anshul Sethi", "StartupName": "TrashTech" },
+  { "FounderName": "Mr. Pulkesh Gautam", "StartupName": "Kakumei" },
+  { "FounderName": "Mr. Gurwant Singh", "StartupName": "B.G. Innovatech Pvt. Ltd." },
+  { "FounderName": "Iresh Kumar Singla", "StartupName": "Apna Mandir" },
+  { "FounderName": "Pulkesh Gautam", "StartupName": "Vidyutam Verde NCESOL Pvt. Ltd." },
+  { "FounderName": "Nripen Kumar", "StartupName": "Neuralink" },
+  { "FounderName": "Mr. Aditya Raj Saxena", "StartupName": "ANTHRONEX" },
+  { "FounderName": "Rishi Raj Dutta", "StartupName": "Aastra" },
+  { "FounderName": "Jaskaran Singh", "StartupName": "HIKK" },
+  { "FounderName": "Navneet Yaduvanshi", "StartupName": "Aasyra" },
+  { "FounderName": "Dr. Varsha Grover", "StartupName": "NA(Healing Waves)" },
+  { "FounderName": "Mr. Parag Shrivastava", "StartupName": "Tech-She" },
+  { "FounderName": "Mr. Pranshu", "StartupName": "Defenciq Tech" },
+  { "FounderName": "Ms. Ritika", "StartupName": "NA( Mosquito Repellent Accessories)" },
+  { "FounderName": "Dr. Swati Sharma", "StartupName": "SVN SCIENTIFIC VISION PRIVATE LIMITED" },
+  { "FounderName": "Mr. Vedant Ashok Daware", "StartupName": "Frii Jal" },
+  { "FounderName": "Ms. Vanshika", "StartupName": "Vee Gamma" },
+  { "FounderName": "Mr. Kunwar Singh", "StartupName": "NA(Dual Battery Technology)" },
+  { "FounderName": "Mr. MD Mustafa Yusuf", "StartupName": "BookEvm" },
+  { "FounderName": "Shivam Chauhan", "StartupName": "Stoc ML" },
+  { "FounderName": "Shekhar Kashyap", "StartupName": "UnifHub" },
+  { "FounderName": "Aditya Raj", "StartupName": "A Bagwani" },
+  { "FounderName": "Abhishek Sharma", "StartupName": "The Hard Millenium" },
+  { "FounderName": "Aditya Raj", "StartupName": "NMAK (No More Andha Kannon)" },
+  { "FounderName": "Moinak Dey", "StartupName": "Rheonix" }
+]
+
   return (
     <div className="min-h-screen bg-white font-jakarta">
       {/* Top Banner */}
@@ -111,7 +161,7 @@ export default function Index() {
             {/* Stats Grid */}
             <div className="bg-gray-100 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-brand-red text-4xl font-bold mb-2">80 lakhs+</div>
+                <div className="text-brand-red text-4xl font-bold mb-2">1 Crore+</div>
                 <div className="text-brand-dark text-sm">Of funding Granted to the startups</div>
               </div>
               <div className="text-center border-l border-black/20 pl-4">
@@ -142,14 +192,14 @@ export default function Index() {
       <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-4 mb-8 text-center">
            <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span>
-           <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Incubated Startups</h3>
+           <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Incubated Partners</h3>
         </div>
         
         <div className="relative w-full overflow-hidden group">
           <div className="flex gap-16 items-center animate-scroll whitespace-nowrap min-w-full">
               {/* Duplicate list 3 times to ensure smooth scrolling on wide screens */}
               {[...startupLogos, ...startupLogos, ...startupLogos].map((logo, idx) => (
-                  <div key={idx} className="flex-shrink-0 w-32 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 hover:scale-110">
+                  <div key={idx} className="flex-shrink-0 w-32 h-24 flex items-center justify-center transition-all duration-500 opacity-60 hover:opacity-100 hover:scale-110">
                     <img 
                       src={`/assets/Start-up-logos/${logo}`} 
                       alt="Startup Logo" 
@@ -180,10 +230,10 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: 'Suraj Yadav', company: 'Paloalto', package: '1 Crore/PA', image: '/assets/succes-1.jpeg', logo: '/assets/Start-up-logos/Techealth_logo - TecHealth.PNG' },
-              { name: 'Omm Kumar', company: 'TechHealth', package: '44 LPA', image: '/assets/success-2.jpeg', logo: '/assets/Start-up-logos/Techealth_logo - TecHealth.PNG' },
-              { name: 'Anmol Bhateja', company: 'V2R', package: '45.5 LPA', image: '/assets/success-3.jpeg', logo: '/assets/GalleryImages/V2R.jpg' },
-              { name: 'Anmol Bhateja', company: 'Amazon', package: '45.5 LPA', image: '/assets/success-3.jpeg', logo: '/assets/GalleryImages/V2R.jpg' },
+              { name: 'Suraj Yadav', company: 'Paloalto', package: '4 Lakhs', image: '/assets/success-1.jpeg', logo: '/assets/Start-up-logos/Techealth_logo - TecHealth.PNG' },
+              { name: 'Omm Kumar', company: 'TechHealth', package: '2.5 Lakhs', image: '/assets/success-2.jpeg', logo: '/assets/Start-up-logos/Logo - Harris Babbar.png' },
+              { name: 'Anmol Bhateja', company: 'V2R', package: '3 Lakhs', image: '/assets/success-3.jpeg', logo: '/assets/GalleryImages/V2R.jpg' },
+              { name: 'Anmol Bhateja', company: 'Amazon', package: '3 Lakhs', image: '/assets/success-3.jpeg', logo: '/assets/GalleryImages/V2R.jpg' },
               // { name: 'Simran Saini', company: 'Autodesk', package: '33 LPA', image: '/assets/success-4.jpeg', logo: '/assets/autodesk.png' },
             ].map((student, idx) => (
               <div key={idx} className="relative bg-gray-800 h-[530px] overflow-hidden group">
@@ -191,7 +241,7 @@ export default function Index() {
                 {/* Overlay removed as requested */}
                 
                 <div className="absolute top-0 right-0 bg-brand-red rounded-bl-lg p-4">
-                  <div className="text-white text-xs mb-1">Salary Package</div>
+                  <div className="text-white text-xs mb-1">Funding</div>
                   <div className="text-white font-bold text-2xl">{student.package}</div>
                 </div>
 
@@ -201,7 +251,7 @@ export default function Index() {
 
                 <div className="absolute bottom-8 left-8">
                   <div className="text-white text-4xl font-bold mb-2">{student.name}</div>
-                  <div className="text-white text-sm">- Placed in {student.company}</div>
+                  <div className="text-white text-sm">~{student.company}</div>
                 </div>
               </div>
             ))}
@@ -227,13 +277,13 @@ export default function Index() {
 
               <div className="space-y-6 text-lg leading-relaxed">
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer. took a galley of type and scrambled it to make a type specimen book.
+                  Recognized as a Technology Business Incubator (TBI), CGC VentureNest offers specialized support and advanced infrastructure for tech-driven startups. Our TBI status enables startups to access exclusive government grants, funding schemes and a wide range of benefits designed to accelerate innovation and growth.
                 </p>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printe. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Beyond funding, we provide a collaborative ecosystem where founders connect with industry leaders, alumni network, and fellow entrepreneurs. Our mentorship programs are tailored to guide startups through every stage of their journey, from ideation and business modeling to market entry and scaling.
                 </p>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                  With state-of-the-art co-working spaces, dedicated research labs, and regular pitch events, VentureNest ensures that every startup has the resources they need to thrive. We are committed to fostering a culture of experimentation and risk-taking, empowering students to transform their groundbreaking ideas into viable, sustainable businesses.
                 </p>
               </div>
             </div>
@@ -404,34 +454,35 @@ export default function Index() {
         <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-3xl ml-auto text-white">
             <h2 className="text-5xl font-bold font-jakarta mb-8">
-              North India's Fastest-<br />Growing Institute
+              Pioneering Innovation<br />in North India
             </h2>
             
             <p className="text-2xl mb-12 leading-relaxed">
-              North India's fastest-growing educational institutions, known for its rapid expansion and excellence in education. Established in 2012, it has achieved significant milestones, including NAAC A+ accreditation.
+              VentureNest stands as a beacon for aspiring entrepreneurs, fostering a dynamic ecosystem of innovation and risk-taking. We are not just an incubator; we are a launchpad for the next generation of industry disruptors, providing unparalleled access to resources, mentorship, and capital.
             </p>
 
             <div className="grid grid-cols-2 gap-8 mb-12">
               <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">5.3 LPA</div>
-                <div className="text-lg">Highest Package Offered</div>
+                <div className="text-5xl font-bold mb-2">70+</div>
+                <div className="text-lg">Startups Incubated</div>
               </div>
               <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">10000+</div>
-                <div className="text-lg">Placement Offers</div>
+                <div className="text-5xl font-bold mb-2">1 Cr+</div>
+                <div className="text-lg">Funding Raised</div>
               </div>
               <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">1200+</div>
-                <div className="text-lg">Recruiters</div>
+                <div className="text-5xl font-bold mb-2">50+</div>
+                <div className="text-lg">Corporate Partners</div>
               </div>
               <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">50 LPA</div>
-                <div className="text-lg">Package Offered by 9+ Companies</div>
+                <div className="text-5xl font-bold mb-2">200+</div>
+                <div className="text-lg">Mentors & Experts</div>
               </div>
             </div>
           </div>
         </div>
       </section>
+      
 
       {/* Student Stories */}
       <section className="bg-white py-20">
@@ -442,7 +493,7 @@ export default function Index() {
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((_, idx) => (
+            {studentNames.slice(0, 8).map((student, idx) => (
               <div key={idx} className="bg-gray-100 p-8 relative">
                 <svg className="absolute top-8 left-8 w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 40 40">
                   <path fillRule="evenodd" clipRule="evenodd" d="M14.8665 30.824C13.1838 31.368 11.2425 31.3573 9.65584 30.544C5.99184 28.6613 4.40517 23.808 5.87984 18.6666C6.54117 16.36 7.7065 14.12 10.1705 11.8613C12.6345 9.59998 16.0532 8.26665 17.6372 8.26665C17.7705 8.26453 17.9029 8.28874 18.0268 8.33788C18.1507 8.38702 18.2637 8.46014 18.3594 8.55304C18.455 8.64593 18.5313 8.75678 18.584 8.87924C18.6367 9.00169 18.6648 9.13334 18.6665 9.26665C18.6665 9.81865 18.1972 10.2666 17.6372 10.2666C15.8265 10.2666 14.2078 11.2533 12.2905 12.704C10.8238 13.816 9.67717 15.2373 9.04517 16.4746C7.83184 18.8426 7.79184 22.1813 9.75183 23.0693C10.2069 22.5528 10.7677 22.1403 11.3962 21.8596C12.0247 21.579 12.7062 21.4367 13.3945 21.4426C16.5945 21.4426 18.4798 24.016 18.3972 26.3466C18.3198 28.5733 16.9038 30.16 14.8665 30.824ZM30.8665 30.824C29.1838 31.368 27.2425 31.3573 25.6558 30.544C21.9918 28.6613 20.4052 23.808 21.8798 18.6666C22.5412 16.36 23.7065 14.12 26.1705 11.8613C28.6345 9.59998 32.0532 8.26665 33.6372 8.26665C33.7705 8.26453 33.9029 8.28874 34.0268 8.33788C34.1507 8.38702 34.2637 8.46014 34.3594 8.55304C34.455 8.64593 34.5313 8.75678 34.584 8.87924C34.6367 9.00169 34.6648 9.13334 34.6665 9.26665C34.6665 9.81865 34.1972 10.2666 33.6372 10.2666C31.8265 10.2666 30.2078 11.2533 28.2905 12.704C26.8238 13.816 25.6772 15.2373 25.0452 16.4746C23.8318 18.8426 23.7918 22.1813 25.7518 23.0693C26.6932 22.04 27.9225 21.4426 29.3945 21.4426C32.5945 21.4426 34.4798 24.016 34.3972 26.3466C34.3198 28.5733 32.9038 30.16 30.8665 30.824Z" fillOpacity="0.4"/>
@@ -450,112 +501,23 @@ export default function Index() {
                 
                 <div className="mt-16 mb-6">
                   <p className="text-brand-dark leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo.
+                    "{student.Story}"
                   </p>
                 </div>
 
                 <div className="flex items-center space-x-4 pt-6 border-t border-gray-400">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full"></div>
+                  <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-gray-600">
+                    {student.FounderName.charAt(0)}
+                  </div>
                   <div>
-                    <div className="text-brand-red font-bold">Megha Kwatra</div>
-                    <div className="text-gray-600 text-sm">Placed in Adobe</div>
+                    <div className="text-brand-red font-bold">{student.FounderName}</div>
+                    <div className="text-gray-600 text-sm font-medium">Founder, {student.StartupName}</div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+            ))}</div>
+      </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-brand-dark text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            {/* About */}
-            <div>
-              <img src="https://api.builder.io/api/v1/image/assets/TEMP/0f7026c13753e8627232c3949530eba492fe0048?width=356" alt="CGC Logo" className="h-20 mb-6" />
-              <h3 className="text-brand-red-light text-lg font-bold mb-4">About Us</h3>
-              <p className="text-sm leading-relaxed text-justify">
-                Welcome to CGC University, Mohali, one of the best University in North India known for delivering excellent placements in top-ranked companies.
-              </p>
-              <p className="text-sm leading-relaxed text-justify mt-4">
-                We offer various Undergraduate and Postgraduate Courses like B.Tech, BCA, BBA, B.Com, Law, Journalism, Pharmacy, Fashion Designing, Paramedical Science, MBA, MCA at affordable fees in Chandigarh.
-              </p>
-            </div>
-
-            {/* Apply Here */}
-            <div>
-              <h3 className="text-brand-red-light text-lg font-bold mb-4">Apply Here</h3>
-              <ul className="space-y-2 text-sm underline">
-                <li><a href="#" className="hover:text-brand-red-light">Admissions</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">Online Admission</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">How to Apply?</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">Education Loan</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">CGCUET Scholarship</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">Placements</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">Hostels</a></li>
-              </ul>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h3 className="text-brand-red-light text-lg font-bold mb-4">Quick Links</h3>
-              <ul className="space-y-2 text-sm underline">
-                <li><a href="#" className="hover:text-brand-red-light">International Tie Ups</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">CGC University Mohali Brochure 2025-26</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">Careers</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">Gallery</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">News</a></li>
-                <li><a href="#" className="hover:text-brand-red-light">Events</a></li>
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h3 className="text-brand-red-light text-lg font-bold mb-4">Contact Us</h3>
-              <div className="space-y-4 text-sm">
-                <p>CGC University, State Highway 12A, Chandigarh-Sirhind Road, Sahibzada Ajit Singh Nagar, Punjab 140307</p>
-                
-                <div>
-                  <div className="text-brand-red-light font-semibold">Toll Free No:</div>
-                  <a href="tel:18005005005" className="underline">1800-500-5005</a>
-                </div>
-
-                <div>
-                  <div className="text-brand-red-light font-semibold">Email:</div>
-                  <a href="mailto:info@cgc.ac.in" className="underline">info@cgc.ac.in</a>
-                </div>
-
-                <div className="flex space-x-3 pt-4">
-                  {['facebook', 'twitter', 'linkedin', 'instagram', 'youtube'].map((social) => (
-                    <a key={social} href="#" className="w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
-                      <span className="sr-only">{social}</span>
-                      <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" />
-                      </svg>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Footer */}
-          <div className="border-t border-white/20 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <div className="flex space-x-6 text-sm opacity-50">
-                <a href="#" className="hover:opacity-100">Privacy policy</a>
-                <a href="#" className="hover:opacity-100">Terms of use</a>
-                <a href="#" className="hover:opacity-100">Refund policy</a>
-                <a href="#" className="hover:opacity-100">FAQ</a>
-              </div>
-              <div className="text-sm opacity-50">
-                Copyright © 2025 CGC University (Mohali)
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
