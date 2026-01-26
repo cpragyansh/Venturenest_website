@@ -6,6 +6,7 @@ import Incubated_startups_rendering from '../Rendering_components/Incubated_star
 import Incubated_venture_highlight from '../Rendering_components/Incubated_venture_highlight';
 import Council_highlight from '../Rendering_components/Council_highlight';
 import Partner_highlight from '../Rendering_components/Partner_highlight';
+import StudentStories from './StudentStories';
 
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
