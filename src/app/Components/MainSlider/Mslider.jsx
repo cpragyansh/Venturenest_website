@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Box, IconButton, Stack, Typography, useTheme, useMediaQuery } from '@mui/material';
+import { Box, IconButton, Stack, useTheme, useMediaQuery } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -31,22 +31,16 @@ const Mslider = () => {
     enter: (direction) => ({
       x: direction > 0 ? '100%' : '-100%',
       opacity: 0,
-      scale: 1.1,
-      filter: 'blur(10px)',
     }),
     center: {
       zIndex: 1,
       x: 0,
       opacity: 1,
-      scale: 1,
-      filter: 'blur(0px)',
     },
     exit: (direction) => ({
       zIndex: 0,
       x: direction < 0 ? '100%' : '-100%',
       opacity: 0,
-      scale: 0.9,
-      filter: 'blur(10px)',
     }),
   };
 
@@ -80,14 +74,10 @@ const Mslider = () => {
       sx={{
         position: 'relative',
         width: '100%',
-        height: { xs: '300px', sm: '400px', md: '500px', lg: '650px' },
+        height: { xs: '300px', sm: '400px', md: '500px', lg: '800px' },
         borderRadius: { xs: 0, md: 0 }, // Removed border radius for a more "full width" immersive look
         overflow: 'hidden',
-        boxShadow: '0 30px 60px rgba(0,0,0,0.15)',
-        backgroundColor: '#0a0a0a',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#000',
       }}
     >
       <AnimatePresence initial={false} custom={direction} mode="popLayout">
@@ -99,26 +89,14 @@ const Mslider = () => {
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "spring", stiffness: 260, damping: 30 },
-            opacity: { duration: 0.5 },
-            scale: { duration: 0.7 },
-            filter: { duration: 0.4 }
-          }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = offset.x;
-            if (swipe < -100) handleManualNav(nextSlide);
-            else if (swipe > 100) handleManualNav(prevSlide);
+            x: { type: "tween", duration: 0.5, ease: "easeInOut" },
+            opacity: { duration: 0.5 }
           }}
           style={{
             position: 'absolute',
             width: '100%',
             height: '100%',
-            cursor: 'grab',
           }}
-          whileTap={{ cursor: 'grabbing' }}
         >
           <Box
             component="img"
@@ -129,120 +107,98 @@ const Mslider = () => {
               height: '100%',
               objectFit: 'cover',
               objectPosition: 'center',
-              pointerEvents: 'none',
-              transition: 'transform 0.5s ease-out',
             }}
           />
-          {/* Decorative Overlay for Depth */}
+          {/* Main Overlay */}
           <Box
             sx={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(rgba(0,0,0,0.2) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.4) 100%)',
-              pointerEvents: 'none',
+              background: 'linear-gradient(rgba(0,0,0,0.3) 0%, transparent 50%, rgba(0,0,0,0.5) 100%)',
             }}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Floating Navigation Panel - Bottom Right */}
-      <Stack
-        direction="row"
-        alignItems="center"
-        sx={{
-          position: 'absolute',
-          bottom: { xs: 20, md: 40 },
-          right: { xs: 20, md: 40 },
-          zIndex: 10,
-          background: 'rgba(15, 15, 15, 0.6)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          padding: { xs: '10px 16px', md: '12px 24px' },
-          borderRadius: 100,
-          border: '1px solid rgba(255, 255, 255, 0.15)',
-          boxShadow: '0 15px 45px rgba(0,0,0,0.4)',
-        }}
-      >
-        {/* Slide Counter */}
-        <Typography 
-          sx={{ 
-            color: 'rgba(255,255,255,0.9)', 
-            fontSize: '0.85rem', 
-            fontWeight: 600, 
-            fontFamily: 'monospace',
-            mr: 2,
-            minWidth: '45px'
-          }}
-        >
-          {String(currentIndex + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
-        </Typography>
-
-        {/* Animated Dots Trail */}
-        <Stack direction="row" spacing={1.2} sx={{ mr: { xs: 2, md: 3 }, px: 1 }}>
-          {slides.map((_, index) => (
-            <motion.div
-              key={index}
-              initial={false}
-              animate={{
-                width: currentIndex === index ? (isMobile ? 24 : 36) : 8,
-                backgroundColor: currentIndex === index ? '#fff' : 'rgba(255,255,255,0.25)',
-              }}
-              onClick={() => {
-                setDirection(index > currentIndex ? 1 : -1);
-                setCurrentIndex(index);
-              }}
-              style={{
-                height: 8,
-                borderRadius: 4,
-                cursor: 'pointer',
-                transition: 'background-color 0.3s'
-              }}
-              whileHover={{ backgroundColor: 'rgba(255,255,255,0.5)' }}
-            />
-          ))}
-        </Stack>
-
-        {/* Separator */}
-        <Box sx={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.15)', mr: 2, display: { xs: 'none', sm: 'block' } }} />
-
-        {/* Arrow Buttons */}
-        <Stack direction="row" spacing={0.5}>
+      {/* Side Navigation Arrows - Simple UX */}
+      {!isMobile && (
+        <>
           <IconButton
             onClick={() => handleManualNav(prevSlide)}
             sx={{
+              position: 'absolute',
+              left: 30,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 10,
               color: '#fff',
-              backgroundColor: 'rgba(255,255,255,0.05)',
-              '&:hover': { backgroundColor: 'rgba(255,255,255,0.15)', transform: 'translateX(-2px)' },
-              width: { xs: 32, md: 40 },
-              height: { xs: 32, md: 40 },
-              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+              backgroundColor: 'rgba(0,0,0,0.3)',
+              '&:hover': { backgroundColor: 'rgba(0,0,0,0.5)' },
+              width: 50,
+              height: 50,
             }}
           >
-            <ArrowBackIosNewIcon sx={{ fontSize: { xs: 14, md: 18 } }} />
+            <ArrowBackIosNewIcon />
           </IconButton>
           <IconButton
             onClick={() => handleManualNav(nextSlide)}
             sx={{
+              position: 'absolute',
+              right: 30,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 10,
               color: '#fff',
-              backgroundColor: 'rgba(255,255,255,0.05)',
-              '&:hover': { backgroundColor: 'rgba(255,255,255,0.15)', transform: 'translateX(2px)' },
-              width: { xs: 32, md: 40 },
-              height: { xs: 32, md: 40 },
-              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+              backgroundColor: 'rgba(0,0,0,0.3)',
+              '&:hover': { backgroundColor: 'rgba(0,0,0,0.5)' },
+              width: 50,
+              height: 50,
             }}
           >
-            <ArrowForwardIosIcon sx={{ fontSize: { xs: 14, md: 18 } }} />
+            <ArrowForwardIosIcon />
           </IconButton>
-        </Stack>
+        </>
+      )}
+
+      {/* Bottom Center Dots */}
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{
+          position: 'absolute',
+          bottom: 40,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 10,
+        }}
+      >
+        {slides.map((_, index) => (
+          <Box
+            key={index}
+            onClick={() => {
+              setDirection(index > currentIndex ? 1 : -1);
+              setCurrentIndex(index);
+            }}
+            sx={{
+              width: currentIndex === index ? 30 : 10,
+              height: 10,
+              borderRadius: 5,
+              backgroundColor: currentIndex === index ? '#9E0203' : 'rgba(255,255,255,0.5)',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+            }}
+          />
+        ))}
       </Stack>
 
-      {/* Progress Bar (Optional but Premium) */}
+      {/* Progress Bar - Red Theme */}
       <Box
         sx={{
           position: 'absolute',
           bottom: 0,
           left: 0,
-          height: 3,
-          background: 'rgba(255,255,255,0.3)',
+          height: 4,
+          background: 'rgba(255,255,255,0.1)',
           width: '100%',
           zIndex: 5,
         }}
@@ -254,7 +210,7 @@ const Mslider = () => {
           transition={{ duration: 6, ease: "linear" }}
           style={{
             height: '100%',
-            background: '#fff',
+            background: '#9E0203', // Changed to Brand Red
             originX: 0,
           }}
         />
