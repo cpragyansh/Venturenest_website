@@ -265,7 +265,7 @@ export default function EventsPage() {
                 <div className="h-1 bg-[#9E0203] w-12"></div>
                 <span className="text-white/60 font-black uppercase tracking-[0.5em] text-[10px]">Upcoming Experiences</span>
               </div>
-              <h1 className="text-white text-6xl md:text-8xl font-black font-jakarta uppercase tracking-tighter leading-[0.8]">
+              <h1 className="text-white text-5xl md:text-7xl font-black font-jakarta uppercase tracking-tighter leading-[0.8]">
                 EVENT <br />
                 <span className="text-[#9E0203]">CHRONICLE</span>
               </h1>
