@@ -8,7 +8,7 @@ const CouncilSection = ({ category, title, description, iconLetter, alignRight }
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`https://venturenest.onrender.com/council-members?category=${category}`)
+    axios.get(`https://venture-nest-backend.onrender.com/council-members?category=${category}`)
       .then(response => {
         setMembers(response.data);
         setLoading(false);

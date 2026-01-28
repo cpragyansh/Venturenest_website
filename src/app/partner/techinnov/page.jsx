@@ -8,7 +8,7 @@ export default function TechInnovCouncil() {
 
   useEffect(() => {
     // Fetch council members from backend
-    axios.get('https://venturenest.onrender.com/council-members?category=techInnov')
+    axios.get('https://venture-nest-backend.onrender.com/council-members?category=techInnov')
       .then(response => {
         setMembers(response.data);
         setLoading(false);

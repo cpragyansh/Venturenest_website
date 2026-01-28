@@ -34,7 +34,7 @@ const Incubated_venture_highlight = () => {
     useEffect(() => {
         const fetchStartups = async () => {
             try {
-                const response = await axios.get('https://venturenest.onrender.com/getstartup');
+                const response = await axios.get('https://venture-nest-backend.onrender.com/getstartup');
                 const data = response.data;
 
                 // Map API data to component structure and assign logos from pool

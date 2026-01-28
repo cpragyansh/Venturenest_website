@@ -20,7 +20,7 @@ const HeroCarousel = () => {
     useEffect(() => {
         const fetchSlides = async () => {
             try {
-                const response = await axios.get('https://venturenest.onrender.com/images');
+                const response = await axios.get('https://venture-nest-backend.onrender.com/images');
                 const data = response.data[0];
                 
                 // Construct slide data matching user constraints

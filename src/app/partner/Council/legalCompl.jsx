@@ -8,7 +8,7 @@ export default function LegalComplianceCouncil() {
 
   useEffect(() => {
     // Fetch Legal & Compliance council members from backend
-    axios.get('https://venturenest.onrender.com/council-members?category=legalCompl')
+    axios.get('https://venture-nest-backend.onrender.com/council-members?category=legalCompl')
       .then(response => {
         setMembers(response.data);
       })

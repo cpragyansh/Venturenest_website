@@ -192,7 +192,7 @@ export default function ProgramsPage() {
   useEffect(() => {
     const fetchPrograms = async () => {
       try {
-        const response = await axios.get("https://venturenest.onrender.com/programs");
+        const response = await axios.get("https://venture-nest-backend.onrender.com/programs");
         setPrograms(response.data);
       } catch (error) {
         console.error("Error fetching programs:", error);

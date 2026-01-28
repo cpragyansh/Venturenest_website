@@ -24,7 +24,7 @@ export default function EventDetails() {
     useEffect(() => {
         const fetchEvent = async () => {
             try {
-                const response = await axios.get("https://venturenest.onrender.com/events");
+                const response = await axios.get("https://venture-nest-backend.onrender.com/events");
                 const events = response.data;
                 const index = events.findIndex(
                     (e) => createSlug(e.eventName) === eventName

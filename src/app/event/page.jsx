@@ -183,7 +183,7 @@ export default function EventsPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("https://venturenest.onrender.com/events");
+        const response = await axios.get("https://venture-nest-backend.onrender.com/events");
         setEvents(response.data);
         setFilteredEvents(response.data);
       } catch (error) {

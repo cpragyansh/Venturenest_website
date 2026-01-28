@@ -29,7 +29,8 @@ const Partner_highlight = () => {
         const fetchPartners = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`https://venturenest.onrender.com/getpartner?category=${activeCategory}`);
+                // Using the endpoint found in existing pages
+                const response = await axios.get(`https://venture-nest-backend.onrender.com/getpartner?category=${activeCategory}`);
                 const data = response.data;
 
                 const mappedPartners = data.map((partner, index) => ({

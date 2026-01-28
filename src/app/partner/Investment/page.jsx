@@ -15,7 +15,7 @@ export default function Investment() {
   useEffect(() => {
     const fetchPartners = async () => {
       try {
-        const response = await axios.get("https://venturenest.onrender.com/getpartner?category=investor");
+        const response = await axios.get("https://venture-nest-backend.onrender.com/getpartner?category=investor");
         setPartners(response.data);
       } catch (err) {
         console.error("Error fetching partners:", err);

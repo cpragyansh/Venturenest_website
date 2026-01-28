@@ -24,7 +24,7 @@ export default function ProgramDetails() {
     useEffect(() => {
         const fetchProgram = async () => {
             try {
-                const response = await axios.get("https://venturenest.onrender.com/programs");
+                const response = await axios.get("https://venture-nest-backend.onrender.com/programs");
                 const programs = response.data;
                 const index = programs.findIndex(
                     (p) => createSlug(p.programName) === programName

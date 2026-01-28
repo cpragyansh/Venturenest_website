@@ -16,7 +16,7 @@ export default function GovCatalyst() {
     // Fetch investor partners from backend
     const fetchPartners = async () => {
       try {
-        const response = await axios.get("https://venturenest.onrender.com/getpartner?category=government");
+        const response = await axios.get("https://venture-nest-backend.onrender.com/getpartner?category=government");
         setPartners(response.data);
       } catch (err) {
         console.error("Error fetching partners:", err);
