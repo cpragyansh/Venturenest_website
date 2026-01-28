@@ -78,7 +78,7 @@ export default function VisionPage() {
       subtitle: "OUR PURPOSE",
       desc: "To empower early-stage ventures by providing structured mentorship, access to funding, cutting-edge infrastructure, and a collaborative ecosystem that fosters innovation and accelerates business growth.",
       extended: "Our mission is to bridge the gap between academic research and commercial viability, ensuring that the next generation of founders has the discipline, network, and tools required to navigate the complex global market.",
-      image: "/assets/mission-updated.jpg",
+      image: "/assets/block3.jpeg",
     }
   ];
 
