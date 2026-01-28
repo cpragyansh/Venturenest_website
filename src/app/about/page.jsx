@@ -152,7 +152,7 @@ export default function AboutPage() {
   const features = [
     { title: "Ecosystem", subtitle: "HOW WE WORK", image: "/assets/about-how-we-work.jpg", desc: "From ideation to IPO, we provide the complete roadmap for startups. Our comprehensive lifecycle support ensures every founder has the tools and mentorship needed.", stats: "End-to-End Support" },
     { title: "Impact", subtitle: "PROVEN RESULTS", image: "/assets/our-impact-img-photo.jpg", desc: "Over 70+ ventures incubated with funding opportunities up to ₹12 Cr. We take pride in building businesses that create real-world impact.", stats: "70+ Startups" },
-    { title: "Infrastructure", subtitle: "WORLD CLASS", image: "/assets/mission-updated.jpg", desc: "24/7 Co-working spaces and Maker's Labs designed to foster creativity round the clock with high-performance computing.", stats: "24/7 Access" },
+    { title: "Infrastructure", subtitle: "WORLD CLASS", image: "/assets/block3.jpeg", desc: "24/7 Co-working spaces and Maker's Labs designed to foster creativity round the clock with high-performance computing.", stats: "24/7 Access" },
     { title: "Network", subtitle: "GLOBAL REACH", image: "/assets/partners-section-hands-image.png", desc: "Partnerships with global accelerators bridge the gap between local innovation and global markets, providing unparalleled scale.", stats: "Global Partners" }
   ];
 
