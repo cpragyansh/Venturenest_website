@@ -11,28 +11,36 @@ import StudentStories from './StudentStories';
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const startupLogos = [
-    "1749710321866 - Aditya Raj Saxena.jpg",
-    "5(3 - Karan Agrawal.png",
-    "file_00000000fa6861f8b46d40c35e6646b9_conversation_id=67fe9c73-e260-8006-bab2-ec35ca4f9089 - Juara Organics.png",
-    "IMG-20231230-WA0023(2) - Anand Kumar.jpg",
-    "IMG-20250208-WA0007 - Shekhar kashyap.jpg",
-    "IMG-20250611-WA0000 - arpit kumar.jpg",
-    "IMG-20250612-WA0000 - JIGYASA GARG.jpg",
-    "IMG-20250612-WA0004 - Navneet Yaduvanshi.jpg",
-    "IMG-20250612-WA0004 - SHAGUN SHARMA.jpg",
-    "IMG-20250612-WA0005 - Mayank Dahiya.jpg",
-    "IMG_20250613_112419_040 - Vivek Singh.jpg",
-    "Logo - Harris Babbar.png",
-    "SAVE_20250611_152058 - Pulkesh Gautam.jpg",
-    "Screenshot_2025-03-06-23-58-39-73_6012fa4d4ddec268fc5c7112cbb265e7 - Aryan Mankotia.jpg",
-    "Screenshot_2025-06-12-18-15-12-052_com.whatsapp-edit - Vedant Daware.jpg",
-    "stacked wordmark black - ansh haritash.png",
-    "Techealth_logo - TecHealth.PNG",
-    "tHM LOGO - Abhishek Sharma.png",
-    "VeeGamma Logo Design in Gradient__endoftext__ - Vanshika.png"
-  ];
+  // const startupLogos = [
+  //   "1749710321866 - Aditya Raj Saxena.jpg",
+  //   "5(3 - Karan Agrawal.png",
+  //   "file_00000000fa6861f8b46d40c35e6646b9_conversation_id=67fe9c73-e260-8006-bab2-ec35ca4f9089 - Juara Organics.png",
+  //   "IMG-20231230-WA0023(2) - Anand Kumar.jpg",
+  //   "IMG-20250208-WA0007 - Shekhar kashyap.jpg",
+  //   "IMG-20250611-WA0000 - arpit kumar.jpg",
+  //   "IMG-20250612-WA0000 - JIGYASA GARG.jpg",
+  //   "IMG-20250612-WA0004 - Navneet Yaduvanshi.jpg",
+  //   "IMG-20250612-WA0004 - SHAGUN SHARMA.jpg",
+  //   "IMG-20250612-WA0005 - Mayank Dahiya.jpg",
+  //   "IMG_20250613_112419_040 - Vivek Singh.jpg",
+  //   "Logo - Harris Babbar.png",
+  //   "SAVE_20250611_152058 - Pulkesh Gautam.jpg",
+  //   "Screenshot_2025-03-06-23-58-39-73_6012fa4d4ddec268fc5c7112cbb265e7 - Aryan Mankotia.jpg",
+  //   "Screenshot_2025-06-12-18-15-12-052_com.whatsapp-edit - Vedant Daware.jpg",
+  //   "stacked wordmark black - ansh haritash.png",
+  //   "Techealth_logo - TecHealth.PNG",
+  //   "tHM LOGO - Abhishek Sharma.png",
+  //   "VeeGamma Logo Design in Gradient__endoftext__ - Vanshika.png"
+  // ];
 
+  const startupLogos = [
+    "TIE.jpeg",
+    "startup-india.jpeg",
+    "startup-punjab.jpeg",
+    "PHDCCI.jpeg",
+    "meity.jpeg",
+    "CII.jpeg",
+  ];
   const studentNames = [
     { "FounderName": "Mr. RAJAT SONI", "StartupName": "V2R AUTOINFINITE PRIVATE LIMITED", "Story": "At V2R, we’re not just disrupting the automotive sector; we’re revolutionizing it. Our mission is to empower both vehicle owners and automotive service businesses through advanced, technology-driven solutions that streamline operations, enhance efficiency, and drive sustainable growth." },
     { "FounderName": "Mr. Akash Shrivastava", "StartupName": "Lorro Digital Pvt. Ltd.", "Story": "The networking opportunities at VentureNest helped us secure our first three major clients. It's the perfect launchpad for digital ventures." },
@@ -117,11 +125,11 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="relative">
-              <div className="absolute -left-8 top-12">
+              {/* <div className="absolute -left-8 top-12">
                 <svg width="58" height="29" viewBox="0 0 58 29" fill="none">
                   <path d="M48.321 8.74875C45.6238 8.74875 44.3189 6.65379 43.0611 4.6313C41.8908 2.75375 40.7877 0.975009 38.6487 0.975009C36.5098 0.975009 35.4067 2.74716 34.2431 4.6313C32.9853 6.66038 31.6804 8.74875 28.9899 8.74875C26.2994 8.74875 24.9946 6.65379 23.73 4.6313C22.5597 2.75375 21.4566 0.975009 19.3176 0.975009C17.1787 0.975009 16.0756 2.74716 14.912 4.6313C13.6542 6.66038 12.3493 8.74875 9.65881 8.74875C6.96834 8.74875 5.66346 6.65379 4.40566 4.6313C3.2353 2.75375 2.1322 0.975009 0 0.975009V0C2.69721 0 3.99536 2.09495 5.25316 4.12403C6.42352 6.00159 7.52661 7.78033 9.65881 7.78033C11.791 7.78033 12.9008 6.00818 14.0645 4.12403C15.3223 2.09495 16.6272 0 19.3176 0C22.0081 0 23.313 2.09495 24.5775 4.12403C25.7479 6.00159 26.851 7.78033 28.9899 7.78033C31.1288 7.78033 32.2319 6.00818 33.4023 4.12403C34.6601 2.10154 35.965 0.0065843 38.6554 0.0065843C41.3459 0.0065843 42.6575 2.10155 43.9153 4.13063C45.0857 6.00818 46.1888 7.78691 48.3277 7.78691C50.4667 7.78691 51.5697 6.01477 52.7401 4.13063C53.9979 2.10155 55.3028 0.0065843 58 0.0065843V0.981603C55.8611 0.981603 54.758 2.75374 53.5876 4.63789C52.3298 6.66038 51.0249 8.75534 48.3277 8.75534L48.321 8.74875Z" fill="#9E0203" />
                 </svg>
-              </div>
+              </div> */}
 
               <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-6">
                 Welcome to CGC<br />Venturenest
@@ -158,15 +166,15 @@ export default function Index() {
 
             <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-4 mb-8 text-center">
-          <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span>
-          <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Incubated Partners</h3>
+          {/* <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span> */}
+          <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Our Government Partners </h3>
         </div>
 
         <div className="relative w-full overflow-hidden group">
           <div className="flex gap-16 items-center animate-scroll whitespace-nowrap min-w-full">
             {/* Duplicate list 3 times to ensure smooth scrolling on wide screens */}
             {[...startupLogos, ...startupLogos, ...startupLogos].map((logo, idx) => (
-              <div key={idx} className="flex-shrink-0 w-32 h-24 flex items-center justify-center transition-all duration-500 opacity-60 hover:opacity-100 hover:scale-110">
+              <div key={idx} className="flex-shrink-0 w-32 h-24 flex items-center justify-center transition-all duration-500 opacity-90 hover:opacity-100 hover:scale-110">
                 <img
                   src={`/assets/Start-up-logos/${logo}`}
                   alt="Startup Logo"
@@ -196,48 +204,81 @@ export default function Index() {
       {/* Stats Section */}
       <section className="bg-white py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl">
-            <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-8">
-              We Don't Just Promise<br />Growth—We Prove It.
-            </h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="max-w-2xl">
+              <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-8">
+                We Don't Just Promise<br />Growth—We Prove It.
+              </h2>
 
-            <p className="text-brand-dark text-lg leading-relaxed mb-12">
-              {/* Driven by the motto "Each One, One Job", CGC University, Mohali ensures every student secures desirable career opportunities with 86% placement rate, featuring 1,600+ offers from 650+ recruiters like Microsoft, Amazon, Deloitte and many more. */}
-              Driven by the vision of “Each One, One Job”,
-CGC University Mohali’s Technology Business Incubator TBI – Venture Nest empowers students and startups with funding, mentorship, incubation support, and industry exposure—transforming ideas into scalable ventures and successful careers.
-            </p>
-
-            {/* Stats Grid */}
-            <div className="bg-gray-100 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-brand-red text-4xl font-bold mb-2">1.5 Crore+</div>
-                <div className="text-brand-dark text-sm">Of funding Granted to the startups</div>
-              </div>
-              <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">100+</div>
-                <div className="text-brand-dark text-sm">Startups Incubated both physically and virtually</div>
-              </div>
-              <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">685+</div>
-                <div className="text-brand-dark text-sm">Patents published successfully</div>
-              </div>
-              <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">10+</div>
-                <div className="text-brand-dark text-sm">Unicorn Ventures are launched</div>
-              </div>
+              <p className="text-brand-dark text-lg leading-relaxed mb-12">
+                Driven by the vision of “Each One, One Job”, CGC University Mohali’s Technology Business Incubator (TBI) – Venture Nest empowers students and startups with funding, mentorship, incubation support, and industry exposure. We transform innovative ideas into scalable ventures and successful careers by providing a robust ecosystem that nurtures talent, fosters creativity, and bridges the gap between academia and industry. Our commitment goes beyond just starting up; we focus on sustainable growth, long-term success, and creating a lasting impact in the global startup landscape. Through our extensive network of mentors and investors, we ensure that every entrepreneur has the guidance and resources needed to navigate the complexities of the business world.
+              </p>
             </div>
 
-            {/* <button className="mt-12 bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-colors flex items-center space-x-2">
-              <span>Apply Now</span>
-              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                <path fillRule="evenodd" clipRule="evenodd" d="M22.731 12.0001L15.7662 18.9665L14.6334 17.8353L19.6686 12.8001L1.59976 12.8001L1.59976 11.2001L19.6686 11.2001L14.6334 6.16649L15.7662 5.03369L22.731 12.0001Z" />
-              </svg>
-            </button> */}
+            {/* Right Stats Grid (2x2) */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="text-center p-8 bg-brand-red rounded-3xl shadow-lg transform hover:scale-[1.02] transition-all duration-300">
+                <div className="text-white text-4xl font-bold mb-2">1.5 Crore+</div>
+                <div className="text-white/90 text-sm font-medium">Of funding Granted to the startups</div>
+              </div>
+              <div className="text-center p-8 bg-gray-50 rounded-3xl border border-gray-100 shadow-sm transform hover:scale-[1.02] transition-all duration-300">
+                <div className="text-brand-red text-4xl font-bold mb-2">100+</div>
+                <div className="text-brand-dark text-sm font-medium">Startups Incubated both physically and virtually</div>
+              </div>
+              <div className="text-center p-8 bg-gray-50 rounded-3xl border border-gray-100 shadow-sm transform hover:scale-[1.02] transition-all duration-300">
+                <div className="text-brand-red text-4xl font-bold mb-2">685+</div>
+                <div className="text-brand-dark text-sm font-medium">Patents published successfully</div>
+              </div>
+              <div className="text-center p-8 bg-brand-red rounded-3xl shadow-lg transform hover:scale-[1.02] transition-all duration-300">
+                <div className="text-white text-4xl font-bold mb-2">10+</div>
+                <div className="text-white/90 text-sm font-medium">Unicorn Ventures are launched</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
       
       <Council_highlight />
+
+      {/* Placement Records */}
+      <section className="bg-gray-50 py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-brand-red text-5xl font-bold font-jakarta text-center mb-4">
+            Our Outstanding Placement Record Over the Years
+          </h2>
+          <p className="text-brand-dark text-center mb-16">
+            Driven by our commitment to excellence, CGC University Mohali consistently achieves remarkable results. Our placement records showcase the talent of our students and the trust of world-class recruiters, ensuring a bright transition from academic learning to professional success.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <div>
+              <h3 className="text-brand-red text-2xl font-semibold font-lato mb-8">Companies recruiting at CGC Mohali (Jhanjeri)</h3>
+              <div className="bg-white p-8 rounded-lg">
+                {/* Simple chart placeholder */}
+                <div className="h-64 flex items-end justify-around space-x-2">
+                  {[200, 250, 310, 420, 550, 650, 800].map((height, idx) => (
+                    <div key={idx} className="flex-1 bg-brand-red/20 hover:bg-brand-red transition-colors" style={{ height: `${height / 10}%` }}></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-brand-red text-2xl font-semibold font-lato mb-8">Companies offering CTC 5 Lacs P.a. or above</h3>
+              <div className="bg-white p-8 rounded-lg">
+                {/* Simple chart placeholder */}
+                <div className="h-64 flex items-end justify-around space-x-2">
+                  {[150, 220, 290, 350, 480, 580, 700].map((height, idx) => (
+                    <div key={idx} className="flex-1 bg-brand-red/20 hover:bg-brand-red transition-colors" style={{ height: `${height / 10}%` }}></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Partner_highlight />
 
       {/* Company Logos */}
@@ -329,43 +370,6 @@ CGC University Mohali’s Technology Business Incubator TBI – Venture Nest emp
         </div>
       </section>
 
-      {/* Placement Records */}
-      <section className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-brand-red text-5xl font-bold font-jakarta text-center mb-4">
-            Our Outstanding Placement Record Over the Years
-          </h2>
-          <p className="text-brand-dark text-center mb-16">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <div>
-              <h3 className="text-brand-red text-2xl font-semibold font-lato mb-8">Companies recruiting at CGC Mohali (Jhanjeri)</h3>
-              <div className="bg-white p-8 rounded-lg">
-                {/* Simple chart placeholder */}
-                <div className="h-64 flex items-end justify-around space-x-2">
-                  {[200, 250, 310, 420, 550, 650, 800].map((height, idx) => (
-                    <div key={idx} className="flex-1 bg-brand-red/20 hover:bg-brand-red transition-colors" style={{ height: `${height / 10}%` }}></div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-brand-red text-2xl font-semibold font-lato mb-8">Companies offering CTC 5 Lacs P.a. or above</h3>
-              <div className="bg-white p-8 rounded-lg">
-                {/* Simple chart placeholder */}
-                <div className="h-64 flex items-end justify-around space-x-2">
-                  {[150, 220, 290, 350, 480, 580, 700].map((height, idx) => (
-                    <div key={idx} className="flex-1 bg-brand-red/20 hover:bg-brand-red transition-colors" style={{ height: `${height / 10}%` }}></div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Incubated_startups_rendering />
       <Incubated_venture_highlight />
