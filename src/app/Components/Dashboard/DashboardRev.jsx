@@ -213,29 +213,17 @@ export default function Index() {
                 We Prove It.
               </h2>
 
-            <p className="text-brand-dark text-lg leading-relaxed mb-12">
-              {/* Driven by the motto "Each One, One Job", CGC University, Mohali ensures every student secures desirable career opportunities with 86% placement rate, featuring 1,600+ offers from 650+ recruiters like Microsoft, Amazon, Deloitte and many more. */}
-              Driven by the vision of “Each One, One Job”,
-CGC University Mohali’s Technology Business Incubator TBI – Venture Nest empowers students and startups with funding, mentorship, incubation support, and industry exposure—transforming ideas into scalable ventures and successful careers.
-            </p>
-
-            {/* Stats Grid */}
-            <div className="bg-gray-100 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-brand-red text-4xl font-bold mb-2">26.5 Lakhs+</div>
-                <div className="text-brand-dark text-sm">Of funding Granted to the startups</div>
-              </div>
-              <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">100+</div>
-                <div className="text-brand-dark text-sm">Startups Incubated both physically and virtually</div>
-              </div>
-              <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">1000+</div>
-                <div className="text-brand-dark text-sm">Patents published successfully</div>
-              </div>
-              <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">10+</div>
-                <div className="text-brand-dark text-sm">Unicorn Ventures are launched</div>
+              <p className="text-brand-dark/80 text-lg leading-relaxed mb-6 font-medium">
+                Driven by the vision of <span className="text-brand-red font-bold">“Each One, One Job”</span>, CGC University Mohali’s Technology Business Incubator (TBI) – Venture Nest empowers students and startups with funding, mentorship, and industry exposure.
+              </p>
+              
+              <p className="text-brand-dark/70 text-base leading-relaxed mb-10">
+                We transform innovative ideas into scalable ventures by providing a robust ecosystem that bridges the gap between academia and industry. Our commitment goes beyond just starting up; we focus on sustainable growth, long-term success, and creating a lasting impact in the global startup landscape.
+              </p>
+              
+              <div className="flex items-center gap-4">
+                <div className="h-[2px] w-12 bg-brand-red"></div>
+                <span className="text-brand-dark text-xs font-black uppercase tracking-[0.2em] opacity-40">Impact Report 2024</span>
               </div>
             </div>
 
@@ -299,7 +287,6 @@ CGC University Mohali’s Technology Business Incubator TBI – Venture Nest emp
               </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
       
@@ -419,13 +406,9 @@ CGC University Mohali’s Technology Business Incubator TBI – Venture Nest emp
                   <div className="text-white font-bold text-2xl">{student.package}</div>
                 </div>
 
-                <div className="absolute top-4 left-4 w-28 h-8">
-  <img
-    src={student.logo}
-    alt=""
-    className="w-full h-auto object-contain"
-  />
-</div>
+                <div className="absolute top-8 left-4">
+                  <img src={student.logo} alt="" className="h-7" />
+                </div>
 
                 <div className="absolute bottom-8 left-8">
                   <div className="text-white text-4xl font-bold mb-2">{student.name}</div>
