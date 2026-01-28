@@ -4,19 +4,17 @@ import axios from 'axios';
 const Council_highlight = () => {
     // Categories for the sorting bar
     const categories = [
-        { id: 'advisory', label: 'Advisory' },
-        { id: 'investfund', label: 'Investment' },
-        { id: 'techInnov', label: 'Tech & Innovation' },
-        { id: 'legalCompl', label: 'Legal & Compliance' },
-        { id: 'mentorship', label: 'Mentorship' }
+        { id: 'advisory', label: 'Advisory', number: '01' },
+        { id: 'investfund', label: 'Investment', number: '02' },
+        { id: 'techInnov', label: 'Tech & Innovation', number: '03' },
+        { id: 'legal Compliance', label: 'Legal & Compliance', number: '04' },
+        { id: 'mentorship', label: 'Mentorship', number: '05' }
     ];
 
     const [activeCategory, setActiveCategory] = useState('advisory');
     const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState(null);
-    const [isPaused, setIsPaused] = useState(false);
-    const scrollRef = useRef(null);
 
     // Fetch data from API based on category
     useEffect(() => {
@@ -26,13 +24,12 @@ const Council_highlight = () => {
                 const response = await axios.get(`https://venture-nest-backend.onrender.com/council-members?category=${activeCategory}`);
                 const data = response.data;
 
-                // Map API data to component structure
                 const mappedMembers = data.map((member, index) => ({
-                    id: member._id || index, // Fallback index if no ID
-                    logo: member.imgpath || "/assets/incubated_hero.png", // Use member image
+                    id: member._id || index,
+                    logo: member.imgpath || "/assets/incubated_hero.png",
                     name: member.name,
-                    role: member.company || "Council Member", // Using company as role/designation
-                    brief: member.description || `Distinguished member of our ${categories.find(c => c.id === activeCategory)?.label} Council, driving innovation and strategic growth.`, // Generic brief if missing
+                    role: member.company || "Council Member",
+                    brief: member.description || `Distinguished member of our ${categories.find(c => c.id === activeCategory)?.label} Council.`,
                     category: categories.find(c => c.id === activeCategory)?.label || "Council"
                 }));
 
@@ -43,7 +40,7 @@ const Council_highlight = () => {
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching council members:", error);
-                setMembers([]); // Clear data on error
+                setMembers([]);
                 setLoading(false);
             }
         };
@@ -51,46 +48,12 @@ const Council_highlight = () => {
         fetchMembers();
     }, [activeCategory]);
 
-    // Auto-play effect
-    useEffect(() => {
-        let interval;
-        if (!isPaused && members.length > 0) {
-            interval = setInterval(() => {
-                setActiveTab((prevId) => {
-                    const currentIndex = members.findIndex(v => v.id === prevId);
-                    const nextIndex = (currentIndex + 1) % members.length;
-                    return members[nextIndex].id;
-                });
-            }, 4000);
-        }
-        return () => clearInterval(interval);
-    }, [isPaused, members]);
-
-    // Auto-scroll the slider to keep active tab in view (without scrolling page)
-    useEffect(() => {
-        if (scrollRef.current && activeTab && members.length > 0) {
-            const index = members.findIndex(v => v.id === activeTab);
-            if (index !== -1) {
-                const activeElement = scrollRef.current.children[index];
-                const container = scrollRef.current;
-
-                if (activeElement && container) {
-                    // Calculate center position
-                    const newScrollLeft = activeElement.offsetLeft - (container.offsetWidth / 2) + (activeElement.offsetWidth / 2);
-
-                    container.scrollTo({
-                        left: newScrollLeft,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        }
-    }, [activeTab, members]);
+    const scrollRef = useRef(null);
 
     const scroll = (direction) => {
         if (scrollRef.current) {
             const { current } = scrollRef;
-            const scrollAmount = 200;
+            const scrollAmount = 300;
             if (direction === 'left') {
                 current.scrollLeft -= scrollAmount;
             } else {
@@ -102,172 +65,215 @@ const Council_highlight = () => {
     const activeMember = members.find(v => v.id === activeTab);
 
     return (
-        <section className="bg-[#9E0203] py-24 font-jakarta relative overflow-hidden text-white">
-            {/* Background Texture - Mesh Gradient */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none"
-                style={{
-                    backgroundImage: 'radial-gradient(circle at 50% 50%, #7a0000 0%, transparent 50%), radial-gradient(circle at 100% 0%, #500000 0%, transparent 50%)',
-                }}>
-            </div>
-
-            {/* Decorative Elements - Less Blobs, More Geometric */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
-
-            <div className="container mx-auto px-4 relative z-10">
-                {/* Header Section */}
-                <div className="text-center mb-12">
-                    <span className="text-white/60 font-black uppercase tracking-[0.3em] text-xs block mb-3">Our Leadership</span>
-                    <h2 className="text-5xl md:text-6xl font-black text-white uppercase tracking-tighter mb-6 drop-shadow-md">
-                        The <span className="text-[#003366] bg-white px-3 py-1 transform -skew-x-6 inline-block shadow-lg">Council</span>
-                    </h2>
-                    <p className="text-white/80 font-medium text-lg max-w-2xl mx-auto leading-relaxed">
-                        Industry veterans and thought leaders guiding the next generation of innovation.
-                    </p>
+        <section className="bg-white font-jakarta overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-between">
+            {/* Header / Featured Member Section - Centered Layout */}
+            <div className="bg-[#9E0203] pt-12 pb-20 relative text-white flex-grow-0">
+                <div className="absolute inset-0 opacity-10 pointer-events-none"
+                    style={{
+                        backgroundImage: 'radial-gradient(circle at 50% 50%, #7a0000 0%, transparent 70%)',
+                    }}>
                 </div>
-
-                {/* Sorting Bar - Glassmorphic Pill Style */}
-                <div className="flex flex-wrap justify-center gap-3 mb-16">
-                    {categories.map((cat) => (
-                        <button
-                            key={cat.id}
-                            onClick={() => setActiveCategory(cat.id)}
-                            className={`px-8 py-3 rounded-full font-black uppercase tracking-widest text-[10px] transition-all duration-300 border-2 ${activeCategory === cat.id
-                                    ? 'bg-white text-[#9E0203] border-white shadow-[0_0_20px_rgba(255,255,255,0.4)] scale-105'
-                                    : 'bg-transparent border-white/30 text-white/70 hover:bg-white/10 hover:border-white hover:text-white'
-                                }`}
-                        >
-                            {cat.label}
-                        </button>
-                    ))}
-                </div>
-
-                {loading ? (
-                    <div className="h-[500px] flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-white"></div>
-                    </div>
-                ) : members.length === 0 ? (
-                    <div className="h-[300px] flex items-center justify-center text-center border-2 border-dashed border-white/20 rounded-3xl bg-white/5">
-                        <p className="text-white/50 font-bold uppercase tracking-widest text-lg">No council members in this category.</p>
-                    </div>
-                ) : (
-                    <div
-                        className="relative max-w-7xl mx-auto"
-                        onMouseEnter={() => setIsPaused(true)}
-                        onMouseLeave={() => setIsPaused(false)}
-                    >
-                        {/* Main Content Box - Reversed Layout */}
-                        {activeMember && (
-                            <div className="relative z-20 mb-16">
-                                <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-20">
-
-                                    {/* Left Side: Content (Text) */}
-                                    <div className="w-full md:w-1/2 text-center md:text-right space-y-8 animate-fadeIn">
-                                        <div>
-                                            <div className="inline-flex items-center gap-2 mb-4 justify-center md:justify-end opacity-80">
-                                                <span className="h-px w-12 bg-white/60"></span>
-                                                <span className="text-xs font-black uppercase tracking-widest text-white/80">{activeMember.category}</span>
-                                            </div>
-                                            <h3 className="text-4xl md:text-6xl font-black font-jakarta uppercase tracking-tighter leading-none mb-4">
-                                                {activeMember.name}
-                                            </h3>
-                                            <div className="text-xl md:text-2xl font-bold text-[#003366] bg-white/90 inline-block px-4 py-1 rounded-lg shadow-lg rotate-1 transform">
-                                                {activeMember.role}
-                                            </div>
-                                        </div>
-
-                                        <p className="text-white/90 font-medium text-lg leading-relaxed shadow-black drop-shadow-md">
-                                            "{activeMember.brief}"
-                                        </p>
-
-                                        {/* Stats / Badges Grid */}
-                                        <div className="grid grid-cols-2 gap-4 max-w-md ml-auto mr-auto md:mr-0 md:ml-auto">
-                                            <div className="bg-[#003366]/30 backdrop-blur-md border border-[#003366]/50 p-4 rounded-xl text-right">
-                                                <div className="text-xs text-white/50 uppercase tracking-widest font-black mb-1">Focus Area</div>
-                                                <div className="text-white font-bold">{activeMember.category}</div>
-                                            </div>
-                                            <div className="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-xl text-right">
-                                                <div className="text-xs text-white/50 uppercase tracking-widest font-black mb-1">Status</div>
-                                                <div className="text-white font-bold">Active Member</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Right Side: Photo */}
-                                    <div className="w-full md:w-1/2 flex justify-center md:justify-start relative">
-                                        {/* Abstract shapes behind image */}
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-white/10 rounded-full animate-[spin_20s_linear_infinite]"></div>
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] border-2 border-dashed border-white/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
-
-                                        <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white/10 shadow-[0_0_60px_rgba(0,0,0,0.5)] z-10 bg-[#9E0203]">
-                                            <img
-                                                src={activeMember.logo}
-                                                alt={activeMember.name}
-                                                className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
-                                            />
-                                        </div>
-
-                                        {/* Floating Badge */}
-                                        <div className="absolute bottom-0 right-10 md:right-auto md:left-0 z-20 bg-[#003366] text-white p-4 rounded-full shadow-xl border-4 border-[#9E0203] animate-bounce">
-                                            <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                        </div>
-                                    </div>
-
-                                </div>
+                
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-12">
+                        {/* Left Side: Branding/Stats */}
+                        <div className="hidden lg:flex flex-col items-start space-y-4 opacity-40">
+                            <div className="flex flex-col">
+                                <span className="text-6xl font-black tracking-tighter leading-none">V-NEST</span>
+                                <span className="text-2xl font-black tracking-[0.2em] ml-1">COUNCIL</span>
                             </div>
-                        )}
-
-                        {/* Bottom Slider - Minimalist Strip */}
-                        <div className="border-t border-white/10 pt-8 mt-8">
-                            <div className="flex items-center gap-6">
-                                <button onClick={() => scroll('left')} className="p-3 rounded-full border border-white/20 hover:bg-white hover:text-[#9E0203] transition-colors">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                                </button>
-
-                                <div ref={scrollRef} className="flex overflow-x-auto gap-4 py-4 px-2 flex-grow no-scrollbar scroll-smooth">
-                                    {members.map((member) => (
-                                        <button
-                                            key={member.id}
-                                            onClick={() => setActiveTab(member.id)}
-                                            className={`flex-shrink-0 w-20 h-20 rounded-full border-2 overflow-hidden transition-all duration-300 relative ${activeTab === member.id
-                                                    ? 'border-white scale-110 shadow-[0_0_20px_rgba(255,255,255,0.6)] ring-4 ring-[#003366]/50'
-                                                    : 'border-white/30 opacity-60 hover:opacity-100 hover:scale-105'
-                                                }`}
-                                        >
-                                            <img
-                                                src={member.logo}
-                                                alt={member.name}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </button>
-                                    ))}
-                                </div>
-
-                                <button onClick={() => scroll('right')} className="p-3 rounded-full border border-white/20 hover:bg-white hover:text-[#9E0203] transition-colors">
-                                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                                </button>
+                            <div className="h-px w-32 bg-white/40"></div>
+                            <div className="text-[10px] uppercase font-black tracking-widest">
+                                Global Strategy Group {new Date().getFullYear()}
                             </div>
                         </div>
 
+                        {/* Center: Featured Member Portrait - Centered */}
+                        <div className="flex justify-center order-first lg:order-none">
+                            {loading ? (
+                                <div className="w-56 h-56 rounded-full bg-white/5 animate-pulse"></div>
+                            ) : activeMember ? (
+                                <div className="relative group">
+                                    <div className="absolute -inset-6 border border-white/10 rounded-full animate-spin-slow"></div>
+                                    <div className="absolute -inset-3 border border-white/20 rounded-full"></div>
+                                    <div className="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-2xl z-10 relative bg-[#7a0000]">
+                                        <img 
+                                            src={activeMember.logo} 
+                                            alt={activeMember.name}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                        />
+                                    </div>
+                                    <div className="absolute top-0 right-0 bg-white text-[#9E0203] px-4 py-1 rounded-full shadow-xl font-black text-[10px] z-20 uppercase">
+                                        Active
+                                    </div>
+                                </div>
+                            ) : null}
+                        </div>
+
+                        {/* Right Side: Featured Member Details */}
+                        <div className="space-y-6 text-center lg:text-left">
+                            {activeMember && !loading ? (
+                                <div className="animate-fadeIn space-y-4">
+                                    <div className="space-y-1">
+                                        <div className="uppercase tracking-[0.4em] text-[10px] font-black opacity-70 block">
+                                            {activeMember.category} Sector
+                                        </div>
+                                        <h3 className="text-3xl md:text-4xl font-black text-white leading-tight uppercase tracking-tighter">
+                                            {activeMember.name}
+                                        </h3>
+                                        <div className="text-xs font-bold text-[#9E0203] bg-white inline-block px-4 py-1 rounded-md shadow-lg transform -rotate-1">
+                                            {activeMember.role}
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="relative">
+                                        <div className="absolute -left-2 top-0 text-4xl text-white/20 font-serif">"</div>
+                                        <p className="text-sm md:text-base opacity-90 leading-relaxed max-w-sm mx-auto lg:mx-0 font-medium italic pl-4">
+                                            {activeMember.brief}
+                                        </p>
+                                    </div>
+
+                                    <div className="flex justify-center lg:justify-start gap-4 pt-4">
+                                        <div className="h-10 w-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 cursor-pointer">
+                                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                        </div>
+                                        <div className="h-10 w-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 cursor-pointer">
+                                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M4 12h16m-7-7l7 7-7 7" /></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="h-32 flex items-center justify-center">
+                                    <p className="text-sm opacity-60">Selecting strategic leader...</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                )}
+                </div>
             </div>
+
+            {/* Category Navigation - Compact Pills */}
+            <div className="relative -mt-10 z-20">
+                <div className="container mx-auto px-6">
+                    <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden">
+                        <div className="flex overflow-x-auto no-scrollbar divide-x divide-gray-100">
+                            {categories.map((cat) => (
+                                <button
+                                    key={cat.id}
+                                    onClick={() => setActiveCategory(cat.id)}
+                                    className={`flex-1 min-w-[120px] p-4 group transition-all duration-300 relative flex flex-col items-center justify-center text-center ${
+                                        activeCategory === cat.id ? 'bg-[#9E0203] text-white' : 'hover:bg-gray-50'
+                                    }`}
+                                >
+                                    <span className={`text-[8px] font-black absolute top-2 right-4 tracking-widest ${
+                                        activeCategory === cat.id ? 'text-white/40' : 'text-gray-300'
+                                    }`}>
+                                        {cat.number}
+                                    </span>
+                                    <h4 className="font-black text-[9px] uppercase tracking-[0.2em]">
+                                        {cat.label}
+                                    </h4>
+                                    {activeCategory === cat.id && (
+                                        <div className="absolute bottom-0 left-0 w-full h-1 bg-white/30"></div>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Member List Section with Manual Navigation */}
+            <div className="py-8 flex-grow">
+                <div className="container mx-auto px-6">
+                    <div className="flex items-center justify-between mb-6">
+                        <div className="space-y-1">
+                             <h3 className="text-lg font-black text-black tracking-tighter uppercase leading-none">
+                                {activeCategory} <span className="text-[#9E0203]">Advisory Group</span>
+                            </h3>
+                            <p className="text-[9px] text-gray-400 font-bold uppercase tracking-[0.2em]">
+                                Selective faculty of industry leaders
+                            </p>
+                        </div>
+                        
+                        {/* Navigation Buttons */}
+                        <div className="flex gap-2">
+                             <button 
+                                onClick={() => scroll('left')}
+                                className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#9E0203] hover:text-white transition-all shadow-sm"
+                            >
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path d="M15 19l-7-7 7-7" /></svg>
+                            </button>
+                            <button 
+                                onClick={() => scroll('right')}
+                                className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#9E0203] hover:text-white transition-all shadow-sm"
+                            >
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path d="M9 5l7 7-7 7" /></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="relative">
+                        <div 
+                            ref={scrollRef}
+                            className="flex gap-6 items-center py-4 overflow-x-auto no-scrollbar scroll-smooth"
+                        >
+                            {loading ? (
+                                Array(8).fill(0).map((_, i) => (
+                                    <div key={i} className="w-24 h-24 rounded-full bg-gray-50 animate-pulse"></div>
+                                ))
+                            ) : members.length > 0 ? (
+                                members.map((member) => (
+                                    <div 
+                                        key={member.id}
+                                        onClick={() => setActiveTab(member.id)}
+                                        className={`flex-shrink-0 group relative cursor-pointer outline-none touch-auto`}
+                                    >
+                                        <div className={`w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden transition-all duration-500 border-2 p-1 ${
+                                            activeTab === member.id 
+                                            ? 'border-[#9E0203] shadow-xl scale-110' 
+                                            : 'border-transparent opacity-60 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-105 hover:border-gray-200'
+                                        }`}>
+                                            <img 
+                                                src={member.logo} 
+                                                alt={member.name}
+                                                className="w-full h-full object-cover rounded-full"
+                                            />
+                                        </div>
+                                        {activeTab === member.id && (
+                                            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-1 bg-[#9E0203] rounded-full"></div>
+                                        )}
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="w-full py-10 text-center border-2 border-dashed border-gray-100 rounded-3xl">
+                                    <span className="font-black text-gray-300 text-[10px] uppercase tracking-widest">Category Empty</span>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <style jsx>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-      `}</style>
+                .no-scrollbar::-webkit-scrollbar { display: none; }
+                .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+                
+                @keyframes spin-slow {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                .animate-spin-slow {
+                    animation: spin-slow 15s linear infinite;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+                    to { opacity: 1; transform: scale(1) translateY(0); }
+                }
+                .animate-fadeIn {
+                    animation: fadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                }
+            `}</style>
         </section>
     );
 };
