@@ -38,7 +38,7 @@ export default function Advisory() {
               <div className="space-y-4">
                 <div className="h-1 w-32 bg-white"></div>
                 <p className="text-gray-400 text-lg font-medium leading-relaxed max-w-2xl">
-                   The <strong className="text-white">Advisory Council</strong> at CGC VentureNest brings together distinguished experts and thought leaders who guide our startups with strategic insights, mentorship, and industry foresight helping to identify market trends and ensure evolving innovation.
+                   The <strong className="text-white">Advisory Council</strong> at CGC VentureNest brings together distinguished experts and thought leaders who guide our startups with strategic insights, mentorship, and industry foresight, helping them identify market trends and foster evolving innovation.
                 </p>
               </div>
             </div>

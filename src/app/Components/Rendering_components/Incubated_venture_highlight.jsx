@@ -136,7 +136,7 @@ const Incubated_venture_highlight = () => {
                         Our <span className="text-[#9E0203] bg-white px-2 rounded-lg">Incubated Ventures</span>
                     </h2>
                     <p className="text-gray-200 font-medium uppercase tracking-widest text-sm bg-white/10 inline-block px-4 py-1 rounded-full backdrop-blur-sm">
-                        Innovating for a better tomorrow · {ventures.length} Active Startups
+                        Innovating for a better tomorrow · 100+ Active Startups
                     </p>
                 </div>
 

@@ -117,11 +117,11 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="relative">
-              <div className="absolute -left-8 top-12">
+              {/* <div className="absolute -left-8 top-12">
                 <svg width="58" height="29" viewBox="0 0 58 29" fill="none">
                   <path d="M48.321 8.74875C45.6238 8.74875 44.3189 6.65379 43.0611 4.6313C41.8908 2.75375 40.7877 0.975009 38.6487 0.975009C36.5098 0.975009 35.4067 2.74716 34.2431 4.6313C32.9853 6.66038 31.6804 8.74875 28.9899 8.74875C26.2994 8.74875 24.9946 6.65379 23.73 4.6313C22.5597 2.75375 21.4566 0.975009 19.3176 0.975009C17.1787 0.975009 16.0756 2.74716 14.912 4.6313C13.6542 6.66038 12.3493 8.74875 9.65881 8.74875C6.96834 8.74875 5.66346 6.65379 4.40566 4.6313C3.2353 2.75375 2.1322 0.975009 0 0.975009V0C2.69721 0 3.99536 2.09495 5.25316 4.12403C6.42352 6.00159 7.52661 7.78033 9.65881 7.78033C11.791 7.78033 12.9008 6.00818 14.0645 4.12403C15.3223 2.09495 16.6272 0 19.3176 0C22.0081 0 23.313 2.09495 24.5775 4.12403C25.7479 6.00159 26.851 7.78033 28.9899 7.78033C31.1288 7.78033 32.2319 6.00818 33.4023 4.12403C34.6601 2.10154 35.965 0.0065843 38.6554 0.0065843C41.3459 0.0065843 42.6575 2.10155 43.9153 4.13063C45.0857 6.00818 46.1888 7.78691 48.3277 7.78691C50.4667 7.78691 51.5697 6.01477 52.7401 4.13063C53.9979 2.10155 55.3028 0.0065843 58 0.0065843V0.981603C55.8611 0.981603 54.758 2.75374 53.5876 4.63789C52.3298 6.66038 51.0249 8.75534 48.3277 8.75534L48.321 8.74875Z" fill="#9E0203" />
                 </svg>
-              </div>
+              </div> */}
 
               <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-6">
                 Welcome to CGC<br />Venturenest
@@ -210,7 +210,7 @@ CGC University Mohali’s Technology Business Incubator TBI – Venture Nest emp
             {/* Stats Grid */}
             <div className="bg-gray-100 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-brand-red text-4xl font-bold mb-2">1.5 Crore+</div>
+                <div className="text-brand-red text-4xl font-bold mb-2">26.5 Lakhs+</div>
                 <div className="text-brand-dark text-sm">Of funding Granted to the startups</div>
               </div>
               <div className="text-center border-l border-black/20 pl-4">
@@ -218,7 +218,7 @@ CGC University Mohali’s Technology Business Incubator TBI – Venture Nest emp
                 <div className="text-brand-dark text-sm">Startups Incubated both physically and virtually</div>
               </div>
               <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">685+</div>
+                <div className="text-brand-red text-4xl font-bold mb-2">1000+</div>
                 <div className="text-brand-dark text-sm">Patents published successfully</div>
               </div>
               <div className="text-center border-l border-black/20 pl-4">
@@ -247,10 +247,10 @@ CGC University Mohali’s Technology Business Incubator TBI – Venture Nest emp
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: 'Suraj Yadav', company: 'Paloalto', package: '4 Lakhs', image: '/assets/success-1.jpeg', logo: '/assets/Start-up-logos/Techealth_logo - TecHealth.PNG' },
-              { name: 'Omm Kumar', company: 'TechHealth', package: '2.5 Lakhs', image: '/assets/success-2.jpeg', logo: '/assets/Start-up-logos/Logo - Harris Babbar.png' },
-              { name: 'Anmol Bhateja', company: 'V2R', package: '3 Lakhs', image: '/assets/success-3.jpeg', logo: '/assets/GalleryImages/V2R.jpg' },
-              { name: 'Anmol Bhateja', company: 'Amazon', package: '3 Lakhs', image: '/assets/success-3.jpeg', logo: '/assets/GalleryImages/V2R.jpg' },
+              { name: 'Shivang Tiwari', company: 'Techealth Apex Private Limited', package: '3 Lakhs', image: '/assets/success-1.jpeg', logo: '/assets/Start-up-logos/Techealth_logo - TecHealth.PNG' },
+              { name: 'Pulkesh Gautam', company: 'Vidyutam Verde', package: '3 Lakhs', image: '/assets/pulkesh_img.jpg', logo: '/assets/pulkesh_logo-Photoroom.png' },
+              { name: 'Ashish Chabra', company: 'EDS Wagon Tech', package: '3 Lakhs', image: '/assets/eds wagon.jpg', logo: '/assets/eds_logo.webp' },
+              { name: 'Anmol Bhateja', company: 'escapekar ', package: '3 Lakhs', image: '/assets/escapekar.jpg', logo: '/assets/escapekar_logo.png' },
               // { name: 'Simran Saini', company: 'Autodesk', package: '33 LPA', image: '/assets/success-4.jpeg', logo: '/assets/autodesk.png' },
             ].map((student, idx) => (
               <div key={idx} className="relative bg-gray-800 h-[530px] overflow-hidden group">
@@ -262,9 +262,13 @@ CGC University Mohali’s Technology Business Incubator TBI – Venture Nest emp
                   <div className="text-white font-bold text-2xl">{student.package}</div>
                 </div>
 
-                <div className="absolute top-8 left-4">
-                  <img src={student.logo} alt="" className="h-7" />
-                </div>
+                <div className="absolute top-4 left-4 w-28 h-8">
+  <img
+    src={student.logo}
+    alt=""
+    className="w-full h-auto object-contain"
+  />
+</div>
 
                 <div className="absolute bottom-8 left-8">
                   <div className="text-white text-4xl font-bold mb-2">{student.name}</div>
@@ -484,16 +488,16 @@ CGC University Mohali’s Technology Business Incubator TBI – Venture Nest emp
 
             <div className="grid grid-cols-2 gap-8 mb-12">
               <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">70+</div>
+                <div className="text-5xl font-bold mb-2">100+</div>
                 <div className="text-lg">Startups Incubated</div>
               </div>
               <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">1 Cr+</div>
+                <div className="text-5xl font-bold mb-2">26.5 Lakh+</div>
                 <div className="text-lg">Funding Raised</div>
               </div>
               <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">50+</div>
-                <div className="text-lg">Corporate Partners</div>
+                <div className="text-5xl font-bold mb-2">100+</div>
+                <div className="text-lg">Partners</div>
               </div>
               <div className="border-b border-white pb-6">
                 <div className="text-5xl font-bold mb-2">200+</div>
