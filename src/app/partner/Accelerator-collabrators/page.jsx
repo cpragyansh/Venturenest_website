@@ -11,7 +11,7 @@ export default function Accelerators() {
     // Fetch "accelerator" category partners from backend
     const fetchPartners = async () => {
       try {
-        const response = await axios.get("https://venturenest.onrender.com/getpartner?category=accelerator");
+        const response = await axios.get("https://venture-nest-backend.onrender.com/getpartner?category=accelerator");
         setPartners(response.data);
       } catch (err) {
         console.error("Error fetching partners:", err);

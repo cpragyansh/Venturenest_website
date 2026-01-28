@@ -14,7 +14,7 @@ export default function HeroSection() {
     // Fetch images from the backend API
     const fetchImages = async () => {
       try {
-        const response = await axios.get('https://venturenest.onrender.com/images'); // Adjust API URL if needed
+        const response = await axios.get('https://venture-nest-backend.onrender.com/images'); // Adjust API URL if needed
         const data = response.data;
 
         // Assuming data[0] is the latest HeroSection entry

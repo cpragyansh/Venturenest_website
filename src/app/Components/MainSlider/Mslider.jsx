@@ -17,7 +17,7 @@ const Mslider = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('https://venturenest.onrender.com/images');
+        const response = await axios.get('https://venture-nest-backend.onrender.com/images');
         const imageData = response.data[0]?.laptop || [];
         setSlides(imageData.map(img => img.path));
       } catch (error) {

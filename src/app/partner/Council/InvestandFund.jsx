@@ -8,7 +8,7 @@ export default function InvestandFund() {
 
   useEffect(() => {
     // Fetch council members from backend
-    axios.get('https://venturenest.onrender.com/council-members?category=investfund')
+    axios.get('https://venture-nest-backend.onrender.com/council-members?category=investfund')
       .then(response => {
         setMembers(response.data);
       })

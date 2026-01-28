@@ -15,7 +15,7 @@ const StoryDetails = () => {
     const fetchStory = async () => {
         try {
             const res = await axios.get(
-                `https://venturenest.onrender.com/starred-stories/${id}`
+                `https://venture-nest-backend.onrender.com/starred-stories/${id}`
             );
             setStory(res.data);
         } catch (err) {

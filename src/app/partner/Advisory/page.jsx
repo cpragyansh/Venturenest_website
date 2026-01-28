@@ -8,7 +8,7 @@ export default function Advisory() {
 
   useEffect(() => {
     // Fetch council members from backend
-    axios.get('https://venturenest.onrender.com/council-members?category=advisory')
+    axios.get('https://venture-nest-backend.onrender.com/council-members?category=advisory')
       .then(response => {
         setMembers(response.data);
         setLoading(false);

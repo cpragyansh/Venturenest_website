@@ -156,7 +156,7 @@ const Dashboard = () => {
     // / Function to fetch starred events
     const fetchStarredEvents = async () => {
         try {
-            const response = await axios.get('https://venturenest.onrender.com/starred-events'); // Adjust the API path if necessary
+            const response = await axios.get('https://venture-nest-backend.onrender.com/starred-events'); // Adjust the API path if necessary
             setStarredEvents(response.data);
         } catch (err) {
             console.error("Error fetching starred events:", err);
@@ -167,7 +167,7 @@ const Dashboard = () => {
     };
     const fetchStarredStories = async () => {
         try {
-            const response = await axios.get('https://venturenest.onrender.com/starred-stories');
+            const response = await axios.get('https://venture-nest-backend.onrender.com/starred-stories');
             setStarredStories(response.data);  // Assuming the response contains the array of starred stories
         } catch (error) {
             console.error("Error fetching starred stories:", error);

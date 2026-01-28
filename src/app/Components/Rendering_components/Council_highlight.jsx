@@ -23,7 +23,7 @@ const Council_highlight = () => {
         const fetchMembers = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`https://venturenest.onrender.com/council-members?category=${activeCategory}`);
+                const response = await axios.get(`https://venture-nest-backend.onrender.com/council-members?category=${activeCategory}`);
                 const data = response.data;
 
                 // Map API data to component structure

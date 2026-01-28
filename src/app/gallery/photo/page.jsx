@@ -16,7 +16,7 @@ export default function Photos() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://venturenest.onrender.com/photos");
+        const response = await axios.get("https://venture-nest-backend.onrender.com/photos");
         let photos = response.data;
         if (photos.length > 0) {
           const originalPhotos = [...photos];
@@ -38,7 +38,7 @@ export default function Photos() {
   useEffect(() => {
     const fetchRawData = async () => {
       try {
-        const response = await axios.get("https://venturenest.onrender.com/photos");
+        const response = await axios.get("https://venture-nest-backend.onrender.com/photos");
         setRawPhotos(response.data);
       } catch (error) {
         console.error("Error fetching raw photos", error);

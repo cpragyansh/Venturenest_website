@@ -16,7 +16,7 @@ export default function Member() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await fetch("https://venturenest.onrender.com/api/team"); // ⬅️ Use your deployed backend URL
+        const response = await fetch("https://venture-nest-backend.onrender.com/api/team"); // ⬅️ Use your deployed backend URL
         const data = await response.json();
         setTeamData(data);
       } catch (error) {
