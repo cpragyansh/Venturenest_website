@@ -164,7 +164,7 @@ export default function IncubateFormPage() {
       {/* 3. OFFLINE INCUBATION PROCESS - VENTURENEST THEMED */}
       <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden">
         {/* Background Image: Modern Startup Hub / Office */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute grayscale inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1920&q=80" 
             alt="VentureNest Startup Hub" 

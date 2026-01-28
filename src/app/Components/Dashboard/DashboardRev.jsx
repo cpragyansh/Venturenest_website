@@ -34,10 +34,10 @@ export default function Index() {
   ];
 
   const studentNames = [
-    { "FounderName": "Mr. RAJAT SONI", "StartupName": "V2R AUTOINFINITE PRIVATE LIMITED", "Story": "VentureNest provided the critical infrastructure we needed to prototype our automotive solutions. The mentorship on IP rights was invaluable." },
+    { "FounderName": "Mr. RAJAT SONI", "StartupName": "V2R AUTOINFINITE PRIVATE LIMITED", "Story": "At V2R, we’re not just disrupting the automotive sector; we’re revolutionizing it. Our mission is to empower both vehicle owners and automotive service businesses through advanced, technology-driven solutions that streamline operations, enhance efficiency, and drive sustainable growth." },
     { "FounderName": "Mr. Akash Shrivastava", "StartupName": "Lorro Digital Pvt. Ltd.", "Story": "The networking opportunities at VentureNest helped us secure our first three major clients. It's the perfect launchpad for digital ventures." },
     { "FounderName": "Mr. Vishal", "StartupName": "Jagdev Organics Pvt Ltd", "Story": "From lab access to market connect, VentureNest supported our organic product journey every step of the way. Truly a transformative experience." },
-    { "FounderName": "Mr Harrish Babber", "StartupName": "Escapekar", "Story": "Escapekar grew from a concept to a platform thanks to the business modeling workshops and funding guidance at VentureNest." },
+    { "FounderName": "Mr Harrish Babber", "StartupName": "Escapekar", "Story": "Escapekar is a travel guidance platform that helps people become better travelers—from exploring and planning to taking a trip. Travelers across the globe use the Escapekar app to discover hidden places, find where to stay, what to do, and where to eat—all recommended by an algorithm that selects the best options for them." },
     { "FounderName": "Mr. Narinder Singh", "StartupName": "Nhanks Waste Recyclers Pvt.Ltd", "Story": "Sustainable solutions need specialized support. VentureNest's focus on social impact startups gave us the push we needed." },
     { "FounderName": "Mr Karan Kumar Aggrawal", "StartupName": "Indi Tech", "Story": "The technical mentorship here is unmatched. We scaled our tech stack and team efficiently under the guidance of industry experts." },
     { "FounderName": "Mr. Jaskaranpreet Singh", "StartupName": "Juniva Organics", "Story": "Juniva Organics found its footing here. The incubation support helped us navigate regulatory challenges and reach the market faster." },
@@ -45,13 +45,13 @@ export default function Index() {
     { "FounderName": "Ms. Arshpreet Ahluwalia", "StartupName": "Juara Organics", "Story": "The supportive environment at VentureNest allowed us to experiment and refine our products with confidence. A great place to grow." },
     { "FounderName": "Mr. Vivek Kumar", "StartupName": "Groming Young Minds Innovative Pvt. Ltd" },
     { "FounderName": "Mr. Nirdosh Arora", "StartupName": "Ashab Group" },
-    { "FounderName": "Mr. Ashish Chhabra", "StartupName": "EDS Wagon Tech Pvt. Ltd" },
+    { "FounderName": "Mr. Ashish Chhabra", "StartupName": "EDS Wagon Tech Pvt. Ltd", "Story": "EDS Wagon, an incubated startup at VentureNest, has secured ₹5 lakh in funding from IIT Madras under the Carbon Zero Challenge (CZC), a flagship initiative of the School of Sustainability (SoS). Selected among the top 25 teams nationwide, EDS Wagon was recognized for its innovative solution focused on carbon reduction and environmental sustainability. This achievement reflects VentureNest’s continued efforts to support high-impact ventures." },
     { "FounderName": "Mr. Anand Kumar", "StartupName": "Kulhad" },
     { "FounderName": "Mr. Risahbh Naithani", "StartupName": "Veritex Innovations" },
     { "FounderName": "Mr. Shreyansh Tiwari", "StartupName": "Tarang" },
     { "FounderName": "Mr. Yuvraj Bhadauriya", "StartupName": "Armbot" },
     { "FounderName": "Mr. Surya N", "StartupName": "NIL" },
-    { "FounderName": "Mr. Shivang Tiwari", "StartupName": "Techealth Apex Pvt. Ltd" },
+    { "FounderName": "Mr. Shivang Tiwari", "StartupName": "Techealth Apex Pvt. Ltd", "Story": "Techealth Apex is revolutionizing healthcare accessibility through innovative digital solutions. Their commitment to improving patient outcomes through technology has made them a standout venture in our ecosystem." },
     { "FounderName": "Mr. Divyansh Sood", "StartupName": "Videlec" },
     { "FounderName": "Mr. Tejinder Pal Singh Jassal", "StartupName": "Dulcimer Innovations Pvt. Ltd." },
     { "FounderName": "Mr. Pratham Arora", "StartupName": "Start Spark Pvt. Ltd." },
@@ -126,19 +126,24 @@ export default function Index() {
               <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-6">
                 Welcome to CGC<br />Venturenest
               </h2>
+              <h2 className="text-black text-2xl font-bold font-jakarta mb-6">
+                VentureNest is CGC University’s Technology Business Incubator, where ideas evolve into impactful startups.
+              </h2>
 
               <div className="space-y-4 text-brand-dark text-lg leading-relaxed mb-8">
                 <p>
-                  CGC VentureNest is the premier business incubator at CGC University , designed to empower innovation, entrepreneurship, and sustainable business growth. As a dynamic startup hub, VentureNest provides a thriving ecosystem where aspiring entrepreneurs and early-stage startups can transform groundbreaking ideas into successful ventures.
+                  VentureNest is the dedicated Technology Business Incubator (TBI) at CGC University, established to foster a culture of innovation, entrepreneurship, and startup excellence within the university ecosystem. It serves as a structured platform that enables students, faculty members, and aspiring entrepreneurs to convert innovative ideas into viable and scalable business ventures.
                 </p>
                 <p>
-
-                  As a flagship initiative of CGC University, CGC VentureNest is dedicated to fostering an entrepreneurial culture among students, faculty and the broader community. Our incubator offers cutting-edge infrastructure, personalized mentorship from industry experts, strong networking opportunities and access to investors and funding resources. Whether you're launching a tech startup, social enterprise, or scalable business model, CGC VentureNest accelerates your journey from concept to market success.
+                As a flagship initiative of CGC University, VentureNest provides a comprehensive support system including advanced infrastructure, structured incubation programs, expert mentorship, industry linkages, investor access, and policy guidance. The incubator actively supports technology-driven, knowledge-based, and social impact startups by offering end-to-end assistance from ideation and validation to product development, market entry, and scale-up.
                 </p>
+               
+
+                
               </div>
 
               <button className="bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-colors flex items-center space-x-2">
-                <span>Apply Now</span>
+                <span>Launch your Startup Now</span>
                 <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fillRule="evenodd" clipRule="evenodd" d="M22.731 12.0001L15.7662 18.9665L14.6334 17.8353L19.6686 12.8001L1.59976 12.8001L1.59976 11.2001L19.6686 11.2001L14.6334 6.16649L15.7662 5.03369L22.731 12.0001Z" />
                 </svg>
@@ -151,52 +156,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="bg-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl">
-            <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-8">
-              We Don't Just Promise<br />Growth—We Prove It.
-            </h2>
-
-            <p className="text-brand-dark text-lg leading-relaxed mb-12">
-              Driven by the motto "Each One, One Job", CGC University, Mohali ensures every student secures desirable career opportunities with 86% placement rate, featuring 1,600+ offers from 650+ recruiters like Microsoft, Amazon, Deloitte and many more.
-            </p>
-
-            {/* Stats Grid */}
-            <div className="bg-gray-100 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-brand-red text-4xl font-bold mb-2">1 Crore+</div>
-                <div className="text-brand-dark text-sm">Of funding Granted to the startups</div>
-              </div>
-              <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">70+</div>
-                <div className="text-brand-dark text-sm">Startups Incubated both physically and virtually</div>
-              </div>
-              <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">685+</div>
-                <div className="text-brand-dark text-sm">Patents published successfully</div>
-              </div>
-              <div className="text-center border-l border-black/20 pl-4">
-                <div className="text-brand-red text-4xl font-bold mb-2">10+</div>
-                <div className="text-brand-dark text-sm">Unicorn Ventures are launched</div>
-              </div>
-            </div>
-
-            <button className="mt-12 bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-colors flex items-center space-x-2">
-              <span>Apply Now</span>
-              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                <path fillRule="evenodd" clipRule="evenodd" d="M22.731 12.0001L15.7662 18.9665L14.6334 17.8353L19.6686 12.8001L1.59976 12.8001L1.59976 11.2001L19.6686 11.2001L14.6334 6.16649L15.7662 5.03369L22.731 12.0001Z" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
-      <Council_highlight />
-      <Partner_highlight />
-
-      {/* Company Logos */}
-      <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
+            <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-4 mb-8 text-center">
           <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span>
           <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Incubated Partners</h3>
@@ -231,6 +191,56 @@ export default function Index() {
           }
         `}</style>
       </section>
+
+
+      {/* Stats Section */}
+      <section className="bg-white py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl">
+            <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-8">
+              We Don't Just Promise<br />Growth—We Prove It.
+            </h2>
+
+            <p className="text-brand-dark text-lg leading-relaxed mb-12">
+              {/* Driven by the motto "Each One, One Job", CGC University, Mohali ensures every student secures desirable career opportunities with 86% placement rate, featuring 1,600+ offers from 650+ recruiters like Microsoft, Amazon, Deloitte and many more. */}
+              Driven by the vision of “Each One, One Job”,
+CGC University Mohali’s Technology Business Incubator TBI – Venture Nest empowers students and startups with funding, mentorship, incubation support, and industry exposure—transforming ideas into scalable ventures and successful careers.
+            </p>
+
+            {/* Stats Grid */}
+            <div className="bg-gray-100 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="text-brand-red text-4xl font-bold mb-2">1.5 Crore+</div>
+                <div className="text-brand-dark text-sm">Of funding Granted to the startups</div>
+              </div>
+              <div className="text-center border-l border-black/20 pl-4">
+                <div className="text-brand-red text-4xl font-bold mb-2">100+</div>
+                <div className="text-brand-dark text-sm">Startups Incubated both physically and virtually</div>
+              </div>
+              <div className="text-center border-l border-black/20 pl-4">
+                <div className="text-brand-red text-4xl font-bold mb-2">685+</div>
+                <div className="text-brand-dark text-sm">Patents published successfully</div>
+              </div>
+              <div className="text-center border-l border-black/20 pl-4">
+                <div className="text-brand-red text-4xl font-bold mb-2">10+</div>
+                <div className="text-brand-dark text-sm">Unicorn Ventures are launched</div>
+              </div>
+            </div>
+
+            {/* <button className="mt-12 bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-colors flex items-center space-x-2">
+              <span>Apply Now</span>
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" clipRule="evenodd" d="M22.731 12.0001L15.7662 18.9665L14.6334 17.8353L19.6686 12.8001L1.59976 12.8001L1.59976 11.2001L19.6686 11.2001L14.6334 6.16649L15.7662 5.03369L22.731 12.0001Z" />
+              </svg>
+            </button> */}
+          </div>
+        </div>
+      </section>
+      
+      <Council_highlight />
+      <Partner_highlight />
+
+      {/* Company Logos */}
 
       {/* Student Cards Section */}
       <section className="bg-brand-red py-20">

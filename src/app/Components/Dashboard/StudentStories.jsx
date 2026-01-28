@@ -1,10 +1,10 @@
 import React from 'react';
 
 const studentNames = [
-  { "FounderName": "Mr. RAJAT SONI", "StartupName": "V2R AUTOINFINITE PRIVATE LIMITED", "Story": "VentureNest provided the critical infrastructure we needed to prototype our automotive solutions. The mentorship on IP rights was invaluable." },
+  { "FounderName": "Mr. RAJAT SONI", "StartupName": "V2R AUTOINFINITE PRIVATE LIMITED", "Story": "At V2R, we’re not just disrupting the automotive sector; we’re revolutionizing it. Our mission is to empower vehicle owners through advanced, technology-driven solutions." },
   { "FounderName": "Mr. Akash Shrivastava", "StartupName": "Lorro Digital Pvt. Ltd.", "Story": "The networking opportunities at VentureNest helped us secure our first three major clients. It's the perfect launchpad for digital ventures." },
   { "FounderName": "Mr. Vishal", "StartupName": "Jagdev Organics Pvt Ltd", "Story": "From lab access to market connect, VentureNest supported our organic product journey every step of the way. Truly a transformative experience." },
-  { "FounderName": "Mr Harrish Babber", "StartupName": "Escapekar", "Story": "Escapekar grew from a concept to a platform thanks to the business modeling workshops and funding guidance at VentureNest." },
+  { "FounderName": "Mr Harrish Babber", "StartupName": "Escapekar", "Story": "Escapekar is a travel guidance platform that helps people become better travelers—from exploring and planning to taking a trip. Travelers across the globe use the Escapekar app to find the best options." },
   { "FounderName": "Mr. Narinder Singh", "StartupName": "Nhanks Waste Recyclers Pvt.Ltd", "Story": "Sustainable solutions need specialized support. VentureNest's focus on social impact startups gave us the push we needed." },
   { "FounderName": "Mr Karan Kumar Aggrawal", "StartupName": "Indi Tech", "Story": "The technical mentorship here is unmatched. We scaled our tech stack and team efficiently under the guidance of industry experts." },
   { "FounderName": "Mr. Jaskaranpreet Singh", "StartupName": "Juniva Organics", "Story": "Juniva Organics found its footing here. The incubation support helped us navigate regulatory challenges and reach the market faster." },
@@ -12,13 +12,13 @@ const studentNames = [
   { "FounderName": "Ms. Arshpreet Ahluwalia", "StartupName": "Juara Organics", "Story": "The supportive environment at VentureNest allowed us to experiment and refine our products with confidence. A great place to grow." },
   { "FounderName": "Mr. Vivek Kumar", "StartupName": "Groming Young Minds Innovative Pvt. Ltd" },
   { "FounderName": "Mr. Nirdosh Arora", "StartupName": "Ashab Group" },
-  { "FounderName": "Mr. Ashish Chhabra", "StartupName": "EDS Wagon Tech Pvt. Ltd" },
+  { "FounderName": "Mr. Ashish Chhabra", "StartupName": "EDS Wagon Tech Pvt. Ltd", "Story": "EDS Wagon, an incubated startup at VentureNest, has secured ₹5 lakh in funding from IIT Madras under the Carbon Zero Challenge (CZC)." },
   { "FounderName": "Mr. Anand Kumar", "StartupName": "Kulhad" },
   { "FounderName": "Mr. Risahbh Naithani", "StartupName": "Veritex Innovations" },
   { "FounderName": "Mr. Shreyansh Tiwari", "StartupName": "Tarang" },
   { "FounderName": "Mr. Yuvraj Bhadauriya", "StartupName": "Armbot" },
   { "FounderName": "Mr. Surya N", "StartupName": "NIL" },
-  { "FounderName": "Mr. Shivang Tiwari", "StartupName": "Techealth Apex Pvt. Ltd" },
+  { "FounderName": "Mr. Shivang Tiwari", "StartupName": "Techealth Apex Pvt. Ltd", "Story": "Techealth Apex is revolutionizing healthcare accessibility through innovative digital solutions and technology-driven patient outcomes." },
   { "FounderName": "Mr. Divyansh Sood", "StartupName": "Videlec" },
   { "FounderName": "Mr. Tejinder Pal Singh Jassal", "StartupName": "Dulcimer Innovations Pvt. Ltd." },
   { "FounderName": "Mr. Pratham Arora", "StartupName": "Start Spark Pvt. Ltd." },

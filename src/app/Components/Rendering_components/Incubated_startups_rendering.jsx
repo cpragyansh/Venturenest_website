@@ -57,7 +57,7 @@ function Incubated_startups_rendering() {
             <section className="grid grid-cols-1 md:grid-cols-3">
                 <StatBlock number="60+" label="Ventures" desc="Active Incubated Startups" color="red" />
                 <StatBlock number="500+" label="Jobs" desc="Employment Opportunities Created" color="navy" />
-                <StatBlock number="20Cr+" label="Funding" desc="Total Ecosystem Capital Raised" color="red" />
+                <StatBlock number="1.5Cr+" label="Funding" desc="Total Ecosystem Capital Raised" color="red" />
             </section>
 
         </div>

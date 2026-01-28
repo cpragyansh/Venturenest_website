@@ -22,7 +22,7 @@ export default function Advisory() {
   return (
     <div className="min-h-screen bg-white font-jakarta">
       {/* 1. HERO SECTION */}
-      <section className="relative bg-black py-24 md:py-32 overflow-hidden border-b-[12px] border-[#9E0203]">
+      <section className="relative bg-black py-24  overflow-hidden border-b-[12px] border-[#9E0203]">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-[#9E0203]/5 skew-x-[-20deg] transform translate-x-1/3 pointer-events-none"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">

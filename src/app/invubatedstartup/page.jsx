@@ -123,9 +123,9 @@ export default function IncubatedStartupsPage() {
 
       {/* 2. PORTFOLIO INSIGHTS - Signature Blocks */}
       <section className="grid grid-cols-1 md:grid-cols-3">
-         <StatBlock number="60+" label="Ventures" desc="Active Incubated Startups" color="red" />
-         <StatBlock number="500+" label="Jobs" desc="Employment Opportunities Created" color="navy" />
-         <StatBlock number="20Cr+" label="Funding" desc="Total Ecosystem Capital Raised" color="red" />
+         <StatBlock number="100+" label="Ventures" desc="Active Incubated Startups" color="red" />
+         <StatBlock number="1000+" label="Patents" desc="Patents Published Successfully" color="navy" />
+         <StatBlock number="1.5Cr+" label="Funding" desc="Total Ecosystem Capital Raised" color="red" />
       </section>
 
       {/* 3. LOGO CLOUD - Premium Slider */}
@@ -151,7 +151,7 @@ export default function IncubatedStartupsPage() {
             >
               {logos.map((logo, index) => (
                 <SwiperSlide key={index}>
-                  <div className="h-24 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer group">
+                  <div className="h-24 flex items-center justify-center  opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer group">
                     <img src={logo} alt="Startup Logo" className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform" />
                   </div>
                 </SwiperSlide>
@@ -213,7 +213,9 @@ export default function IncubatedStartupsPage() {
                       </td>
                       <td className="py-8 px-4">
                         <span className={`inline-block px-3 py-1 text-[9px] font-black uppercase tracking-widest border ${item.RegistrationStatus?.includes('Registered') ? 'border-green-500 text-green-500 bg-green-50' : 'border-[#9E0203] text-[#9E0203] bg-red-50'}`}>
-                          {item.RegistrationStatus || "INCUBATED"}
+                          
+                          
+                          {item.RegistrationStatus === "Not Registered" ? "Staged Process" : item.RegistrationStatus }
                         </span>
                       </td>
                     </tr>

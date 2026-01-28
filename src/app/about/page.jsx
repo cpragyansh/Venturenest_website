@@ -128,24 +128,24 @@ export default function AboutPage() {
   const leadershipData = [
     {
       name: "S. Rashpal Singh Dhaliwal",
-      role: "Chancellor, CGC University, Mohali",
+      role: "Founder Chancellor",
       image: "/assets/chairman.png",
-      quote: "Greetings!",
-      desc: "I extend a warm welcome to all at the CGC University, Mohali. Our University was established with the primary goal of providing quality education to all, recognizing its crucial role in social mobility and economic development. In today's globalized world, our focus is on fostering students' confidence, self-motivation, and independent thinking. Join us at CGC University, where we strive to provide a comprehensive and globally relevant education.",
+      quote: "Greetings.",
+      desc: "I extend a warm welcome to all at CGC University, Mohali. Our university was established with the primary goal of providing quality education to all, recognizing its vital role in social mobility and economic development. In today’s globalized world, our focus is on fostering students’ confidence, self-motivation, and independent thinking. Join us at CGC University, where we strive to deliver a comprehensive, future-ready, and globally relevant education.",
     },
     {
       name: "Mr. Arsh Dhaliwal",
       role: "Managing Director, CGC University, Mohali",
       image: "/assets/md.png",
-      quote: "Trust is the foundation,",
-      desc: "of educational excellence. As Managing Director, I am committed to making CGC University synonymous with agility, quality, and innovation. We have evolved significantly in delivering quality education, and our goal remains steadfast: to foster independent thinking and creative problem-solving in our students. Join us on this journey.",
+      quote: "Trust is the foundation",
+      desc: "of educational excellence. As Managing Director, I am committed to making CGC University synonymous with agility, quality, and innovation. We have evolved significantly in our delivery of quality education, and our goal remains steadfast—to foster independent thinking and creative problem-solving in our students. Join us as we continue this journey of transformation and excellence.",
     },
     {
       name: "Dr. Ati Priye",
       role: "CEO, Incubator & Startups",
       image: "/assets/ceo-incubator.jpg",
       quote: "Innovation creates impact.",
-      desc: "it's about making ideas a reality. At Venturenest, we are committed to building a movement that empowers founders. Our mission is to provide more than just infrastructure; we provide a platform for growth, mentorship, and excellence that bridges the gap between dreams and market-leading enterprises.",
+      desc: "It’s about making ideas a reality. At VentureNest, we are committed to building a strong founder ecosystem. Our mission extends beyond providing infrastructure—we offer a platform for growth, mentorship, and excellence that bridges the gap between entrepreneurial vision and market-ready enterprises.",
     }
   ];
 

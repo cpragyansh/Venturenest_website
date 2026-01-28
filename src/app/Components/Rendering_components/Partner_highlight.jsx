@@ -1,20 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
+// Inline Icons for better reliability
+const IconZap = () => (<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>);
+const IconTrendingUp = () => (<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>);
+const IconShield = () => (<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>);
+const IconGlobe = () => (<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>);
+const IconArrowRight = () => (<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>);
+const IconChevronLeft = () => (<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>);
+const IconChevronRight = () => (<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>);
+
 const Partner_highlight = () => {
-    // Categories based on the website structure
     const categories = [
-        { id: 'accelerator', label: 'Accelerators' },
-        { id: 'corporate', label: 'Corporate' },
-        { id: 'government', label: 'Government' },
-        { id: 'ecosystem', label: 'Ecosystem' }
+        { id: 'accelerator', label: 'Accelerator', icon: <IconZap />, number: '01' },
+        { id: 'investor', label: 'Investment', icon: <IconTrendingUp />, number: '02' },
+        { id: 'government', label: 'Government', icon: <IconShield />, number: '03' },
+        { id: 'ecosystem', label: 'Ecosystem', icon: <IconGlobe />, number: '04' }
     ];
 
     const [activeCategory, setActiveCategory] = useState('accelerator');
     const [partners, setPartners] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState(null);
-    const [isPaused, setIsPaused] = useState(false);
     const scrollRef = useRef(null);
 
     // Fetch data from API based on category
@@ -22,18 +29,16 @@ const Partner_highlight = () => {
         const fetchPartners = async () => {
             setLoading(true);
             try {
-                // Using the endpoint found in existing pages
                 const response = await axios.get(`https://venturenest.onrender.com/getpartner?category=${activeCategory}`);
                 const data = response.data;
 
-                // Map API data to component structure
                 const mappedPartners = data.map((partner, index) => ({
                     id: partner._id || index,
                     logo: partner.imgpath || "/assets/incubated_hero.png",
-                    name: partner.Name, // Note: API uses 'Name' (capital N)
+                    name: partner.Name,
                     type: categories.find(c => c.id === activeCategory)?.label || "Partner",
-                    // Generic description since API might not provide one
-                    brief: `Strategic ${categories.find(c => c.id === activeCategory)?.label} partner collaborating to drive innovation and ecosystem growth.`
+                    description: partner.Description || `Strategic ${categories.find(c => c.id === activeCategory)?.label} partner driving future-ready innovation.`,
+                    ranking: partner.Ranking || "Top Tier"
                 }));
 
                 setPartners(mappedPartners);
@@ -51,245 +56,224 @@ const Partner_highlight = () => {
         fetchPartners();
     }, [activeCategory]);
 
-    // Auto-play effect
-    useEffect(() => {
-        let interval;
-        if (!isPaused && partners.length > 0) {
-            interval = setInterval(() => {
-                setActiveTab((prevId) => {
-                    const currentIndex = partners.findIndex(v => v.id === prevId);
-                    const nextIndex = (currentIndex + 1) % partners.length;
-                    return partners[nextIndex].id;
-                });
-            }, 3000); // Slightly faster rotation for partners
-        }
-        return () => clearInterval(interval);
-    }, [isPaused, partners]);
-
-    // Auto-scroll logic
-    useEffect(() => {
-        if (scrollRef.current && activeTab && partners.length > 0) {
-            const index = partners.findIndex(v => v.id === activeTab);
-            if (index !== -1) {
-                const activeElement = scrollRef.current.children[index];
-                const container = scrollRef.current;
-
-                if (activeElement && container) {
-                    const newScrollLeft = activeElement.offsetLeft - (container.offsetWidth / 2) + (activeElement.offsetWidth / 2);
-                    container.scrollTo({
-                        left: newScrollLeft,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        }
-    }, [activeTab, partners]);
-
-    const scroll = (direction) => {
-        if (scrollRef.current) {
-            const { current } = scrollRef;
-            const scrollAmount = 200;
-            if (direction === 'left') {
-                current.scrollLeft -= scrollAmount;
-            } else {
-                current.scrollLeft += scrollAmount;
-            }
-        }
-    };
-
     const activePartner = partners.find(v => v.id === activeTab);
 
     return (
-        <section className="bg-white py-24 font-jakarta relative overflow-hidden border-t border-gray-100">
-            {/* Background Texture - Mesh Gradient */}
-            <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-                style={{
-                    backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
-                    backgroundSize: '40px 40px'
-                }}>
-            </div>
-
-            {/* Dynamic Mesh Gradients */}
-            <div className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-gradient-to-br from-[#9E0203]/20 via-[#ff4d4d]/10 to-transparent rounded-full blur-[120px] animate-pulse-slow pointer-events-none"></div>
-            <div className="absolute bottom-[-20%] right-[-10%] w-[800px] h-[800px] bg-gradient-to-tl from-blue-900/20 via-blue-500/10 to-transparent rounded-full blur-[120px] animate-pulse-slow animation-delay-2000 pointer-events-none"></div>
-
-            {/* Decorative Geometric Elements */}
-            <div className="absolute top-20 right-10 w-24 h-24 border-2 border-dashed border-gray-200 rounded-full animate-[spin_30s_linear_infinite] pointer-events-none"></div>
-            <div className="absolute top-40 right-20 w-4 h-4 bg-[#9E0203] rounded-full mix-blend-multiply opacity-50 animate-bounce pointer-events-none"></div>
-            <div className="absolute bottom-20 left-10 w-16 h-16 border border-gray-200 rotate-45 pointer-events-none"></div>
-
-            <div className="container mx-auto px-4 relative z-10">
-                {/* Header Section */}
-                <div className="text-center mb-20 relative">
-                    {/* Decorative line behind text */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gradient-to-r from-red-50 to-blue-50 rounded-full blur-3xl -z-10 opacity-50"></div>
-
-                    <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-xs block mb-4 animate-fadeIn">Global Network</span>
-                    <h2 className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-black via-gray-800 to-gray-500 uppercase tracking-tighter mb-6 relative inline-block">
-                        Strategic <span className="relative inline-block ml-4">
-                            <span className="relative z-10 text-white px-6 py-2 bg-[#9E0203] transform -skew-x-12 shadow-[10px_10px_0px_rgba(0,0,0,0.1)] inline-block">Partners</span>
-                            <span className="absolute top-2 left-2 w-full h-full border-2 border-[#9E0203] transform -skew-x-12 -z-10"></span>
-                        </span>
-                    </h2>
-                    <p className="text-gray-500 font-medium text-xl max-w-2xl mx-auto leading-relaxed mt-6">
-                        Collaborating with world-class institutions to build a <span className="text-black font-bold decoration-[#9E0203] underline decoration-4 underline-offset-4">borderless</span> innovation ecosystem.
-                    </p>
+        <section className="bg-white font-jakarta overflow-hidden">
+            {/* Hero Branding Section (Inspired by Image 0 & 1) */}
+            <div className="bg-[#9E0203] pt-20 pb-32 relative text-white">
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+                    <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-white rounded-full blur-[120px]"></div>
                 </div>
+                
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="flex flex-col lg:flex-row items-center gap-16">
+                        {/* Left Side: Editorial Content */}
+                        <div className="w-full lg:w-1/2 space-y-8">
+                            <div className="space-y-4">
+                                <span className="uppercase tracking-[0.4em] text-xs font-black opacity-70 block">
+                                    Strategic Alliances
+                                </span>
+                                <h2 className="text-5xl md:text-7xl font-black leading-[1.1] tracking-tighter">
+                                    Global Network of <span className="opacity-50">Excellence.</span>
+                                </h2>
+                            </div>
+                            
+                            <p className="text-lg md:text-xl opacity-90 leading-relaxed max-w-xl font-medium">
+                                We bridge the gap between visionaries and industry titans. Our partners provide the 
+                                bedrock of expertise, capital, and infrastructure for the next generation of startups.
+                            </p>
 
-                {/* Sorting Bar - Modern Tabs */}
-                <div className="flex flex-wrap justify-center gap-4 mb-24 max-w-4xl mx-auto p-2 bg-gray-50/50 backdrop-blur-sm rounded-full border border-gray-100 shadow-sm">
-                    {categories.map((cat) => (
-                        <button
-                            key={cat.id}
-                            onClick={() => setActiveCategory(cat.id)}
-                            className={`py-3 px-8 rounded-full font-bold uppercase tracking-widest text-[11px] transition-all duration-500 relative overflow-hidden group ${activeCategory === cat.id
-                                ? 'bg-black text-white shadow-lg'
-                                : 'text-gray-500 hover:text-black hover:bg-white'
-                                }`}
-                        >
-                            <span className="relative z-10">{cat.label}</span>
-                            {activeCategory === cat.id && (
-                                <span className="absolute inset-0 bg-gradient-to-r from-[#9E0203] to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-0"></span>
+                            <div className="flex flex-wrap gap-4 pt-4">
+                                <button className="bg-white text-[#9E0203] px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest flex items-center gap-3 hover:bg-gray-100 transition-all group">
+                                    Partner With Us 
+                                    <IconArrowRight />
+                                </button>
+                                <button className="border-2 border-white/30 text-white px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-white/10 transition-all">
+                                    Our Impact
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Right Side: Featured Partner Showcase (Inspired by Image 0/1) */}
+                        <div className="w-full lg:w-1/2 relative">
+                            {loading ? (
+                                <div className="aspect-[4/3] bg-white/5 rounded-[2.5rem] animate-pulse"></div>
+                            ) : activePartner ? (
+                                <div className="relative group perspective-1000">
+                                    <div className="aspect-[4/3] bg-white rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 flex items-center justify-center p-16">
+                                        <img 
+                                            src={activePartner.logo} 
+                                            alt={activePartner.name}
+                                            className="max-w-full max-h-full object-contain filter drop-shadow-2xl group-hover:scale-110 transition-transform duration-700"
+                                        />
+                                        {/* Corner Accent */}
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-[#9E0203]/5 rounded-bl-[100%]"></div>
+                                    </div>
+                                    {/* Floating Stats Label (Inspired by Image 4) */}
+                                    <div className="absolute -bottom-6 -left-6 bg-black text-white p-6 rounded-2xl shadow-2xl animate-float">
+                                        <div className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60 mb-1">Status</div>
+                                        <div className="text-xl font-black text-[#9E0203]">PLATINUM</div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="aspect-[4/3] bg-white/5 rounded-[2.5rem] flex items-center justify-center border-2 border-dashed border-white/20">
+                                    <span className="font-bold opacity-30 text-sm uppercase tracking-[0.3em]">Connecting Partners...</span>
+                                </div>
                             )}
-                        </button>
-                    ))}
-                </div>
-
-                {loading ? (
-                    <div className="h-[400px] flex items-center justify-center">
-                        <div className="relative">
-                            <div className="w-20 h-20 border-4 border-gray-100 rounded-full animate-spin"></div>
-                            <div className="absolute top-0 left-0 w-20 h-20 border-4 border-[#9E0203] rounded-full animate-spin border-t-transparent animation-delay-150"></div>
                         </div>
                     </div>
-                ) : partners.length === 0 ? (
-                    <div className="h-[300px] flex items-center justify-center text-center bg-gray-50/50 rounded-[2rem] border-2 border-dashed border-gray-200 backdrop-blur-sm">
-                        <p className="text-gray-400 font-bold uppercase tracking-widest text-lg">No partners found in this category.</p>
+                </div>
+            </div>
+
+            {/* Category Navigation (Inspired by Image 1's icons) */}
+            <div className="relative -mt-20 z-20 pb-20">
+                <div className="container mx-auto px-6">
+                    <div className="bg-white rounded-3xl shadow-[0_30px_100px_-20px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden">
+                        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100">
+                            {categories.map((cat) => (
+                                <button
+                                    key={cat.id}
+                                    onClick={() => setActiveCategory(cat.id)}
+                                    className={`p-8 group transition-all duration-500 relative flex flex-col items-center justify-center text-center ${
+                                        activeCategory === cat.id ? 'bg-[#9E0203] text-white' : 'hover:bg-gray-50'
+                                    }`}
+                                >
+                                    <span className={`text-[10px] font-black absolute top-4 left-6 tracking-widest ${
+                                        activeCategory === cat.id ? 'text-white/40' : 'text-gray-300'
+                                    }`}>
+                                        {cat.number}
+                                    </span>
+                                    <div className={`transition-transform duration-500 group-hover:scale-110 ${
+                                        activeCategory === cat.id ? 'text-white' : 'text-[#9E0203]'
+                                    }`}>
+                                        {cat.icon}
+                                    </div>
+                                    <div className="space-y-1 mt-4">
+                                        <h4 className="font-black text-xs uppercase tracking-[0.2em]">
+                                            {cat.label}
+                                        </h4>
+                                        <p className={`text-[9px] font-bold uppercase tracking-wider ${
+                                            activeCategory === cat.id ? 'text-white/60' : 'text-gray-400'
+                                        }`}>
+                                            Network Path
+                                        </p>
+                                    </div>
+                                    {activeCategory === cat.id && (
+                                        <div className="absolute bottom-0 left-0 w-full h-1 bg-white/30"></div>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
                     </div>
-                ) : (
-                    <div
-                        className="relative max-w-7xl mx-auto"
-                        onMouseEnter={() => setIsPaused(true)}
-                        onMouseLeave={() => setIsPaused(false)}
-                    >
-                        {/* Main Content Area */}
-                        {activePartner && (
-                            <div className="flex flex-col md:flex-row items-center gap-16 md:gap-24 mb-24 animate-fadeIn relative z-20">
-                                {/* Decorative circle */}
-                                <div className="absolute top-1/2 left-0 w-[500px] h-[500px] border border-gray-100 rounded-full -z-10 transform -translate-y-1/2 -translate-x-1/4 pointer-events-none"></div>
+                </div>
+            </div>
 
-                                {/* Left: Logo Display (Ultra Glass) */}
-                                <div className="w-full md:w-5/12 flex justify-center md:justify-end perspective-1000">
-                                    <div className="relative group w-[350px] h-[350px]">
-                                        {/* Card shadow/glow */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-[#9E0203]/20 to-blue-500/20 rounded-[3rem] blur-2xl transform group-hover:scale-105 transition-transform duration-700 opacity-50"></div>
+            {/* Partners Grid (Inspired by Image 4 - Legacy Cards) */}
+            <div className="pb-24">
+                <div className="container mx-auto px-6">
+                    <div className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                        <div className="space-y-2">
+                            <h3 className="text-4xl font-black text-black tracking-tighter uppercase">
+                                Active <span className="text-[#9E0203]">{activeCategory}</span> Leaders
+                            </h3>
+                            <p className="text-gray-400 font-bold text-xs uppercase tracking-[0.3em]">
+                                Showing {partners.length} Accredited Organizations
+                            </p>
+                        </div>
+                        <div className="flex gap-4">
+                            <button className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#9E0203] hover:border-[#9E0203] hover:text-white transition-all">
+                                <IconChevronLeft />
+                            </button>
+                            <button className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#9E0203] hover:border-[#9E0203] hover:text-white transition-all">
+                                <IconChevronRight />
+                            </button>
+                        </div>
+                    </div>
 
-                                        {/* Main Card */}
-                                        <div className="relative h-full w-full bg-white/70 backdrop-blur-2xl rounded-[3rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-white flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:rotate-1 group-hover:scale-[1.02]">
-                                            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-gray-100 to-transparent rounded-bl-[10rem] opacity-50"></div>
-                                            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-[#9E0203]/5 to-transparent rounded-tr-[5rem]"></div>
-
-                                            <img
-                                                src={activePartner.logo}
-                                                alt={activePartner.name}
-                                                className="max-w-[70%] max-h-[70%] object-contain transform group-hover:scale-110 transition-transform duration-700 relative z-10 filter drop-shadow-lg"
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {loading ? (
+                            Array(4).fill(0).map((_, i) => (
+                                <div key={i} className="h-[300px] bg-gray-50 rounded-[2rem] animate-pulse"></div>
+                            ))
+                        ) : partners.length > 0 ? (
+                            partners.map((partner) => (
+                                <div 
+                                    key={partner.id}
+                                    onClick={() => setActiveTab(partner.id)}
+                                    className={`group cursor-pointer rounded-[2rem] p-8 transition-all duration-500 min-h-[320px] flex flex-col justify-between border-2 ${
+                                        activeTab === partner.id 
+                                        ? 'bg-[#9E0203] border-[#9E0203] text-white shadow-2xl active-card scale-[1.02]' 
+                                        : 'bg-white border-gray-100 hover:border-[#9E0203]/20 shadow-sm'
+                                    }`}
+                                >
+                                    <div className="space-y-6">
+                                        <div className="flex justify-between items-start">
+                                            <div className="space-y-1">
+                                                <div className={`text-[10px] font-black uppercase tracking-widest ${
+                                                    activeTab === partner.id ? 'text-white/60' : 'text-gray-400'
+                                                }`}>
+                                                    Accredited
+                                                </div>
+                                                <div className={`text-2xl font-black tracking-tight ${
+                                                    activeTab === partner.id ? 'text-white' : 'text-[#9E0203]'
+                                                }`}>
+                                                    {partner.ranking}
+                                                </div>
+                                            </div>
+                                            <div className={`w-8 h-8 rounded-full border flex items-center justify-center ${
+                                                activeTab === partner.id ? 'border-white/30 text-white' : 'border-gray-100 text-[#9E0203]'
+                                            }`}>
+                                                <IconArrowRight />
+                                            </div>
+                                        </div>
+                                        
+                                        <div className={`h-[100px] flex items-center justify-center p-4 rounded-xl transition-all duration-500 ${
+                                            activeTab === partner.id ? 'bg-white shadow-inner' : 'bg-gray-50'
+                                        }`}>
+                                            <img 
+                                                src={partner.logo} 
+                                                alt={partner.name}
+                                                className="max-w-full max-h-full object-contain filter drop-shadow-sm" 
                                             />
-
-                                            {/* Shine effect */}
-                                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
                                         </div>
                                     </div>
-                                </div>
 
-                                {/* Right: Info */}
-                                <div className="w-full md:w-7/12 text-center md:text-left space-y-8">
-                                    <div className="inline-flex items-center gap-3 px-5 py-2 bg-white border border-gray-200 shadow-sm text-gray-800 text-[10px] font-black uppercase tracking-[0.2em] rounded-full mb-2">
-                                        <span className="w-2 h-2 rounded-full bg-[#9E0203] animate-pulse"></span>
-                                        {activePartner.type}
+                                    <div className="space-y-1 mt-6">
+                                        <h4 className="font-black uppercase tracking-tight text-lg line-clamp-1">
+                                            {partner.name}
+                                        </h4>
+                                        <p className={`text-[10px] font-bold uppercase tracking-widest ${
+                                            activeTab === partner.id ? 'text-white/50' : 'text-gray-400'
+                                        }`}>
+                                            Strategic {activeCategory}
+                                        </p>
                                     </div>
-                                    <h3 className="text-5xl md:text-7xl font-black font-jakarta uppercase tracking-tighter text-black leading-[0.9]">
-                                        {activePartner.name}
-                                    </h3>
-                                    <div className="flex items-center gap-4 justify-center md:justify-start">
-                                        <div className="h-1.5 w-24 bg-gradient-to-r from-[#9E0203] to-red-400 rounded-full"></div>
-                                        <div className="h-1.5 w-4 bg-gray-200 rounded-full"></div>
-                                    </div>
-
-                                    <p className="text-gray-500 font-medium text-xl leading-relaxed max-w-xl mx-auto md:mx-0">
-                                        {activePartner.brief}
-                                    </p>
                                 </div>
+                            ))
+                        ) : (
+                            <div className="col-span-full py-20 text-center border-2 border-dashed border-gray-100 rounded-[2rem]">
+                                <span className="font-black text-gray-300 uppercase tracking-widest">No Partners Found in this Category</span>
                             </div>
                         )}
-
-                        {/* Bottom Slider - Seamless Design */}
-                        <div className="relative pt-12">
-                            {/* Fade Masks */}
-                            <div className="absolute left-0 top-12 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-                            <div className="absolute right-0 top-12 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-
-                            <div className="flex items-center gap-8 justify-center">
-                                {/* Navigation Buttons */}
-                                <button onClick={() => scroll('left')} className="p-5 rounded-full bg-white text-black hover:bg-black hover:text-white border border-gray-100 transition-all shadow-lg hover:shadow-xl z-20 group">
-                                    <svg className="w-6 h-6 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                                </button>
-
-                                <div ref={scrollRef} className="flex overflow-x-auto gap-6 py-8 px-4 flex-grow no-scrollbar scroll-smooth items-center">
-                                    {partners.map((partner) => (
-                                        <button
-                                            key={partner.id}
-                                            onClick={() => setActiveTab(partner.id)}
-                                            className={`flex-shrink-0 w-48 h-28 bg-white border rounded-2xl flex items-center justify-center p-6 transition-all duration-500 relative overflow-hidden group ${activeTab === partner.id
-                                                ? 'border-[#9E0203] shadow-[0_20px_40px_-10px_rgba(158,2,3,0.15)] scale-110 -translate-y-2'
-                                                : 'border-gray-100 hover:border-gray-300 opacity-60 hover:opacity-100 hover:-translate-y-1'
-                                                }`}
-                                        >
-                                            <div className={`absolute top-0 left-0 w-1 h-full bg-[#9E0203] transition-all duration-300 ${activeTab === partner.id ? 'opacity-100' : 'opacity-0'}`}></div>
-                                            <img
-                                                src={partner.logo}
-                                                alt={partner.name}
-                                                className="max-w-full max-h-full object-contain filter drop-shadow-sm transition-transform duration-500 group-hover:scale-105"
-                                            />
-                                        </button>
-                                    ))}
-                                </div>
-
-                                <button onClick={() => scroll('right')} className="p-5 rounded-full bg-white text-black hover:bg-black hover:text-white border border-gray-100 transition-all shadow-lg hover:shadow-xl z-20 group">
-                                    <svg className="w-6 h-6 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                                </button>
-                            </div>
-                        </div>
-
                     </div>
-                )}
+                </div>
             </div>
+
             <style jsx>{`
-                .no-scrollbar::-webkit-scrollbar {
-                    display: none;
-                }
-                .no-scrollbar {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                 @keyframes pulse-slow {
-                    0%, 100% { transform: scale(1); opacity: 0.3; }
-                    50% { transform: scale(1.1); opacity: 0.5; }
-                }
-                .animate-fadeIn {
-                    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                }
-                .animate-pulse-slow {
-                    animation: pulse-slow 8s ease-in-out infinite;
-                }
                 .perspective-1000 {
                     perspective: 1000px;
                 }
-                .animation-delay-2000 {
-                    animation-delay: 2s;
+                @keyframes float {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-10px); }
+                }
+                .animate-float {
+                    animation: float 4s ease-in-out infinite;
+                }
+                .active-card {
+                    transform: translateY(-8px);
                 }
             `}</style>
         </section>
@@ -297,3 +281,4 @@ const Partner_highlight = () => {
 };
 
 export default Partner_highlight;
+
