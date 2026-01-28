@@ -206,33 +206,84 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <div className="max-w-2xl">
-              <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-8">
-                We Don't Just Promise<br />Growth—We Prove It.
+            <div className="max-w-2xl py-8">
+              <h2 className="text-brand-red text-6xl font-black font-jakarta mb-10 leading-[1.1] tracking-tighter">
+                We Don't Just <br />
+                <span className="text-brand-dark">Promise Growth</span> — <br />
+                We Prove It.
               </h2>
 
-              <p className="text-brand-dark text-lg leading-relaxed mb-12">
-                Driven by the vision of “Each One, One Job”, CGC University Mohali’s Technology Business Incubator (TBI) – Venture Nest empowers students and startups with funding, mentorship, incubation support, and industry exposure. We transform innovative ideas into scalable ventures and successful careers by providing a robust ecosystem that nurtures talent, fosters creativity, and bridges the gap between academia and industry. Our commitment goes beyond just starting up; we focus on sustainable growth, long-term success, and creating a lasting impact in the global startup landscape. Through our extensive network of mentors and investors, we ensure that every entrepreneur has the guidance and resources needed to navigate the complexities of the business world.
+              <p className="text-brand-dark/80 text-lg leading-relaxed mb-6 font-medium">
+                Driven by the vision of <span className="text-brand-red font-bold">“Each One, One Job”</span>, CGC University Mohali’s Technology Business Incubator (TBI) – Venture Nest empowers students and startups with funding, mentorship, and industry exposure.
               </p>
+              
+              <p className="text-brand-dark/70 text-base leading-relaxed mb-10">
+                We transform innovative ideas into scalable ventures by providing a robust ecosystem that bridges the gap between academia and industry. Our commitment goes beyond just starting up; we focus on sustainable growth, long-term success, and creating a lasting impact in the global startup landscape.
+              </p>
+              
+              <div className="flex items-center gap-4">
+                <div className="h-[2px] w-12 bg-brand-red"></div>
+                <span className="text-brand-dark text-xs font-black uppercase tracking-[0.2em] opacity-40">Impact Report 2024</span>
+              </div>
             </div>
 
-            {/* Right Stats Grid (2x2) */}
-            <div className="grid grid-cols-2 gap-6">
-              <div className="text-center p-8 bg-brand-red rounded-3xl shadow-lg transform hover:scale-[1.02] transition-all duration-300">
-                <div className="text-white text-4xl font-bold mb-2">1.5 Crore+</div>
-                <div className="text-white/90 text-sm font-medium">Of funding Granted to the startups</div>
+            {/* Premium Stats Dashboard Visualization */}
+            <div className="grid grid-cols-2 gap-4 h-full">
+              {/* Funding Stat - Line Chart Style */}
+              <div className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden relative group">
+                <div className="relative z-10">
+                  <div className="text-brand-red text-3xl font-black mb-1">1.5 Cr+</div>
+                  <div className="text-brand-dark text-[10px] font-bold uppercase tracking-wider opacity-60">Funding Granted</div>
+                </div>
+                {/* Mini Sparkline SVG */}
+                <div className="absolute bottom-0 left-0 w-full h-1/2 opacity-20 group-hover:opacity-40 transition-opacity">
+                  <svg viewBox="0 0 100 40" className="w-full h-full preserve-3d">
+                    <path d="M0,40 L10,35 L30,38 L50,20 L70,25 L100,0 L100,40 Z" fill="url(#grad-red)" />
+                    <defs>
+                      <linearGradient id="grad-red" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#9E0203" />
+                        <stop offset="100%" stopColor="transparent" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
               </div>
-              <div className="text-center p-8 bg-gray-50 rounded-3xl border border-gray-100 shadow-sm transform hover:scale-[1.02] transition-all duration-300">
-                <div className="text-brand-red text-4xl font-bold mb-2">100+</div>
-                <div className="text-brand-dark text-sm font-medium">Startups Incubated both physically and virtually</div>
+
+              {/* Startups Stat - Progress Circle Style */}
+              <div className="bg-brand-red p-6 rounded-[32px] shadow-lg hover:shadow-red-200/50 transition-all duration-500 flex flex-col justify-between overflow-hidden relative group">
+                <div className="relative z-10">
+                  <div className="text-white text-3xl font-black mb-1">100+</div>
+                  <div className="text-white/80 text-[10px] font-bold uppercase tracking-wider">Startups Incubated</div>
+                </div>
+                <div className="mt-4 w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin-slow"></div>
+                <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
               </div>
-              <div className="text-center p-8 bg-gray-50 rounded-3xl border border-gray-100 shadow-sm transform hover:scale-[1.02] transition-all duration-300">
-                <div className="text-brand-red text-4xl font-bold mb-2">685+</div>
-                <div className="text-brand-dark text-sm font-medium">Patents published successfully</div>
+
+              {/* Patents Stat - Bar Graph Style */}
+              <div className="bg-gray-50 p-6 rounded-[32px] border border-gray-200 hover:border-brand-red transition-all duration-500 flex flex-col justify-between group">
+                <div>
+                  <div className="text-brand-red text-3xl font-black mb-1">685+</div>
+                  <div className="text-brand-dark text-[10px] font-bold uppercase tracking-wider opacity-60">Patents Published</div>
+                </div>
+                <div className="flex items-end gap-1 h-12 mt-4">
+                  {[30, 60, 45, 90, 70, 100].map((h, i) => (
+                    <div key={i} className="flex-1 bg-brand-red/20 group-hover:bg-brand-red transition-all duration-500 rounded-sm" style={{ height: `${h}%` }}></div>
+                  ))}
+                </div>
               </div>
-              <div className="text-center p-8 bg-brand-red rounded-3xl shadow-lg transform hover:scale-[1.02] transition-all duration-300">
-                <div className="text-white text-4xl font-bold mb-2">10+</div>
-                <div className="text-white/90 text-sm font-medium">Unicorn Ventures are launched</div>
+
+              {/* Unicorns Stat - Impact Style */}
+              <div className="bg-brand-dark p-6 rounded-[32px] shadow-2xl transition-all duration-500 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+                <div className="relative z-10">
+                  <div className="text-white text-4xl font-black mb-1 group-hover:scale-110 transition-transform">10+</div>
+                  <div className="text-brand-red text-[11px] font-black uppercase tracking-widest">Unicorn Ventures</div>
+                </div>
+                {/* Decorative particles */}
+                <div className="absolute inset-0 opacity-30">
+                  <div className="absolute top-2 left-4 w-1 h-1 bg-white rounded-full animate-ping"></div>
+                  <div className="absolute bottom-6 right-8 w-2 h-2 bg-brand-red rounded-full animate-pulse"></div>
+                  <div className="absolute top-1/2 left-1/2 w-20 h-20 border border-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 scale-150"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -241,37 +292,89 @@ export default function Index() {
       
       <Council_highlight />
 
-      {/* Placement Records */}
-      <section className="bg-gray-50 py-20">
+      {/* Success Milestones Section - Redesigned for Image-based Analytics */}
+      <section className="bg-white py-24 relative overflow-hidden">
+        {/* Subtle background detail */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gray-50 -z-10 translate-x-1/2 rounded-full blur-3xl opacity-50"></div>
+        
         <div className="container mx-auto px-4">
-          <h2 className="text-brand-red text-5xl font-bold font-jakarta text-center mb-4">
-            Our Outstanding Placement Record Over the Years
-          </h2>
-          <p className="text-brand-dark text-center mb-16">
-            Driven by our commitment to excellence, CGC University Mohali consistently achieves remarkable results. Our placement records showcase the talent of our students and the trust of world-class recruiters, ensuring a bright transition from academic learning to professional success.
-          </p>
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            {/* Left Content: The Data Breakdown */}
+            <div className="w-full lg:w-1/3">
+              <div className="mb-12">
+                <span className="text-brand-red font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Analytics Dashboard</span>
+                <h2 className="text-brand-dark text-5xl font-black font-jakarta leading-[1.1] mb-6 tracking-tight">
+                  Incubation <br />
+                  <span className="text-brand-red">Milestones</span>
+                </h2>
+                <div className="h-1.5 w-20 bg-brand-red mb-8"></div>
+                <p className="text-gray-500 font-medium leading-relaxed">
+                  VentureNest tracks the exponential growth and capital infusion across our incubated startups. Our data reflects a consistent upward trajectory in market readiness and investor confidence.
+                </p>
+              </div>
 
-          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <div>
-              <h3 className="text-brand-red text-2xl font-semibold font-lato mb-8">Companies recruiting at CGC Mohali (Jhanjeri)</h3>
-              <div className="bg-white p-8 rounded-lg">
-                {/* Simple chart placeholder */}
-                <div className="h-64 flex items-end justify-around space-x-2">
-                  {[200, 250, 310, 420, 550, 650, 800].map((height, idx) => (
-                    <div key={idx} className="flex-1 bg-brand-red/20 hover:bg-brand-red transition-colors" style={{ height: `${height / 10}%` }}></div>
-                  ))}
-                </div>
+              {/* Seed Funding Steps */}
+              <div className="space-y-4">
+                <h4 className="text-brand-dark font-black uppercase tracking-widest text-[11px] mb-6 opacity-40">Seed Funding Roadmap</h4>
+                {[
+                  { phase: 'Seed Phase I', amount: '3 Lakhs', status: 'Completed' },
+                  { phase: 'Seed Phase II', amount: '8 Lakhs', status: 'Completed' },
+                  { phase: 'Seed Phase III', amount: '11 Lakhs', status: 'Completed' },
+                  { phase: 'Bridge Phase IV', amount: '26.5 Lakhs', status: 'Achieved' },
+                ].map((step, idx) => (
+                  <div key={idx} className="flex items-center gap-6 p-5 rounded-[24px] bg-gray-50 border border-transparent group hover:bg-white hover:border-gray-100 hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 cursor-default">
+                    <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-brand-red font-black group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase font-bold text-gray-400 mb-0.5">{step.phase}</div>
+                      <div className="text-brand-dark font-black text-xl tracking-tighter">{step.amount}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div>
-              <h3 className="text-brand-red text-2xl font-semibold font-lato mb-8">Companies offering CTC 5 Lacs P.a. or above</h3>
-              <div className="bg-white p-8 rounded-lg">
-                {/* Simple chart placeholder */}
-                <div className="h-64 flex items-end justify-around space-x-2">
-                  {[150, 220, 290, 350, 480, 580, 700].map((height, idx) => (
-                    <div key={idx} className="flex-1 bg-brand-red/20 hover:bg-brand-red transition-colors" style={{ height: `${height / 10}%` }}></div>
-                  ))}
+            {/* Right Content: The Graph Display Area */}
+            <div className="w-full lg:w-2/3">
+              <div className="bg-brand-dark p-2 rounded-[48px] shadow-2xl relative">
+                {/* Header of the Display Frame */}
+                <div className="px-8 py-5 flex items-center justify-between border-b border-white/5">
+                  <div className="flex gap-2">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+                  </div>
+                  <div className="text-white/30 text-[10px] font-black uppercase tracking-[0.3em]">Growth_Analytics_Visualization_v2.0</div>
+                </div>
+
+                {/* Main Image Container */}
+                <div className="bg-[#121212] rounded-[40px] overflow-hidden min-h-[550px] flex items-center justify-center group relative">
+                  {/* The Image itself - USER CAN PASTE SRC HERE */}
+                  <img 
+                    src="/assets/funding-graph.png" 
+                    alt="Seed Funding Growth Graph" 
+                    className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105" 
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentNode.querySelector('.fallback-ui').style.display = 'flex';
+                    }}
+                  />
+                  
+                  {/* Fallback Display if image is missing */}
+                  <div className="fallback-ui absolute inset-0 hidden flex-col items-center justify-center text-center p-12">
+                     <div className="w-24 h-24 mb-8 text-brand-red opacity-20">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                     </div>
+                     <h3 className="text-white/80 font-black text-2xl mb-4 tracking-tight">Visualization Engine Ready</h3>
+                     <p className="text-white/30 text-sm max-w-xs font-medium leading-relaxed">Please update the image source in the DashboardRev.jsx component to display the growth data visualization here.</p>
+                  </div>
+                </div>
+
+                {/* Floating Stats on the Frame */}
+                <div className="absolute -bottom-8 -right-8 bg-brand-red p-10 rounded-[40px] shadow-[0_20px_50px_rgba(158,2,3,0.3)] hidden md:block">
+                  <div className="text-white text-4xl font-black mb-1">685+</div>
+                  <div className="text-white/70 text-[10px] uppercase font-black tracking-widest leading-tight">Total Patents <br /> Published</div>
                 </div>
               </div>
             </div>
@@ -374,95 +477,145 @@ export default function Index() {
       <Incubated_startups_rendering />
       <Incubated_venture_highlight />
 
-      {/* Application Process */}
-      <section className="bg-white py-20 relative overflow-hidden">
-        {/* Decorative Grid Background */}
-        <div className="absolute inset-0 pointer-events-none opacity-30"
-          style={{ backgroundImage: 'radial-gradient(#9E0203 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
+      {/* Incubation Application Process */}
+      <section className="bg-white py-16 relative overflow-hidden">
+        {/* World Map Background with Low Opacity */}
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none flex items-center justify-center overflow-hidden">
+           <img 
+             src="/assets/world_map.png" 
+             alt="World Map Background" 
+             className="w-full h-full object-cover opacity-60"
+           />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-4">
-              Application Process
+            <h2 className="text-brand-red text-4xl font-black font-jakarta mb-3">
+              Incubation Application Process
             </h2>
-            <div className="h-1 w-24 bg-brand-red mx-auto"></div>
+            <p className="text-gray-500 font-medium text-sm max-w-xl mx-auto">
+              A structured roadmap designed to identify, nurture, and accelerate high-potential startup ventures within our ecosystem.
+            </p>
           </div>
 
-          <div className="max-w-5xl mx-auto space-y-12">
+          <div className="relative max-w-5xl mx-auto">
+            {/* Horizontal Connector Line */}
+            <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -translate-y-1/2 hidden md:block"></div>
 
-            {/* Step 1 */}
-            <div className="flex flex-col md:flex-row items-center gap-8 relative group">
-              <div className="w-full md:w-1/2 text-right order-1 md:order-1 pr-8">
-                <h3 className="text-3xl font-bold text-gray-800 font-jakarta mb-2">Online Application</h3>
-                <p className="text-brand-red font-bold uppercase tracking-wider text-sm mb-3">Kickstart Your Journey</p>
-                <p className="text-gray-600 leading-relaxed font-lato">
-                  Startups can easily apply via our intuitive online portal. Just share your innovative business concept, core team details, market traction and the current stage of your venture’s development.
-                </p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+              
+              {/* Step 1: Online Application (Label BOTTOM) */}
+              <div className="flex flex-col items-center group">
+                <div className="h-32 flex items-end justify-center mb-6 hidden md:flex">
+                   {/* Spacing for TOP content in other columns */}
+                </div>
+                
+                {/* Circle */}
+                <div className="relative">
+                   <div className="w-32 h-32 rounded-full bg-brand-red shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
+                      <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                         <polyline points="14 2 14 8 20 8"></polyline>
+                         <line x1="16" y1="13" x2="8" y2="13"></line>
+                         <line x1="16" y1="17" x2="8" y2="17"></line>
+                         <polyline points="10 9 9 9 8 9"></polyline>
+                      </svg>
+                   </div>
+                   {/* Line down to text */}
+                   <div className="absolute top-full left-1/2 -translate-x-1/2 h-6 w-px bg-gray-300"></div>
+                </div>
 
-              {/* Center Icon/Marker */}
-              <div className="hidden md:flex flex-col items-center justify-center order-2 absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
-                <div className="w-12 h-12 rounded-full bg-brand-red text-white flex items-center justify-center font-bold text-xl shadow-lg z-10">1</div>
-                <div className="w-1 bg-gray-200 flex-grow -z-0"></div>
-              </div>
-
-              <div className="w-full md:w-1/2 order-2 md:order-3 pl-8">
-                <div className="bg-gray-50 p-6 rounded-2xl border-2 border-dashed border-gray-200 group-hover:border-brand-red transition-colors duration-300">
-                  <img src="assets/application-step-1.svg" alt="Online Application" className="w-full h-48 object-contain" />
+                <div className="mt-8 text-center max-w-[200px]">
+                  <h3 className="text-brand-red text-lg font-black mb-2">Online Application</h3>
+                  <p className="text-gray-500 text-xs leading-relaxed font-medium">
+                    Startups can easily apply via our intuitive online portal. Just share your innovative business concept and core team details.
+                  </p>
                 </div>
               </div>
-            </div>
 
-            {/* Step 2 */}
-            <div className="flex flex-col md:flex-row items-center gap-8 relative group">
-              <div className="w-full md:w-1/2 order-2 md:order-1 pr-8">
-                <div className="bg-gray-50 p-6 rounded-2xl border-2 border-dashed border-gray-200 group-hover:border-brand-red transition-colors duration-300">
-                  <img src="assets/application-step-2.svg" alt="Screening" className="w-full h-48 object-contain" />
+              {/* Step 2: Screening (Label TOP) */}
+              <div className="flex flex-col-reverse md:flex-col items-center group">
+                {/* Label Top Content */}
+                <div className="mb-8 text-center max-w-[200px] relative">
+                  <h3 className="text-brand-red text-lg font-black mb-2">Initial Screening</h3>
+                  <p className="text-gray-500 text-xs leading-relaxed font-medium">
+                    Our expert panel evaluates your submission based on the strength of your idea, team synergy, and market readiness.
+                  </p>
+                  {/* Line down to circle */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 h-6 w-px bg-gray-300 translate-y-2 hidden md:block"></div>
+                </div>
+
+                {/* Circle */}
+                <div className="relative mt-8 md:mt-0">
+                   <div className="w-32 h-32 rounded-full bg-gray-800 border-2 border-dashed border-gray-600 shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
+                      <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                         <circle cx="11" cy="11" r="8"></circle>
+                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      </svg>
+                   </div>
+                </div>
+
+                <div className="h-32 hidden md:block">
+                   {/* Spacing for BOTTOM content in other columns */}
                 </div>
               </div>
 
-              {/* Center Icon/Marker */}
-              <div className="hidden md:flex flex-col items-center justify-center order-2 absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
-                <div className="w-12 h-12 rounded-full bg-white border-4 border-brand-red text-brand-red flex items-center justify-center font-bold text-xl shadow-lg z-10">2</div>
-                <div className="w-1 bg-gray-200 flex-grow -z-0"></div>
-              </div>
+              {/* Step 3: Selection Board (Label BOTTOM) */}
+              <div className="flex flex-col items-center group">
+                <div className="h-32 flex items-end justify-center mb-6 hidden md:flex">
+                </div>
+                
+                {/* Circle */}
+                <div className="relative">
+                   <div className="w-32 h-32 rounded-full bg-brand-red shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
+                      <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                         <circle cx="9" cy="7" r="4"></circle>
+                         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                      </svg>
+                   </div>
+                   <div className="absolute top-full left-1/2 -translate-x-1/2 h-6 w-px bg-gray-300"></div>
+                </div>
 
-              <div className="w-full md:w-1/2 text-left order-1 md:order-3 pl-8">
-                <h3 className="text-3xl font-bold text-gray-800 font-jakarta mb-2">Screening & Evaluation</h3>
-                <p className="text-brand-red font-bold uppercase tracking-wider text-sm mb-3">Your Idea, Our Insights</p>
-                <p className="text-gray-600 leading-relaxed font-lato">
-                  Once you apply, our expert panel evaluates your submission based on the strength of your idea, team synergy, scalability and market readiness. Every application gets the attention it deserves.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex flex-col md:flex-row items-center gap-8 relative group">
-              <div className="w-full md:w-1/2 text-right order-1 md:order-1 pr-8">
-                <h3 className="text-3xl font-bold text-gray-800 font-jakarta mb-2">Selection & Onboarding</h3>
-                <p className="text-brand-red font-bold uppercase tracking-wider text-sm mb-3">Welcome to Growth</p>
-                <p className="text-gray-600 leading-relaxed font-lato">
-                  Selected startups are onboarded into our ecosystem, gaining access to tailored mentorship, strategic resources and hands-on support to scale efficiently and sustainably.
-                </p>
-              </div>
-
-              {/* Center Icon/Marker */}
-              <div className="hidden md:flex flex-col items-center justify-center order-2 absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
-                <div className="w-12 h-12 rounded-full bg-brand-red text-white flex items-center justify-center font-bold text-xl shadow-lg z-10">3</div>
-              </div>
-
-              <div className="w-full md:w-1/2 order-2 md:order-3 pl-8">
-                <div className="bg-gray-50 p-6 rounded-2xl border-2 border-dashed border-gray-200 group-hover:border-brand-red transition-colors duration-300">
-                  <img src="assets/application-step-3.svg" alt="Onboarding" className="w-full h-48 object-contain" />
+                <div className="mt-8 text-center max-w-[200px]">
+                  <h3 className="text-brand-red text-lg font-black mb-2">Selection Board</h3>
+                  <p className="text-gray-500 text-xs leading-relaxed font-medium">
+                    Shortlisted startups present their vision to a panel of mentors and industry experts for final incubation approval.
+                  </p>
                 </div>
               </div>
+
+              {/* Step 4: Onboarding (Label TOP) */}
+              <div className="flex flex-col-reverse md:flex-col items-center group">
+                <div className="mb-8 text-center max-w-[200px] relative">
+                  <h3 className="text-brand-red text-lg font-black mb-2">Onboarding</h3>
+                  <p className="text-gray-500 text-xs leading-relaxed font-medium">
+                    Selected startups are onboarded into our ecosystem, gaining access to tailored mentorship and strategic resources.
+                  </p>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 h-6 w-px bg-gray-300 translate-y-2 hidden md:block"></div>
+                </div>
+
+                {/* Circle */}
+                <div className="relative mt-8 md:mt-0">
+                   <div className="w-32 h-32 rounded-full bg-gray-800 border-2 border-dashed border-gray-600 shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
+                      <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                      </svg>
+                   </div>
+                </div>
+
+                <div className="h-32 hidden md:block">
+                </div>
+              </div>
+
             </div>
 
-            <div className="text-center pt-12">
-              <button className="bg-brand-red text-white px-10 py-5 rounded-full font-bold uppercase text-base hover:bg-brand-red-light transition-all shadow-xl hover:shadow-2xl flex items-center space-x-3 mx-auto">
+            <div className="text-center pt-16">
+              <button className="bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-all shadow-lg hover:shadow-xl flex items-center space-x-3 mx-auto">
                 <span>Start Your Application</span>
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                   <path fillRule="evenodd" clipRule="evenodd" d="M22.731 12.0001L15.7662 18.9665L14.6334 17.8353L19.6686 12.8001L1.59976 12.8001L1.59976 11.2001L19.6686 11.2001L14.6334 6.16649L15.7662 5.03369L22.731 12.0001Z" />
                 </svg>
               </button>
