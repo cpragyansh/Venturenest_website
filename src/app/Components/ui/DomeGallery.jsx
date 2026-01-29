@@ -1,134 +1,290 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useCallback, useState } from 'react';
+import { useGesture } from '@use-gesture/react';
 import './DomeGallery.css';
 
-const DomeGallery = ({
-  images = [],
-  fit = 0.85,
-  minRadius = 600,
-  segments = 22,
-  dragDampening = 4,
-  onImageClick // Added optional prop
-}) => {
-  const rootRef = useRef(null);
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+const DEFAULT_IMAGES = [
+  {
+    src: 'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Abstract art'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: 'Modern sculpture'
+  }
+];
 
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-
-  // Determine grid dimensions based on image count and segments
-  // We assume 'segments' is the number of columns (horizontal segments)
-  const columns = segments;
-  const rows = Math.ceil(images.length / columns);
-  
-  // Adjust segments-y to fit rows, or keep it proportional? 
-  // Let's set segments-y to a value that makes the items roughly square or fits the sphere.
-  // The CSS uses --rot-x = (360 / segments-y).
-  // If we want a full sphere, segments-y should cover 360 (or 180?).
-  // Usually sphere mapping is 360 horizontal, 180 vertical.
-  // But let's stick to the CSS logic: rot-x = 360/segments-y.
-  // If we use 22 segments for X, and we have, say, 100 images -> 5 rows.
-  // We can just use the row count as segments-y if we want them to wrap "fully" or distribute them.
-  // Let's try setting segments-y to roughly match the aspect ratio or just 'rows' + padding.
-  // Actually, if we want a "dome" or "sphere" look, we might want fixed 360/180 distribution.
-  // But let's assume the CSS handles it if update segments-y.
-  // Let's use 'rows' * 2 to give some space or just 'segments' again to make it a generic sphere grid?
-  // Let's assume segments-y = segments (square grid on sphere) for now, 
-  // but if we have too many images they might overlap or spiral.
-  // Better approach: segments-y should be enough to hold the rows.
-  // If we want to wrap around the sphere once, segments-y should be close to segments/2 (for 180 deg vs 360 deg).
-  
-  const segmentsY = Math.max(rows, Math.floor(segments / 2)) + 2; // Ensure enough rows
-
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setDragStart({ x: e.clientX, y: e.clientY });
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    
-    const dx = e.clientX - dragStart.x;
-    const dy = e.clientY - dragStart.y;
-    
-    setRotation(prev => ({
-      x: prev.x - dy / dragDampening,
-      y: prev.y + dx / dragDampening
-    }));
-    
-    setDragStart({ x: e.clientX, y: e.clientY });
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  useEffect(() => {
-    window.addEventListener('mouseup', handleMouseUp);
-    return () => window.removeEventListener('mouseup', handleMouseUp);
-  }, []);
-
-  return (
-    <div 
-      className="sphere-root" 
-      ref={rootRef}
-      style={{
-        '--segments-x': columns,
-        '--segments-y': segmentsY,
-        '--radius': `${minRadius}px`,
-        '--rot-x-delta': `${rotation.x}deg`,
-        '--rot-y-delta': `${rotation.y}deg`,
-        cursor: isDragging ? 'grabbing' : 'grab'
-      }}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-    >
-      <main className="sphere-main">
-        <div className="stage">
-          <div className="sphere">
-            {images.map((img, i) => {
-              // Calculate grid position
-              // We want to center them properly?
-              // The CSS uses --offset-x and --offset-y.
-              // Center is when offset is 0?
-              // The CSS: rot-y * (offset-x + (item-size-x - 1)/2)
-              // This implies offset-x is an index.
-              
-              const col = i % columns;
-              const row = Math.floor(i / columns);
-              
-              // Center the grid
-              const offsetX = col - (columns / 2);
-              const offsetY = row - (rows / 2);
-
-              return (
-                <div 
-                  key={img.id || i} 
-                  className="item"
-                  style={{
-                    '--offset-x': offsetX,
-                    '--offset-y': offsetY,
-                    '--item-size-x': 1,
-                    '--item-size-y': 1
-                  }}
-                >
-                  <div 
-                    className="item__image"
-                    onClick={() => onImageClick && onImageClick(img)}
-                  >
-                    <img src={img.img || img.url || img.imageUrl || img} alt="" />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </main>
-      
-      {/* Optional Gradient Edges from CSS */}
-      <div className="edge-fade edge-fade--top" />
-      <div className="edge-fade edge-fade--bottom" />
-    </div>
-  );
+const DEFAULTS = {
+  maxVerticalRotationDeg: 45,
+  dragSensitivity: 20,
+  enlargeTransitionMs: 300,
+  segments: 42 // Increased for tighter fit
 };
 
-export default DomeGallery;
+const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+const normalizeAngle = d => ((d % 360) + 360) % 360;
+const wrapAngleSigned = deg => {
+  const a = (((deg + 180) % 360) + 360) % 360;
+  return a - 180;
+};
+
+function buildItems(pool, seg) {
+  const items = [];
+  const rows = 14; // Increased rows
+  const cols = seg;
+  const totalSlots = rows * cols;
+  
+  if (pool.length === 0) return [];
+
+  const normalizedImages = pool.map(image => {
+    if (typeof image === 'string') return { src: image, alt: '' };
+    return { src: image.src || image.imageUrl || image.img || '', alt: image.alt || image.photoName || '' };
+  });
+
+  const usedImages = Array.from({ length: totalSlots }, (_, i) => normalizedImages[i % normalizedImages.length]);
+
+  let idx = 0;
+  for (let r = 0; r < rows; r++) {
+    const lat = -75 + (r * 150) / (rows - 1);
+    for (let c = 0; c < cols; c++) {
+      const lon = (c * 360) / cols;
+      items.push({
+        x: lon,
+        y: lat,
+        sizeX: 2.1, // Increased size
+        sizeY: 2.1,
+        src: usedImages[idx].src,
+        alt: usedImages[idx].alt,
+        original: pool[idx % pool.length]
+      });
+      idx++;
+    }
+  }
+
+  return items;
+}
+
+export default function DomeGallery({
+  images = DEFAULT_IMAGES,
+  onImageClick,
+  fit = 0.6,
+  minRadius = 600,
+  maxRadius = Infinity,
+  overlayBlurColor = '#060010',
+  maxVerticalRotationDeg = 45,
+  dragSensitivity = 15,
+  dragDampening = 2,
+  segments = 36,
+  grayscale = false,
+  imageBorderRadius = '24px'
+}) {
+  const rootRef = useRef(null);
+  const mainRef = useRef(null);
+  const sphereRef = useRef(null);
+  const rotationRef = useRef({ x: 0, y: 0 });
+  const startRotRef = useRef({ x: 0, y: 0 });
+  const startPosRef = useRef({ x: 0, y: 0 });
+  const draggingRef = useRef(false);
+  const movedRef = useRef(false);
+  const inertiaRAF = useRef(null);
+  const lastDragEndAt = useRef(0);
+  const [zoom, setZoom] = useState(1);
+
+  const items = useMemo(() => buildItems(images, segments), [images, segments]);
+
+  const applyTransform = useCallback((xDeg, yDeg) => {
+    const el = sphereRef.current;
+    if (el) {
+      // Formula: (Distance Multiplier) - (Zoom)
+      // If zoom is 2.2, multiplier is 0.3 (Very close)
+      // If zoom is 0.5, multiplier is 2.0 (Further back)
+      el.style.transform = `translateZ(calc(var(--radius) * -1 * (2.5 - var(--zoom, 1)))) rotateX(${xDeg}deg) rotateY(${yDeg}deg)`;
+    }
+  }, []);
+
+  const stopInertia = useCallback(() => {
+    if (inertiaRAF.current) {
+      cancelAnimationFrame(inertiaRAF.current);
+      inertiaRAF.current = null;
+    }
+  }, []);
+
+  const startInertia = useCallback(
+    (vx, vy) => {
+      let vX = clamp(vx, -1.5, 1.5) * 80;
+      let vY = clamp(vy, -1.5, 1.5) * 80;
+      const friction = 0.95;
+      
+      const step = () => {
+        vX *= friction;
+        vY *= friction;
+        if (Math.abs(vX) < 0.01 && Math.abs(vY) < 0.01) {
+          inertiaRAF.current = null;
+          return;
+        }
+        const nextX = clamp(rotationRef.current.x - vY / 100, -maxVerticalRotationDeg, maxVerticalRotationDeg);
+        const nextY = wrapAngleSigned(rotationRef.current.y + vX / 100);
+        rotationRef.current = { x: nextX, y: nextY };
+        applyTransform(nextX, nextY);
+        inertiaRAF.current = requestAnimationFrame(step);
+      };
+      stopInertia();
+      inertiaRAF.current = requestAnimationFrame(step);
+    },
+    [maxVerticalRotationDeg, stopInertia, applyTransform]
+  );
+
+  useGesture(
+    {
+      onDragStart: ({ event }) => {
+        stopInertia();
+        draggingRef.current = true;
+        movedRef.current = false;
+        startRotRef.current = { ...rotationRef.current };
+        startPosRef.current = { x: event.clientX, y: event.clientY };
+      },
+      onDrag: ({ event, last, velocity, direction, movement }) => {
+        if (!draggingRef.current) return;
+        const dxTotal = event.clientX - startPosRef.current.x;
+        const dyTotal = event.clientY - startPosRef.current.y;
+        
+        if (!movedRef.current && (dxTotal * dxTotal + dyTotal * dyTotal > 10)) {
+          movedRef.current = true;
+        }
+
+        const nextX = clamp(
+          startRotRef.current.x - dyTotal / dragSensitivity,
+          -maxVerticalRotationDeg,
+          maxVerticalRotationDeg
+        );
+        const nextY = wrapAngleSigned(startRotRef.current.y + dxTotal / dragSensitivity);
+        
+        rotationRef.current = { x: nextX, y: nextY };
+        applyTransform(nextX, nextY);
+
+        if (last) {
+          draggingRef.current = false;
+          let [vx, vy] = velocity;
+          const [dx, dy] = direction;
+          startInertia(vx * dx, vy * dy);
+          if (movedRef.current) lastDragEndAt.current = performance.now();
+        }
+      },
+      onWheel: ({ delta: [, dy] }) => {
+        setZoom(prev => clamp(prev - dy * 0.001, 0.5, 2.2));
+      },
+      onPinch: ({ offset: [d] }) => {
+        // Pinch distance is typically large, we want to map it to our 0.5 - 2.2 range
+        // Scaling movement to zoom values
+        setZoom(clamp(1 + d / 200, 0.5, 2.2));
+      }
+    },
+    { target: mainRef, eventOptions: { passive: false } }
+  );
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    
+    const updateRadius = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const radius = clamp(Math.min(w, h) * fit, minRadius, maxRadius);
+      root.style.setProperty('--radius', `${radius}px`);
+    };
+
+    window.addEventListener('resize', updateRadius);
+    updateRadius();
+    applyTransform(rotationRef.current.x, rotationRef.current.y);
+    
+    return () => window.removeEventListener('resize', updateRadius);
+  }, [fit, minRadius, maxRadius, applyTransform]);
+
+  useEffect(() => {
+    rootRef.current?.style.setProperty('--zoom', zoom);
+  }, [zoom]);
+
+  const handleTileClick = (item) => {
+    if (movedRef.current || performance.now() - lastDragEndAt.current < 100) return;
+    if (onImageClick) {
+      // Normalize object for the parent's ModalContent (expects imageUrl and photoName)
+      const exportItem = (typeof item.original === 'object' && item.original !== null) 
+        ? { ...item.original } 
+        : { imageUrl: item.src, photoName: item.alt };
+      
+      if (!exportItem.imageUrl) exportItem.imageUrl = item.src;
+      if (!exportItem.photoName) exportItem.photoName = item.alt;
+      
+      onImageClick(exportItem);
+    }
+  };
+
+  return (
+    <div
+      ref={rootRef}
+      className="sphere-root"
+      style={{
+        ['--overlay-blur-color']: overlayBlurColor,
+        ['--tile-radius']: imageBorderRadius,
+        ['--image-filter']: grayscale ? 'grayscale(1)' : 'none'
+      }}
+    >
+      <main ref={mainRef} className="sphere-main">
+        <div className="stage">
+          <div ref={sphereRef} className="sphere">
+            {items.map((it, i) => (
+              <div
+                key={i}
+                className="item"
+                style={{
+                  ['--offset-x']: it.x,
+                  ['--offset-y']: it.y,
+                  ['--item-size-x']: it.sizeX,
+                  ['--item-size-y']: it.sizeY
+                }}
+              >
+                <div
+                  className="item__image"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => handleTileClick(it)}
+                >
+                  <img src={it.src} draggable={false} alt={it.alt} />
+                  <div className="item-overlay" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="overlay" />
+        <div className="overlay overlay--blur" />
+        <div className="edge-fade edge-fade--top" />
+        <div className="edge-fade edge-fade--bottom" />
+        
+        <div className="sphere-controls">
+           <div className="zoom-controls">
+              <button 
+                className="zoom-btn" 
+                onClick={() => setZoom(prev => clamp(prev + 0.2, 0.5, 2.2))}
+                title="Zoom In"
+              >
+                +
+              </button>
+              <div className="zoom-indicator">
+                <div className="zoom-bar">
+                  <div className="zoom-fill" style={{ width: `${((zoom - 0.5) / 1.7) * 100}%` }} />
+                </div>
+              </div>
+              <button 
+                className="zoom-btn" 
+                onClick={() => setZoom(prev => clamp(prev - 0.2, 0.5, 2.2))}
+                title="Zoom Out"
+              >
+                -
+              </button>
+           </div>
+        </div>
+      </main>
+    </div>
+  );
+}

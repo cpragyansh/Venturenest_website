@@ -45,11 +45,7 @@ export default function Photos() {
   }, []);
 
   const handleImageClick = (image) => {
-    if (!image || image.skeleton) return;
-    setSelectedImage({
-      imageUrl: image.imageUrl || image.img || image.url,
-      photoName: image.photoName || "Gallery Capture"
-    });
+    setSelectedImage(image);
   };
 
   const closePopup = () => {
@@ -99,9 +95,17 @@ export default function Photos() {
         {/* View Switcher */}
         <div className="flex gap-2 pointer-events-auto bg-white/10 backdrop-blur-md p-1.5 rounded-full border border-white/20">
           <button
+            onMouseEnter={() => {
+              const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3");
+              audio.volume = 0.3;
+              audio.play().catch(() => {});
+            }}
             onClick={() => {
-              setViewMode('globe');
-              setSelectedCategory(null);
+              const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
+              audio.volume = 0.5;
+              audio.play().catch(() => {});
+              setViewMode('globe'); 
+              setSelectedCategory(null); 
             }}
             className={`p-2 rounded-full transition-all duration-300 flex items-center gap-2 ${viewMode === 'globe' ? 'bg-[#A40C1A] text-white shadow-lg' : 'text-gray-500 hover:bg-white/20 hover:text-white'}`}
           >
@@ -109,7 +113,15 @@ export default function Photos() {
             <span className={`text-[10px] font-bold leading-none ${viewMode === 'globe' ? 'block' : 'hidden'} md:block`}>IMMERSIVE</span>
           </button>
           <button
+            onMouseEnter={() => {
+              const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3");
+              audio.volume = 0.3;
+              audio.play().catch(() => {});
+            }}
             onClick={() => {
+              const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
+              audio.volume = 0.5;
+              audio.play().catch(() => {});
               setViewMode('list');
             }}
             className={`p-2 rounded-full transition-all duration-300 flex items-center gap-2 ${viewMode === 'list' ? 'bg-white text-black shadow-lg' : 'text-gray-500 hover:bg-black/20 hover:text-black'}`}
@@ -164,14 +176,7 @@ export default function Photos() {
 
             {/* Right Split (50%) - Dome Gallery */}
             <div style={{ width: '50%', height: '100%' }}>
-              <DomeGallery
-                images={displayImages}
-                fit={0.85}
-                minRadius={600}
-                segments={22}
-                dragDampening={4}
-                onImageClick={handleImageClick}
-              />
+              <DomeGallery images={displayImages} onImageClick={handleImageClick} />
             </div>
           </motion.div>
         )}
