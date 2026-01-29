@@ -22,34 +22,37 @@ export default function Advisory() {
   return (
     <div className="min-h-screen bg-white font-jakarta">
       {/* 1. HERO SECTION */}
-      <section className="relative bg-black py-24  overflow-hidden border-b-[12px] border-[#9E0203]">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#9E0203]/5 skew-x-[-20deg] transform translate-x-1/3 pointer-events-none"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-            <div className="w-full md:w-7/12 space-y-8 text-left">
-              <div className="flex items-center space-x-4">
-                <div className="h-1 bg-[#9E0203] w-12"></div>
-                <span className="text-white/60 font-black uppercase tracking-[0.5em] text-[10px]">Thought Leadership</span>
+      <section 
+        className="relative h-[85vh] flex items-center overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url("https://contentstatic.timesjobs.com/photo/74902695/slideshows/5-tips-to-prepare-for-group-discussion-rounds.jpg")' }}
+      >
+        {/* Cinematic Backdrop Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-0"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl space-y-10">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-[2px] bg-[#9E0203] w-12"></div>
+                <span className="text-white/60 font-semibold uppercase tracking-[0.3em] text-[11px]">Thought Leadership</span>
               </div>
-              <h1 className="text-white text-5xl md:text-7xl font-black font-jakarta uppercase tracking-tighter leading-[0.85]">
+              <h1 className="text-white text-6xl md:text-9xl font-extralight font-jakarta leading-[1] tracking-tight">
                 Advisory <br />
-                <span className="text-[#9E0203]">Council</span>
+                <span className="font-bold text-[#9E0203]">Council.</span>
               </h1>
-              <div className="space-y-4">
-                <div className="h-1 w-32 bg-white"></div>
-                <p className="text-gray-400 text-lg font-medium leading-relaxed max-w-2xl">
-                   The <strong className="text-white">Advisory Council</strong> at CGC VentureNest brings together distinguished experts and thought leaders who guide our startups with strategic insights, mentorship, and industry foresight, helping them identify market trends and foster evolving innovation.
-                </p>
-              </div>
             </div>
-            
-            <div className="w-full md:w-5/12 hidden md:block relative">
-                {/* Decorative Element */}
-                <div className="w-full aspect-square border-2 border-dashed border-[#9E0203]/30 rounded-full animate-[spin_60s_linear_infinite] flex items-center justify-center p-12">
-                   <div className="w-full h-full border border-white/10 rounded-full flex items-center justify-center">
-                      <div className="text-[#9E0203] text-6xl font-black">?</div>
-                   </div>
+
+            <div className="space-y-6 border-l-2 border-white/10 pl-8 ml-1">
+              <p className="text-gray-300 text-xl font-light leading-relaxed max-w-2xl">
+                Bridging the gap between <span className="text-white font-medium">visionary ambition</span> and <span className="text-white font-medium">market reality</span>. Our council provides the strategic framework for the next generation of industry leaders.
+              </p>
+              
+              <button className="flex items-center gap-4 text-white hover:text-[#9E0203] transition-colors group">
+                <span className="text-sm font-bold uppercase tracking-widest text-white/40 group-hover:text-[#9E0203]">Learn Meet our Visionaries</span>
+                <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#9E0203]">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                 </div>
+              </button>
             </div>
           </div>
         </div>

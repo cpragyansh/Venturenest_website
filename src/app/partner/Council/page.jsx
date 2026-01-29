@@ -73,23 +73,40 @@ const CouncilSection = ({ category, title, description, iconLetter, alignRight }
 export default function CouncilOverview() {
   return (
     <div className="min-h-screen bg-white font-jakarta">
-      {/* 1. MASTER HERO SECTION */}
-      <section className="relative bg-black py-24 md:py-32 overflow-hidden border-b-[12px] border-[#9E0203]">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#9E0203]/5 skew-x-[-20deg] transform translate-x-1/3 pointer-events-none"></div>
-        <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl">
-              <div className="flex items-center space-x-4 mb-8">
-                <div className="h-1 bg-[#9E0203] w-12"></div>
-                <span className="text-white/60 font-black uppercase tracking-[0.5em] text-[10px]">Governance Structure</span>
+      {/* 1. HERO SECTION */}
+      <section 
+        className="relative h-[85vh] flex items-center overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")' }}
+      >
+        {/* Cinematic Backdrop Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-0"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl space-y-10">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-[2px] bg-[#9E0203] w-12"></div>
+                <span className="text-white/60 font-semibold uppercase tracking-[0.3em] text-[11px]">Governance structure</span>
               </div>
-              <h1 className="text-white text-5xl md:text-8xl font-black font-jakarta uppercase tracking-tighter leading-[0.85] mb-8">
+              <h1 className="text-white text-6xl md:text-9xl font-extralight font-jakarta leading-[1] tracking-tight">
                 The <br />
-                <span className="text-[#9E0203]">Councils</span>
+                <span className="font-bold text-[#9E0203]">Councils.</span>
               </h1>
-              <p className="text-gray-400 text-xl font-medium leading-relaxed max-w-2xl">
-                 Our governance structure consists of five specialized councils, each comprising industry veterans and experts dedicated to guiding our startups through every phase of growth.
-              </p>
             </div>
+
+            <div className="space-y-6 border-l-2 border-white/10 pl-8 ml-1">
+              <p className="text-gray-300 text-xl font-light leading-relaxed max-w-2xl">
+                A multidimensional <span className="text-white font-medium">governance framework</span> comprising industry veterans and elite experts dedicated to guiding our startups through systemic growth.
+              </p>
+              
+              <button className="flex items-center gap-4 text-white hover:text-[#9E0203] transition-colors group">
+                <span className="text-sm font-bold uppercase tracking-widest text-white/40 group-hover:text-[#9E0203]">Meet our council heads</span>
+                <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#9E0203]">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

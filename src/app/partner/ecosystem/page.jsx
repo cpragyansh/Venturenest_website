@@ -26,39 +26,37 @@ export default function EcosystemPartners() {
   return (
     <div className="min-h-screen bg-white font-jakarta">
       {/* 1. HERO SECTION */}
-      <section className="relative bg-black py-24 md:py-32 overflow-hidden border-b-[12px] border-[#9E0203]">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#9E0203]/5 skew-x-[-20deg] transform translate-x-1/3 pointer-events-none"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-            <div className="w-full md:w-6/12 space-y-8 text-left">
-              <div className="flex items-center space-x-4">
-                <div className="h-1 bg-[#9E0203] w-12"></div>
-                <span className="text-white/60 font-black uppercase tracking-[0.5em] text-[10px]">Collaborative Network</span>
+      <section 
+        className="relative h-[85vh] flex items-center overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1522071823991-b5ae77c4740e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")' }}
+      >
+        {/* Cinematic Backdrop Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-0"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl space-y-10">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-[2px] bg-[#9E0203] w-12"></div>
+                <span className="text-white/60 font-semibold uppercase tracking-[0.3em] text-[11px]">Innovation Hubs</span>
               </div>
-              <h1 className="text-white text-5xl md:text-7xl font-black font-jakarta uppercase tracking-tighter leading-[0.85]">
-                Ecosystem <br />
-                <span className="text-[#9E0203]">Partners</span>
+              <h1 className="text-white text-6xl md:text-9xl font-extralight font-jakarta leading-[1] tracking-tight">
+                Startup <br />
+                <span className="font-bold text-[#9E0203]">Ecosystem.</span>
               </h1>
-              <div className="space-y-4">
-                <div className="h-1 w-32 bg-white"></div>
-                <p className="text-gray-400 text-lg font-medium leading-relaxed max-w-xl">
-                  We <strong className="text-white">are backed</strong> by a dynamic ecosystem of educational institutions, incubation centres, innovation labs, and industry bodies that jointly contribute to capacity-building, research, and startup mentorship.
-                </p>
-              </div>
             </div>
 
-            <div className="w-full md:w-6/12 relative">
-               {/* Visual */}
-              <div className="absolute -inset-4 border-2 border-white/5 rounded-3xl translate-x-4 translate-y-4"></div>
-              <div className="relative overflow-hidden rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] bg-[#111] aspect-[16/9] flex items-center justify-center group">
-                 <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black opacity-90"></div>
-                 <div className="relative z-10 text-center p-8">
-                    <svg className="w-24 h-24 text-[#9E0203] mx-auto mb-4 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                    </svg>
-                    <h3 className="text-white text-xl font-bold uppercase tracking-widest">Global<br/>Connect</h3>
-                 </div>
-              </div>
+            <div className="space-y-6 border-l-2 border-white/10 pl-8 ml-1">
+              <p className="text-gray-300 text-xl font-light leading-relaxed max-w-2xl">
+                Nurturing a <span className="text-white font-medium">thriving community</span> of innovators, institutional partners, and industry leaders working together to redefine excellence.
+              </p>
+              
+              <button className="flex items-center gap-4 text-white hover:text-[#9E0203] transition-colors group">
+                <span className="text-sm font-bold uppercase tracking-widest text-white/40 group-hover:text-[#9E0203]">Explore the Network</span>
+                <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#9E0203]">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                </div>
+              </button>
             </div>
           </div>
         </div>

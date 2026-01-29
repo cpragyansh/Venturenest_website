@@ -251,7 +251,7 @@ export default function Index() {
               </div>
 
               {/* Startups Stat - Progress Circle Style */}
-              <div className="bg-brand-red p-6 rounded-[32px] shadow-lg hover:shadow-red-200/50 transition-all duration-500 flex flex-col justify-between overflow-hidden relative group">
+              <div className="bg-brand-red p-6 rounded-[16px] shadow-lg hover:shadow-red-200/50 transition-all duration-500 flex flex-col justify-between overflow-hidden relative group">
                 <div className="relative z-10">
                   <div className="text-white text-4xl font-black mb-1">100+</div>
                   <div className="text-white/80 text-[16px] font-bold uppercase tracking-wider">Startups Incubated</div>
@@ -312,8 +312,9 @@ export default function Index() {
               { name: 'Anmol Bhateja', company: 'escapekar ', package: '3 Lakhs', image: '/assets/escapekar.jpg', logo: '/assets/escapekar_logo.png' },
               // { name: 'Simran Saini', company: 'Autodesk', package: '33 LPA', image: '/assets/success-4.jpeg', logo: '/assets/autodesk.png' },
             ].map((student, idx) => (
-              <div key={idx} className="relative bg-gray-800 h-[530px] overflow-hidden group">
-                <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[400px] w-auto object-contain" />
+              // Increase the Size of the Logos
+              <div key={idx} className="relative bg-gray-800 h-[600px] overflow-hidden group">
+                <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[600px] w-auto object-contain" />
                 {/* Overlay removed as requested */}
 
                 <div className="absolute top-0 right-0 bg-brand-red rounded-bl-lg p-4">
@@ -321,8 +322,8 @@ export default function Index() {
                   <div className="text-white font-bold text-2xl">{student.package}</div>
                 </div>
 
-                <div className="absolute top-8 left-4">
-                  <img src={student.logo} alt="" className="h-7" />
+                <div className="absolute top-8 left-6 bg-white/10 backdrop-blur-sm p-2 rounded-lg border border-white/5">
+                  <img src={student.logo} alt="" className="h-12 w-auto object-contain max-w-[140px]" />
                 </div>
 
                 <div className="absolute bottom-8 left-8">
@@ -627,7 +628,7 @@ export default function Index() {
       <section className="bg-white py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-16">
-            <span className="text-brand-red text-5xl font-bold font-jakarta">Student </span>
+            <span className="text-brand-red text-5xl font-bold font-jakarta">Startup Success </span>
             <span className="text-brand-dark text-5xl font-bold font-jakarta">Stories</span>
           </h2>
 
