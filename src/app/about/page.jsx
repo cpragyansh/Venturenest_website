@@ -143,7 +143,7 @@ export default function AboutPage() {
     {
       name: "Dr. Ati Priye",
       role: "CEO, Incubator & Startups",
-      image: "/assets/ceo-incubator.jpg",
+      image: "https://i.ibb.co/pjkyb1mG/Whats-App-Image-2026-01-29-at-00-25-21.jpg",
       quote: "Innovation creates impact.",
       desc: "It’s about making ideas a reality. At VentureNest, we are committed to building a strong founder ecosystem. Our mission extends beyond providing infrastructure—we offer a platform for growth, mentorship, and excellence that bridges the gap between entrepreneurial vision and market-ready enterprises.",
     }

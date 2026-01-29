@@ -7,6 +7,7 @@ import Incubated_venture_highlight from '../Rendering_components/Incubated_ventu
 import Council_highlight from '../Rendering_components/Council_highlight';
 import Partner_highlight from '../Rendering_components/Partner_highlight';
 import StudentStories from './StudentStories';
+import Stats from './Stats';
 
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function Index() {
 
   const startupLogos = [
     "TIE.jpeg",
-    "startup-india.jpeg",
+    "startup-india.png",
     "startup-punjab.jpeg",
     "PHDCCI.jpeg",
     "meity.jpeg",
@@ -174,7 +175,7 @@ export default function Index() {
           <div className="flex gap-16 items-center animate-scroll whitespace-nowrap min-w-full">
             {/* Duplicate list 3 times to ensure smooth scrolling on wide screens */}
             {[...startupLogos, ...startupLogos, ...startupLogos].map((logo, idx) => (
-              <div key={idx} className="flex-shrink-0 w-32 h-24 flex items-center justify-center transition-all duration-500 opacity-90 hover:opacity-100 hover:scale-110">
+              <div key={idx} className="flex-shrink-0 w-40 h-28 flex items-center justify-center transition-all duration-500 opacity-90 hover:opacity-100 hover:scale-110">
                 <img
                   src={`/assets/Start-up-logos/${logo}`}
                   alt="Startup Logo"
@@ -223,7 +224,7 @@ export default function Index() {
               
               <div className="flex items-center gap-4">
                 <div className="h-[2px] w-12 bg-brand-red"></div>
-                <span className="text-brand-dark text-xs font-black uppercase tracking-[0.2em] opacity-40">Impact Report 2024</span>
+                <span className="text-brand-dark text-xs font-black uppercase tracking-[0.2em] opacity-40">Impact Report 2024-26</span>
               </div>
             </div>
 
@@ -232,8 +233,8 @@ export default function Index() {
               {/* Funding Stat - Line Chart Style */}
               <div className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden relative group">
                 <div className="relative z-10">
-                  <div className="text-brand-red text-3xl font-black mb-1">1.5 Cr+</div>
-                  <div className="text-brand-dark text-[10px] font-bold uppercase tracking-wider opacity-60">Funding Granted</div>
+                  <div className="text-brand-red text-4xl font-black mb-1">1.5 Cr+</div>
+                  <div className="text-brand-dark text-[16px] font-bold uppercase tracking-wider opacity-60">Grants Raised</div>
                 </div>
                 {/* Mini Sparkline SVG */}
                 <div className="absolute bottom-0 left-0 w-full h-1/2 opacity-20 group-hover:opacity-40 transition-opacity">
@@ -252,8 +253,8 @@ export default function Index() {
               {/* Startups Stat - Progress Circle Style */}
               <div className="bg-brand-red p-6 rounded-[32px] shadow-lg hover:shadow-red-200/50 transition-all duration-500 flex flex-col justify-between overflow-hidden relative group">
                 <div className="relative z-10">
-                  <div className="text-white text-3xl font-black mb-1">100+</div>
-                  <div className="text-white/80 text-[10px] font-bold uppercase tracking-wider">Startups Incubated</div>
+                  <div className="text-white text-4xl font-black mb-1">100+</div>
+                  <div className="text-white/80 text-[16px] font-bold uppercase tracking-wider">Startups Incubated</div>
                 </div>
                 <div className="mt-4 w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin-slow"></div>
                 <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
@@ -262,8 +263,8 @@ export default function Index() {
               {/* Patents Stat - Bar Graph Style */}
               <div className="bg-gray-50 p-6 rounded-[32px] border border-gray-200 hover:border-brand-red transition-all duration-500 flex flex-col justify-between group">
                 <div>
-                  <div className="text-brand-red text-3xl font-black mb-1">685+</div>
-                  <div className="text-brand-dark text-[10px] font-bold uppercase tracking-wider opacity-60">Patents Published</div>
+                  <div className="text-brand-red text-4xl font-black mb-1">1000+</div>
+                  <div className="text-brand-dark text-[16px] font-bold uppercase tracking-wider opacity-60">Patents Filed</div>
                 </div>
                 <div className="flex items-end gap-1 h-12 mt-4">
                   {[30, 60, 45, 90, 70, 100].map((h, i) => (
@@ -276,7 +277,7 @@ export default function Index() {
               <div className="bg-brand-dark p-6 rounded-[32px] shadow-2xl transition-all duration-500 flex flex-col items-center justify-center text-center relative overflow-hidden group">
                 <div className="relative z-10">
                   <div className="text-white text-4xl font-black mb-1 group-hover:scale-110 transition-transform">10+</div>
-                  <div className="text-brand-red text-[11px] font-black uppercase tracking-widest">Unicorn Ventures</div>
+                  <div className="text-brand-red text-[16px] font-black uppercase tracking-widest">Unicorn Ventures</div>
                 </div>
                 {/* Decorative particles */}
                 <div className="absolute inset-0 opacity-30">
@@ -292,94 +293,8 @@ export default function Index() {
       
       <Council_highlight />
 
-      {/* Success Milestones Section - Redesigned for Image-based Analytics */}
-      <section className="bg-white py-24 relative overflow-hidden">
-        {/* Subtle background detail */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gray-50 -z-10 translate-x-1/2 rounded-full blur-3xl opacity-50"></div>
-        
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-16 items-start">
-            {/* Left Content: The Data Breakdown */}
-            <div className="w-full lg:w-1/3">
-              <div className="mb-12">
-                <span className="text-brand-red font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Analytics Dashboard</span>
-                <h2 className="text-brand-dark text-5xl font-black font-jakarta leading-[1.1] mb-6 tracking-tight">
-                  Incubation <br />
-                  <span className="text-brand-red">Milestones</span>
-                </h2>
-                <div className="h-1.5 w-20 bg-brand-red mb-8"></div>
-                <p className="text-gray-500 font-medium leading-relaxed">
-                  VentureNest tracks the exponential growth and capital infusion across our incubated startups. Our data reflects a consistent upward trajectory in market readiness and investor confidence.
-                </p>
-              </div>
-
-              {/* Seed Funding Steps */}
-              <div className="space-y-4">
-                <h4 className="text-brand-dark font-black uppercase tracking-widest text-[11px] mb-6 opacity-40">Seed Funding Roadmap</h4>
-                {[
-                  { phase: 'Seed Phase I', amount: '3 Lakhs', status: 'Completed' },
-                  { phase: 'Seed Phase II', amount: '8 Lakhs', status: 'Completed' },
-                  { phase: 'Seed Phase III', amount: '11 Lakhs', status: 'Completed' },
-                  { phase: 'Bridge Phase IV', amount: '26.5 Lakhs', status: 'Achieved' },
-                ].map((step, idx) => (
-                  <div key={idx} className="flex items-center gap-6 p-5 rounded-[24px] bg-gray-50 border border-transparent group hover:bg-white hover:border-gray-100 hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 cursor-default">
-                    <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-brand-red font-black group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
-                      {idx + 1}
-                    </div>
-                    <div>
-                      <div className="text-[10px] uppercase font-bold text-gray-400 mb-0.5">{step.phase}</div>
-                      <div className="text-brand-dark font-black text-xl tracking-tighter">{step.amount}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Content: The Graph Display Area */}
-            <div className="w-full lg:w-2/3">
-              <div className="bg-brand-dark p-2 rounded-[48px] shadow-2xl relative">
-                {/* Header of the Display Frame */}
-                <div className="px-8 py-5 flex items-center justify-between border-b border-white/5">
-                  <div className="flex gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
-                  </div>
-                  <div className="text-white/30 text-[10px] font-black uppercase tracking-[0.3em]">Growth_Analytics_Visualization_v2.0</div>
-                </div>
-
-                {/* Main Image Container */}
-                <div className="bg-[#121212] rounded-[40px] overflow-hidden min-h-[550px] flex items-center justify-center group relative">
-                  {/* The Image itself - USER CAN PASTE SRC HERE */}
-                  <img 
-                    src="/assets/funding-graph.png" 
-                    alt="Seed Funding Growth Graph" 
-                    className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105" 
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.parentNode.querySelector('.fallback-ui').style.display = 'flex';
-                    }}
-                  />
-                  
-                  {/* Fallback Display if image is missing */}
-                  <div className="fallback-ui absolute inset-0 hidden flex-col items-center justify-center text-center p-12">
-                     <div className="w-24 h-24 mb-8 text-brand-red opacity-20">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
-                     </div>
-                     <h3 className="text-white/80 font-black text-2xl mb-4 tracking-tight">Visualization Engine Ready</h3>
-                     <p className="text-white/30 text-sm max-w-xs font-medium leading-relaxed">Please update the image source in the DashboardRev.jsx component to display the growth data visualization here.</p>
-                  </div>
-                </div>
-
-                {/* Floating Stats on the Frame */}
-                <div className="absolute -bottom-8 -right-8 bg-brand-red p-10 rounded-[40px] shadow-[0_20px_50px_rgba(158,2,3,0.3)] hidden md:block">
-                  <div className="text-white text-4xl font-black mb-1">685+</div>
-                  <div className="text-white/70 text-[10px] uppercase font-black tracking-widest leading-tight">Total Patents <br /> Published</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className="py-0">
+        <Stats />
       </section>
 
       <Partner_highlight />
@@ -398,7 +313,7 @@ export default function Index() {
               // { name: 'Simran Saini', company: 'Autodesk', package: '33 LPA', image: '/assets/success-4.jpeg', logo: '/assets/autodesk.png' },
             ].map((student, idx) => (
               <div key={idx} className="relative bg-gray-800 h-[530px] overflow-hidden group">
-                <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[386px] w-auto object-cover" />
+                <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[400px] w-auto object-contain" />
                 {/* Overlay removed as requested */}
 
                 <div className="absolute top-0 right-0 bg-brand-red rounded-bl-lg p-4">
@@ -456,7 +371,7 @@ export default function Index() {
                 { title: 'Incubation Programs', icon: '/assets/su-1.svg', desc: 'Ideation to market entry' },
                 { title: 'Mentorship network', icon: '/assets/su-2.svg', desc: 'Guidance from experts' },
                 { title: 'Modern Infrastructure', icon: '/assets/su-3.svg', desc: 'Labs & prototyping' },
-                { title: 'Funding Assistance', icon: '/assets/su-4.svg', desc: 'Venture & Angel connections' },
+                { title: 'Funding Assistance', icon: '/assets/investment-rupee-icon.svg', desc: 'Venture & Angel connections' },
                 { title: 'Networking events', icon: '/assets/su-5.svg', desc: 'Partner collaborations' },
                 { title: 'Legal & IP Support', icon: '/assets/su-6.svg', desc: 'Regulatory guidance' },
               ].map((feature, idx) => (
@@ -480,11 +395,11 @@ export default function Index() {
       {/* Incubation Application Process */}
       <section className="bg-white py-16 relative overflow-hidden">
         {/* World Map Background with Low Opacity */}
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.1] pointer-events-none flex items-center justify-center overflow-hidden">
            <img 
-             src="/assets/world_map.png" 
+             src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" 
              alt="World Map Background" 
-             className="w-full h-full object-cover opacity-60"
+             className="w-full opacity-60"
            />
         </div>
 
@@ -536,7 +451,7 @@ export default function Index() {
               {/* Step 2: Screening (Label TOP) */}
               <div className="flex flex-col-reverse md:flex-col items-center group">
                 {/* Label Top Content */}
-                <div className="mb-8 text-center max-w-[200px] relative">
+                <div className="-mt-8 text-center max-w-[200px] relative">
                   <h3 className="text-brand-red text-lg font-black mb-2">Initial Screening</h3>
                   <p className="text-gray-500 text-xs leading-relaxed font-medium">
                     Our expert panel evaluates your submission based on the strength of your idea, team synergy, and market readiness.
@@ -588,7 +503,7 @@ export default function Index() {
 
               {/* Step 4: Onboarding (Label TOP) */}
               <div className="flex flex-col-reverse md:flex-col items-center group">
-                <div className="mb-8 text-center max-w-[200px] relative">
+                <div className="-mt-8 text-center max-w-[200px] relative">
                   <h3 className="text-brand-red text-lg font-black mb-2">Onboarding</h3>
                   <p className="text-gray-500 text-xs leading-relaxed font-medium">
                     Selected startups are onboarded into our ecosystem, gaining access to tailored mentorship and strategic resources.
@@ -625,38 +540,84 @@ export default function Index() {
         </div>
       </section>
 
-      {/* North India's Fastest Growing Institute */}
-      <section className="relative bg-cover bg-center py-20" style={{ backgroundImage: 'url(https://api.builder.io/api/v1/image/assets/TEMP/3d21804528e0cfd22fd4944defec35b289d09126?width=1920)' }}>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-blue-900/70"></div>
+      {/* North India's Fastest Growing Institute - Redesigned and Swapped */}
+      <section className="bg-[#003366] overflow-hidden relative">
+        <div className="flex flex-col lg:flex-row min-h-[600px]">
+          {/* Left Side: Content Area (Swapped) */}
+          <div className="lg:w-1/2 p-8 md:p-16 lg:p-24 relative flex flex-col justify-center text-white">
+            {/* Background Image with 20% Transparency */}
+            <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+              <img 
+                // src="/assets/5.jpg" 
+                src="https://www.cgcuniversity.in/frontend/images/campus-facilities/campus-img.webp" 
+                alt="Institute Background" 
+                className="w-full h-full object-cover"
+              />
+            </div>
 
-        <div className="relative z-10 container mx-auto px-4">
-          <div className="max-w-3xl ml-auto text-white">
-            <h2 className="text-5xl font-bold font-jakarta mb-8">
-              Pioneering Innovation<br />in North India
-            </h2>
+            {/* Dot pattern decor */}
+            <div className="absolute top-10 right-10 flex flex-col gap-2 opacity-30 z-10">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="flex gap-2">
+                  {[...Array(3)].map((_, j) => (
+                    <div key={j} className="w-1 h-1 rounded-full bg-white"></div>
+                  ))}
+                </div>
+              ))}
+            </div>
 
-            <p className="text-2xl mb-12 leading-relaxed">
-              VentureNest stands as a beacon for aspiring entrepreneurs, fostering a dynamic ecosystem of innovation and risk-taking. We are not just an incubator; we are a launchpad for the next generation of industry disruptors, providing unparalleled access to resources, mentorship, and capital.
-            </p>
+            <div className="relative z-10">
+              <h2 className="text-4xl md:text-5xl font-black font-jakarta mb-6 leading-[1.1]">
+                Pioneering Innovation<br />in North India
+              </h2>
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-16 font-medium max-w-lg">
+                VentureNest stands as a beacon for aspiring entrepreneurs, fostering a dynamic ecosystem of innovation and risk-taking. We are not just an incubator; we are a launchpad for the next generation of industry disruptors, providing unparalleled access to resources, mentorship, and capital.
+              </p>
 
-            <div className="grid grid-cols-2 gap-8 mb-12">
-              <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">100+</div>
-                <div className="text-lg">Startups Incubated</div>
-              </div>
-              <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">26.5 Lakh+</div>
-                <div className="text-lg">Funding Raised</div>
-              </div>
-              <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">100+</div>
-                <div className="text-lg">Partners</div>
-              </div>
-              <div className="border-b border-white pb-6">
-                <div className="text-5xl font-bold mb-2">200+</div>
-                <div className="text-lg">Mentors & Experts</div>
+              {/* Stats Grid - 2x2 for 4 Metrics */}
+              <div className="grid grid-cols-2 border-t border-dashed border-white/20 pt-10">
+                {/* Stat 1 */}
+                <div className="pr-6 border-r border-dashed border-white/20 pb-10">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl md:text-4xl font-black">100+</span>
+                  </div>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Startups Incubated</p>
+                </div>
+
+                {/* Stat 2 */}
+                <div className="pl-6 pb-10">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl md:text-4xl font-black">1.5 Cr+</span>
+                  </div>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Funding Raised</p>
+                </div>
+
+                {/* Stat 3 */}
+                <div className="pr-6 border-r border-dashed border-white/20 pt-10 border-t border-dashed">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl md:text-4xl font-black">50+</span>
+                  </div>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Corporate Partners</p>
+                </div>
+
+                {/* Stat 4 */}
+                <div className="pl-6 pt-10 border-t border-dashed border-white/20">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl md:text-4xl font-black">200+</span>
+                  </div>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Mentors & Experts</p>
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* Right Side: Student Image (Swapped) */}
+          <div className="lg:w-1/2 relative min-h-[400px]">
+            <img 
+              src="https://i.ibb.co/mCYRQhGq/prbx77.jpg" 
+              alt="CGC Student" 
+              className="absolute inset-0 w-full h-full py-4 object-cover"
+            />
           </div>
         </div>
       </section>

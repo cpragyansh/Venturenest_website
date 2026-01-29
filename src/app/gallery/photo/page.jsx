@@ -9,6 +9,7 @@ import { Close, ZoomIn, ZoomOut, RestartAlt, ViewInAr, GridView, ArrowBack } fro
 
 export default function Photos() {
   const [Path, SetPath] = useState([]);
+  const [rawPhotos, setRawPhotos] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [viewMode, setViewMode] = useState('globe'); // Default changed from 'list' to 'globe'
   const [selectedCategory, setSelectedCategory] = useState(null); // For Masonry view
@@ -17,15 +18,24 @@ export default function Photos() {
     const fetchData = async () => {
       try {
         const response = await axios.get("https://venture-nest-backend.onrender.com/photos");
-        let photos = response.data;
-        if (photos.length > 0) {
-          const originalPhotos = [...photos];
-          let domePhotos = [...photos];
+        const photos = Array.isArray(response.data) ? response.data : [];
+        
+        // Map photos to ensure consistent property naming
+        const mappedPhotos = photos.map(p => ({
+          ...p,
+          imageUrl: p.imageUrl || p.url || p.img, // Polyfill imageUrl
+          img: p.imageUrl || p.url || p.img,      // Polyfill img (for Masonry)
+          url: p.imageUrl || p.url || p.img,      // Polyfill url (for fallback)
+        }));
+
+        setRawPhotos(mappedPhotos);
+        
+        if (mappedPhotos.length > 0) {
+          let domePhotos = [...mappedPhotos];
           while (domePhotos.length < 150) {
-            domePhotos = [...domePhotos, ...originalPhotos];
+            domePhotos = [...domePhotos, ...mappedPhotos];
           }
-          domePhotos = domePhotos.slice(0, 150);
-          SetPath(domePhotos);
+          SetPath(domePhotos.slice(0, 150));
         }
       } catch (error) {
         console.error('Error fetching photos:', error);
@@ -34,21 +44,12 @@ export default function Photos() {
     fetchData();
   }, []);
 
-  const [rawPhotos, setRawPhotos] = useState([]);
-  useEffect(() => {
-    const fetchRawData = async () => {
-      try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/photos");
-        setRawPhotos(response.data);
-      } catch (error) {
-        console.error("Error fetching raw photos", error);
-      }
-    }
-    fetchRawData();
-  }, []);
-
   const handleImageClick = (image) => {
-    setSelectedImage(image);
+    if (!image || image.skeleton) return;
+    setSelectedImage({
+      imageUrl: image.imageUrl || image.img || image.url,
+      photoName: image.photoName || "Gallery Capture"
+    });
   };
 
   const closePopup = () => {
@@ -70,19 +71,13 @@ export default function Photos() {
     }));
   }, [rawPhotos]);
 
-  const masonryItems = useMemo(() => {
-    if (!selectedCategory) return [];
-    return rawPhotos
-      .filter(p => p.photoName === selectedCategory)
-      .map((p, i) => ({
-        id: p._id || `${i}`,
-        img: p.imageUrl,
-        url: p.imageUrl,
-        height: Math.floor(Math.random() * (600 - 250 + 1) + 250)
-      }));
-  }, [selectedCategory, rawPhotos]);
+  const skeletons = useMemo(() => Array(100).fill(null).map((_, i) => ({ 
+    id: `skeleton-${i}`,
+    skeleton: true, 
+    imageUrl: "https://www.cgcuniversity.in/frontend/images/campus-facilities/campus-img.webp",
+    photoName: "Loading VentureNest Gallery..." 
+  })), []);
 
-  const skeletons = Array(50).fill({ skeleton: true });
   const displayImages = Path.length > 0 ? Path : skeletons;
 
   const handleCategorySelect = (categoryName) => {
@@ -175,6 +170,7 @@ export default function Photos() {
                 minRadius={600}
                 segments={22}
                 dragDampening={4}
+                onImageClick={handleImageClick}
               />
             </div>
           </motion.div>

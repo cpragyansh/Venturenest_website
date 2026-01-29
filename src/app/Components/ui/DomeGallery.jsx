@@ -115,7 +115,7 @@ const DomeGallery = ({
                     className="item__image"
                     onClick={() => onImageClick && onImageClick(img)}
                   >
-                    <img src={img.img || img.url || img} alt="" />
+                    <img src={img.img || img.url || img.imageUrl || img} alt="" />
                   </div>
                 </div>
               );
