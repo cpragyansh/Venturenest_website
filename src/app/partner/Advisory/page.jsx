@@ -162,7 +162,7 @@ export default function Advisory() {
                                     <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                         <h3 className="text-2xl font-black text-white uppercase leading-none drop-shadow-md">
                                             {member.name.split(' ')[0]} 
-                                            <span className="block text-[#9E0203] text-lg">{member.name.split(' ').slice(1).join(' ')}</span>
+                                            <span className="block text-white text-lg">{member.name.split(' ').slice(1).join(' ')}</span>
                                         </h3>
                                     </div>
                                 </div>

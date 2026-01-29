@@ -22,43 +22,70 @@ const CouncilSection = ({ category, title, description, iconLetter, alignRight }
   if (!loading && members.length === 0) return null; // Don't show empty sections
 
   return (
-    <section className={`py-20 ${alignRight ? 'bg-gray-50' : 'bg-white'}`}>
-      <div className="container mx-auto px-4">
-        <div className={`flex flex-col md:flex-row gap-12 mb-12 ${alignRight ? 'md:flex-row-reverse' : ''}`}>
+    <section className={`relative py-24 overflow-hidden ${alignRight ? 'bg-gray-50' : 'bg-white'}`}>
+      {/* Subtle Background Elements for sections */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className={`flex flex-col lg:flex-row gap-16 mb-12 ${alignRight ? 'lg:flex-row-reverse' : ''}`}>
            {/* Header Area */}
-           <div className={`w-full md:w-1/3 ${alignRight ? 'text-right' : 'text-left'}`}>
-              <div className={`inline-block border-b-4 border-black mb-4 ${alignRight ? 'pr-12' : 'pr-12'}`}>
-                 <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px] block mb-2">Council</span>
-                 <h2 className="text-4xl font-black text-black uppercase tracking-tighter leading-none">{title}</h2>
+           <div className={`w-full lg:w-1/3 space-y-6 ${alignRight ? 'lg:text-right' : 'lg:text-left'}`}>
+              <div className="space-y-2">
+                 <div className={`flex items-center gap-3 ${alignRight ? 'justify-end' : 'justify-start'}`}>
+                    <div className="h-[2px] w-8 bg-[#9E0203]"></div>
+                    <span className="text-[#9E0203] font-bold uppercase tracking-[0.3em] text-[10px]">Strategic Council</span>
+                 </div>
+                 <h2 className="text-5xl font-black text-black uppercase tracking-tighter leading-tight">{title}</h2>
               </div>
-              <p className="text-gray-500 font-medium leading-relaxed">{description}</p>
+              <p className="text-gray-500 font-medium leading-relaxed text-lg">{description}</p>
+              
+              <div className={`pt-4 flex ${alignRight ? 'justify-end' : 'justify-start'}`}>
+                  <a href={`/partner/${category === 'investfund' ? 'InvestandFund' : category === 'techInnov' ? 'techinnov' : category === 'legalCompl' ? 'legalCompl' : title}`} className="group flex items-center gap-3 text-black font-bold uppercase tracking-widest text-xs hover:text-[#9E0203] transition-colors">
+                      View Full Council
+                      <div className="w-6 h-6 rounded-full border border-black/10 flex items-center justify-center group-hover:border-[#9E0203] group-hover:bg-[#9E0203] group-hover:text-white transition-all">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="3"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                      </div>
+                  </a>
+              </div>
            </div>
            
            {/* Grid Area */}
-           <div className="w-full md:w-2/3">
+           <div className="w-full lg:w-2/3">
               {loading ? (
-                <div className="flex items-center justify-center h-32">
-                   <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#9E0203]"></div>
+                <div className="flex items-center justify-center h-64">
+                   <div className="relative w-12 h-12">
+                      <div className="absolute inset-0 border-2 border-[#9E0203] border-t-transparent rounded-full animate-spin"></div>
+                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {members.map((member, index) => (
-                    <div key={index} className="group relative bg-white border border-gray-200 hover:border-[#9E0203] transition-all duration-300 overflow-hidden hover:shadow-xl">
-                       <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                          <img 
-                            src={member.imgpath} 
-                            alt={member.name} 
-                            className="w-full h-full object-cover transition-all duration-500" 
-                          />
-                          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                             <p className="text-white text-xs font-bold uppercase tracking-widest">{member.company}</p>
-                          </div>
-                       </div>
-                       <div className="p-4 bg-white relative z-10">
-                          <h3 className="text-lg font-bold font-jakarta text-black leading-tight group-hover:text-[#9E0203] transition-colors uppercase truncate">
-                            {member.name}
-                          </h3>
-                       </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {members.slice(0, 3).map((member, index) => (
+                    <div key={index} className="group relative">
+                        <div className="relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-[#9E0203]/30 group-hover:-translate-y-2">
+                            {/* Image Frame */}
+                            <div className="p-3 pb-0">
+                                <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-gray-50">
+                                    <img 
+                                      src={member.imgpath} 
+                                      alt={member.name} 
+                                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0" 
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+                                    <div className="absolute bottom-3 left-3 right-3 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                        <p className="text-white text-[10px] font-black uppercase tracking-widest opacity-80">{member.company}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Details */}
+                            <div className="p-4 text-center">
+                                <h3 className="text-md font-bold font-jakarta text-black uppercase tracking-tight group-hover:text-[#9E0203] transition-colors truncate">
+                                  {member.name}
+                                </h3>
+                                <div className="mt-2 text-[9px] font-black text-[#9E0203]/40 group-hover:text-[#9E0203] transition-colors uppercase tracking-[0.2em]">Council Member</div>
+                            </div>
+                        </div>
                     </div>
                   ))}
                 </div>
