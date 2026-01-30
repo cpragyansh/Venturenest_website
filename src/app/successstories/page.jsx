@@ -80,7 +80,7 @@ const SuccessStoryBlock = ({ story, index }) => {
                 <img 
                   src={story.FounderImg || "/assets/default.jpg"}
                   alt={story.StartupName} 
-                  className={`relative z-10 h-full w-full object-cover shadow-xl transition-all duration-700 grayscale group-hover:grayscale-0 ${isEven ? 'translate-x-[4%]' : 'translate-x-[-4%]'} group-hover:translate-x-0`}
+                  className={`relative z-10 h-full w-full object-cover shadow-xl transition-all duration-700 ${isEven ? 'translate-x-[4%]' : 'translate-x-[-4%]'} group-hover:translate-x-0`}
                 />
               </Link>
             </div>
@@ -112,15 +112,15 @@ export default function StartupStories() {
 
   return (
     <div className="min-h-screen bg-white font-jakarta">
-      {/* Hero Section - Text to Left Screen, Grayscale Background Overlay */}
+      {/* Hero Section - Text to Left Screen, Vivid Success Background */}
       <section className="relative py-32 overflow-hidden border-b-4 border-black">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://api.builder.io/api/v1/image/assets/TEMP/c7c728362241680d22384a377926978583492576?width=1920" 
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" 
             alt="Success Stories Hero" 
-            className="w-full h-full object-cover grayscale opacity-40 blur-[1px]"
+            className="w-full h-full object-cover opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">

@@ -34,26 +34,26 @@ const ContentBlock = ({ item, index }) => {
         ></div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
+          <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-0`}>
             {/* Text Side */}
-            <div className={`w-full md:w-3/5 py-10 ${isEven ? 'md:pr-12' : 'md:pl-12'} text-white`}>
-              <p className="text-lg md:text-xl leading-relaxed italic opacity-95 first-letter:text-3xl first-letter:font-black first-letter:mr-1">
+            <div className={`w-full md:w-7/12 py-12 ${isEven ? 'md:pr-20' : 'md:pl-20'} text-white relative z-30`}>
+              <p className="text-xl md:text-2xl leading-relaxed italic opacity-95 first-letter:text-4xl first-letter:font-black first-letter:mr-2 first-letter:text-[#9E0203]">
                 {item.desc}
               </p>
               {item.extended && (
-                <p className="text-base mt-4 text-white/80 leading-relaxed hidden md:block">
+                <p className="text-base mt-6 text-white/80 leading-relaxed hidden md:block border-l-2 border-[#9E0203]/30 pl-6">
                   {item.extended}
                 </p>
               )}
             </div>
             
             {/* Image Side */}
-            <div className={`w-full md:w-2/5 flex ${isEven ? 'justify-end' : 'justify-start'}`}>
-              <div className="relative w-full h-[350px] md:h-[400px] overflow-visible">
+            <div className={`w-full md:w-5/12 flex ${isEven ? 'justify-end' : 'justify-start'} relative z-20`}>
+              <div className="relative w-full h-[300px] md:h-[450px] overflow-visible">
                 <img 
                   src={item.image} 
                   alt={item.title} 
-                  className={`absolute bottom-[-15px] ${isEven ? 'right-0' : 'left-0'} h-[108%] w-auto object-contain max-w-none transform ${isEven ? 'translate-x-[5%]' : 'translate-x-[-5%]'}`}
+                  className={`absolute bottom-[-20px] ${isEven ? 'right-0' : 'left-0'} h-[115%] w-auto max-w-[140%] object-contain transform ${isEven ? 'translate-x-[15%]' : 'translate-x-[-15%]'}`}
                 />
               </div>
             </div>

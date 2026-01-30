@@ -92,7 +92,16 @@ const Partner_highlight = () => {
                     </div>
 
                     {/* RIGHT SIDE: Partner List and Profile */}
-                    <div className="md:col-span-8 bg-white p-8 md:p-12 shadow-sm border border-gray-100">
+                    <div className="md:col-span-8 relative">
+                        {/* RED DECORATIVE BACKGROUND BLOCK */}
+                        <div 
+                            className="absolute -inset-y-40 -right-[100vw] 
+                            bg-[#1A4880]/[0.01] 
+                            z-0 hidden md:block pointer-events-none"
+                            style={{ left: '-1rem' }}
+                        ></div>
+                        
+                        <div className="relative z-10 bg-white p-8 md:p-12 shadow-sm border border-gray-100 h-full">
                         {loading ? (
                             <div className="flex justify-center py-20">
                                 <div className="w-8 h-8 border-2 border-[#A40C1A] border-t-transparent rounded-full animate-spin"></div>
@@ -103,7 +112,7 @@ const Partner_highlight = () => {
                                 <div className="space-y-6">
                                     {activePartner ? (
                                         <>
-                                            <div className="w-32 h-20 flex items-center border-b border-gray-100 pb-4">
+                                            <div className="w-50 h-50 flex items-center border-b border-gray-100 pb-6">
                                                 <img 
                                                     src={activePartner.logo} 
                                                     alt={activePartner.name} 
@@ -119,9 +128,6 @@ const Partner_highlight = () => {
                                             <p className="text-gray-600 text-sm leading-relaxed">
                                                 {activePartner.description}
                                             </p>
-                                            <button className="text-[#A40C1A] font-bold text-sm border-b-2 border-[#A40C1A] pb-1 hover:opacity-70 transition-opacity">
-                                                Visit Official Website →
-                                            </button>
                                         </>
                                     ) : (
                                         <p className="text-gray-400 italic">No partners found in this category.</p>
@@ -142,8 +148,8 @@ const Partner_highlight = () => {
                                                     : "bg-white border-transparent hover:bg-gray-50"
                                                 }`}
                                             >
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-10 h-10 flex-shrink-0">
+                                                <div className="flex items-center gap-6">
+                                                    <div className="w-16 h-12 flex-shrink-0">
                                                         <img src={p.logo} alt="" className="w-full h-full object-contain" />
                                                     </div>
                                                     <span className="text-sm font-bold text-gray-800">{p.name}</span>
@@ -157,6 +163,7 @@ const Partner_highlight = () => {
                     </div>
                 </div>
             </div>
+        </div>
 
             <style>{`
                 .custom-scrollbar::-webkit-scrollbar {
