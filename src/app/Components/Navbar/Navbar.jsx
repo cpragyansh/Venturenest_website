@@ -3,6 +3,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   // Sound effects logic
   const playSound = (url) => {
@@ -20,10 +21,18 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    setActiveDropdown(null);
+  };
+  
+  const toggleDropdown = (name) => {
+    if (window.innerWidth <= 1250) {
+      setActiveDropdown(activeDropdown === name ? null : name);
+    }
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setActiveDropdown(null);
   };
 
   return (
@@ -130,9 +139,9 @@ const Navbar = () => {
             <a href="/" onClick={closeMenu}>Home</a>
           </li>
 
-          <li className="dropdown">
+          <li className={`dropdown ${activeDropdown === 'about' ? 'active' : ''}`}>
             <div className="dropdown-arrow-fix">
-              <a href="#" onClick={(e) => e.preventDefault()}>
+              <a href="#" onClick={(e) => { e.preventDefault(); toggleDropdown('about'); }}>
                 <span>About</span>
               </a>
             </div>
@@ -152,8 +161,8 @@ const Navbar = () => {
             </ul>
           </li> */}
 
-          <li className="dropdown">
-            <a href="#" onClick={(e) => e.preventDefault()}>Council Members</a>
+          <li className={`dropdown ${activeDropdown === 'council' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); toggleDropdown('council'); }}>Council Members</a>
             <ul className="dropdown-menu">
               <li><a href="/Advisory" onClick={closeMenu}>Advisory-Council</a></li>
               <li><a href="/Investment-and-Funding" onClick={closeMenu}>Investment & Funding Council</a></li>
@@ -163,8 +172,8 @@ const Navbar = () => {
             </ul>
           </li>
 
-          <li className="dropdown">
-            <a href="#" onClick={(e) => e.preventDefault()}>Partners</a>
+          <li className={`dropdown ${activeDropdown === 'partners' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); toggleDropdown('partners'); }}>Partners</a>
             <ul className="dropdown-menu">
               <li><a href="/Government-Catalyst" onClick={closeMenu}>Government Catalyst Partners</a></li>
               <li><a href="/Invest" onClick={closeMenu}>Investment Partners</a></li>
@@ -198,8 +207,8 @@ const Navbar = () => {
             </a>
           </li> */}
 
-          <li className="dropdown">
-            <a href="#" onClick={(e) => e.preventDefault()}>Gallery</a>
+          <li className={`dropdown ${activeDropdown === 'gallery' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); toggleDropdown('gallery'); }}>Gallery</a>
             <ul className="dropdown-menu">
               <li><a href="/Gallery/Photos" onClick={closeMenu}>Photo</a></li>
               {/* <li><a href="/Gallery/Videos" onClick={closeMenu}>Videos</a></li> */}

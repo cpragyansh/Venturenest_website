@@ -132,10 +132,10 @@ export default function Index() {
                 </svg>
               </div> */}
 
-              <h2 className="text-brand-red text-5xl font-bold font-jakarta mb-6">
+              <h2 className="text-brand-red text-3xl md:text-5xl font-bold font-jakarta mb-6">
                 Welcome to CGC<br />Venturenest
               </h2>
-              <h2 className="text-black text-2xl font-bold font-jakarta mb-6">
+              <h2 className="text-black text-xl md:text-2xl font-bold font-jakarta mb-6">
                 VentureNest is CGC University’s Technology Business Incubator, where ideas evolve into impactful startups.
               </h2>
 
@@ -208,7 +208,7 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="max-w-2xl py-8">
-              <h2 className="text-brand-red text-6xl font-black font-jakarta mb-10 leading-[1.1] tracking-tighter">
+              <h2 className="text-brand-red text-4xl md:text-6xl font-black font-jakarta mb-10 leading-[1.1] tracking-tighter">
                 We Don't Just <br />
                 <span className="text-brand-dark">Promise Growth</span> — <br />
                 We Prove It.
@@ -229,7 +229,7 @@ export default function Index() {
             </div>
 
             {/* Premium Stats Dashboard Visualization */}
-            <div className="grid grid-cols-2 gap-4 h-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
               {/* Funding Stat - Line Chart Style */}
               <div className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden relative group">
                 <div className="relative z-10">
@@ -313,8 +313,8 @@ export default function Index() {
               // { name: 'Simran Saini', company: 'Autodesk', package: '33 LPA', image: '/assets/success-4.jpeg', logo: '/assets/autodesk.png' },
             ].map((student, idx) => (
               // Increase the Size of the Logos
-              <div key={idx} className="relative bg-gray-800 h-[600px] overflow-hidden group">
-                <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[600px] w-auto object-contain" />
+              <div key={idx} className="relative bg-gray-800 h-[450px] md:h-[600px] overflow-hidden group">
+                <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain" />
                 {/* Overlay removed as requested */}
 
                 <div className="absolute top-0 right-0 bg-brand-red rounded-bl-lg p-4">
@@ -628,8 +628,8 @@ export default function Index() {
       <section className="bg-white py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-16">
-            <span className="text-brand-red text-5xl font-bold font-jakarta">Startup Success </span>
-            <span className="text-brand-dark text-5xl font-bold font-jakarta">Stories</span>
+            <span className="text-brand-red text-3xl md:text-5xl font-bold font-jakarta">Startup Success </span>
+            <span className="text-brand-dark text-3xl md:text-5xl font-bold font-jakarta">Stories</span>
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
