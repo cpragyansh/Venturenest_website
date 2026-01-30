@@ -54,10 +54,11 @@ function Incubated_startups_rendering() {
             </section>
 
             {/* 2. PORTFOLIO INSIGHTS - Signature Blocks */}
+
             <section className="grid grid-cols-1 md:grid-cols-3">
                 <StatBlock number="100+" label="Ventures" desc="Active Incubated Startups" color="red" />
-                <StatBlock number="10+" label="Funded Ventures" desc="Funded Ventures " color="navy" />
-                <StatBlock number="26.5 Lakh" label="Funding" desc="Total Ecosystem Capital Raised" color="red" />
+                <StatBlock number="10+" label="Women Driven Startups" desc="Women Centric Startups" color="navy" />
+                <StatBlock number="~1.5 Crore" label="Funds Granted" desc="Total Ecosystem Capital Raised" color="red" />
             </section>
 
         </div>

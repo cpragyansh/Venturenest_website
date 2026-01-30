@@ -15,8 +15,8 @@ const Council_highlight = () => {
     const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState(null);
+    const [isPaused, setIsPaused] = useState(false);
 
-    // Fetch data from API based on category
     useEffect(() => {
         const fetchMembers = async () => {
             setLoading(true);
@@ -48,6 +48,54 @@ const Council_highlight = () => {
         fetchMembers();
     }, [activeCategory]);
 
+    // Auto-cycle logic
+    useEffect(() => {
+        if (loading || isPaused) return;
+
+        const interval = setInterval(() => {
+            if (members.length > 0) {
+                const currentIndex = members.findIndex(m => m.id === activeTab);
+                if (currentIndex !== -1 && currentIndex < members.length - 1) {
+                    // Next member in current category
+                    setActiveTab(members[currentIndex + 1].id);
+                } else {
+                    // Switch to next category
+                    const currentCatIndex = categories.findIndex(c => c.id === activeCategory);
+                    const nextCatIndex = (currentCatIndex + 1) % categories.length;
+                    setActiveCategory(categories[nextCatIndex].id);
+                }
+            } else {
+                // Empty category, skip after delay
+                const currentCatIndex = categories.findIndex(c => c.id === activeCategory);
+                const nextCatIndex = (currentCatIndex + 1) % categories.length;
+                setActiveCategory(categories[nextCatIndex].id);
+            }
+        }, 6000); // 6s Interval for Cinematic Feel
+
+        return () => clearInterval(interval);
+    }, [members, activeTab, activeCategory, loading, categories, isPaused]);
+
+    // Auto-scroll the slider to keep active member in view
+    useEffect(() => {
+        if (scrollRef.current && activeTab && members.length > 0) {
+            const index = members.findIndex(v => v.id === activeTab);
+            if (index !== -1) {
+                const activeElement = scrollRef.current.children[index];
+                const container = scrollRef.current;
+
+                if (activeElement && container) {
+                    // Calculate center position
+                    const newScrollLeft = activeElement.offsetLeft - (container.offsetWidth / 2) + (activeElement.offsetWidth / 2);
+
+                    container.scrollTo({
+                        left: newScrollLeft,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+    }, [activeTab, members]);
+
     const scrollRef = useRef(null);
 
     const scroll = (direction) => {
@@ -65,7 +113,11 @@ const Council_highlight = () => {
     const activeMember = members.find(v => v.id === activeTab);
 
     return (
-        <section className="bg-white font-jakarta overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-between">
+        <section 
+            className="bg-white font-jakarta overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-between"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+        >
             {/* Header / Featured Member Section - Centered Layout */}
             <div className="bg-[#9E0203] pt-12 pb-20 relative text-white flex-grow-0">
                 <div className="absolute inset-0 opacity-10 pointer-events-none"
@@ -156,12 +208,13 @@ const Council_highlight = () => {
             <div className="relative -mt-10 z-20">
                 <div className="container mx-auto px-6">
                     <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden">
-                        <div className="flex overflow-x-auto no-scrollbar divide-x divide-gray-100">
+                        {/* Make the Font Larger of the Pills */}
+                        <div className="flex overflow-x-auto  no-scrollbar divide-x font-lg divide-gray-100">
                             {categories.map((cat) => (
                                 <button
                                     key={cat.id}
                                     onClick={() => setActiveCategory(cat.id)}
-                                    className={`flex-1 min-w-[120px] p-4 group transition-all duration-300 relative flex flex-col items-center justify-center text-center ${
+                                    className={`flex-1 min-w-[120px] p-4 group transition-all duration-300 relative flex flex-col items-center justify-center text-center font-lg ${
                                         activeCategory === cat.id ? 'bg-[#9E0203] text-white' : 'hover:bg-gray-50'
                                     }`}
                                 >
@@ -241,7 +294,7 @@ const Council_highlight = () => {
                                             />
                                         </div>
                                         {activeTab === member.id && (
-                                            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-1 bg-[#9E0203] rounded-full"></div>
+                                            <div key={activeTab} className="absolute -bottom-1.5 left-0 h-1 bg-[#9E0203] rounded-full animate-progress transition-all"></div>
                                         )}
                                     </div>
                                 ))
@@ -267,11 +320,18 @@ const Council_highlight = () => {
                     animation: spin-slow 15s linear infinite;
                 }
                 @keyframes fadeIn {
-                    from { opacity: 0; transform: scale(0.95) translateY(10px); }
-                    to { opacity: 1; transform: scale(1) translateY(0); }
+                    from { opacity: 0; transform: scale(1.05) translateY(20px); filter: blur(10px); }
+                    to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+                }
+                @keyframes progress {
+                    from { width: 0%; }
+                    to { width: 100%; }
                 }
                 .animate-fadeIn {
-                    animation: fadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                    animation: fadeIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+                }
+                .animate-progress {
+                    animation: progress 6s linear forwards;
                 }
             `}</style>
         </section>

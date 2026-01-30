@@ -192,7 +192,7 @@ export default function Index() {
             100% { transform: translateX(-33.33%); }
           }
           .animate-scroll {
-            animation: scroll 40s linear infinite;
+            animation: scroll 60s linear infinite;
             width: max-content;
           }
           .animate-scroll:hover {
@@ -215,7 +215,7 @@ export default function Index() {
               </h2>
 
               <p className="text-brand-dark/80 text-lg leading-relaxed mb-6 font-medium">
-                Driven by the vision of <span className="text-brand-red font-bold">“Each One, One Job”</span>, CGC University Mohali’s Technology Business Incubator (TBI) – Venture Nest empowers students and startups with funding, mentorship, and industry exposure.
+                Driven by the vision of <span className="text-brand-red font-bold">“Each One, One Innovation Journey”</span>, CGC University Mohali’s Technology Business Incubator (TBI) – Venture Nest empowers students and startups with funding, mentorship, and industry exposure.
               </p>
               
               <p className="text-brand-dark/70 text-base leading-relaxed mb-10">
