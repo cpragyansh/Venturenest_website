@@ -16,10 +16,12 @@ import Stats from './Stats';
 import ProgramsSection from './ProgramsSection';
 import StartupInventorySection from './StartupInventorySection';
 import StartupLogoCloud from './StartupLogoCloud';
+import Event from '../Event/Event';
 
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [events, setEvents] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
@@ -38,7 +40,18 @@ export default function Index() {
         console.error('Error fetching photos:', error);
       }
     };
+
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get("https://venture-nest-backend.onrender.com/events");
+        setEvents(Array.isArray(response.data) ? response.data : []);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    };
+
     fetchPhotos();
+    fetchEvents();
   }, []);
 
   // const startupLogos = [
@@ -129,7 +142,7 @@ export default function Index() {
       </div> */}
 
       {/* Header */}
-      <header className="relative">
+      <header id="home" className="relative">
         {/* Hero Area with Mslider */}
         <div className="relative overflow-hidden">
           {/* Main Slider */}
@@ -148,7 +161,7 @@ export default function Index() {
       </header>
 
       {/* Welcome Section */}
-      <section className="relative py-20 overflow-hidden">
+      <section id="about" className="relative py-20 overflow-hidden">
         <img src="https://api.builder.io/api/v1/image/assets/TEMP/4457b3ebf8e16b2f34e08b4bc4e55bb881f9f762?width=3840" alt="" className="absolute inset-0 w-full h-full object-cover" />
 
         <div className="relative z-10 container mx-auto px-4">
@@ -232,7 +245,7 @@ export default function Index() {
 
 
       {/* Stats Section */}
-      <section className="bg-white py-20">
+      <section id="impact" className="bg-white py-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -436,14 +449,198 @@ export default function Index() {
       </section>
 
 
-      <ProgramsSection />
+      <div id="programs">
+        <ProgramsSection />
+      </div>
+      <div id="events">
+        {events.length > 0 && <Event events={events} />}
+      </div>
       <Incubated_startups_rendering />
-      <StartupInventorySection />
+      <div id="portfolio">
+        <StartupInventorySection />
+      </div>
       <Incubated_venture_highlight />
       <StartupLogoCloud />
 
+
+      {/* North India's Fastest Growing Institute - Redesigned and Swapped */}
+      <section className="bg-[#003366] overflow-hidden relative">
+        <div className="flex flex-col lg:flex-row min-h-[600px]">
+          {/* Left Side: Content Area (Swapped) */}
+          <div className="lg:w-1/2 p-8 md:p-16 lg:p-24 relative flex flex-col justify-center text-white">
+            {/* Background Image with 20% Transparency */}
+            <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+              <img 
+                // src="/assets/5.jpg" 
+                src="https://www.cgcuniversity.in/frontend/images/campus-facilities/campus-img.webp" 
+                alt="Institute Background" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Dot pattern decor */}
+            <div className="absolute top-10 right-10 flex flex-col gap-2 opacity-30 z-10">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="flex gap-2">
+                  {[...Array(3)].map((_, j) => (
+                    <div key={j} className="w-1 h-1 rounded-full bg-white"></div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            <div className="relative z-10">
+              <h2 className="text-4xl md:text-5xl font-black font-jakarta mb-6 leading-[1.1]">
+                Pioneering Innovation<br />in North India
+              </h2>
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-10 font-medium max-w-lg">
+                VentureNest stands as a beacon for aspiring entrepreneurs, fostering a dynamic ecosystem of innovation and risk-taking. We are not just an incubator; we are a launchpad for the next generation of industry disruptors, providing unparalleled access to resources, mentorship, and capital.
+              </p>
+
+              <Link to="/IncubateWithUs" className="bg-[#9E0203] text-white px-8 py-3 rounded-none font-black uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all mb-12 w-fit block border-b-4 border-black">
+                Ignite Your disruptive Vision →
+              </Link>
+
+              {/* Stats Grid - 2x2 for 4 Metrics */}
+              <div className="grid grid-cols-2 border-t border-dashed border-white/20 pt-10">
+                {/* Stat 1 */}
+                <div className="pr-6 border-r border-dashed border-white/20 pb-10">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl md:text-4xl font-black">100+</span>
+                  </div>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Startups Incubated</p>
+                </div>
+
+                {/* Stat 2 */}
+                <div className="pl-6 pb-10">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl md:text-4xl font-black">1.5 Cr+</span>
+                  </div>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Funding Raised</p>
+                </div>
+
+                {/* Stat 3 */}
+                <div className="pr-6 border-r border-dashed border-white/20 pt-10 border-t border-dashed">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl md:text-4xl font-black">50+</span>
+                  </div>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Corporate Partners</p>
+                </div>
+
+                {/* Stat 4 */}
+                <div className="pl-6 pt-10 border-t border-dashed border-white/20">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl md:text-4xl font-black">200+</span>
+                  </div>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Mentors & Experts</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side: Student Image (Swapped) */}
+          <div className="lg:w-1/2 relative min-h-[400px]">
+            <img 
+              src="https://i.ibb.co/mCYRQhGq/prbx77.jpg" 
+              alt="CGC Student" 
+              className="absolute inset-0 w-full h-full py-4 object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+
+      {/* <GallerySection /> */}
+
+                  <div id="gallery" className="text-center pt-12 mb-12">
+                    <h3 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight uppercase">
+                      The Innovation <span className="text-brand-red">Catalog</span>
+                    </h3>
+                  </div>
+        
+                  <div className="space-y-4 mb-20">
+                    {/* Row 1: Left to Right */}
+                    <div className="relative overflow-hidden group">
+                      <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
+                        {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
+                          <div 
+                            key={idx} 
+                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                            onClick={() => setSelectedImage(photo)}
+                          >
+                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+        
+                    {/* Row 2: Right to Left */}
+                    <div className="relative overflow-hidden p-2 bg-[#9E0203] group">
+                      <div className="flex gap-4 animate-scroll-rtl hover:pause-scroll">
+                        {[...photos.slice(15, 30), ...photos.slice(15, 30)].map((photo, idx) => (
+                          <div 
+                            key={idx} 
+                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                            onClick={() => setSelectedImage(photo)}
+                          >
+                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="relative overflow-hidden bg-[#1A4480] p-2 group">
+                      <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
+                        {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
+                          <div 
+                            key={idx} 
+                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                            onClick={() => setSelectedImage(photo)}
+                          >
+                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+        
+                  <style>{`
+                    @keyframes scroll-ltr {
+                      0% { transform: translateX(-50%); }
+                      100% { transform: translateX(0); }
+                    }
+                    @keyframes scroll-rtl {
+                      0% { transform: translateX(0); }
+                      100% { transform: translateX(-50%); }
+                    }
+                    .animate-scroll-ltr {
+                      display: flex;
+                      width: max-content;
+                      animation: scroll-ltr 60s linear infinite;
+                    }
+                    .animate-scroll-rtl {
+                      display: flex;
+                      width: max-content;
+                      animation: scroll-rtl 70s linear infinite;
+                    }
+                    .hover\\:pause-scroll:hover {
+                      animation-play-state: paused;
+                    }
+                  `}</style>
+        
+        
+     
       {/* Incubation Application Process */}
-      <section className="bg-white py-16 relative overflow-hidden">
+      <section id="process" className="bg-white py-16 relative overflow-hidden">
         {/* World Map Background with Low Opacity */}
         <div className="absolute inset-0 opacity-[0.1] pointer-events-none flex items-center justify-center overflow-hidden">
            <img 
@@ -590,184 +787,8 @@ export default function Index() {
         </div>
       </section>
 
-      {/* North India's Fastest Growing Institute - Redesigned and Swapped */}
-      <section className="bg-[#003366] overflow-hidden relative">
-        <div className="flex flex-col lg:flex-row min-h-[600px]">
-          {/* Left Side: Content Area (Swapped) */}
-          <div className="lg:w-1/2 p-8 md:p-16 lg:p-24 relative flex flex-col justify-center text-white">
-            {/* Background Image with 20% Transparency */}
-            <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-              <img 
-                // src="/assets/5.jpg" 
-                src="https://www.cgcuniversity.in/frontend/images/campus-facilities/campus-img.webp" 
-                alt="Institute Background" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Dot pattern decor */}
-            <div className="absolute top-10 right-10 flex flex-col gap-2 opacity-30 z-10">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="flex gap-2">
-                  {[...Array(3)].map((_, j) => (
-                    <div key={j} className="w-1 h-1 rounded-full bg-white"></div>
-                  ))}
-                </div>
-              ))}
-            </div>
-
-            <div className="relative z-10">
-              <h2 className="text-4xl md:text-5xl font-black font-jakarta mb-6 leading-[1.1]">
-                Pioneering Innovation<br />in North India
-              </h2>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-10 font-medium max-w-lg">
-                VentureNest stands as a beacon for aspiring entrepreneurs, fostering a dynamic ecosystem of innovation and risk-taking. We are not just an incubator; we are a launchpad for the next generation of industry disruptors, providing unparalleled access to resources, mentorship, and capital.
-              </p>
-
-              <Link to="/IncubateWithUs" className="bg-[#9E0203] text-white px-8 py-3 rounded-none font-black uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all mb-12 w-fit block border-b-4 border-black">
-                Ignite Your disruptive Vision →
-              </Link>
-
-              {/* Stats Grid - 2x2 for 4 Metrics */}
-              <div className="grid grid-cols-2 border-t border-dashed border-white/20 pt-10">
-                {/* Stat 1 */}
-                <div className="pr-6 border-r border-dashed border-white/20 pb-10">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl md:text-4xl font-black">100+</span>
-                  </div>
-                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Startups Incubated</p>
-                </div>
-
-                {/* Stat 2 */}
-                <div className="pl-6 pb-10">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl md:text-4xl font-black">1.5 Cr+</span>
-                  </div>
-                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Funding Raised</p>
-                </div>
-
-                {/* Stat 3 */}
-                <div className="pr-6 border-r border-dashed border-white/20 pt-10 border-t border-dashed">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl md:text-4xl font-black">50+</span>
-                  </div>
-                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Corporate Partners</p>
-                </div>
-
-                {/* Stat 4 */}
-                <div className="pl-6 pt-10 border-t border-dashed border-white/20">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl md:text-4xl font-black">200+</span>
-                  </div>
-                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-gray-400 mt-2">Mentors & Experts</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side: Student Image (Swapped) */}
-          <div className="lg:w-1/2 relative min-h-[400px]">
-            <img 
-              src="https://i.ibb.co/mCYRQhGq/prbx77.jpg" 
-              alt="CGC Student" 
-              className="absolute inset-0 w-full h-full py-4 object-cover"
-            />
-          </div>
-        </div>
-      </section>
-
-
-      {/* <GallerySection /> */}
-
-                  <div className="text-center pt-12 mb-12">
-                    <h3 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight uppercase">
-                      The Innovation <span className="text-brand-red">Catalog</span>
-                    </h3>
-                  </div>
-        
-                  <div className="space-y-4 mb-20">
-                    {/* Row 1: Left to Right */}
-                    <div className="relative overflow-hidden group">
-                      <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
-                        {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
-                          <div 
-                            key={idx} 
-                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
-                            onClick={() => setSelectedImage(photo)}
-                          >
-                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-        
-                    {/* Row 2: Right to Left */}
-                    <div className="relative overflow-hidden p-2 bg-[#9E0203] group">
-                      <div className="flex gap-4 animate-scroll-rtl hover:pause-scroll">
-                        {[...photos.slice(15, 30), ...photos.slice(15, 30)].map((photo, idx) => (
-                          <div 
-                            key={idx} 
-                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
-                            onClick={() => setSelectedImage(photo)}
-                          >
-                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="relative overflow-hidden bg-[#1A4480] p-2 group">
-                      <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
-                        {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
-                          <div 
-                            key={idx} 
-                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
-                            onClick={() => setSelectedImage(photo)}
-                          >
-                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-        
-                  <style>{`
-                    @keyframes scroll-ltr {
-                      0% { transform: translateX(-50%); }
-                      100% { transform: translateX(0); }
-                    }
-                    @keyframes scroll-rtl {
-                      0% { transform: translateX(0); }
-                      100% { transform: translateX(-50%); }
-                    }
-                    .animate-scroll-ltr {
-                      display: flex;
-                      width: max-content;
-                      animation: scroll-ltr 60s linear infinite;
-                    }
-                    .animate-scroll-rtl {
-                      display: flex;
-                      width: max-content;
-                      animation: scroll-rtl 70s linear infinite;
-                    }
-                    .hover\\:pause-scroll:hover {
-                      animation-play-state: paused;
-                    }
-                  `}</style>
-        
-        
-     
       {/* Student Stories */}
-      <section className="bg-white py-20">
+      <section id="success-stories" className="bg-white py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-16">
             <span className="text-brand-red text-3xl md:text-5xl font-bold font-jakarta">Startup Success </span>

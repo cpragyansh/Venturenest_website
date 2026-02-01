@@ -1,210 +1,234 @@
-/* .events-container{
+/* Optimized Editorial Showcase CSS */
+.editorial-showcase {
     width: 100%;
-    min-width: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-     
-    Adjust to provide spacing from the main page
-    position: relative; 
-    For layering
-    z-index: 1; 
-    Lower z-index to stay below the main page
-}
-
-.events {
-    margin-top: -10em;
-    width: auto;
-    height: 40em;
-    margin-top: 3em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-     Prevents overflow when events expand
-}
-
-.event-main {
-    height: 40vh;
-    width: 80vw;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    gap: 3em; 
-    Set a standard gap
-}
-
-.event {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 10px solid rgb(255, 255, 255);
-    width: 60em;
-    height: 100%;
-    transition: width 700ms ease-in-out,height 700ms, transform 300ms ease-in-out;
-     Added transform for smooth scaling
+    height: 100vh;
+    min-height: 750px;
+    background-color: #9E0203; /* Brand Red */
     position: relative;
-    object-fit: fill;
     overflow: hidden;
-     Prevents child overflow
-}
-
-.event:hover {
-    Set expanded width on hover
-    transform: scale(1.08); 
-    Slightly scale for a zoom effect
-}
-
-.head-event {
-    position: absolute;
-    transition: transform 800ms ease-in-out;
-    font-weight: bold;
-    font-size: 2vh;
-color:black;
-    opacity: 0; 
-    Hidden by default
-    border-radius: 10px;
-    padding: 10px;
-}
-
-
-.details-event {
-    padding-left: 10%;
-    padding-right: 10%;
-    bottom: 2%;
-    opacity: 1; 
-    Hidden by default
-    color: white;
-    position: absolute;
-    opacity: 0;
-    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-
-}
-
-.event:hover .head-event {
-    color: white;
-    background-color: rgba(45, 42, 42, 0.5);
-    animation: fadeOut 5s ease-in-out forwards;
-}
-
-.event:hover .details-event {
-    color: white;
-    background-color: rgba(45, 42, 42, 0.5);
-    animation: fadeOut 20s ease-in forwards;
-}
-
-Keyframes for fading out
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-
-.event:hover .head-event {
-    transform: translate(0%, 0%) rotate(0deg); 
-    Move head event on hover
-}
-
-.event:hover .details-event {
-    font-size: 18px; 
-    Adjust font size
-    font-weight: 600; 
-    Adjust font weight
-    Change color
-    text-align: justify;
-}
-
-.event-image {
-    width: 100%;
-    height: 100%;
-    object-fit:fill;
-     Ensures the image covers the area
-    object-position: center;
-    margin: auto;
-    position: absolute; 
-    Keep the image positioned behind other elements
-}
- */
-.events-section-new-design-events-boxes-main-container{
-    width: 100%;
-    height: auto;
-    padding: 2em;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     flex-wrap: wrap;
-     gap: 4em;
-}
-.events-new-design-boxes-main-container-main-direct-entry-boxes{
-  
-    display: flex;
     justify-content: center;
-    align-items: start;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.showcase-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    font-size: 35vw;
+    font-weight: 900;
+    color: rgba(26, 72, 128, 0.15); /* Deep Blue */
+    line-height: 1;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.showcase-container {
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    padding: 0 4rem;
+}
+
+.showcase-slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Info Section - Smaller Typography for better wrapping */
+.showcase-info {
+    width: 45%;
+    position: relative;
+    z-index: 10;
+}
+
+.info-tag {
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+    padding-left: 10px;
+    border-left: 3px solid #1A4880; /* Blue accent */
+}
+
+.showcase-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem); /* Reduced Size for better wrapping */
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    max-width: 90%;
+}
+
+.showcase-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 2rem;
+}
+
+.showcase-cta-block {
+    margin-top: 2rem;
+}
+
+.result-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.result-link:hover {
+    background: white;
+    color: #9E0203;
+    transform: translateX(5px);
+}
+
+.showcase-meta {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.meta-item {
+    display: flex;
     flex-direction: column;
-    gap:1em;
+    gap: 0.3rem;
+}
 
+.meta-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.4);
 }
-.events-section-new-design-direct-entry-main-img-division-block{
-    height: 24em;
-    width: 24em;
-    background-color: white;
-    border: 6px solid #A30D33;
-    border-radius: 20px;
-    object-fit: cover;
-    
-}
-.event-section-new-design-direct-entry-heading-name-tag-direct{
-    font-size:2.4vh;
+
+.meta-value {
+    font-size: 0.95rem;
     font-weight: 600;
+    color: #ffffff;
 }
-.event-image{
+
+/* Image Section */
+.showcase-image-wrapper {
+    width: 55%;
+    height: 65%;
+    position: relative;
+}
+
+.image-frame {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px; 
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.showcase-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.main-image-event-section-image-tag-direct-entry{
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
+
+/* Classic/Traditional Navigation Buttons */
+.showcase-navigation {
+    position: absolute;
+    bottom: 4rem;
+    left: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    z-index: 50;
 }
 
-@media (min-width:320px) and (max-width:480px) {
-    .events-section-new-design-direct-entry-main-img-division-block {
-        height: 18vh;
-        width: 40vw;
-        border: 4px solid #A30D33;
+.classic-nav-btns {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-btn-classic {
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.nav-btn-classic:hover {
+    background: white;
+    color: #9E0203;
+    border-color: white;
+}
+
+.nav-counter {
+    color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.nav-counter .active {
+    color: #ffffff;
+}
+
+.nav-counter .divider {
+    margin: 0 10px;
+    opacity: 0.3;
+}
+
+.nav-counter .total {
+    opacity: 0.5;
+}
+
+@media (max-width: 1024px) {
+    .showcase-slide {
+        flex-direction: column-reverse;
+        padding-top: 50px;
     }
-    .event-section-new-design-direct-entry-heading-name-tag-direct{
-        font-size:4.4vw;
-        font-weight: 500;
-        width: 26vw;
-        text-align: center;
-    }
-    .events-new-design-boxes-main-container-main-direct-entry-boxes{
-    
-        display: flex;
-        justify-content: center;
-        align-items: start;
-        flex-direction: column;
-        gap:1em;
-    
-    }
-    .events-section-new-design-events-boxes-main-container{
+    .showcase-info {
         width: 100%;
-        height: auto;
-        padding: 1em;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         flex-wrap: wrap;
-         gap: 2em;
+        padding: 0;
     }
-    
+    .showcase-image-wrapper {
+        width: 100%;
+        height: 40%;
+    }
+    .showcase-navigation {
+        bottom: 2rem;
+        left: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .showcase-title {
+        font-size: 1.6rem;
+    }
+    .showcase-container {
+        padding: 0 1.5rem;
+    }
 }

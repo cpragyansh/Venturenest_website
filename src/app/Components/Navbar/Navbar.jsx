@@ -136,7 +136,7 @@ const Navbar = () => {
         </ul>
         <ul className={`nav-links ${isMenuOpen ? "nav-active" : ""}`}>
           <li>
-            <a href="/" onClick={closeMenu}>Home</a>
+            <a href="/#home" onClick={closeMenu}>Home</a>
           </li>
 
           <li className={`dropdown ${activeDropdown === 'about' ? 'active' : ''}`}>
@@ -146,10 +146,10 @@ const Navbar = () => {
               </a>
             </div>
             <ul className="dropdown-menu">
-              <li><a href="/aboutUs" onClick={closeMenu}>About Us</a></li>
-              <li><a href="/vision" onClick={closeMenu}>Mission & Vision</a></li>
-              <li><a href="/contact" onClick={closeMenu}>Contact</a></li>
-              <li><a href="/success" onClick={closeMenu}>Success Stories</a></li>
+              <li><a href="/#about" onClick={closeMenu}>About Us</a></li>
+              <li><a href="/#about" onClick={closeMenu}>Mission & Vision</a></li>
+              <li><a href="/#contact" onClick={closeMenu}>Contact</a></li>
+              <li><a href="/#success-stories" onClick={closeMenu}>Success Stories</a></li>
             </ul>
           </li>
 
@@ -182,13 +182,13 @@ const Navbar = () => {
             </ul>
           </li>
 
-          <li><a href="/Programs" onClick={closeMenu}>Programs</a></li>
-          <li><a href="/Startups" onClick={closeMenu}>Portfolio</a></li>
+          <li><a href="/#programs" onClick={closeMenu}>Programs</a></li>
+          <li><a href="/#portfolio" onClick={closeMenu}>Portfolio</a></li>
 
           <li className="dropdown">
-            <a href="/Events" onClick={closeMenu}>Events</a>
+            <a href="/#events" onClick={closeMenu}>Events</a>
             <ul className="dropdown-menu">
-              <li><a href="/Events" onClick={closeMenu}>All Events</a></li>
+              <li><a href="/#events" onClick={closeMenu}>All Events</a></li>
               {/* <li><a href="/VenturePulse"    onClick={closeMenu}>VenturePulse</a></li> */}
             </ul>
           </li>
@@ -208,10 +208,10 @@ const Navbar = () => {
           </li> */}
 
           <li className={`dropdown ${activeDropdown === 'gallery' ? 'active' : ''}`}>
-            <a href="#" onClick={(e) => { e.preventDefault(); toggleDropdown('gallery'); }}>Gallery</a>
+            <a href="/#gallery" onClick={closeMenu}>Gallery</a>
             <ul className="dropdown-menu">
-              <li><a href="/Gallery/Photos" onClick={closeMenu}>Photo</a></li>
-              <li><a href="/Gallery/Videos" onClick={closeMenu}>Videos</a></li>
+              <li><a href="/#gallery" onClick={closeMenu}>Photo</a></li>
+              <li><a href="/#gallery" onClick={closeMenu}>Videos</a></li>
             </ul>
           </li>
 
