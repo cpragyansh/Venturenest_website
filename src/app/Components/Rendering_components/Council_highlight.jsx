@@ -209,21 +209,21 @@ const Council_highlight = () => {
                 <div className="container mx-auto px-6">
                     <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden">
                         {/* Make the Font Larger of the Pills */}
-                        <div className="flex overflow-x-auto  no-scrollbar divide-x font-lg divide-gray-100">
+                        <div className="flex overflow-x-auto no-scrollbar divide-x divide-gray-100">
                             {categories.map((cat) => (
                                 <button
                                     key={cat.id}
                                     onClick={() => setActiveCategory(cat.id)}
-                                    className={`flex-1 min-w-[120px] p-4 group transition-all duration-300 relative flex flex-col items-center justify-center text-center font-lg ${
+                                    className={`flex-1 min-w-[140px] p-5 group transition-all duration-300 relative flex flex-col items-center justify-center text-center ${
                                         activeCategory === cat.id ? 'bg-[#9E0203] text-white' : 'hover:bg-gray-50'
                                     }`}
                                 >
-                                    <span className={`text-[8px] font-black absolute top-2 right-4 tracking-widest ${
+                                    <span className={`text-[10px] font-black absolute top-2 right-4 tracking-widest ${
                                         activeCategory === cat.id ? 'text-white/40' : 'text-gray-300'
                                     }`}>
                                         {cat.number}
                                     </span>
-                                    <h4 className="font-black text-[9px] uppercase tracking-[0.2em]">
+                                    <h4 className="font-extrabold text-[13px] uppercase tracking-[0.15em]">
                                         {cat.label}
                                     </h4>
                                     {activeCategory === cat.id && (
@@ -250,7 +250,7 @@ const Council_highlight = () => {
                         </div>
                         
                         {/* Navigation Buttons */}
-                        <div className="flex gap-2">
+                        {/* <div className="flex gap-2">
                              <button 
                                 onClick={() => scroll('left')}
                                 className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#9E0203] hover:text-white transition-all shadow-sm"
@@ -263,13 +263,13 @@ const Council_highlight = () => {
                             >
                                 <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path d="M9 5l7 7-7 7" /></svg>
                             </button>
-                        </div>
+                        </div> */}
                     </div>
-
+                    {/* Leaders UX */}
                     <div className="relative">
                         <div 
                             ref={scrollRef}
-                            className="flex gap-6 items-center py-4 overflow-x-auto no-scrollbar scroll-smooth"
+                            className="flex gap-6 items-center pl-10 py-4 overflow-x-auto no-scrollbar scroll-smooth"
                         >
                             {loading ? (
                                 Array(8).fill(0).map((_, i) => (

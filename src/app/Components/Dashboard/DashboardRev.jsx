@@ -8,6 +8,10 @@ import Council_highlight from '../Rendering_components/Council_highlight';
 import Partner_highlight from '../Rendering_components/Partner_highlight';
 import StudentStories from './StudentStories';
 import Stats from './Stats';
+// import GallerySection from './GallerySection';
+import ProgramsSection from './ProgramsSection';
+import StartupInventorySection from './StartupInventorySection';
+import StartupLogoCloud from './StartupLogoCloud';
 
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -390,8 +394,11 @@ export default function Index() {
       </section>
 
 
+      <ProgramsSection />
       <Incubated_startups_rendering />
+      <StartupInventorySection />
       <Incubated_venture_highlight />
+      <StartupLogoCloud />
 
       {/* Incubation Application Process */}
       <section className="bg-white py-16 relative overflow-hidden">
@@ -624,6 +631,7 @@ export default function Index() {
       </section>
 
 
+      {/* <GallerySection /> */}
       {/* Student Stories */}
       <section className="bg-white py-20">
         <div className="container mx-auto px-4">

@@ -211,7 +211,7 @@ const Navbar = () => {
             <a href="#" onClick={(e) => { e.preventDefault(); toggleDropdown('gallery'); }}>Gallery</a>
             <ul className="dropdown-menu">
               <li><a href="/Gallery/Photos" onClick={closeMenu}>Photo</a></li>
-              {/* <li><a href="/Gallery/Videos" onClick={closeMenu}>Videos</a></li> */}
+              <li><a href="/Gallery/Videos" onClick={closeMenu}>Videos</a></li>
             </ul>
           </li>
 
