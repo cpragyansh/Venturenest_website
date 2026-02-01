@@ -25,14 +25,17 @@ const StartupInventorySection = () => {
       <div className="container mx-auto px-6">
         {/* Compact Header */}
         <div className="text-center mb-8">
-           <div className="flex items-center justify-center space-x-4 mb-2">
+           {/* <div className="flex items-center justify-center space-x-4 mb-2">
               <div className="h-0.5 bg-[#9E0203] w-12"></div>
               <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px]">Inventory</span>
               <div className="h-0.5 bg-[#9E0203] w-12"></div>
-           </div>
-          <h2 className="text-[#1a1a1a] text-3xl md:text-5xl font-black uppercase tracking-tight">
+           </div> */}
+          <h2 className="text-[#1a1a1a] text-3xl md:text-3xl font-black uppercase tracking-tight">
             Venture Portfolio
           </h2>
+          <p className="text-gray-600 mt-4 text-md max-w-2xl mx-auto">
+            Discover the next generation of innovation. A curated selection of high-potential startups currently shaping the future of their industries.
+          </p>
         </div>
 
         {/* Efficient Layout: Split Image + Scrollable Table */}
@@ -54,7 +57,7 @@ const StartupInventorySection = () => {
           <div className="w-full lg:w-1/2 flex flex-col border border-gray-100 shadow-2xl bg-white overflow-hidden">
             {/* Sticky Table Header */}
             <div className="bg-[#9E0203] text-white flex items-center py-3 px-6 shadow-md z-20">
-              <span className="w-12 text-[10px] font-black uppercase tracking-widest border-r border-white/20 mr-4">#</span>
+              <span className="w-12 text-[10px] font-black uppercase tracking-widest border-r border-white/20 mr-4">Sr. No.</span>
               <span className="flex-1 text-[10px] font-black uppercase tracking-widest">Venture Identify</span>
               <span className="w-24 text-[10px] font-black uppercase tracking-widest text-right">Status</span>
             </div>

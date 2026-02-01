@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Close, ZoomIn, ZoomOut, RestartAlt } from "@mui/icons-material";
+import DomeGallery from '../ui/DomeGallery';
 import { Link } from 'react-router-dom';
 import "./global.css";
 import Mslider from '../MainSlider/Mslider';
@@ -15,6 +19,27 @@ import StartupLogoCloud from './StartupLogoCloud';
 
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [photos, setPhotos] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        const response = await axios.get("https://venture-nest-backend.onrender.com/photos");
+        const data = Array.isArray(response.data) ? response.data : [];
+        if (data.length > 0) {
+          let domePhotos = [...data];
+          while (domePhotos.length < 150) {
+            domePhotos = [...domePhotos, ...data];
+          }
+          setPhotos(domePhotos.slice(0, 150));
+        }
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      }
+    };
+    fetchPhotos();
+  }, []);
 
   // const startupLogos = [
   //   "1749710321866 - Aditya Raj Saxena.jpg",
@@ -155,12 +180,12 @@ export default function Index() {
                 
               </div>
 
-              <button className="bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-colors flex items-center space-x-2">
-                <span>Launch your Startup Now</span>
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <Link to="/IncubateWithUs" className="bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-all shadow-xl hover:shadow-2xl flex items-center space-x-3 w-fit group">
+                <span>Fuel Your Ambition Now</span>
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" className="group-hover:translate-x-1 transition-transform">
                   <path fillRule="evenodd" clipRule="evenodd" d="M22.731 12.0001L15.7662 18.9665L14.6334 17.8353L19.6686 12.8001L1.59976 12.8001L1.59976 11.2001L19.6686 11.2001L14.6334 6.16649L15.7662 5.03369L22.731 12.0001Z" />
                 </svg>
-              </button>
+              </Link>
             </div>
 
             {/* Right side would have an image */}
@@ -229,6 +254,12 @@ export default function Index() {
               <div className="flex items-center gap-4">
                 <div className="h-[2px] w-12 bg-brand-red"></div>
                 <span className="text-brand-dark text-xs font-black uppercase tracking-[0.2em] opacity-40">Impact Report 2024-26</span>
+              </div>
+
+              <div className="mt-12">
+                <Link to="/IncubateWithUs" className="inline-flex items-center space-x-4 group bg-brand-dark text-white px-8 py-4 rounded-xl font-bold uppercase text-sm hover:bg-black transition-all shadow-2xl">
+                  <span>Scale Your Impact →</span>
+                </Link>
               </div>
             </div>
 
@@ -306,7 +337,7 @@ export default function Index() {
       {/* Company Logos */}
 
       {/* Student Cards Section */}
-      <section className="bg-brand-red py-20">
+      <section className="bg-brand-red pt-20 pb-10">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -337,6 +368,11 @@ export default function Index() {
               </div>
             ))}
           </div>
+          <div className="flex flex-col md:flex-row justify-between items-end mt-4 mb-4 gap-8">
+            <Link to="/IncubateWithUs" className="bg-white text-brand-red px-8 py-4 rounded-full font-black uppercase text-sm hover:bg-black hover:text-white transition-all shadow-2xl flex items-center space-x-3">
+              <span>Join the Wall of Fame →</span>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -366,6 +402,12 @@ export default function Index() {
                 <p>
                   With state-of-the-art co-working spaces, dedicated research labs, and regular pitch events, VentureNest ensures that every startup has the resources they need to thrive. We are committed to fostering a culture of experimentation and risk-taking, empowering students to transform their groundbreaking ideas into viable, sustainable businesses.
                 </p>
+
+                <div className="pt-8">
+                  <Link to="/IncubateWithUs" className="bg-white text-brand-red px-10 py-4 rounded-full font-black uppercase text-sm hover:bg-black hover:text-white transition-all shadow-2xl inline-block">
+                    Unlock These Benefits →
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -536,12 +578,12 @@ export default function Index() {
             </div>
 
             <div className="text-center pt-16">
-              <button className="bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-all shadow-lg hover:shadow-xl flex items-center space-x-3 mx-auto">
-                <span>Start Your Application</span>
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <Link to="/IncubateWithUs" className="bg-brand-red text-white px-10 py-5 rounded-full font-black uppercase text-base hover:bg-brand-red-light transition-all shadow-2xl hover:shadow-[0_20px_40px_rgba(158,2,3,0.3)] flex items-center space-x-4 mx-auto w-fit group">
+                <span>Start Your Incubation Journey Hub</span>
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" className="group-hover:translate-x-2 transition-transform">
                   <path fillRule="evenodd" clipRule="evenodd" d="M22.731 12.0001L15.7662 18.9665L14.6334 17.8353L19.6686 12.8001L1.59976 12.8001L1.59976 11.2001L19.6686 11.2001L14.6334 6.16649L15.7662 5.03369L22.731 12.0001Z" />
                 </svg>
-              </button>
+              </Link>
             </div>
 
           </div>
@@ -578,9 +620,13 @@ export default function Index() {
               <h2 className="text-4xl md:text-5xl font-black font-jakarta mb-6 leading-[1.1]">
                 Pioneering Innovation<br />in North India
               </h2>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-16 font-medium max-w-lg">
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-10 font-medium max-w-lg">
                 VentureNest stands as a beacon for aspiring entrepreneurs, fostering a dynamic ecosystem of innovation and risk-taking. We are not just an incubator; we are a launchpad for the next generation of industry disruptors, providing unparalleled access to resources, mentorship, and capital.
               </p>
+
+              <Link to="/IncubateWithUs" className="bg-[#9E0203] text-white px-8 py-3 rounded-none font-black uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all mb-12 w-fit block border-b-4 border-black">
+                Ignite Your disruptive Vision →
+              </Link>
 
               {/* Stats Grid - 2x2 for 4 Metrics */}
               <div className="grid grid-cols-2 border-t border-dashed border-white/20 pt-10">
@@ -632,12 +678,99 @@ export default function Index() {
 
 
       {/* <GallerySection /> */}
+
+                  <div className="text-center pt-12 mb-12">
+                    <h3 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight uppercase">
+                      The Innovation <span className="text-brand-red">Catalog</span>
+                    </h3>
+                  </div>
+        
+                  <div className="space-y-4 mb-20">
+                    {/* Row 1: Left to Right */}
+                    <div className="relative overflow-hidden group">
+                      <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
+                        {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
+                          <div 
+                            key={idx} 
+                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                            onClick={() => setSelectedImage(photo)}
+                          >
+                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+        
+                    {/* Row 2: Right to Left */}
+                    <div className="relative overflow-hidden p-2 bg-[#9E0203] group">
+                      <div className="flex gap-4 animate-scroll-rtl hover:pause-scroll">
+                        {[...photos.slice(15, 30), ...photos.slice(15, 30)].map((photo, idx) => (
+                          <div 
+                            key={idx} 
+                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                            onClick={() => setSelectedImage(photo)}
+                          >
+                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="relative overflow-hidden bg-[#1A4480] p-2 group">
+                      <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
+                        {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
+                          <div 
+                            key={idx} 
+                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                            onClick={() => setSelectedImage(photo)}
+                          >
+                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+        
+                  <style>{`
+                    @keyframes scroll-ltr {
+                      0% { transform: translateX(-50%); }
+                      100% { transform: translateX(0); }
+                    }
+                    @keyframes scroll-rtl {
+                      0% { transform: translateX(0); }
+                      100% { transform: translateX(-50%); }
+                    }
+                    .animate-scroll-ltr {
+                      display: flex;
+                      width: max-content;
+                      animation: scroll-ltr 60s linear infinite;
+                    }
+                    .animate-scroll-rtl {
+                      display: flex;
+                      width: max-content;
+                      animation: scroll-rtl 70s linear infinite;
+                    }
+                    .hover\\:pause-scroll:hover {
+                      animation-play-state: paused;
+                    }
+                  `}</style>
+        
+        
+     
       {/* Student Stories */}
       <section className="bg-white py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-16">
             <span className="text-brand-red text-3xl md:text-5xl font-bold font-jakarta">Startup Success </span>
-            <span className="text-brand-dark text-3xl md:text-5xl font-bold font-jakarta">Stories</span>
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -666,6 +799,114 @@ export default function Index() {
             ))}</div>
         </div>
       </section>
+      
+
+      {/* Premium Image Modal (Global) */}
+      <AnimatePresence>
+        {selectedImage && (
+          <ModalContent
+            selectedImage={selectedImage}
+            closePopup={() => setSelectedImage(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
+
+// Extracted Modal Component (Consistent with Gallery Page)
+const ModalContent = ({ selectedImage, closePopup }) => {
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    setScale(1);
+  }, [selectedImage]);
+
+  const handleZoomIn = (e) => {
+    e.stopPropagation();
+    setScale(prev => Math.min(prev + 0.5, 4));
+  };
+
+  const handleZoomOut = (e) => {
+    e.stopPropagation();
+    setScale(prev => Math.max(prev - 0.5, 1));
+  };
+
+  const handleReset = (e) => {
+    e.stopPropagation();
+    setScale(1);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-12 pt-12"
+      onClick={closePopup}
+    >
+      <motion.button
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        onClick={closePopup}
+        className="absolute top-6 right-6 p-4 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all z-50 backdrop-blur-md border border-white/10 group"
+      >
+        <Close className="group-hover:rotate-90 transition-transform duration-300" />
+      </motion.button>
+
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="relative max-w-7xl w-full h-full flex flex-col items-center justify-center overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-lg border border-white/5 bg-[#0a0a0a]">
+          <motion.img
+            src={selectedImage.imageUrl}
+            alt={selectedImage.photoName}
+            className="max-h-full max-w-full object-contain"
+            animate={{ scale: scale }}
+            drag={scale > 1}
+            dragConstraints={{ left: -scale * 200, right: scale * 200, top: -scale * 200, bottom: scale * 200 }}
+            dragElastic={0.1}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            style={{ cursor: scale > 1 ? 'grab' : 'default' }}
+          />
+
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-black/50 backdrop-blur-md px-6 py-3 rounded-full border border-white/10 transition-opacity duration-300 pointer-events-auto z-50">
+            <button onClick={handleZoomOut} className="text-white hover:text-[#9E0203] disabled:opacity-50" disabled={scale <= 1}>
+              <ZoomOut />
+            </button>
+            <span className="text-white font-mono text-sm min-w-[3rem] text-center">{Math.round(scale * 100)}%</span>
+            <button onClick={handleZoomIn} className="text-white hover:text-[#9E0203] disabled:opacity-50" disabled={scale >= 4}>
+              <ZoomIn />
+            </button>
+            <div className="w-px h-4 bg-white/20 mx-2" />
+            <button onClick={handleReset} className="text-white hover:text-[#9E0203]" title="Reset">
+              <RestartAlt />
+            </button>
+          </div>
+
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent p-8 pt-24 text-white pointer-events-none z-40">
+            <motion.h3
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-3xl font-bold tracking-tight mb-2"
+            >
+              {selectedImage.photoName || "Untitled Capture"}
+            </motion.h3>
+            <div className="flex items-center gap-6">
+              <span className="text-sm text-gray-400 uppercase tracking-widest font-mono">
+                {scale > 1 ? "Drag to Pan" : "VentureNest Gallery"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};

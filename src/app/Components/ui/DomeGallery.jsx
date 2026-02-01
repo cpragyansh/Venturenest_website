@@ -87,7 +87,7 @@ export default function DomeGallery({
   const movedRef = useRef(false);
   const inertiaRAF = useRef(null);
   const lastDragEndAt = useRef(0);
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(2.0); // Initial zoom set to 'Zoomed In' as requested
 
   const items = useMemo(() => buildItems(images, segments), [images, segments]);
 
@@ -121,7 +121,7 @@ export default function DomeGallery({
           inertiaRAF.current = null;
           return;
         }
-        const nextX = clamp(rotationRef.current.x - vY / 100, -maxVerticalRotationDeg, maxVerticalRotationDeg);
+        const nextX = wrapAngleSigned(rotationRef.current.x - vY / 100);
         const nextY = wrapAngleSigned(rotationRef.current.y + vX / 100);
         rotationRef.current = { x: nextX, y: nextY };
         applyTransform(nextX, nextY);
@@ -151,11 +151,7 @@ export default function DomeGallery({
           movedRef.current = true;
         }
 
-        const nextX = clamp(
-          startRotRef.current.x - dyTotal / dragSensitivity,
-          -maxVerticalRotationDeg,
-          maxVerticalRotationDeg
-        );
+        const nextX = wrapAngleSigned(startRotRef.current.x - dyTotal / dragSensitivity);
         const nextY = wrapAngleSigned(startRotRef.current.y + dxTotal / dragSensitivity);
         
         rotationRef.current = { x: nextX, y: nextY };
