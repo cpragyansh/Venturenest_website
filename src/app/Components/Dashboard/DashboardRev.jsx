@@ -17,6 +17,8 @@ import ProgramsSection from './ProgramsSection';
 import StartupInventorySection from './StartupInventorySection';
 import StartupLogoCloud from './StartupLogoCloud';
 import Event from '../Event/Event';
+// import AboutPage from '../../about/page.jsx';
+// import ContactSection from '../../contact/page.jsx';
 
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -178,19 +180,19 @@ export default function Index() {
                 Welcome to CGC<br />Venturenest
               </h2>
               <h2 className="text-black text-xl md:text-2xl font-bold font-jakarta mb-6">
-                VentureNest is CGC University’s Technology Business Incubator, where ideas evolve into impactful startups.
+                VentureNest is CGC University, Mohali Technology Business Incubator, where ideas evolve into impactful startups.
               </h2>
 
               <div className="space-y-4 text-brand-dark text-lg leading-relaxed mb-8">
                 <p>
-                  VentureNest is the dedicated Technology Business Incubator (TBI) at CGC University, established to foster a culture of innovation, entrepreneurship, and startup excellence within the university ecosystem. It serves as a structured platform that enables students, faculty members, and aspiring entrepreneurs to convert innovative ideas into viable and scalable business ventures.
+                  VentureNest is the dedicated Technology Business Incubator (TBI) at CGC University,Mohali established to foster a culture of innovation, entrepreneurship, and startup excellence within the university ecosystem. It serves as a structured platform that enables students, faculty members, and aspiring entrepreneurs to convert innovative ideas into viable and scalable business ventures.
                 </p>
                 <p>
-                As a flagship initiative of CGC University, VentureNest provides a comprehensive support system including advanced infrastructure, structured incubation programs, expert mentorship, industry linkages, investor access, and policy guidance. The incubator actively supports technology-driven, knowledge-based, and social impact startups by offering end-to-end assistance from ideation and validation to product development, market entry, and scale-up.
+                  As a flagship initiative of CGC University, VentureNest provides a comprehensive support system including advanced infrastructure, structured incubation programs, expert mentorship, industry linkages, investor access, and policy guidance. The incubator actively supports technology-driven, knowledge-based, and social impact startups by offering end-to-end assistance from ideation and validation to product development, market entry, and scale-up.
                 </p>
-               
 
-                
+
+
               </div>
 
               <Link to="/IncubateWithUs" className="bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-all shadow-xl hover:shadow-2xl flex items-center space-x-3 w-fit group">
@@ -207,7 +209,11 @@ export default function Index() {
         </div>
       </section>
 
-            <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
+      {/* <div id="about-detailed">
+        <AboutPage />
+      </div> */}
+
+      <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-4 mb-8 text-center">
           {/* <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span> */}
           <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Our Government Partners </h3>
@@ -259,11 +265,11 @@ export default function Index() {
               <p className="text-brand-dark/80 text-lg leading-relaxed mb-6 font-medium">
                 Driven by the vision of <span className="text-brand-red font-bold">“Each One, One Innovation Journey”</span>, CGC University Mohali’s Technology Business Incubator (TBI) – Venture Nest empowers students and startups with funding, mentorship, and industry exposure.
               </p>
-              
+
               <p className="text-brand-dark/70 text-base leading-relaxed mb-10">
                 We transform innovative ideas into scalable ventures by providing a robust ecosystem that bridges the gap between academia and industry. Our commitment goes beyond just starting up; we focus on sustainable growth, long-term success, and creating a lasting impact in the global startup landscape.
               </p>
-              
+
               <div className="flex items-center gap-4">
                 <div className="h-[2px] w-12 bg-brand-red"></div>
                 <span className="text-brand-dark text-xs font-black uppercase tracking-[0.2em] opacity-40">Impact Report 2024-26</span>
@@ -338,14 +344,18 @@ export default function Index() {
           </div>
         </div>
       </section>
-      
-      <Council_highlight />
+
+      <div id="council">
+        <Council_highlight />
+      </div>
 
       <section className="py-0">
         <Stats />
       </section>
 
-      <Partner_highlight />
+      <div id="partners">
+        <Partner_highlight />
+      </div>
 
       {/* Company Logos */}
 
@@ -470,10 +480,10 @@ export default function Index() {
           <div className="lg:w-1/2 p-8 md:p-16 lg:p-24 relative flex flex-col justify-center text-white">
             {/* Background Image with 20% Transparency */}
             <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-              <img 
+              <img
                 // src="/assets/5.jpg" 
-                src="https://www.cgcuniversity.in/frontend/images/campus-facilities/campus-img.webp" 
-                alt="Institute Background" 
+                src="https://www.cgcuniversity.in/frontend/images/campus-facilities/campus-img.webp"
+                alt="Institute Background"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -540,9 +550,9 @@ export default function Index() {
 
           {/* Right Side: Student Image (Swapped) */}
           <div className="lg:w-1/2 relative min-h-[400px]">
-            <img 
-              src="https://i.ibb.co/mCYRQhGq/prbx77.jpg" 
-              alt="CGC Student" 
+            <img
+              src="https://i.ibb.co/mCYRQhGq/prbx77.jpg"
+              alt="CGC Student"
               className="absolute inset-0 w-full h-full py-4 object-cover"
             />
           </div>
@@ -552,68 +562,68 @@ export default function Index() {
 
       {/* <GallerySection /> */}
 
-                  <div id="gallery" className="text-center pt-12 mb-12">
-                    <h3 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight uppercase">
-                      The Innovation <span className="text-brand-red">Catalog</span>
-                    </h3>
-                  </div>
-        
-                  <div className="space-y-4 mb-20">
-                    {/* Row 1: Left to Right */}
-                    <div className="relative overflow-hidden group">
-                      <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
-                        {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
-                          <div 
-                            key={idx} 
-                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
-                            onClick={() => setSelectedImage(photo)}
-                          >
-                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-        
-                    {/* Row 2: Right to Left */}
-                    <div className="relative overflow-hidden p-2 bg-[#9E0203] group">
-                      <div className="flex gap-4 animate-scroll-rtl hover:pause-scroll">
-                        {[...photos.slice(15, 30), ...photos.slice(15, 30)].map((photo, idx) => (
-                          <div 
-                            key={idx} 
-                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
-                            onClick={() => setSelectedImage(photo)}
-                          >
-                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="relative overflow-hidden bg-[#1A4480] p-2 group">
-                      <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
-                        {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
-                          <div 
-                            key={idx} 
-                            className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
-                            onClick={() => setSelectedImage(photo)}
-                          >
-                            <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                              <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-        
-                  <style>{`
+      <div id="gallery" className="text-center pt-12 mb-12">
+        <h3 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight uppercase">
+          The Innovation <span className="text-brand-red">Catalog</span>
+        </h3>
+      </div>
+
+      <div className="space-y-4 mb-20">
+        {/* Row 1: Left to Right */}
+        <div className="relative overflow-hidden group">
+          <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
+            {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
+              <div
+                key={idx}
+                className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                onClick={() => setSelectedImage(photo)}
+              >
+                <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                  <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 2: Right to Left */}
+        <div className="relative overflow-hidden p-2 bg-[#9E0203] group">
+          <div className="flex gap-4 animate-scroll-rtl hover:pause-scroll">
+            {[...photos.slice(15, 30), ...photos.slice(15, 30)].map((photo, idx) => (
+              <div
+                key={idx}
+                className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                onClick={() => setSelectedImage(photo)}
+              >
+                <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                  <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative overflow-hidden bg-[#1A4480] p-2 group">
+          <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll">
+            {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
+              <div
+                key={idx}
+                className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                onClick={() => setSelectedImage(photo)}
+              >
+                <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                  <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
                     @keyframes scroll-ltr {
                       0% { transform: translateX(-50%); }
                       100% { transform: translateX(0); }
@@ -636,18 +646,18 @@ export default function Index() {
                       animation-play-state: paused;
                     }
                   `}</style>
-        
-        
-     
+
+
+
       {/* Incubation Application Process */}
       <section id="process" className="bg-white py-16 relative overflow-hidden">
         {/* World Map Background with Low Opacity */}
         <div className="absolute inset-0 opacity-[0.1] pointer-events-none flex items-center justify-center overflow-hidden">
-           <img 
-             src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" 
-             alt="World Map Background" 
-             className="w-full opacity-60"
-           />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
+            alt="World Map Background"
+            className="w-full opacity-60"
+          />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -665,26 +675,26 @@ export default function Index() {
             <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -translate-y-1/2 hidden md:block"></div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-              
+
               {/* Step 1: Online Application (Label BOTTOM) */}
               <div className="flex flex-col items-center group">
                 <div className="h-32 flex items-end justify-center mb-6 hidden md:flex">
-                   {/* Spacing for TOP content in other columns */}
+                  {/* Spacing for TOP content in other columns */}
                 </div>
-                
+
                 {/* Circle */}
                 <div className="relative">
-                   <div className="w-32 h-32 rounded-full bg-brand-red shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
-                      <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                         <polyline points="14 2 14 8 20 8"></polyline>
-                         <line x1="16" y1="13" x2="8" y2="13"></line>
-                         <line x1="16" y1="17" x2="8" y2="17"></line>
-                         <polyline points="10 9 9 9 8 9"></polyline>
-                      </svg>
-                   </div>
-                   {/* Line down to text */}
-                   <div className="absolute top-full left-1/2 -translate-x-1/2 h-6 w-px bg-gray-300"></div>
+                  <div className="w-32 h-32 rounded-full bg-brand-red shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
+                    <svg className="translate-y-1" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="16" y1="13" x2="8" y2="13"></line>
+                      <line x1="16" y1="17" x2="8" y2="17"></line>
+                      <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                  </div>
+                  {/* Line down to text */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 h-6 w-px bg-gray-300"></div>
                 </div>
 
                 <div className="mt-8 text-center max-w-[200px]">
@@ -698,7 +708,7 @@ export default function Index() {
               {/* Step 2: Screening (Label TOP) */}
               <div className="flex flex-col-reverse md:flex-col items-center group">
                 {/* Label Top Content */}
-                <div className="-mt-8 text-center max-w-[200px] relative">
+                <div className="mt-6 md:mt-0 md:mb-8 text-center max-w-[200px] relative">
                   <h3 className="text-brand-red text-lg font-black mb-2">Initial Screening</h3>
                   <p className="text-gray-500 text-xs leading-relaxed font-medium">
                     Our expert panel evaluates your submission based on the strength of your idea, team synergy, and market readiness.
@@ -709,16 +719,16 @@ export default function Index() {
 
                 {/* Circle */}
                 <div className="relative mt-8 md:mt-0">
-                   <div className="w-32 h-32 rounded-full bg-gray-800 border-2 border-dashed border-gray-600 shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
-                      <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                         <circle cx="11" cy="11" r="8"></circle>
-                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                   </div>
+                  <div className="w-32 h-32 rounded-full bg-gray-800 border-2 border-dashed border-gray-600 shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
+                    <svg className="translate-y-1" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                  </div>
                 </div>
 
                 <div className="h-32 hidden md:block">
-                   {/* Spacing for BOTTOM content in other columns */}
+                  {/* Spacing for BOTTOM content in other columns */}
                 </div>
               </div>
 
@@ -726,18 +736,18 @@ export default function Index() {
               <div className="flex flex-col items-center group">
                 <div className="h-32 flex items-end justify-center mb-6 hidden md:flex">
                 </div>
-                
+
                 {/* Circle */}
                 <div className="relative">
-                   <div className="w-32 h-32 rounded-full bg-brand-red shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
-                      <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                         <circle cx="9" cy="7" r="4"></circle>
-                         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                      </svg>
-                   </div>
-                   <div className="absolute top-full left-1/2 -translate-x-1/2 h-6 w-px bg-gray-300"></div>
+                  <div className="w-32 h-32 rounded-full bg-brand-red shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
+                    <svg className="translate-y-1" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                  </div>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 h-6 w-px bg-gray-300"></div>
                 </div>
 
                 <div className="mt-8 text-center max-w-[200px]">
@@ -750,7 +760,7 @@ export default function Index() {
 
               {/* Step 4: Onboarding (Label TOP) */}
               <div className="flex flex-col-reverse md:flex-col items-center group">
-                <div className="-mt-8 text-center max-w-[200px] relative">
+                <div className="mt-6 md:mt-0 md:mb-8 text-center max-w-[200px] relative">
                   <h3 className="text-brand-red text-lg font-black mb-2">Onboarding</h3>
                   <p className="text-gray-500 text-xs leading-relaxed font-medium">
                     Selected startups are onboarded into our ecosystem, gaining access to tailored mentorship and strategic resources.
@@ -760,12 +770,12 @@ export default function Index() {
 
                 {/* Circle */}
                 <div className="relative mt-8 md:mt-0">
-                   <div className="w-32 h-32 rounded-full bg-gray-800 border-2 border-dashed border-gray-600 shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
-                      <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                      </svg>
-                   </div>
+                  <div className="w-32 h-32 rounded-full bg-gray-800 border-2 border-dashed border-gray-600 shadow-xl flex items-center justify-center z-10 relative transform group-hover:scale-110 transition-transform duration-500">
+                    <svg className="translate-y-1" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                  </div>
                 </div>
 
                 <div className="h-32 hidden md:block">
@@ -820,7 +830,11 @@ export default function Index() {
             ))}</div>
         </div>
       </section>
-      
+
+      {/* <div id="contact-us">
+        <ContactSection />
+      </div> */}
+
 
       {/* Premium Image Modal (Global) */}
       <AnimatePresence>

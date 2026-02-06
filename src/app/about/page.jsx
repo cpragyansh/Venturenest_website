@@ -29,7 +29,7 @@ const LeadershipCard = ({ leader, index }) => {
       {/* Content Section - Compact Height */}
       <div className="relative min-h-[320px] flex items-center">
         {/* The Colored Container - Scaled to 80% */}
-        <div 
+        <div
           className={`absolute top-0 bottom-0 ${isEven ? 'left-0' : 'right-0'} w-[80%] ${bgColor} z-0 shadow-xl`}
         ></div>
 
@@ -41,13 +41,13 @@ const LeadershipCard = ({ leader, index }) => {
                 <span className="text-2xl font-black mr-1">{leader.quote}</span> {leader.desc}
               </p>
             </div>
-            
+
             {/* Image Side - Perfectly Scaled */}
             <div className={`w-full md:w-2/5 flex ${isEven ? 'justify-end' : 'justify-start'}`}>
               <div className="relative w-full h-[350px] md:h-[400px] overflow-visible">
-                <img 
-                  src={leader.image} 
-                  alt={leader.name} 
+                <img
+                  src={leader.image}
+                  alt={leader.name}
                   className={`absolute bottom-[-10px] ${isEven ? 'right-0' : 'left-0'} h-[105%] w-auto object-contain max-w-none transform ${isEven ? 'translate-x-[5%]' : 'translate-x-[-5%]'}`}
                 />
               </div>
@@ -64,7 +64,7 @@ const FeatureSection = ({ feature, index }) => {
   // Use slightly different colors but same logic as leadership
   const bgColors = ["bg-[#9E0203]", "bg-black", "bg-[#003366]", "bg-[#333333]"];
   const bgColor = bgColors[index % 4];
-  
+
   return (
     <div className="relative mb-24">
       {/* Title Section with Red Bar (Black if red bg) */}
@@ -86,7 +86,7 @@ const FeatureSection = ({ feature, index }) => {
 
       {/* Content Section */}
       <div className="relative min-h-[300px] flex items-center">
-        <div 
+        <div
           className={`absolute top-0 bottom-0 ${isEven ? 'left-0' : 'right-0'} w-[85%] ${bgColor} z-0 shadow-xl`}
         ></div>
 
@@ -94,25 +94,25 @@ const FeatureSection = ({ feature, index }) => {
           <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
             {/* Text Side */}
             <div className={`w-full md:w-3/5 py-10 ${isEven ? 'md:pr-12' : 'md:pl-12'} text-white`}>
-               <div className="mb-4">
-                  <div className={`w-10 h-10 flex items-center justify-center font-bold bg-white text-black rounded-full shadow-lg`}>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" /></svg>
-                  </div>
-               </div>
-               <p className="text-base md:text-xl leading-relaxed font-medium">
-                  {feature.desc}
-               </p>
-               <div className="mt-4 pt-4 border-t border-white/20">
-                  <span className="font-black uppercase tracking-widest text-xs opacity-80">{feature.stats}</span>
-               </div>
+              <div className="mb-4">
+                <div className={`w-10 h-10 flex items-center justify-center font-bold bg-white text-black rounded-full shadow-lg`}>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" /></svg>
+                </div>
+              </div>
+              <p className="text-base md:text-xl leading-relaxed font-medium">
+                {feature.desc}
+              </p>
+              <div className="mt-4 pt-4 border-t border-white/20">
+                <span className="font-black uppercase tracking-widest text-xs opacity-80">{feature.stats}</span>
+              </div>
             </div>
-            
+
             {/* Image Side */}
             <div className={`w-full md:w-2/5 flex ${isEven ? 'justify-end' : 'justify-start'}`}>
               <div className="relative w-full h-[280px] md:h-[320px] overflow-visible">
-                <img 
-                  src={feature.image} 
-                  alt={feature.title} 
+                <img
+                  src={feature.image}
+                  alt={feature.title}
                   className={`absolute bottom-[-10px] ${isEven ? 'right-0' : 'left-0'} h-[110%] w-auto object-contain max-w-none transform ${isEven ? 'translate-x-[5%]' : 'translate-x-[5%]'} rounded-lg shadow-2xl`}
                 />
               </div>
@@ -180,7 +180,7 @@ export default function AboutPage() {
           <span className="text-[#9E0203] font-black uppercase tracking-[0.3em] text-[10px] block mb-2">Our Visionaries</span>
           <h2 className="text-4xl md:text-5xl font-black font-jakarta text-black uppercase tracking-tighter border-b-4 border-black inline-block pb-2">The Leadership</h2>
         </div>
-        
+
         <div className="space-y-24">
           {leadershipData.map((leader, index) => (
             <LeadershipCard key={index} leader={leader} index={index} />
@@ -191,10 +191,10 @@ export default function AboutPage() {
       {/* Features Section - Matches Leadership Layout */}
       <section className="bg-white py-20">
         <div className="container mx-auto px-4 text-center mb-20">
-             <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px] block mb-2">The Venturenest Advantage</span>
-             <h2 className="text-4xl md:text-6xl font-black font-jakarta text-black tracking-tighter uppercase leading-none border-b-4 border-black inline-block pb-2">Why Choose Us?</h2>
+          <span className="text-[#9E0203] font-black uppercase tracking-[0.4em] text-[10px] block mb-2">The Venturenest Advantage</span>
+          <h2 className="text-4xl md:text-6xl font-black font-jakarta text-black tracking-tighter uppercase leading-none border-b-4 border-black inline-block pb-2">Why Choose Us?</h2>
         </div>
-        
+
         <div className="space-y-32">
           {features.map((feature, index) => (
             <FeatureSection key={index} feature={feature} index={index} />
