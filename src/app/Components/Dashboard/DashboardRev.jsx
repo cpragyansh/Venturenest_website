@@ -87,9 +87,11 @@ export default function Index() {
     "CII.jpeg",
   ];
   const studentNames = [
+    { "FounderName": "Pulkesh Gautam", "StartupName": "Vidyutam Verde NCESOL Pvt. Ltd.", "Story": "The networking opportunities at VentureNest helped us secure our first three major clients. It's the perfect launchpad for digital ventures." },
+    { "FounderName": "Navneet Yaduvanshi", "StartupName": "Aasyra", "Story": "From lab access to market connect, VentureNest supported our organic product journey every step of the way. Truly a transformative experience." },
     { "FounderName": "Mr. RAJAT SONI", "StartupName": "V2R AUTOINFINITE PRIVATE LIMITED", "Story": "At V2R, we’re not just disrupting the automotive sector; we’re revolutionizing it. Our mission is to empower both vehicle owners and automotive service businesses through advanced, technology-driven solutions that streamline operations, enhance efficiency, and drive sustainable growth." },
-    { "FounderName": "Mr. Akash Shrivastava", "StartupName": "Lorro Digital Pvt. Ltd.", "Story": "The networking opportunities at VentureNest helped us secure our first three major clients. It's the perfect launchpad for digital ventures." },
-    { "FounderName": "Mr. Vishal", "StartupName": "Jagdev Organics Pvt Ltd", "Story": "From lab access to market connect, VentureNest supported our organic product journey every step of the way. Truly a transformative experience." },
+    // { , "Story": "The networking opportunities at VentureNest helped us secure our first three major clients. It's the perfect launchpad for digital ventures." },
+    // { , "Story": "From lab access to market connect, VentureNest supported our organic product journey every step of the way. Truly a transformative experience." },
     { "FounderName": "Mr Harrish Babber", "StartupName": "Escapekar", "Story": "Escapekar is a travel guidance platform that helps people become better travelers—from exploring and planning to taking a trip. Travelers across the globe use the Escapekar app to discover hidden places, find where to stay, what to do, and where to eat—all recommended by an algorithm that selects the best options for them." },
     { "FounderName": "Mr. Narinder Singh", "StartupName": "Nhanks Waste Recyclers Pvt.Ltd", "Story": "Sustainable solutions need specialized support. VentureNest's focus on social impact startups gave us the push we needed." },
     { "FounderName": "Mr Karan Kumar Aggrawal", "StartupName": "Indi Tech", "Story": "The technical mentorship here is unmatched. We scaled our tech stack and team efficiently under the guidance of industry experts." },
@@ -113,12 +115,12 @@ export default function Index() {
     { "FounderName": "Mr. Pulkesh Gautam", "StartupName": "Kakumei" },
     { "FounderName": "Mr. Gurwant Singh", "StartupName": "B.G. Innovatech Pvt. Ltd." },
     { "FounderName": "Iresh Kumar Singla", "StartupName": "Apna Mandir" },
-    { "FounderName": "Pulkesh Gautam", "StartupName": "Vidyutam Verde NCESOL Pvt. Ltd." },
+    { "FounderName": "Mr. Akash Shrivastava", "StartupName": "Lorro Digital Pvt. Ltd." },
     { "FounderName": "Nripen Kumar", "StartupName": "Neuralink" },
     { "FounderName": "Mr. Aditya Raj Saxena", "StartupName": "ANTHRONEX" },
     { "FounderName": "Rishi Raj Dutta", "StartupName": "Aastra" },
     { "FounderName": "Jaskaran Singh", "StartupName": "HIKK" },
-    { "FounderName": "Navneet Yaduvanshi", "StartupName": "Aasyra" },
+    { "FounderName": "Mr. Vishal", "StartupName": "Jagdev Organics Pvt Ltd" },
     { "FounderName": "Dr. Varsha Grover", "StartupName": "NA(Healing Waves)" },
     { "FounderName": "Mr. Parag Shrivastava", "StartupName": "Tech-She" },
     { "FounderName": "Mr. Pranshu", "StartupName": "Defenciq Tech" },
@@ -287,7 +289,7 @@ export default function Index() {
               {/* Funding Stat - Line Chart Style */}
               <div className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden relative group">
                 <div className="relative z-10">
-                  <div className="text-brand-red text-4xl font-black mb-1">1.5 Cr+</div>
+                  <div className="text-brand-red text-6xl font-black mb-1">1.5 Cr+</div>
                   <div className="text-brand-dark text-[16px] font-bold uppercase tracking-wider opacity-60">Grants Raised</div>
                 </div>
                 {/* Mini Sparkline SVG */}
@@ -307,7 +309,7 @@ export default function Index() {
               {/* Startups Stat - Progress Circle Style */}
               <div className="bg-brand-red p-6 rounded-[16px] shadow-lg hover:shadow-red-200/50 transition-all duration-500 flex flex-col justify-between overflow-hidden relative group">
                 <div className="relative z-10">
-                  <div className="text-white text-4xl font-black mb-1">100+</div>
+                  <div className="text-white text-6xl font-black mb-1">100+</div>
                   <div className="text-white/80 text-[16px] font-bold uppercase tracking-wider">Startups Incubated</div>
                 </div>
                 <div className="mt-4 w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin-slow"></div>
@@ -317,7 +319,7 @@ export default function Index() {
               {/* Patents Stat - Bar Graph Style */}
               <div className="bg-gray-50 p-6 rounded-[32px] border border-gray-200 hover:border-brand-red transition-all duration-500 flex flex-col justify-between group">
                 <div>
-                  <div className="text-brand-red text-4xl font-black mb-1">1000+</div>
+                  <div className="text-brand-red text-6xl font-black mb-1">2000+</div>
                   <div className="text-brand-dark text-[16px] font-bold uppercase tracking-wider opacity-60">Patents Filed</div>
                 </div>
                 <div className="flex items-end gap-1 h-12 mt-4">
@@ -330,7 +332,7 @@ export default function Index() {
               {/* Unicorns Stat - Impact Style */}
               <div className="bg-brand-dark p-6 rounded-[32px] shadow-2xl transition-all duration-500 flex flex-col items-center justify-center text-center relative overflow-hidden group">
                 <div className="relative z-10">
-                  <div className="text-white text-4xl font-black mb-1 group-hover:scale-110 transition-transform">10+</div>
+                  <div className="text-white text-6xl font-black mb-1 group-hover:scale-110 transition-transform">10+</div>
                   <div className="text-brand-red text-[16px] font-black uppercase tracking-widest">Unicorn Ventures</div>
                 </div>
                 {/* Decorative particles */}
@@ -367,7 +369,7 @@ export default function Index() {
               { name: 'Shivang Tiwari', company: 'Techealth Apex Private Limited', package: '3 Lakhs', image: '/assets/success-1.jpeg', logo: '/assets/Start-up-logos/Techealth_logo - TecHealth.PNG' },
               { name: 'Pulkesh Gautam', company: 'Vidyutam Verde', package: '3 Lakhs', image: '/assets/pulkesh_img.jpg', logo: '/assets/pulkesh_logo-Photoroom.png' },
               { name: 'Ashish Chabra', company: 'EDS Wagon Tech', package: '3 Lakhs', image: '/assets/eds wagon.jpg', logo: '/assets/eds_logo.webp' },
-              { name: 'Anmol Bhateja', company: 'escapekar ', package: '3 Lakhs', image: '/assets/escapekar.jpg', logo: '/assets/escapekar_logo.png' },
+              { name: 'Harrish Babbar', company: 'escapekar ', package: '3 Lakhs', image: '/assets/escapekar.jpg', logo: '/assets/escapekar_logo.png' },
               // { name: 'Simran Saini', company: 'Autodesk', package: '33 LPA', image: '/assets/success-4.jpeg', logo: '/assets/autodesk.png' },
             ].map((student, idx) => (
               // Increase the Size of the Logos
@@ -806,18 +808,18 @@ export default function Index() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {studentNames.slice(0, 8).map((student, idx) => (
-              <div key={idx} className="bg-gray-100 p-8 relative">
+              <div key={idx} className="bg-gray-100 p-8 relative flex flex-col h-full rounded-2xl">
                 <svg className="absolute top-8 left-8 w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 40 40">
                   <path fillRule="evenodd" clipRule="evenodd" d="M14.8665 30.824C13.1838 31.368 11.2425 31.3573 9.65584 30.544C5.99184 28.6613 4.40517 23.808 5.87984 18.6666C6.54117 16.36 7.7065 14.12 10.1705 11.8613C12.6345 9.59998 16.0532 8.26665 17.6372 8.26665C17.7705 8.26453 17.9029 8.28874 18.0268 8.33788C18.1507 8.38702 18.2637 8.46014 18.3594 8.55304C18.455 8.64593 18.5313 8.75678 18.584 8.87924C18.6367 9.00169 18.6648 9.13334 18.6665 9.26665C18.6665 9.81865 18.1972 10.2666 17.6372 10.2666C15.8265 10.2666 14.2078 11.2533 12.2905 12.704C10.8238 13.816 9.67717 15.2373 9.04517 16.4746C7.83184 18.8426 7.79184 22.1813 9.75183 23.0693C10.2069 22.5528 10.7677 22.1403 11.3962 21.8596C12.0247 21.579 12.7062 21.4367 13.3945 21.4426C16.5945 21.4426 18.4798 24.016 18.3972 26.3466C18.3198 28.5733 16.9038 30.16 14.8665 30.824ZM30.8665 30.824C29.1838 31.368 27.2425 31.3573 25.6558 30.544C21.9918 28.6613 20.4052 23.808 21.8798 18.6666C22.5412 16.36 23.7065 14.12 26.1705 11.8613C28.6345 9.59998 32.0532 8.26665 33.6372 8.26665C33.7705 8.26453 33.9029 8.28874 34.0268 8.33788C34.1507 8.38702 34.2637 8.46014 34.3594 8.55304C34.455 8.64593 34.5313 8.75678 34.584 8.87924C34.6367 9.00169 34.6648 9.13334 34.6665 9.26665C34.6665 9.81865 34.1972 10.2666 33.6372 10.2666C31.8265 10.2666 30.2078 11.2533 28.2905 12.704C26.8238 13.816 25.6772 15.2373 25.0452 16.4746C23.8318 18.8426 23.7918 22.1813 25.7518 23.0693C26.6932 22.04 27.9225 21.4426 29.3945 21.4426C32.5945 21.4426 34.4798 24.016 34.3972 26.3466C34.3198 28.5733 32.9038 30.16 30.8665 30.824Z" fillOpacity="0.4" />
                 </svg>
 
-                <div className="mt-16 mb-6">
+                <div className="mt-16 mb-6 flex-1">
                   <p className="text-brand-dark leading-relaxed">
-                    "{student.Story}"
+                    "{student.Story || "Being part of VentureNest has been a game-changer for our startup journey. The support system here is unparalleled."}"
                   </p>
                 </div>
 
-                <div className="flex items-center space-x-4 pt-6 border-t border-gray-400">
+                <div className="flex items-center space-x-4 pt-6 border-t border-gray-400 mt-auto">
                   <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-gray-600">
                     {student.FounderName.charAt(0)}
                   </div>

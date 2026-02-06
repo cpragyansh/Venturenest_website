@@ -124,8 +124,8 @@ export default function IncubatedStartupsPage() {
       {/* 2. PORTFOLIO INSIGHTS - Signature Blocks */}
       <section className="grid grid-cols-1 md:grid-cols-3">
          <StatBlock number="100+" label="Ventures" desc="Active Incubated Startups" color="red" />
-         <StatBlock number="1000+" label="Patents" desc="Patents Published Successfully" color="navy" />
-         <StatBlock number="26.5 Lakh+" label="Funding" desc="Total Ecosystem Capital Raised" color="red" />
+         <StatBlock number="2000+" label="Patents" desc="Patents Published Successfully" color="navy" />
+         <StatBlock number="1.5 Crore+" label="Grants Raised" desc="Total Ecosystem Grants Raised" color="red" />
       </section>
 
       {/* 3. LOGO CLOUD - Premium Slider */}

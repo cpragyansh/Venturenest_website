@@ -45,7 +45,7 @@ const StartupInventorySection = () => {
             <img 
               src="/assets/incubated_hero.png" 
               alt="Incubated Ventures" 
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              className="w-full h-full object-cover transition-all duration-700"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-md p-4 flex justify-between items-center">
                <span className="text-white text-xs font-black uppercase tracking-widest">Ecosystem Labs</span>
