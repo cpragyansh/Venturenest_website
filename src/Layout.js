@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Helmet } from 'react-helmet';
-import Navbar from './app/Components/Navbar/Navbar';
+// import Navbar from './app/Components/Navbar/Navbar';
 import Footer from './app/Components/Footer/Footer';
 import ClickSpark from './app/Components/ui/ClickSpark';
 // import Sub_Navbar from './app/Components/Sub_navbar/Subnavbar';
@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
     >
       <div>
         {/* <Sub_Navbar/> */}
-        < Navbar />
+        {/* < Navbar /> */}
         {children}
         {/* <Connect /> */}
         <Footer />
