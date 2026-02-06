@@ -7,9 +7,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+
 // --- Design System Tokens ---
-const BRAND_RED = "#9E0203";
-const BRAND_NAVY = "#003366";
 
 const logos = [
   "/assets/Start-up-logos/5(3 - Karan Agrawal.png",
@@ -54,7 +53,7 @@ export default function IncubatedStartupsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://venture-nest-backend.onrender.com/getstartup');
+const response = await axios.get((window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in') + '/getstartup');
         setData(response.data);
         setFilteredData(response.data);
       } catch (error) {
@@ -251,4 +250,3 @@ export default function IncubatedStartupsPage() {
     </div>
   );
 }
-

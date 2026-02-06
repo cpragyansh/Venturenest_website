@@ -11,7 +11,7 @@ const StatBlock = ({ number, label, desc, color }) => (
     </div>
   </div>
 );
-function Incubated_startups_rendering() {
+function IncubatedStartupsRendering() {
     return (
         <div>
             <section className="relative bg-black py-24 md:py-32 overflow-hidden border-b-[12px] border-[#9E0203]">
@@ -65,4 +65,4 @@ function Incubated_startups_rendering() {
     )
 }
 
-export default Incubated_startups_rendering
+export default IncubatedStartupsRendering

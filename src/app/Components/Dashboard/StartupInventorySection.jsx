@@ -9,7 +9,7 @@ const StartupInventorySection = () => {
   useEffect(() => {
     const fetchStartups = async () => {
       try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/getstartup");
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/getstartup');
         setStartups(response.data);
       } catch (error) {
         console.error("Error fetching startups:", error);

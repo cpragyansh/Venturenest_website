@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import axios from 'axios';
 
-const Partner_highlight = () => {
+const PartnerHighlight = () => {
     const categories = useMemo(() => [
         { id: 'accelerator', label: 'Accelerator', desc: 'Accelerating growth through mentorship and capital.' },
         { id: 'investor', label: 'Investment', desc: 'Direct funding and strategic investment networks.' },
@@ -268,4 +268,4 @@ const Partner_highlight = () => {
     );
 };
 
-export default Partner_highlight;
+export default PartnerHighlight;

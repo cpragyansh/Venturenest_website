@@ -10,7 +10,7 @@ export default function EcosystemPartners() {
   useEffect(() => {
     const fetchPartners = async () => {
       try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/getpartner?category=ecosystem");
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in')) + '/getpartner?category=ecosystem');
         setPartners(response.data);
       } catch (err) {
         console.error("Error fetching partners:", err);

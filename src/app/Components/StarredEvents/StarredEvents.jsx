@@ -29,7 +29,7 @@ const StarredEvents = () => {
   useEffect(() => {
     const fetchStarredEvents = async () => {
       try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/starred-events");
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/starred-events');
         setEvents(response.data);
       } catch (error) {
         console.error("Error fetching starred events:", error);

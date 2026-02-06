@@ -1,11 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 export default function GovCatalyst() {
   const [partners, setPartners] = useState([]);
@@ -16,7 +11,7 @@ export default function GovCatalyst() {
     // Fetch investor partners from backend
     const fetchPartners = async () => {
       try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/getpartner?category=government");
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in')) + '/getpartner?category=government');
         setPartners(response.data);
       } catch (err) {
         console.error("Error fetching partners:", err);

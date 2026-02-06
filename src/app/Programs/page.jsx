@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 // --- Design System Utilities ---
-const BRAND_RED = "#9E0203";
 
 const ProgramCard = ({ program, index }) => {
   const createSlug = (name) => {
@@ -192,7 +191,7 @@ export default function ProgramsPage() {
   useEffect(() => {
     const fetchPrograms = async () => {
       try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/programs");
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in')) + '/programs');
         setPrograms(response.data);
       } catch (error) {
         console.error("Error fetching programs:", error);

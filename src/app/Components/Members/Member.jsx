@@ -11,18 +11,15 @@ const categories = ["CEO", "President", "Vice President","Secretary", "Advisor",
 
 export default function Member() {
   const [teamData, setTeamData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await fetch("https://venture-nest-backend.onrender.com/api/team"); // ⬅️ Use your deployed backend URL
+        const response = await fetch((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/api/team'); // ⬅️ Use your deployed backend URL
         const data = await response.json();
         setTeamData(data);
       } catch (error) {
         console.error("Error fetching team members:", error);
-      } finally {
-        setLoading(false);
       }
     };
 

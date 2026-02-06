@@ -57,11 +57,11 @@ const Stats = () => {
                   </h3>
                   <p className="text-xs text-black/60 font-bold leading-normal mb-10 uppercase tracking-widest">
                   {/* How many patents have been filed by Venturenest */}
-                  Venturenest has scaled Patents from 50+ in 2024 to a monumental 1000+ Patents targeted in 2026.
+                  Venturenest has scaled Patents from 50+ in 2024 to a monumental 2000+ Patents targeted in 2026.
                   </p>
                 </div>
                 <div className="flex items-baseline gap-4">
-                  <div className="text-[#9E0203] text-6xl font-black">1000+</div>
+                  <div className="text-[#9E0203] text-6xl font-black">2000+</div>
                   <div className="text-[#1a1a1a] text-xl font-black uppercase">Patents Filed</div>
                 </div>
               </motion.div>

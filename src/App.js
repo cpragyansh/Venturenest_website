@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import './App.css';
 import { Route, Routes } from "react-router-dom";
 import Layout from './Layout';  // Import the Layout component
@@ -35,12 +35,12 @@ import StoryDetails from "./app/successstories/seperatesuccess";
 import ECellPage from "./app/ecell/page";
 import VenturePulsePage from "./app/vp/page";
 
-// import Values from "./about/Values";
+import { initializeApi } from "./apiConfig";
 
 function App() {
-
-
-  // Simulate loading process (e.g., fetching data, etc.)
+  useEffect(() => {
+    initializeApi();
+  }, []);
 
 
   return (

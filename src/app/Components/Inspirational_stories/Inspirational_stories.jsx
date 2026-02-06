@@ -17,7 +17,7 @@ const StartupStories = () => {
 
     const fetchStarredStories = async () => {
         try {
-            const response = await axios.get("https://venture-nest-backend.onrender.com/starred-stories");
+            const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/starred-stories');
             setStarredStories(response.data);
         } catch (err) {
             console.error("Error fetching starred stories:", err);

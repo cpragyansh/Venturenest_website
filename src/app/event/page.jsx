@@ -2,12 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 // --- Design System Utilities ---
-const TEXT_PRIMARY = "text-black";
-const TEXT_SECONDARY = "text-gray-600";
-const BRAND_RED = "#9E0203";
 
 // Shared Utility
 const createSlug = (name) => {
@@ -182,7 +179,7 @@ export default function EventsPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/events");
+        const response = await axios.get((window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in') + '/events');
         setEvents(response.data);
         setFilteredEvents(response.data);
       } catch (error) {

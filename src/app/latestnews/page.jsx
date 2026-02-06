@@ -13,7 +13,7 @@ export default function Page() {
     const fetchNews = async () => {
       try {
         // Fetch the news data from the API
-        const response = await axios.get('https://venture-nest-backend.onrender.com/latestnews');
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in')) + '/latestnews');
         const allNews = response.data;
 
         // Calculate the indices for the current page

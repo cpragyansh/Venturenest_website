@@ -12,7 +12,7 @@ const Page = () => {
   useEffect(() => {
     const fetchPatents = async () => {
       try {
-        const response = await axios.get('https://venture-nest-backend.onrender.com/getpatent');
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in')) + '/getpatent');
         setPatents(response.data);
       } catch (error) {
         console.error('Error fetching patents:', error);

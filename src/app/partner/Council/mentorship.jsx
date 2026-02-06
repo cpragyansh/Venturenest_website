@@ -8,7 +8,7 @@ export default function MentorshipCouncil() {
 
   useEffect(() => {
     // Fetch council members from backend
-    axios.get('https://venture-nest-backend.onrender.com/council-members?category=mentorship')
+    axios.get((window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in')) + '/council-members?category=mentorship')
       .then(response => {
         setMembers(response.data);
       })

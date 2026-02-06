@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const Incubated_venture_highlight = () => {
-    // Static logos pool to assign to fetched startups (Backend missing some logos)
-    const logoPool = [
-        "/assets/Start-up-logos/5(3 - Karan Agrawal.png",
-        "/assets/Start-up-logos/1749710321866 - Aditya Raj Saxena.jpg",
-        "/assets/Start-up-logos/file_00000000fa6861f8b46d40c35e6646b9_conversation_id=67fe9c73-e260-8006-bab2-ec35ca4f9089 - Juara Organics.png",
-        "/assets/Start-up-logos/IMG-20231230-WA0023(2) - Anand Kumar.jpg",
-        "/assets/Start-up-logos/IMG-20250208-WA0007 - Shekhar kashyap.jpg",
-        "/assets/Start-up-logos/IMG-20250611-WA0000 - arpit kumar.jpg",
-        "/assets/Start-up-logos/IMG-20250612-WA0000 - JIGYASA GARG.jpg",
-        "/assets/Start-up-logos/IMG-20250612-WA0004 - Navneet Yaduvanshi.jpg",
-        "/assets/Start-up-logos/IMG-20250612-WA0004 - SHAGUN SHARMA.jpg",
-        "/assets/Start-up-logos/IMG-20250612-WA0005 - Mayank Dahiya.jpg",
-        "/assets/Start-up-logos/Logo - Harris Babbar.png",
-        "/assets/Start-up-logos/SAVE_20250611_152058 - Pulkesh Gautam.jpg",
-        "/assets/Start-up-logos/Screenshot_2025-03-06-23-58-39-73_6012fa4d4ddec268fc5c7112cbb265e7 - Aryan Mankotia.jpg",
-        "/assets/Start-up-logos/Screenshot_2025-06-12-18-15-12-052_com.whatsapp-edit - Vedant Daware.jpg",
-        "/assets/Start-up-logos/stacked wordmark black - ansh haritash.png",
-        "/assets/Start-up-logos/Techealth_logo - TecHealth.png",
-        "/assets/Start-up-logos/tHM LOGO - Abhishek Sharma.png",
-        "/assets/Start-up-logos/VeeGamma Logo Design in Gradient__endoftext__ - Vanshika.png"
-    ];
+// Static logos pool to assign to fetched startups (Backend missing some logos)
+const logoPool = [
+    "/assets/Start-up-logos/5(3 - Karan Agrawal.png",
+    "/assets/Start-up-logos/1749710321866 - Aditya Raj Saxena.jpg",
+    "/assets/Start-up-logos/file_00000000fa6861f8b46d40c35e6646b9_conversation_id=67fe9c73-e260-8006-bab2-ec35ca4f9089 - Juara Organics.png",
+    "/assets/Start-up-logos/IMG-20231230-WA0023(2) - Anand Kumar.jpg",
+    "/assets/Start-up-logos/IMG-20250208-WA0007 - Shekhar kashyap.jpg",
+    "/assets/Start-up-logos/IMG-20250611-WA0000 - arpit kumar.jpg",
+    "/assets/Start-up-logos/IMG-20250612-WA0000 - JIGYASA GARG.jpg",
+    "/assets/Start-up-logos/IMG-20250612-WA0004 - Navneet Yaduvanshi.jpg",
+    "/assets/Start-up-logos/IMG-20250612-WA0004 - SHAGUN SHARMA.jpg",
+    "/assets/Start-up-logos/IMG-20250612-WA0005 - Mayank Dahiya.jpg",
+    "/assets/Start-up-logos/Logo - Harris Babbar.png",
+    "/assets/Start-up-logos/SAVE_20250611_152058 - Pulkesh Gautam.jpg",
+    "/assets/Start-up-logos/Screenshot_2025-03-06-23-58-39-73_6012fa4d4ddec268fc5c7112cbb265e7 - Aryan Mankotia.jpg",
+    "/assets/Start-up-logos/Screenshot_2025-06-12-18-15-12-052_com.whatsapp-edit - Vedant Daware.jpg",
+    "/assets/Start-up-logos/stacked wordmark black - ansh haritash.png",
+    "/assets/Start-up-logos/Techealth_logo - TecHealth.png",
+    "/assets/Start-up-logos/tHM LOGO - Abhishek Sharma.png",
+    "/assets/Start-up-logos/VeeGamma Logo Design in Gradient__endoftext__ - Vanshika.png"
+];
 
+const IncubatedVentureHighlight = () => {
     const [ventures, setVentures] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState(null);
@@ -34,7 +34,7 @@ const Incubated_venture_highlight = () => {
     useEffect(() => {
         const fetchStartups = async () => {
             try {
-                const response = await axios.get('https://venture-nest-backend.onrender.com/getstartup');
+                const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/getstartup');
                 const data = response.data;
 
                 // Map API data to component structure and assign logos from pool
@@ -200,7 +200,7 @@ const Incubated_venture_highlight = () => {
 
                         {/* Background subtle watermark */}
                         <div className="absolute top-0 right-0 w-full h-full opacity-[0.03] pointer-events-none flex items-center justify-center">
-                            <img src={activeVenture.logo} className="w-[80%] h-[80%] object-contain mix-blend-overlay grayscale" />
+                            <img src={activeVenture.logo} alt="" className="w-[80%] h-[80%] object-contain mix-blend-overlay grayscale" />
                         </div>
 
                         <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl mx-auto animate-fadeIn w-full relative z-10">
@@ -300,4 +300,4 @@ const Incubated_venture_highlight = () => {
     );
 };
 
-export default Incubated_venture_highlight;
+export default IncubatedVentureHighlight;

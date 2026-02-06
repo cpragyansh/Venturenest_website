@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import DomeGallery from "../../Components/ui/DomeGallery";
 import FlowingMenu from "../../Components/ui/FlowingMenu";
 import Masonry from "../../Components/ui/Masonry";
-import { Close, ZoomIn, ZoomOut, RestartAlt, ViewInAr, GridView, ArrowBack } from "@mui/icons-material";
+import { Close, ZoomIn, ZoomOut, RestartAlt, ViewInAr, GridView } from "@mui/icons-material";
 
 export default function Photos() {
   const [Path, SetPath] = useState([]);
@@ -17,7 +17,7 @@ export default function Photos() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/photos");
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in')) + '/photos');
         const photos = Array.isArray(response.data) ? response.data : [];
         
         // Map photos to ensure consistent property naming
@@ -76,9 +76,6 @@ export default function Photos() {
 
   const displayImages = Path.length > 0 ? Path : skeletons;
 
-  const handleCategorySelect = (categoryName) => {
-    setSelectedCategory(categoryName);
-  };
 
   return (
     <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: viewMode === 'list' ? '#000' : '#fff', position: 'relative', transition: 'background 0.5s ease' }}>
@@ -167,9 +164,9 @@ export default function Photos() {
                 </p>
 
                 <div className="mt-12 flex gap-4 text-sm text-gray-400 font-mono">
-                  <span>// SCROLL TO ZOOM</span>
-                  <span>// DRAG TO ROTATE</span>
-                  <span>// CLICK TO EXPAND</span>
+                  <span>{"// SCROLL TO ZOOM"}</span>
+                  <span>{"// DRAG TO ROTATE"}</span>
+                  <span>{"// CLICK TO EXPAND"}</span>
                 </div>
               </motion.div>
             </div>

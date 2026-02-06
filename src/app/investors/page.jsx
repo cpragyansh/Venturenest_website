@@ -8,7 +8,7 @@ export default function page() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("https://venture-nest-backend.onrender.com/getpartner?category=investor")
+    axios.get((window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in')) + '/getpartner?category=investor')
       .then(response => {
         setPartners(response.data);
         setLoading(false);

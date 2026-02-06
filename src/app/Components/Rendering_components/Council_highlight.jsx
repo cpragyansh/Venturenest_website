@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const Council_highlight = () => {
+const CouncilHighlight = () => {
     // Categories for the sorting bar
     const categories = [
         { id: 'advisory', label: 'Advisory', number: '01' },
@@ -338,4 +338,4 @@ const Council_highlight = () => {
     );
 };
 
-export default Council_highlight;
+export default CouncilHighlight;

@@ -2,15 +2,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Close, ZoomIn, ZoomOut, RestartAlt } from "@mui/icons-material";
-import DomeGallery from '../ui/DomeGallery';
 import { Link } from 'react-router-dom';
 import "./global.css";
 import Mslider from '../MainSlider/Mslider';
-import Incubated_startups_rendering from '../Rendering_components/Incubated_startups_rendering';
-import Incubated_venture_highlight from '../Rendering_components/Incubated_venture_highlight';
-import Council_highlight from '../Rendering_components/Council_highlight';
-import Partner_highlight from '../Rendering_components/Partner_highlight';
-import StudentStories from './StudentStories';
+import IncubatedStartupsRendering from '../Rendering_components/Incubated_startups_rendering';
+import IncubatedVentureHighlight from '../Rendering_components/Incubated_venture_highlight';
+import CouncilHighlight from '../Rendering_components/Council_highlight';
+import PartnerHighlight from '../Rendering_components/Partner_highlight';
 import Stats from './Stats';
 // import GallerySection from './GallerySection';
 import ProgramsSection from './ProgramsSection';
@@ -21,7 +19,6 @@ import Event from '../Event/Event';
 // import ContactSection from '../../contact/page.jsx';
 
 export default function Index() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [events, setEvents] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -29,7 +26,7 @@ export default function Index() {
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/photos");
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/photos');
         const data = Array.isArray(response.data) ? response.data : [];
         if (data.length > 0) {
           let domePhotos = [...data];
@@ -45,7 +42,7 @@ export default function Index() {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("https://venture-nest-backend.onrender.com/events");
+        const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/events');
         setEvents(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error('Error fetching events:', error);
@@ -348,7 +345,7 @@ export default function Index() {
       </section>
 
       <div id="council">
-        <Council_highlight />
+        <CouncilHighlight />
       </div>
 
       <section className="py-0">
@@ -356,7 +353,7 @@ export default function Index() {
       </section>
 
       <div id="partners">
-        <Partner_highlight />
+        <PartnerHighlight />
       </div>
 
       {/* Company Logos */}
@@ -467,11 +464,11 @@ export default function Index() {
       <div id="events">
         {events.length > 0 && <Event events={events} />}
       </div>
-      <Incubated_startups_rendering />
+      <IncubatedStartupsRendering />
       <div id="portfolio">
         <StartupInventorySection />
       </div>
-      <Incubated_venture_highlight />
+      <IncubatedVentureHighlight />
       <StartupLogoCloud />
 
 

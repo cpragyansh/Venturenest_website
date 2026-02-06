@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { Box, Typography, CircularProgress, Button, Grid, Skeleton, Stack } from "@mui/material";
+import { Box, Typography, CircularProgress, Button, Grid, Skeleton } from "@mui/material";
 
 export default function ProgramDetails() {
     const { programName } = useParams();
@@ -24,7 +24,7 @@ export default function ProgramDetails() {
     useEffect(() => {
         const fetchProgram = async () => {
             try {
-                const response = await axios.get("https://venture-nest-backend.onrender.com/programs");
+                const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in')) + '/programs');
                 const programs = response.data;
                 const index = programs.findIndex(
                     (p) => createSlug(p.programName) === programName
