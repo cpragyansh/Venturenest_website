@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Helmet } from 'react-helmet';
-// import Navbar from './app/Components/Navbar/Navbar';
+import Navbar from './app/Components/Navbar/Navbar';
 import Footer from './app/Components/Footer/Footer';
 import ClickSpark from './app/Components/ui/ClickSpark';
 import CGCUNavbar from './app/Components/Navbar/CGCUNavbar';
@@ -19,11 +19,11 @@ const Layout = ({ children }) => {
       duration={400}
     >
       <div>
-        <CGCUNavbar/>
-        {/* < Navbar /> */}
+        {/* <Sub_Navbar/> */}
+        <Navbar />
         {children}
         {/* <Connect /> */}
-        <Footer />
+        <Footer />  
       </div>
     </ClickSpark>
   );

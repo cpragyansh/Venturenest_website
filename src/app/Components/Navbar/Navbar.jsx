@@ -66,18 +66,11 @@ const Navbar = () => {
               alt="NAAC Accredited"
               className="naac-logo"
             />
-          </a>
-          <a href="/">
-            <img
-              src="/assets/ecell-logo-with-bg.jpg"
-              alt=""
-              className="venture-nest-logo-bg-removed"
-            />
           </a> */}
           <a href="/">
             <img
-              src="/assets/ecell-logo-with-bg.jpg"
-              alt=""
+              src="/assets/venture-nest-logo-bg-remove.png"
+              alt="Venture Nest"
               className="venture-nest-logo-bg-removed"
             />
           </a>

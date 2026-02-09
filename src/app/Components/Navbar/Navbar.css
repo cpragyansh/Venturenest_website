@@ -48,11 +48,13 @@
   background-color: white;
   border-radius: 100%;
   border: 1.5px solid #eee;
-  width: 70px; /* Fixed size for desktop */
-  height: 70px;
-  padding: 0;
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  padding: 8px;
   margin: 0;
   transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .venture-nest-logo-bg-removed:hover {
@@ -68,8 +70,6 @@
 .navbar-logo {
   display: flex;
   align-items: center;
-  object-fit: contain;
-  object-position: center;
   gap: 2.5em;
 }
 
@@ -295,7 +295,7 @@
 
 .cgc-university-logo-updated {
   width: auto;
-  height: 60px;
+  height: 70px;
 }
 
 /* Responsive styles */
@@ -538,8 +538,9 @@
     background-color: white;
     border-radius: 100%;
     border: 1.5px solid #eee;
-    width: 5.5vw;
-    padding: 0;
+    width: 80px;
+    height: 80px;
+    padding: 6px;
     margin: 0;
   }
 
