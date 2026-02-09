@@ -162,48 +162,38 @@ export default function Index() {
       </header>
 
       {/* Welcome Section */}
-      <section id="about" className="relative py-20 overflow-hidden">
-        <img src="https://api.builder.io/api/v1/image/assets/TEMP/4457b3ebf8e16b2f34e08b4bc4e55bb881f9f762?width=3840" alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <section id="about" className="relative flex min-h-[700px]">
+        {/* Background Image (Right Side / Full) */}
+        <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat" style={{ backgroundImage: "url('/assets/DSC_5258%20(1).jpg')", backgroundPosition: '28vw center' }}></div>
 
-        <div className="relative z-10 container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="relative">
-              {/* <div className="absolute -left-8 top-12">
-                <svg width="58" height="29" viewBox="0 0 58 29" fill="none">
+        {/* Content Container (Left Side Overlay) */}
+        <div className="relative z-10 w-full md:w-[75%] lg:w-[65%] bg-white/95 backdrop-blur-md h-full flex flex-col justify-center px-8 md:px-16 lg:px-20 py-20 rounded-tr-[20px] shadow-2xl">
+          <div className="max-w-xl">
+             <div className="mb-4">
+                <svg width="60" height="30" viewBox="0 0 58 29" fill="none" className="mb-2">
                   <path d="M48.321 8.74875C45.6238 8.74875 44.3189 6.65379 43.0611 4.6313C41.8908 2.75375 40.7877 0.975009 38.6487 0.975009C36.5098 0.975009 35.4067 2.74716 34.2431 4.6313C32.9853 6.66038 31.6804 8.74875 28.9899 8.74875C26.2994 8.74875 24.9946 6.65379 23.73 4.6313C22.5597 2.75375 21.4566 0.975009 19.3176 0.975009C17.1787 0.975009 16.0756 2.74716 14.912 4.6313C13.6542 6.66038 12.3493 8.74875 9.65881 8.74875C6.96834 8.74875 5.66346 6.65379 4.40566 4.6313C3.2353 2.75375 2.1322 0.975009 0 0.975009V0C2.69721 0 3.99536 2.09495 5.25316 4.12403C6.42352 6.00159 7.52661 7.78033 9.65881 7.78033C11.791 7.78033 12.9008 6.00818 14.0645 4.12403C15.3223 2.09495 16.6272 0 19.3176 0C22.0081 0 23.313 2.09495 24.5775 4.12403C25.7479 6.00159 26.851 7.78033 28.9899 7.78033C31.1288 7.78033 32.2319 6.00818 33.4023 4.12403C34.6601 2.10154 35.965 0.0065843 38.6554 0.0065843C41.3459 0.0065843 42.6575 2.10155 43.9153 4.13063C45.0857 6.00818 46.1888 7.78691 48.3277 7.78691C50.4667 7.78691 51.5697 6.01477 52.7401 4.13063C53.9979 2.10155 55.3028 0.0065843 58 0.0065843V0.981603C55.8611 0.981603 54.758 2.75374 53.5876 4.63789C52.3298 6.66038 51.0249 8.75534 48.3277 8.75534L48.321 8.74875Z" fill="#9E0203" />
                 </svg>
-              </div> */}
+                <h2 className="text-brand-red text-4xl md:text-5xl font-bold font-jakarta leading-tight">
+                  Welcome to CGC <br />
+                  Venturenest
+                </h2>
+             </div>
 
-              <h2 className="text-brand-red text-3xl md:text-5xl font-bold font-jakarta mb-6">
-                Welcome to CGC<br />Venturenest
-              </h2>
-              <h2 className="text-black text-xl md:text-2xl font-bold font-jakarta mb-6">
-                VentureNest is CGC University, Mohali Technology Business Incubator, where ideas evolve into impactful startups.
-              </h2>
-
-              <div className="space-y-4 text-brand-dark text-lg leading-relaxed mb-8">
+              <div className="space-y-6 text-gray-700 text-base md:text-lg leading-relaxed mb-10">
                 <p>
-                  VentureNest is the dedicated Technology Business Incubator (TBI) at CGC University,Mohali established to foster a culture of innovation, entrepreneurship, and startup excellence within the university ecosystem. It serves as a structured platform that enables students, faculty members, and aspiring entrepreneurs to convert innovative ideas into viable and scalable business ventures.
+                  CGC VentureNest is the premier business incubator at CGC University, designed to empower innovation, entrepreneurship, and sustainable business growth. As a dynamic startup hub, VentureNest provides a thriving ecosystem where aspiring entrepreneurs and early-stage startups can transform groundbreaking ideas into successful ventures.
                 </p>
                 <p>
-                  As a flagship initiative of CGC University, VentureNest provides a comprehensive support system including advanced infrastructure, structured incubation programs, expert mentorship, industry linkages, investor access, and policy guidance. The incubator actively supports technology-driven, knowledge-based, and social impact startups by offering end-to-end assistance from ideation and validation to product development, market entry, and scale-up.
+                  As a flagship initiative of CGC University, CGC VentureNest is dedicated to fostering an entrepreneurial culture among students, faculty and the broader community. Our incubator offers cutting-edge infrastructure, personalized mentorship from industry experts, strong networking opportunities and access to investors and funding resources. Whether you're launching a tech startup, social enterprise, or scalable business model, CGC VentureNest accelerates your journey from concept to market success.
                 </p>
-
-
-
               </div>
 
               <Link to="/IncubateWithUs" className="bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-brand-red-light transition-all shadow-xl hover:shadow-2xl flex items-center space-x-3 w-fit group">
-                <span>Fuel Your Ambition Now</span>
+                <span>APPLY NOW</span>
                 <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" className="group-hover:translate-x-1 transition-transform">
                   <path fillRule="evenodd" clipRule="evenodd" d="M22.731 12.0001L15.7662 18.9665L14.6334 17.8353L19.6686 12.8001L1.59976 12.8001L1.59976 11.2001L19.6686 11.2001L14.6334 6.16649L15.7662 5.03369L22.731 12.0001Z" />
                 </svg>
               </Link>
-            </div>
-
-            {/* Right side would have an image */}
-            <div className="hidden md:block"></div>
           </div>
         </div>
       </section>
