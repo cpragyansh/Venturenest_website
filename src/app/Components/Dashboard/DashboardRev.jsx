@@ -205,7 +205,7 @@ export default function Index() {
       <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-4 mb-8 text-center">
           {/* <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span> */}
-          <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Our Government Partners </h3>
+          <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Our Catalyst Partners </h3>
         </div>
 
         <div className="relative w-full overflow-hidden group">
