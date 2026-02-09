@@ -78,7 +78,7 @@ export default function IncubateFormPage() {
               <div className="space-y-4">
                 <div className="h-1 w-32 bg-white"></div>
                 <p className="text-gray-400 text-xl font-bold uppercase tracking-tight leading-snug max-w-md">
-                   Where visionary ideas transform into market-leading enterprises.
+                   Where visionary ideas Evolve into market-leading enterprises.
                 </p>
               </div>
               <div className="pt-6">
@@ -115,7 +115,7 @@ export default function IncubateFormPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
              <span className="text-[#a40f19] font-black uppercase tracking-[0.4em] text-[10px] block mb-2">The Ecosystem Advantage</span>
-             <h2 className="text-4xl md:text-5xl font-black font-jakarta text-black uppercase tracking-tighter border-b-4 border-[#003366] inline-block pb-2">Why VentureNest?</h2>
+             <h2 className="text-4xl md:text-5xl font-black font-jakarta text-black uppercase tracking-tighter border-b-4 border-[#003366] inline-block pb-2">Why  VentureNest?</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[600px]">
@@ -128,9 +128,9 @@ export default function IncubateFormPage() {
                <p className="text-white/80 text-lg font-bold">We don't just provide space; we provide a high-velocity launchpad for ambitious founders.</p>
                <div className="mt-8 border-t border-white/20 pt-4 flex items-center justify-between">
                   <span className="text-white font-black uppercase tracking-widest text-xs">Explore Program</span>
-                  <div className="w-10 h-10 border border-white flex items-center justify-center rounded-full group-hover:bg-white group-hover:text-[#a40f19] transition-colors">
+                  {/* <div className="w-10 h-10 border border-white flex items-center justify-center rounded-full group-hover:bg-white group-hover:text-[#a40f19] transition-colors">
                      →
-                  </div>
+                  </div> */}
                </div>
             </div>
             
@@ -138,7 +138,7 @@ export default function IncubateFormPage() {
             <div className="bg-black p-8 flex flex-col justify-center rounded-3xl shadow-lg">
                <div className="text-white font-black text-5xl mb-2">200+</div>
                <div className="text-[#003366] font-black uppercase tracking-widest text-[10px]">Expert Mentors</div>
-               <p className="text-white/60 text-xs mt-4">Industry veterans from across the globe guiding your success.</p>
+               <p className="text-white/60 text-xs mt-4">Industry veterans from across the globe guiding Entureprenuerial Journey.</p>
             </div>
             
             {/* Row 2 Right 1 - White Border */}

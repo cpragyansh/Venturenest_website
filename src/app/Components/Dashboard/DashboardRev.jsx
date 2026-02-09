@@ -370,7 +370,7 @@ export default function Index() {
                 </div>
 
                 <div className="absolute top-8 left-6 bg-white/10 backdrop-blur-sm p-2 rounded-lg border border-white/5">
-                  <img src={student.logo} alt="" className="h-12 w-auto object-contain max-w-[140px]" />
+                  <img src={student.logo} alt="" className="h-12 w-auto object-contain max-w-[140px]" /> {student.company ==='escapekar' ? <p className='text-white text-sm'>escapekar</p> : <img src={student.logo} alt="" className="h-12 w-auto object-contain max-w-[140px]" />}
                 </div>
 
                 <div className="absolute bottom-8 left-8">
