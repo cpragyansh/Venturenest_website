@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Link } from 'react-router-dom';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -15,6 +16,15 @@ const ProgramsSection = () => {
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef(null);
+
+  const createSlug = (name) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
 
   useEffect(() => {
     const fetchPrograms = async () => {
@@ -104,25 +114,27 @@ const ProgramsSection = () => {
             >
               {programs.map((program, idx) => (
                 <SwiperSlide key={program._id || idx}>
-                  <motion.div
-                    className="group relative aspect-[16/10] overflow-hidden rounded-xl cursor-pointer shadow-lg border border-gray-100"
-                  >
-                    <img 
-                      src={program.imageUrl} 
-                      alt={program.programName}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent"></div>
-                    
-                    <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
-                      <h3 className="text-xl md:text-2xl font-black mb-1 uppercase tracking-tight leading-[1.1]">
-                        {program.programName}
-                      </h3>
-                      <p className="text-[10px] md:text-xs font-medium leading-relaxed opacity-80 line-clamp-2">
-                        {program.programDescription}
-                      </p>
-                    </div>
-                  </motion.div>
+                  <Link to={`/Programs/${createSlug(program.programName)}`} className="block cursor-pointer">
+                    <motion.div
+                      className="group relative aspect-[16/10] overflow-hidden rounded-xl shadow-lg border border-gray-100"
+                    >
+                      <img 
+                        src={program.imageUrl} 
+                        alt={program.programName}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent"></div>
+                      
+                      <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
+                        <h3 className="text-xl md:text-2xl font-black mb-1 uppercase tracking-tight leading-[1.1]">
+                          {program.programName}
+                        </h3>
+                        <p className="text-[10px] md:text-xs font-medium leading-relaxed opacity-80 line-clamp-2">
+                          {program.programDescription}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </Link>
                 </SwiperSlide>
               ))}
             </Swiper>

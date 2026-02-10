@@ -136,7 +136,7 @@ export default function Index() {
   ]
 
   return (
-    <div className="min-h-screen bg-white font-jakarta">
+    <div className="min-h-screen bg-white font-jakarta overflow-x-hidden w-full relative">
       {/* Top Banner */}
       {/* <div className="bg-brand-dark text-white text-sm py-2 text-center font-jakarta font-medium">
         Admissions open for B.Tech., BBA, BCA, M.tech. courses at CGC University, Mohali (2025-26)
@@ -162,18 +162,18 @@ export default function Index() {
       </header>
 
       {/* Welcome Section */}
-      <section id="about" className="relative flex min-h-[700px]">
+      <section id="about" className="relative flex min-h-[500px] md:min-h-[700px] overflow-hidden">
         {/* Background Image (Right Side / Full) */}
-        <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat" style={{ backgroundImage: "url('/assets/DSC_5258%20(1).jpg')", backgroundPosition: '28vw center' }}></div>
+        <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat" style={{ backgroundImage: "url('/assets/DSC_5258%20(1).jpg')", backgroundPosition: 'center' }}></div>
 
         {/* Content Container (Left Side Overlay) */}
-        <div className="relative z-10 w-full md:w-[75%] lg:w-[65%] bg-white/95 backdrop-blur-md h-full flex flex-col justify-center px-8 md:px-16 lg:px-20 py-20 rounded-tr-[20px] shadow-2xl">
+        <div className="relative z-10 w-full md:w-[80%] lg:w-[65%] bg-white/95 backdrop-blur-md h-full flex flex-col justify-center px-6 md:px-16 lg:px-20 py-12 md:py-20 rounded-tr-none md:rounded-tr-[40px] shadow-2xl">
           <div className="max-w-xl">
-             <div className="mb-4">
+              <div className="mb-4">
                 <svg width="60" height="30" viewBox="0 0 58 29" fill="none" className="mb-2">
                   <path d="M48.321 8.74875C45.6238 8.74875 44.3189 6.65379 43.0611 4.6313C41.8908 2.75375 40.7877 0.975009 38.6487 0.975009C36.5098 0.975009 35.4067 2.74716 34.2431 4.6313C32.9853 6.66038 31.6804 8.74875 28.9899 8.74875C26.2994 8.74875 24.9946 6.65379 23.73 4.6313C22.5597 2.75375 21.4566 0.975009 19.3176 0.975009C17.1787 0.975009 16.0756 2.74716 14.912 4.6313C13.6542 6.66038 12.3493 8.74875 9.65881 8.74875C6.96834 8.74875 5.66346 6.65379 4.40566 4.6313C3.2353 2.75375 2.1322 0.975009 0 0.975009V0C2.69721 0 3.99536 2.09495 5.25316 4.12403C6.42352 6.00159 7.52661 7.78033 9.65881 7.78033C11.791 7.78033 12.9008 6.00818 14.0645 4.12403C15.3223 2.09495 16.6272 0 19.3176 0C22.0081 0 23.313 2.09495 24.5775 4.12403C25.7479 6.00159 26.851 7.78033 28.9899 7.78033C31.1288 7.78033 32.2319 6.00818 33.4023 4.12403C34.6601 2.10154 35.965 0.0065843 38.6554 0.0065843C41.3459 0.0065843 42.6575 2.10155 43.9153 4.13063C45.0857 6.00818 46.1888 7.78691 48.3277 7.78691C50.4667 7.78691 51.5697 6.01477 52.7401 4.13063C53.9979 2.10155 55.3028 0.0065843 58 0.0065843V0.981603C55.8611 0.981603 54.758 2.75374 53.5876 4.63789C52.3298 6.66038 51.0249 8.75534 48.3277 8.75534L48.321 8.74875Z" fill="#9E0203" />
                 </svg>
-                <h2 className="text-brand-red text-4xl md:text-5xl font-bold font-jakarta leading-tight">
+                <h2 className="text-brand-red text-3xl md:text-5xl font-bold font-jakarta leading-tight">
                   Welcome to CGC <br />
                   Venturenest
                 </h2>
@@ -245,7 +245,7 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="max-w-2xl py-8">
-              <h2 className="text-brand-red text-4xl md:text-6xl font-black font-jakarta mb-10 leading-[1.1] tracking-tighter">
+              <h2 className="text-brand-red text-3xl sm:text-4xl md:text-6xl font-black font-jakarta mb-6 md:mb-10 leading-[1.1] tracking-tighter">
                 We Don't Just <br />
                 <span className="text-brand-dark">Promise Growth</span> — <br />
                 We Prove It.
@@ -276,8 +276,8 @@ export default function Index() {
               {/* Funding Stat - Line Chart Style */}
               <div className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden relative group">
                 <div className="relative z-10">
-                  <div className="text-brand-red text-6xl font-black mb-1">1.5 Cr+</div>
-                  <div className="text-brand-dark text-[16px] font-bold uppercase tracking-wider opacity-60">Grants Raised</div>
+                  <div className="text-brand-red text-4xl sm:text-5xl md:text-6xl font-black mb-1">1.5 Cr+</div>
+                  <div className="text-brand-dark text-[14px] md:text-[16px] font-bold uppercase tracking-wider opacity-60">Grants Raised</div>
                 </div>
                 {/* Mini Sparkline SVG */}
                 <div className="absolute bottom-0 left-0 w-full h-1/2 opacity-20 group-hover:opacity-40 transition-opacity">
@@ -296,8 +296,8 @@ export default function Index() {
               {/* Startups Stat - Progress Circle Style */}
               <div className="bg-brand-red p-6 rounded-[16px] shadow-lg hover:shadow-red-200/50 transition-all duration-500 flex flex-col justify-between overflow-hidden relative group">
                 <div className="relative z-10">
-                  <div className="text-white text-6xl font-black mb-1">100+</div>
-                  <div className="text-white/80 text-[16px] font-bold uppercase tracking-wider">Startups Incubated</div>
+                  <div className="text-white text-4xl sm:text-5xl md:text-6xl font-black mb-1">100+</div>
+                  <div className="text-white/80 text-[14px] md:text-[16px] font-bold uppercase tracking-wider">Startups Incubated</div>
                 </div>
                 <div className="mt-4 w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin-slow"></div>
                 <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
@@ -306,8 +306,8 @@ export default function Index() {
               {/* Patents Stat - Bar Graph Style */}
               <div className="bg-gray-50 p-6 rounded-[32px] border border-gray-200 hover:border-brand-red transition-all duration-500 flex flex-col justify-between group">
                 <div>
-                  <div className="text-brand-red text-6xl font-black mb-1">2000+</div>
-                  <div className="text-brand-dark text-[16px] font-bold uppercase tracking-wider opacity-60">Patents Filed</div>
+                  <div className="text-brand-red text-4xl sm:text-5xl md:text-6xl font-black mb-1">2000+</div>
+                  <div className="text-brand-dark text-[14px] md:text-[16px] font-bold uppercase tracking-wider opacity-60">Patents Filed</div>
                 </div>
                 <div className="flex items-end gap-1 h-12 mt-4">
                   {[30, 60, 45, 90, 70, 100].map((h, i) => (
@@ -319,8 +319,8 @@ export default function Index() {
               {/* Unicorns Stat - Impact Style */}
               <div className="bg-brand-dark p-6 rounded-[32px] shadow-2xl transition-all duration-500 flex flex-col items-center justify-center text-center relative overflow-hidden group">
                 <div className="relative z-10">
-                  <div className="text-white text-6xl font-black mb-1 group-hover:scale-110 transition-transform">10+</div>
-                  <div className="text-brand-red text-[16px] font-black uppercase tracking-widest">Unicorn Ventures</div>
+                  <div className="text-white text-4xl sm:text-5xl md:text-6xl font-black mb-1 group-hover:scale-110 transition-transform">10+</div>
+                  <div className="text-brand-red text-[14px] md:text-[16px] font-black uppercase tracking-widest">Unicorn Ventures</div>
                 </div>
                 {/* Decorative particles */}
                 <div className="absolute inset-0 opacity-30">
@@ -374,8 +374,8 @@ export default function Index() {
                 </div>
 
                 <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/95 via-black/40 to-transparent z-10">
-                  <h4 className="text-white text-3xl font-black mb-1 drop-shadow-lg">{student.name}</h4>
-                  <p className="text-brand-red text-sm font-black uppercase tracking-[0.2em]">{student.company}</p>
+                  <h4 className="text-white text-2xl md:text-3xl font-black mb-1 drop-shadow-lg">{student.name}</h4>
+                  <p className="text-brand-red text-xs md:text-sm font-black uppercase tracking-[0.2em]">{student.company}</p>
                 </div>
               </div>
             ))}
@@ -394,14 +394,14 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-16">
             {/* Left Content */}
             <div className="text-white">
-              <h2 className="text-5xl font-bold font-jakarta mb-8 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-bold font-jakarta mb-8 leading-tight">
                 What makes<br />Venturenest<br />the Ultimate Startup Hub
               </h2>
 
-              <div className="flex space-x-4 mb-8">
-                <div className="h-0.5 bg-white w-56"></div>
-                <div className="h-0.5 bg-white w-36"></div>
-                <div className="h-0.5 bg-white w-14"></div>
+              <div className="flex space-x-2 md:space-x-4 mb-8 items-end">
+                <div className="h-0.5 bg-white w-24 sm:w-36 md:w-56"></div>
+                <div className="h-0.5 bg-white w-16 sm:w-24 md:w-36"></div>
+                <div className="h-0.5 bg-white w-8 sm:w-10 md:w-14"></div>
               </div>
 
               <div className="space-y-6 text-lg leading-relaxed">
@@ -489,7 +489,7 @@ export default function Index() {
             </div>
 
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-5xl font-black font-jakarta mb-6 leading-[1.1]">
+              <h2 className="text-3xl md:text-5xl font-black font-jakarta mb-6 leading-[1.1]">
                 Pioneering Innovation<br />in North India
               </h2>
               <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-10 font-medium max-w-lg">
@@ -552,7 +552,7 @@ export default function Index() {
       {/* <GallerySection /> */}
 
       <div id="gallery" className="text-center pt-12 mb-12">
-        <h3 className="text-4xl md:text-5xl font-black text-brand-dark leading-tight uppercase">
+        <h3 className="text-3xl md:text-5xl font-black text-brand-dark leading-tight uppercase">
           The Innovation <span className="text-brand-red">Catalog</span>
         </h3>
       </div>
@@ -634,6 +634,18 @@ export default function Index() {
                     .hover\\:pause-scroll:hover {
                       animation-play-state: paused;
                     }
+                    @keyframes spin-slow {
+                      from { transform: rotate(0deg); }
+                      to { transform: rotate(360deg); }
+                    }
+                    .animate-spin-slow {
+                      animation: spin-slow 8s linear infinite;
+                    }
+                    html, body {
+                      overflow-x: hidden !important;
+                      width: 100% !important;
+                      position: relative !important;
+                    }
                   `}</style>
 
 
@@ -651,7 +663,7 @@ export default function Index() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-brand-red text-4xl font-black font-jakarta mb-3">
+            <h2 className="text-brand-red text-2xl md:text-4xl font-black font-jakarta mb-3">
               Incubation Application Process
             </h2>
             <p className="text-gray-500 font-medium text-sm max-w-xl mx-auto">
@@ -790,29 +802,29 @@ export default function Index() {
       <section id="success-stories" className="bg-white py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-16">
-            <span className="text-brand-red text-3xl md:text-5xl font-bold font-jakarta">Startup Success </span>
+            <span className="text-brand-red text-2xl md:text-5xl font-bold font-jakarta">Startup Success </span>
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {studentNames.slice(0, 8).map((student, idx) => (
-              <div key={idx} className="bg-gray-100 p-8 relative flex flex-col h-full rounded-2xl">
-                <svg className="absolute top-8 left-8 w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 40 40">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M14.8665 30.824C13.1838 31.368 11.2425 31.3573 9.65584 30.544C5.99184 28.6613 4.40517 23.808 5.87984 18.6666C6.54117 16.36 7.7065 14.12 10.1705 11.8613C12.6345 9.59998 16.0532 8.26665 17.6372 8.26665C17.7705 8.26453 17.9029 8.28874 18.0268 8.33788C18.1507 8.38702 18.2637 8.46014 18.3594 8.55304C18.455 8.64593 18.5313 8.75678 18.584 8.87924C18.6367 9.00169 18.6648 9.13334 18.6665 9.26665C18.6665 9.81865 18.1972 10.2666 17.6372 10.2666C15.8265 10.2666 14.2078 11.2533 12.2905 12.704C10.8238 13.816 9.67717 15.2373 9.04517 16.4746C7.83184 18.8426 7.79184 22.1813 9.75183 23.0693C10.2069 22.5528 10.7677 22.1403 11.3962 21.8596C12.0247 21.579 12.7062 21.4367 13.3945 21.4426C16.5945 21.4426 18.4798 24.016 18.3972 26.3466C18.3198 28.5733 16.9038 30.16 14.8665 30.824ZM30.8665 30.824C29.1838 31.368 27.2425 31.3573 25.6558 30.544C21.9918 28.6613 20.4052 23.808 21.8798 18.6666C22.5412 16.36 23.7065 14.12 26.1705 11.8613C28.6345 9.59998 32.0532 8.26665 33.6372 8.26665C33.7705 8.26453 33.9029 8.28874 34.0268 8.33788C34.1507 8.38702 34.2637 8.46014 34.3594 8.55304C34.455 8.64593 34.5313 8.75678 34.584 8.87924C34.6367 9.00169 34.6648 9.13334 34.6665 9.26665C34.6665 9.81865 34.1972 10.2666 33.6372 10.2666C31.8265 10.2666 30.2078 11.2533 28.2905 12.704C26.8238 13.816 25.6772 15.2373 25.0452 16.4746C23.8318 18.8426 23.7918 22.1813 25.7518 23.0693C26.6932 22.04 27.9225 21.4426 29.3945 21.4426C32.5945 21.4426 34.4798 24.016 34.3972 26.3466C34.3198 28.5733 32.9038 30.16 30.8665 30.824Z" fillOpacity="0.4" />
+              <div key={idx} className="bg-gray-100 p-4 md:p-8 relative flex flex-col h-full rounded-xl md:rounded-2xl">
+                <svg className="absolute top-4 left-4 md:top-8 md:left-8 w-6 h-6 md:w-10 md:h-10 text-gray-400" fill="currentColor" viewBox="0 0 40 40">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M14.8665 30.824C13.1838 31.368 11.2425 31.3573 9.65584 30.544C5.99184 28.6613 4.40517 23.808 5.87984 18.6666C6.54117 16.36 7.7065 14.12 10.1705 11.8613C12.6345 9.59998 16.0532 8.26665 17.6372 8.26665C17.7705 8.26453 17.9029 8.28874 18.0268 8.33788C18.1507 8.38702 18.2637 8.46014 18.3594 8.55304C18.4550 8.64593 18.5313 8.75678 18.584 8.87924C18.6367 9.00169 18.6648 9.13334 18.6665 9.26665C18.6665 9.81865 18.1972 10.2666 17.6372 10.2666C15.8265 10.2666 14.2078 11.2533 12.2905 12.704C10.8238 13.816 9.67717 15.2373 9.04517 16.4746C7.83184 18.8426 7.79184 22.1813 9.75183 23.0693C10.2069 22.5528 10.7677 22.1403 11.3962 21.8596C12.0247 21.579 12.7062 21.4367 13.3945 21.4426C16.5945 21.4426 18.4798 24.016 18.3972 26.3466C18.3198 28.5733 16.9038 30.16 14.8665 30.824ZM30.8665 30.824C29.1838 31.368 27.2425 31.3573 25.6558 30.544C21.9918 28.6613 20.4052 23.808 21.8798 18.6666C22.5412 16.36 23.7065 14.12 26.1705 11.8613C28.6345 9.59998 32.0532 8.26665 33.6372 8.26665C33.7705 8.26453 33.9029 8.28874 34.0268 8.33788C34.1507 8.38702 34.2637 8.46014 34.3594 8.55304C34.4550 8.64593 34.5313 8.75678 34.584 8.87924C34.6367 9.00169 34.6648 9.13334 34.6665 9.26665C34.6665 9.81865 34.1972 10.2666 33.6372 10.2666C31.8265 10.2666 30.2078 11.2533 28.2905 12.704C26.8238 13.816 25.6772 15.2373 25.0452 16.4746C23.8318 18.8426 23.7918 22.1813 25.7518 23.0693C26.6932 22.04 27.9225 21.4426 29.3945 21.4426C32.5945 21.4426 34.4798 24.016 34.3972 26.3466C34.3198 28.5733 32.9038 30.16 30.8665 30.824Z" fillOpacity="0.4" />
                 </svg>
 
-                <div className="mt-16 mb-6 flex-1">
-                  <p className="text-brand-dark leading-relaxed">
+                <div className="mt-10 md:mt-16 mb-4 md:mb-6 flex-1">
+                  <p className="text-brand-dark text-[11px] sm:text-[13px] md:text-base leading-relaxed line-clamp-6 md:line-clamp-none">
                     "{student.Story || "Being part of VentureNest has been a game-changer for our startup journey. The support system here is unparalleled."}"
                   </p>
                 </div>
 
-                <div className="flex items-center space-x-4 pt-6 border-t border-gray-400 mt-auto">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-gray-600">
+                <div className="flex items-center space-x-2 md:space-x-4 pt-4 md:pt-6 border-t border-gray-400 mt-auto">
+                  <div className="w-8 h-8 md:w-12 md:h-12 bg-gray-300 rounded-full flex items-center justify-center text-xs md:text-xl font-bold text-gray-600 flex-shrink-0">
                     {student.FounderName.charAt(0)}
                   </div>
-                  <div>
-                    <div className="text-brand-red font-bold">{student.FounderName}</div>
-                    <div className="text-gray-600 text-sm font-medium">Founder, {student.StartupName}</div>
+                  <div className="min-w-0">
+                    <div className="text-brand-red font-bold text-[10px] md:text-base truncate">{student.FounderName}</div>
+                    <div className="text-gray-600 text-[8px] md:text-sm font-medium truncate">Founder, {student.StartupName}</div>
                   </div>
                 </div>
               </div>

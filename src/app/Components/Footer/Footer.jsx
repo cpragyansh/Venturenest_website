@@ -15,11 +15,18 @@ const Footer = () => {
                     
                     {/* Column 1: Brand Info & Apply Button */}
                     <div className="footer-column brand-column">
-                        <img 
-                            src="/assets/cgc_venturenest_logo_n1-modified.png" 
-                            alt="Venture Nest Logo" 
-                            className="footer-logo-main" 
-                        />
+                        <div className="footer-logos-container">
+                            <img 
+                                src="/assets/CGCUNIVERSITYMOHALI_logo.png" 
+                                alt="CGC University Logo" 
+                                className="footer-logo-secondary" 
+                            />
+                            <img 
+                                src="/assets/cgc_venturenest_logo_n1-modified.png" 
+                                alt="Venture Nest Logo" 
+                                className="footer-logo-main" 
+                            />
+                        </div>
                         <p className="brand-description">
                             Welcome to Venture Nest, the premier incubation center at CGC University. 
                             We are dedicated to fostering innovation and entrepreneurship, providing 

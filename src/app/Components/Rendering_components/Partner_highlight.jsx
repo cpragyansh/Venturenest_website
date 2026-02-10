@@ -149,7 +149,7 @@ const PartnerHighlight = () => {
                     <div className="md:col-span-8 relative" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
                         {/* RED DECORATIVE BACKGROUND BLOCK */}
                         <div 
-                            className="absolute -inset-y-40 -right-[100vw] 
+                            className="absolute -inset-y-40 -right-40 
                             bg-[#1A4880]/[0.01] 
                             z-0 hidden md:block pointer-events-none"
                             style={{ left: '-1rem' }}
