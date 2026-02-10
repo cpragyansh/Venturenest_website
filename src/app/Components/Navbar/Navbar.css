@@ -1,5 +1,5 @@
 :root {
-  --nav-height: 120px;
+  --nav-height: 110px;
 }
 
 @media (max-width: 1250px) {
@@ -45,20 +45,21 @@
 }
 
 .venture-nest-logo-bg-removed {
-  background-color: white;
-  border-radius: 100%;
-  border: 1.5px solid #eee;
-  width: 90px;
-  height: 90px;
+  background-color: transparent;
+  width: auto;
+  height: var(--nav-height);
   object-fit: contain;
-  padding: 8px;
+  padding: 0px;
   margin: 0;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: block;
+  z-index: 5002;
 }
 
 .venture-nest-logo-bg-removed:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
+  /* box-shadow: 0 8px 25px rgba(163, 13, 51, 0.1); */
+  border-color: #A30D33;
 }
 
 .logo-updated {
@@ -70,12 +71,12 @@
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: 2.5em;
+  gap: 1.5rem;
 }
 
 .logo,
 .naac-logo {
-  height: 50px;
+  height: 70px;
 }
 
 .logo {
@@ -295,7 +296,8 @@
 
 .cgc-university-logo-updated {
   width: auto;
-  height: 70px;
+  height: 75px;
+  transition: all 0.3s ease;
 }
 
 /* Responsive styles */
@@ -359,8 +361,9 @@
   }
 
   .venture-nest-logo-bg-removed {
-    height: 60px;
-    width: 60px;
+    height: var(--nav-height);
+    width: auto;
+    padding: 0px;
   }
 
   .nav-links {
@@ -535,13 +538,9 @@
   }
 
   .venture-nest-logo-bg-removed {
-    background-color: white;
-    border-radius: 100%;
-    border: 1.5px solid #eee;
-    width: 80px;
-    height: 80px;
-    padding: 6px;
-    margin: 0;
+    width: auto;
+    height: var(--nav-height);
+    padding: 0px;
   }
 
   }

@@ -128,12 +128,12 @@ export default function IncubateFormPage() {
                <p className="text-white/80 text-lg font-bold">We don't just provide space; we provide a high-velocity launchpad for ambitious founders.</p>
                <div className="mt-8 border-t border-white/20 pt-4 flex items-center justify-between">
                   <span className="text-white font-black uppercase tracking-widest text-xs">Explore Program</span>
-                  {/* <div className="w-10 h-10 border border-white flex items-center justify-center rounded-full group-hover:bg-white group-hover:text-[#a40f19] transition-colors">
-                     →
-                  </div> */}
-               </div>
-            </div>
-            
+                </div>
+                <p className="text-white/40 text-[10px] uppercase font-bold tracking-widest mt-4">
+                   Innovating for a better tomorrow · 100+ Active Startups
+                </p>
+             </div>
+
             {/* Top Right - Black */}
             <div className="bg-black p-8 flex flex-col justify-center rounded-3xl shadow-lg">
                <div className="text-white font-black text-5xl mb-2">200+</div>

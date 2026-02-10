@@ -205,7 +205,7 @@ export default function Index() {
       <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
         <div className="container mx-auto px-4 mb-8 text-center">
           {/* <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span> */}
-          <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Our Government Partners </h3>
+          <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Our Catalyst Partners </h3>
         </div>
 
         <div className="relative w-full overflow-hidden group">
@@ -353,29 +353,29 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: 'Shivang Tiwari', company: 'Techealth Apex Private Limited', package: '3 Lakhs', image: '/assets/success-1.jpeg', logo: '/assets/Start-up-logos/Techealth_logo - TecHealth.PNG' },
-              { name: 'Pulkesh Gautam', company: 'Vidyutam Verde', package: '3 Lakhs', image: '/assets/pulkesh_img.jpg', logo: '/assets/pulkesh_logo-Photoroom.png' },
-              { name: 'Ashish Chabra', company: 'EDS Wagon Tech', package: '3 Lakhs', image: '/assets/eds wagon.jpg', logo: '/assets/eds_logo.webp' },
-              { name: 'Harrish Babbar', company: 'escapekar ', package: '3 Lakhs', image: '/assets/escapekar.jpg', logo: '/assets/escapekar_logo.png' },
-              // { name: 'Simran Saini', company: 'Autodesk', package: '33 LPA', image: '/assets/success-4.jpeg', logo: '/assets/autodesk.png' },
+              { name: 'Ashish Chabra', company: 'EDS Wagon Tech', package: '18 Lakhs', image: '/assets/eds wagon.jpg', logo: '/assets/eds_logo.webp' },
+              { name: 'Shivang Tiwari', company: 'Techealth Apex', package: '6.5 Lakhs', image: '/assets/success-1.jpeg', logo: '/assets/Start-up-logos/TechHealth - TecHealth.PNG' },
+              { name: 'Pulkesh Gautam', company: 'Vidyutam Verde', package: '3 Lakhs', image: '/assets/pulkesh_img.jpg', logo: '/assets/Start-up-logos/Vidyutam Verde - Pulkesh Gautam.jpg' },
+              // { name: 'Harrish Babbar', company: 'EscapeKar', package: '3 Lakhs', image: '/assets/escapekar.jpg', logo: '/assets/Start-up-logos/EscapeKar - Harris Babbar.png' },
+              { name: 'Harrish Babbar', company: 'EscapeKar', package: '3 Lakhs', image: '/assets/escapekar.jpg', logo: '/assets/escapekar_logo.png' },
+              // { name: 'Rajat Soni', company: 'V2R AutoInfinite', package: '5 Lakhs', image: '/assets/GalleryImages/V2R.jpg', logo: '/assets/Start-up-logos/1. V2R AutoInfinite.jpg' },
+              // { name: 'Karan Agrawal', company: 'Indi Tech', package: '4 Lakhs', image: '/assets/success-3.jpeg', logo: '/assets/Start-up-logos/Inditech - Karan Aggrawal.png' },
             ].map((student, idx) => (
-              // Increase the Size of the Logos
-              <div key={idx} className="relative bg-gray-800 h-[450px] md:h-[600px] overflow-hidden group">
-                <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain" />
-                {/* Overlay removed as requested */}
-
-                <div className="absolute top-0 right-0 bg-brand-red rounded-bl-lg p-4">
-                  <div className="text-white text-xs mb-1">Funding</div>
-                  <div className="text-white font-bold text-2xl">{student.package}</div>
+              <div key={idx} className="relative bg-gray-800 h-[450px] md:h-[600px] overflow-hidden group rounded-2xl border border-white/5 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,0,0,0.4)]">
+                <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain transition-transform duration-700 group-hover:scale-110" />
+                
+                <div className="absolute top-0 right-0 bg-brand-red rounded-bl-3xl p-6 shadow-xl z-20">
+                  <div className="text-white/80 text-[10px] uppercase font-black tracking-widest mb-1">Grant Secured</div>
+                  <div className="text-white font-black text-2xl">{student.package}</div>
                 </div>
 
-                <div className="absolute top-8 left-6 bg-white/10 backdrop-blur-sm p-2 rounded-lg border border-white/5">
-                  <img src={student.logo} alt="" className="h-12 w-auto object-contain max-w-[140px]" /> {student.company ==='escapekar' ? <p className='text-white text-sm'>escapekar</p> : <img src={student.logo} alt="" className="h-12 w-auto object-contain max-w-[140px]" />}
+                <div className="absolute top-8 left-6 bg-white backdrop-blur-xl p-4 rounded-3xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-20 group-hover:scale-105 transition-all duration-500">
+                  <img src={student.logo} alt="" className="h-10 w-auto object-contain max-w-[180px]" />
                 </div>
 
-                <div className="absolute bottom-8 left-8">
-                  <div className="text-white text-4xl font-bold mb-2">{student.name}</div>
-                  <div className="text-white text-sm">~{student.company}</div>
+                <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/95 via-black/40 to-transparent z-10">
+                  <h4 className="text-white text-3xl font-black mb-1 drop-shadow-lg">{student.name}</h4>
+                  <p className="text-brand-red text-sm font-black uppercase tracking-[0.2em]">{student.company}</p>
                 </div>
               </div>
             ))}

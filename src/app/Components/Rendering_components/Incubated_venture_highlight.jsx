@@ -2,25 +2,45 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 // Static logos pool to assign to fetched startups (Backend missing some logos)
+// Comprehensive logo pool with specific keyword// Curated stories pool to provide professional descriptions when API data is missing/NIL
+const briefPool = [
+    { keywords: ["v2r", "autoinfinite"], text: "Revolutionizing the automotive sector with advanced, technology-driven solutions that enhance efficiency and drive sustainable growth." },
+    { keywords: ["lorro", "digital"], text: "Leading digital transformation for enterprises through innovative software solutions and high-velocity product engineering." },
+    { keywords: ["escape planner", "escapekar"], text: "A travel guidance platform helping people become better travelers through AI-driven recommendations for hidden gems and stays." },
+    { keywords: ["nhanks", "waste"], text: "Pioneering sustainable waste management solutions with a focus on recycling efficiency and environmental social impact." },
+    { keywords: ["indi tech", "inditech"], text: "Mentorship and engineering solutions scaling complex tech stacks for high-growth ventures." },
+    { keywords: ["juniva", "organics"], text: "Bridging the gap in the organic products market through sustainable sourcing and direct-to-consumer health solutions." },
+    { keywords: ["eds wagon"], text: "Award-winning environmental innovation focused on carbon reduction and sustainability, recognized by IIT Madras CZC." },
+    { keywords: ["juara"], text: "Harnessing the power of organic ingredients to provide scientifically-backed wellness and skin-care solutions." },
+    { keywords: ["thm", "millennium"], text: "Industry 4.0 solutions helping manufacturers optimize their production lines through IoT and real-time technical audits." },
+    { keywords: ["vidyutam", "verde"], text: "Green energy initiatives focused on bringing sustainable and clean power solutions to residential and commercial sectors." },
+    { keywords: ["innovative", "trash",], text: "Be a recycler,be a saver.Today, recycle for a better tomorrow." }
+];
+
 const logoPool = [
-    "/assets/Start-up-logos/5(3 - Karan Agrawal.png",
-    "/assets/Start-up-logos/1749710321866 - Aditya Raj Saxena.jpg",
-    "/assets/Start-up-logos/file_00000000fa6861f8b46d40c35e6646b9_conversation_id=67fe9c73-e260-8006-bab2-ec35ca4f9089 - Juara Organics.png",
-    "/assets/Start-up-logos/IMG-20231230-WA0023(2) - Anand Kumar.jpg",
-    "/assets/Start-up-logos/IMG-20250208-WA0007 - Shekhar kashyap.jpg",
-    "/assets/Start-up-logos/IMG-20250611-WA0000 - arpit kumar.jpg",
-    "/assets/Start-up-logos/IMG-20250612-WA0000 - JIGYASA GARG.jpg",
-    "/assets/Start-up-logos/IMG-20250612-WA0004 - Navneet Yaduvanshi.jpg",
-    "/assets/Start-up-logos/IMG-20250612-WA0004 - SHAGUN SHARMA.jpg",
-    "/assets/Start-up-logos/IMG-20250612-WA0005 - Mayank Dahiya.jpg",
-    "/assets/Start-up-logos/Logo - Harris Babbar.png",
-    "/assets/Start-up-logos/SAVE_20250611_152058 - Pulkesh Gautam.jpg",
-    "/assets/Start-up-logos/Screenshot_2025-03-06-23-58-39-73_6012fa4d4ddec268fc5c7112cbb265e7 - Aryan Mankotia.jpg",
-    "/assets/Start-up-logos/Screenshot_2025-06-12-18-15-12-052_com.whatsapp-edit - Vedant Daware.jpg",
-    "/assets/Start-up-logos/stacked wordmark black - ansh haritash.png",
-    "/assets/Start-up-logos/Techealth_logo - TecHealth.png",
-    "/assets/Start-up-logos/tHM LOGO - Abhishek Sharma.png",
-    "/assets/Start-up-logos/VeeGamma Logo Design in Gradient__endoftext__ - Vanshika.png"
+    { file: "aasyra - Navneet Yaduvanshi.jpg", keywords: ["aasyra"] },
+    { file: "Antrhonex- Aditya Raj Saxena.jpg", keywords: ["antrhonex", "anthronex"] },
+    { file: "ASME - arpit kumar.jpg", keywords: ["asme"] },
+    { file: "DefensIQ Tech - ansh haritash.png", keywords: ["defensiq", "defenciq"] },
+    { file: "EduAr - Mayank Dahiya.jpg", keywords: ["eduar", "edshire"] },
+    { file: "EscapeKar - Harris Babbar.png", keywords: ["escapekar", "escape planner"] },
+    { file: "Frii jal- Vedant Daware.jpg", keywords: ["friijal", "frii jal"] },
+    { file: "Inditech - Karan Aggrawal.png", keywords: ["inditech", "indi-tech", "indi tech"] },
+    { file: "JIGYASA GARG.jpg", keywords: ["jigyasa", "jigyasa garg"] },
+    { file: "Juara Organics.png", keywords: ["juara", "juniva"] },
+    { file: "Kulhad - Anand Kumar.jpg", keywords: ["kulhad"] },
+    { file: "PixelPeak- Aryan Mankotia.jpg", keywords: ["pixelpeak", "veritex"] },
+    { file: "TechHealth - TecHealth.PNG", keywords: ["techhealth"] },
+    { file: "tHM LOGO - Abhishek Sharma.png", keywords: ["thm", "millennium", "millenium"] },
+    { file: "UniifHub - Shekhar kashyap.jpg", keywords: ["unifhub", "uniifhub"] },
+    { file: "vedabox - SHAGUN SHARMA.jpg", keywords: ["vedabox", "mosquito"] },
+    { file: "VeeGamma Logo- Vanshika.png", keywords: ["veegamma", "vee gamma"] },
+    { file: "Vidyutam Verde - Pulkesh Gautam.jpg", keywords: ["vidyutam", "kakumei"] },
+    { file: "onspot.jpg", keywords: ["onspot"] },
+    { file: "/assets/eds_logo.webp", keywords: ["eds wagon"] },
+    { file: "1. V2R AutoInfinite.jpg", keywords: ["v2r", "autoinfinite"] },
+    { file: "Jagdev Organics.webp", keywords: ["jagdev"] },
+    { file: "innovative Trash tech.jpg", keywords: ["trash", "innovative"] }
 ];
 
 const IncubatedVentureHighlight = () => {
@@ -30,20 +50,53 @@ const IncubatedVentureHighlight = () => {
     const [isPaused, setIsPaused] = useState(false);
     const scrollRef = useRef(null);
 
+    // Helper to find the best matching logo
+    const findLogo = (startupName, index) => {
+        if (!startupName) return `/assets/Start-up-logos/${logoPool[index % logoPool.length].file}`;
+        
+        const name = startupName.toLowerCase();
+        const matched = logoPool.find(item => 
+            item.keywords.some(keyword => name.includes(keyword))
+        );
+        
+        if (matched) {
+            // Handle both relative assets and absolute paths
+            return matched.file.startsWith('/') ? matched.file : `/assets/Start-up-logos/${matched.file}`;
+        }
+        
+        const fallback = logoPool[index % logoPool.length];
+        return fallback.file.startsWith('/') ? fallback.file : `/assets/Start-up-logos/${fallback.file}`;
+    };
+
+    // Helper to find professional description
+    const findBrief = (startup, index) => {
+        const name = (startup.StartupName || "").toLowerCase();
+        const product = (startup.ProductName || "").toLowerCase();
+        
+        const matched = briefPool.find(item => 
+            item.keywords.some(keyword => name.includes(keyword) || product.includes(keyword))
+        );
+        
+        if (matched) return matched.text;
+        if (startup.ProductName && startup.ProductName !== "NIL") return startup.ProductName;
+        
+        return "Building innovative solutions for a better tomorrow through persistent engineering and visionary leadership.";
+    };
+
     // Fetch data from API
     useEffect(() => {
         const fetchStartups = async () => {
             try {
-                const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/getstartup');
+                const response = await axios.get((window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in') + '/getstartup');
                 const data = response.data;
 
-                // Map API data to component structure and assign logos from pool
-                const mappedVentures = data.slice(0, 18).map((startup, index) => ({
+                // Map API data and match with corresponding logos
+                const mappedVentures = data.slice(0, 20).map((startup, index) => ({
                     id: startup._id,
-                    logo: logoPool[index % logoPool.length], // Round-robin logo assignment from local pool
+                    logo: findLogo(startup.StartupName, index),
                     name: startup.StartupName,
                     founders: startup.FounderName,
-                    brief: startup.ProductName || "Building innovative solutions for a better tomorrow.",
+                    brief: findBrief(startup, index),
                     status: startup.RegistrationStatus || "Incubated"
                 }));
 
