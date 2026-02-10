@@ -36,6 +36,7 @@ import ECellPage from "./app/ecell/page";
 import VenturePulsePage from "./app/vp/page";
 
 import { initializeApi } from "./apiConfig";
+import ScrollToHash from "./app/utils/ScrollToHash";
 
 function App() {
   useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
     <div className="App">
 
       <Layout>
+        <ScrollToHash />
         <Routes>
           <Route path="/" element={<DashboardRev />} />
           <Route path="/dashboard" element={<DashboardRev />} />

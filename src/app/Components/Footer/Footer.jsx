@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "./footer.css";
 
 const Footer = () => {
@@ -33,9 +34,9 @@ const Footer = () => {
                             startups with the resources they need to scale and succeed.
                         </p>
                         
-                        <a href="/IncubateWithUs" className="apply-today-btn">
+                        <Link to="/IncubateWithUs" className="apply-today-btn">
                             APPLY TODAY <span>&#8594;</span>
-                        </a>
+                        </Link>
 
                          {/* Social Icons moved here to fit the "Stay Connected" theme */}
                          <div className="footer-socials">
@@ -58,11 +59,11 @@ const Footer = () => {
                     <div className="footer-column links-column">
                         <h3 className="footer-heading">Quick Links</h3>
                         <ul className="footer-links-list">
-                            <li><a href="/aboutUs">About Us</a></li>
-                            <li><a href="/vision">Mission & Vision</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/Startups">Our Portfolio</a></li>
-                            <li><a href="/Programs">Programs</a></li>
+                            <li><Link to="/aboutUs">About Us</Link></li>
+                            <li><Link to="/vision">Mission & Vision</Link></li>
+                            <li><Link to="/contact">Contact Us</Link></li>
+                            <li><Link to="/Startups">Our Portfolio</Link></li>
+                            <li><Link to="/Programs">Programs</Link></li>
                         </ul>
                     </div>
 
@@ -70,10 +71,10 @@ const Footer = () => {
                     <div className="footer-column links-column">
                         <h3 className="footer-heading">Explore</h3>
                         <ul className="footer-links-list">
-                            <li><a href="/Events">Events</a></li>
-                            <li><a href="/Gallery/Photos">Photo Gallery</a></li>
-                            <li><a href="/Gallery/Videos">Video Gallery</a></li>
-                            <li><a href="/IncubateWithUs">Incubation</a></li>
+                            <li><Link to="/Events">Events</Link></li>
+                            <li><Link to="/Gallery/Photos">Photo Gallery</Link></li>
+                            <li><Link to="/Gallery/Videos">Video Gallery</Link></li>
+                            <li><Link to="/IncubateWithUs">Incubation</Link></li>
                         </ul>
                     </div>
 

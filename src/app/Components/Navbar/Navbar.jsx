@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -30,20 +31,20 @@ const Navbar = () => {
     <div className="navbar-main-experimental-setup">
       <nav className={`navbar`}>
         <div className="navbar-logo">
-          <a href="/">
+          <Link to="/">
             <img
               src="/assets/CGCUNIVERSITYMOHALI_logo.png"
               alt="CGC University"
               className="cgc-university-logo-updated"
             />
-          </a>
-          <a href="/">
+          </Link>
+          <Link to="/">
             <img
               src="/assets/venture-nest-logo-bg-remove.png"
               alt="Venture Nest"
               className="venture-nest-logo-bg-removed"
             />
-          </a>
+          </Link>
         </div>
 
         <button
@@ -72,8 +73,8 @@ const Navbar = () => {
               </a>
             </li>
             <li className="ecell-nav-item">
-              <a
-                href="/VenturePulse"
+              <Link
+                to="/VenturePulse"
                 className="ecell-highlight-link"
                 onClick={(e) => {
                   playSound(clickSound);
@@ -82,41 +83,41 @@ const Navbar = () => {
                 onMouseEnter={() => playSound(hoverSound)}
               >
                 Venture Pulse
-              </a>
+              </Link>
             </li>
 
             <li className="join-us-btn-navbar-extra upper-navbar-menu-incubate-btn">
-              <a href="/IncubateWithUs" className="navbar-links-joinus-btn-text" onClick={closeMenu}>
+              <Link to="/IncubateWithUs" className="navbar-links-joinus-btn-text" onClick={closeMenu}>
                 Incubate with us
-              </a>
+              </Link>
             </li>
           </ul>
           <ul className={`nav-links ${isMenuOpen ? "nav-active" : ""}`}>
             <li>
-              <a href="#home" onClick={closeMenu}>Home</a>
+              <Link to="/#home" onClick={closeMenu}>Home</Link>
             </li>
 
             <li>
-              <a href="#about-detailed" onClick={closeMenu}>About</a>
+              <Link to="/#about" onClick={closeMenu}>About</Link>
             </li>
 
             <li>
-              <a href="#council" onClick={closeMenu}>Council Members</a>
+              <Link to="/#council" onClick={closeMenu}>Council Members</Link>
             </li>
 
             <li>
-              <a href="#partners" onClick={closeMenu}>Partners</a>
+              <Link to="/#partners" onClick={closeMenu}>Partners</Link>
             </li>
 
-            <li><a href="#programs" onClick={closeMenu}>Programs</a></li>
-            <li><a href="#portfolio" onClick={closeMenu}>Portfolio</a></li>
+            <li><Link to="/#programs" onClick={closeMenu}>Programs</Link></li>
+            <li><Link to="/#portfolio" onClick={closeMenu}>Portfolio</Link></li>
 
             <li>
-              <a href="#events" onClick={closeMenu}>Events</a>
+              <Link to="/#events" onClick={closeMenu}>Events</Link>
             </li>
 
             <li>
-              <a href="#gallery" onClick={closeMenu}>Gallery</a>
+              <Link to="/#gallery" onClick={closeMenu}>Gallery</Link>
             </li>
           </ul>
         </div>
