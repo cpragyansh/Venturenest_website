@@ -60,10 +60,11 @@ const Navbar = () => {
           <ul className={`nav-links ${isMenuOpen ? "nav-active" : ""}`}>
             <li className="ecell-nav-item">
               <a
-                href="#"
+                href="https://ecell-2pbz.vercel.app/"
                 className="ecell-highlight-link"
-                onClick={(e) => {
-                  e.preventDefault();
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
                   playSound(clickSound);
                   closeMenu();
                 }}
