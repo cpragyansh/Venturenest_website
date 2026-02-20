@@ -105,7 +105,7 @@ const Mslider = () => {
           }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
+          dragElastic={0.7}
           onDragEnd={(e, { offset, velocity }) => {
             const swipe = swipePower(offset.x, velocity.x);
 
@@ -120,6 +120,8 @@ const Mslider = () => {
             width: '100%',
             height: '100%',
             cursor: 'grab',
+            touchAction: 'pan-y',
+            willChange: 'transform',
           }}
           whileTap={{ cursor: 'grabbing' }}
         >
@@ -127,6 +129,9 @@ const Mslider = () => {
             component="img"
             src={slides[currentIndex]}
             alt={`Venturenest Slide ${currentIndex + 1}`}
+            fetchpriority="high"
+            decoding="sync"
+            loading="eager"
             sx={{
               width: '100%',
               height: '100%',

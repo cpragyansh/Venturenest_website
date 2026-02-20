@@ -1,22 +1,24 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Close, ZoomIn, ZoomOut, RestartAlt } from "@mui/icons-material";
 import { Link } from 'react-router-dom';
 import "./global.css";
 import Mslider from '../MainSlider/Mslider';
-import IncubatedStartupsRendering from '../Rendering_components/Incubated_startups_rendering';
-import IncubatedVentureHighlight from '../Rendering_components/Incubated_venture_highlight';
-import CouncilHighlight from '../Rendering_components/Council_highlight';
-import PartnerHighlight from '../Rendering_components/Partner_highlight';
-import Stats from './Stats';
-// import GallerySection from './GallerySection';
-import ProgramsSection from './ProgramsSection';
-import StartupInventorySection from './StartupInventorySection';
-import StartupLogoCloud from './StartupLogoCloud';
-import Event from '../Event/Event';
-// import AboutPage from '../../about/page.jsx';
-// import ContactSection from '../../contact/page.jsx';
+
+// Lazy Load Components for Performance
+const IncubatedStartupsRendering = React.lazy(() => import('../Rendering_components/Incubated_startups_rendering'));
+const IncubatedVentureHighlight = React.lazy(() => import('../Rendering_components/Incubated_venture_highlight'));
+const CouncilHighlight = React.lazy(() => import('../Rendering_components/Council_highlight'));
+const PartnerHighlight = React.lazy(() => import('../Rendering_components/Partner_highlight'));
+const Stats = React.lazy(() => import('./Stats'));
+// const GallerySection = React.lazy(() => import('./GallerySection'));
+const ProgramsSection = React.lazy(() => import('./ProgramsSection'));
+const StartupInventorySection = React.lazy(() => import('./StartupInventorySection'));
+const StartupLogoCloud = React.lazy(() => import('./StartupLogoCloud'));
+const Event = React.lazy(() => import('../Event/Event'));
+// const AboutPage = React.lazy(() => import('../../about/page.jsx'));
+// const ContactSection = React.lazy(() => import('../../contact/page.jsx'));
 
 export default function Index() {
   const [photos, setPhotos] = useState([]);
@@ -29,11 +31,7 @@ export default function Index() {
         const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/photos');
         const data = Array.isArray(response.data) ? response.data : [];
         if (data.length > 0) {
-          let domePhotos = [...data];
-          while (domePhotos.length < 150) {
-            domePhotos = [...domePhotos, ...data];
-          }
-          setPhotos(domePhotos.slice(0, 150));
+          setPhotos(data);
         }
       } catch (error) {
         console.error('Error fetching photos:', error);
@@ -198,18 +196,16 @@ export default function Index() {
         </div>
       </section>
 
-      {/* <div id="about-detailed">
-        <AboutPage />
-      </div> */}
 
-      <section className="bg-white py-4 md:py-8 border-y border-gray-100 overflow-hidden">
+
+      <section className="bg-white py-4 md:py-8 border-y border-gray-100 overflow-hidden" style={{ contain: 'content' }}>
         <div className="container mx-auto px-4 mb-2 md:mb-4 text-center">
           {/* <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span> */}
           <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Our Catalyst Partners </h3>
         </div>
 
         <div className="relative w-full overflow-hidden group">
-          <div className="flex gap-2 md:gap-4 items-center animate-scroll whitespace-nowrap min-w-full">
+          <div className="flex gap-2 md:gap-4 items-center animate-scroll whitespace-nowrap min-w-full" style={{ willChange: 'transform', transform: 'translate3d(0,0,0)' }}>
             {/* Duplicate list 3 times to ensure smooth scrolling on wide screens */}
             {[...startupLogos, ...startupLogos, ...startupLogos].map((logo, idx) => (
               <div key={idx} className="flex-shrink-0 w-40 h-28 flex items-center justify-center transition-all duration-500 opacity-90 hover:opacity-100 hover:scale-110">
@@ -217,6 +213,8 @@ export default function Index() {
                   src={`/assets/Start-up-logos/${logo}`}
                   alt="Startup Logo"
                   className="max-w-full max-h-full object-contain"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             ))}
@@ -225,8 +223,8 @@ export default function Index() {
 
         <style>{`
           @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-33.33%); }
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-33.33%, 0, 0); }
           }
           .animate-scroll {
             animation: scroll 60s linear infinite;
@@ -336,15 +334,21 @@ export default function Index() {
       </section>
 
       <div id="council">
-        <CouncilHighlight />
+        <Suspense fallback={<div className="h-20 bg-gray-50 animate-pulse rounded-xl"></div>}>
+          <CouncilHighlight />
+        </Suspense>
       </div>
 
       <section className="py-0">
-        <Stats />
+        <Suspense fallback={null}>
+          <Stats />
+        </Suspense>
       </section>
 
       <div id="partners">
-        <PartnerHighlight />
+        <Suspense fallback={<div className="h-20 bg-gray-50 animate-pulse rounded-xl"></div>}>
+          <PartnerHighlight />
+        </Suspense>
       </div>
 
       {/* Company Logos */}
@@ -450,17 +454,29 @@ export default function Index() {
 
 
       <div id="programs">
-        <ProgramsSection />
+        <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl"></div>}>
+          <ProgramsSection />
+        </Suspense>
       </div>
       <div id="events">
-        {events.length > 0 && <Event events={events} />}
+        <Suspense fallback={null}>
+          {events.length > 0 && <Event events={events} />}
+        </Suspense>
       </div>
-      <IncubatedStartupsRendering />
+      <Suspense fallback={null}>
+        <IncubatedStartupsRendering />
+      </Suspense>
       <div id="portfolio">
-        <StartupInventorySection />
+        <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl"></div>}>
+          <StartupInventorySection />
+        </Suspense>
       </div>
-      <IncubatedVentureHighlight />
-      <StartupLogoCloud />
+      <Suspense fallback={null}>
+        <IncubatedVentureHighlight />
+      </Suspense>
+      <Suspense fallback={<div className="h-20 bg-white animate-pulse"></div>}>
+        <StartupLogoCloud />
+      </Suspense>
 
 
       {/* North India's Fastest Growing Institute - Redesigned and Swapped */}
@@ -586,7 +602,7 @@ export default function Index() {
                 className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
                 onClick={() => setSelectedImage(photo)}
               >
-                <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
                   <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
                 </div>
@@ -603,7 +619,7 @@ export default function Index() {
                 className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
                 onClick={() => setSelectedImage(photo)}
               >
-                <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" />
+                <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-all duration-700" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
                   <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
                 </div>
