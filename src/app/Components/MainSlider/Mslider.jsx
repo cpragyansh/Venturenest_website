@@ -69,6 +69,11 @@ const Mslider = () => {
 
   if (slides.length === 0) return null;
 
+  const swipeConfidenceThreshold = 10000;
+  const swipePower = (offset, velocity) => {
+    return Math.abs(offset) * velocity;
+  };
+
   return (
     <Box
       sx={{
@@ -92,11 +97,25 @@ const Mslider = () => {
             x: { type: "tween", duration: 0.5, ease: "easeInOut" },
             opacity: { duration: 0.5 }
           }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={1}
+          onDragEnd={(e, { offset, velocity }) => {
+            const swipe = swipePower(offset.x, velocity.x);
+
+            if (swipe < -swipeConfidenceThreshold) {
+              handleManualNav(nextSlide);
+            } else if (swipe > swipeConfidenceThreshold) {
+              handleManualNav(prevSlide);
+            }
+          }}
           style={{
             position: 'absolute',
             width: '100%',
             height: '100%',
+            cursor: 'grab',
           }}
+          whileTap={{ cursor: 'grabbing' }}
         >
           <Box
             component="img"

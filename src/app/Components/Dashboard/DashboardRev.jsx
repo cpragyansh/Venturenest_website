@@ -202,14 +202,14 @@ export default function Index() {
         <AboutPage />
       </div> */}
 
-      <section className="bg-white py-12 border-y border-gray-100 overflow-hidden">
-        <div className="container mx-auto px-4 mb-8 text-center">
+      <section className="bg-white py-6 md:py-12 border-y border-gray-100 overflow-hidden">
+        <div className="container mx-auto px-4 mb-4 md:mb-8 text-center">
           {/* <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span> */}
           <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Our Catalyst Partners </h3>
         </div>
 
         <div className="relative w-full overflow-hidden group">
-          <div className="flex gap-16 items-center animate-scroll whitespace-nowrap min-w-full">
+          <div className="flex gap-8 md:gap-16 items-center animate-scroll whitespace-nowrap min-w-full">
             {/* Duplicate list 3 times to ensure smooth scrolling on wide screens */}
             {[...startupLogos, ...startupLogos, ...startupLogos].map((logo, idx) => (
               <div key={idx} className="flex-shrink-0 w-40 h-28 flex items-center justify-center transition-all duration-500 opacity-90 hover:opacity-100 hover:scale-110">
@@ -240,7 +240,7 @@ export default function Index() {
 
 
       {/* Stats Section */}
-      <section id="impact" className="bg-white py-20">
+      <section id="impact" className="bg-white pt-0 pb-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}

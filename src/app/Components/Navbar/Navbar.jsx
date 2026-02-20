@@ -47,15 +47,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <button
-          className={`hamburger ${isMenuOpen ? "open" : ""}`}
-          onClick={toggleMenu}
-        >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
-
         <div className="bothnavbar-wrapper">
           <ul className={`nav-links ${isMenuOpen ? "nav-active" : ""}`}>
             <li className="ecell-nav-item">
@@ -122,6 +113,15 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+
+        <button
+          className={`hamburger ${isMenuOpen ? "open" : ""}`}
+          onClick={toggleMenu}
+        >
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </button>
       </nav>
     </div>
   );
