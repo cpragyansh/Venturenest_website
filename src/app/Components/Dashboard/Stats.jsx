@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const Stats = () => {
   return (
-    <section className="relative min-h-[85vh] pt-24 lg:pt-28 pb-12 overflow-hidden font-jakarta bg-[#0a0a0a]">
+    <section className="relative min-h-[85vh] pt-8 md:pt-24 lg:pt-28 pb-12 overflow-hidden font-jakarta bg-[#0a0a0a]">
       {/* Background with Dark Overlay */}
       <div className="absolute inset-0 z-0">
         <img 

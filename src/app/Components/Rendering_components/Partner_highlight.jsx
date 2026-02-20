@@ -100,7 +100,7 @@ const PartnerHighlight = () => {
     }, [activePartner, partners]);
 
     return (
-        <section className="partner-section font-jakarta relative min-h-[600px] flex items-center py-20 overflow-hidden bg-[#fafafa]">
+        <section className="partner-section font-jakarta relative min-h-[600px] flex items-center  py-8 md:py-20 overflow-hidden bg-[#fafafa]">
             {/* RAW BACKGROUND IMAGE WITH LOW OPACITY */}
             {activePartner && (
                 <div 

@@ -202,14 +202,14 @@ export default function Index() {
         <AboutPage />
       </div> */}
 
-      <section className="bg-white py-6 md:py-12 border-y border-gray-100 overflow-hidden">
-        <div className="container mx-auto px-4 mb-4 md:mb-8 text-center">
+      <section className="bg-white py-4 md:py-8 border-y border-gray-100 overflow-hidden">
+        <div className="container mx-auto px-4 mb-2 md:mb-4 text-center">
           {/* <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Network</span> */}
           <h3 className="text-3xl font-bold font-jakarta mt-2 text-brand-dark">Our Catalyst Partners </h3>
         </div>
 
         <div className="relative w-full overflow-hidden group">
-          <div className="flex gap-8 md:gap-16 items-center animate-scroll whitespace-nowrap min-w-full">
+          <div className="flex gap-2 md:gap-4 items-center animate-scroll whitespace-nowrap min-w-full">
             {/* Duplicate list 3 times to ensure smooth scrolling on wide screens */}
             {[...startupLogos, ...startupLogos, ...startupLogos].map((logo, idx) => (
               <div key={idx} className="flex-shrink-0 w-40 h-28 flex items-center justify-center transition-all duration-500 opacity-90 hover:opacity-100 hover:scale-110">
@@ -240,11 +240,11 @@ export default function Index() {
 
 
       {/* Stats Section */}
-      <section id="impact" className="bg-white pt-0 pb-20">
+      <section id="impact" className="bg-white pt-4 pb-4">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Left Content */}
-            <div className="max-w-2xl py-8">
+            <div className="max-w-2xl pt-4">
               <h2 className="text-brand-red text-3xl sm:text-4xl md:text-6xl font-black font-jakarta mb-6 md:mb-10 leading-[1.1] tracking-tighter">
                 We Don't Just <br />
                 <span className="text-brand-dark">Promise Growth</span> — <br />
@@ -264,7 +264,7 @@ export default function Index() {
                 <span className="text-brand-dark text-xs font-black uppercase tracking-[0.2em] opacity-40">Impact Report 2024-26</span>
               </div>
 
-              <div className="mt-12">
+              <div className="pt-4">
                 <Link to="/IncubateWithUs" className="inline-flex items-center space-x-4 group bg-brand-dark text-white px-8 py-4 rounded-xl font-bold uppercase text-sm hover:bg-black transition-all shadow-2xl">
                   <span>Scale Your Impact →</span>
                 </Link>
@@ -299,8 +299,9 @@ export default function Index() {
                   <div className="text-white text-4xl sm:text-5xl md:text-6xl font-black mb-1">100+</div>
                   <div className="text-white/80 text-[14px] md:text-[16px] font-bold uppercase tracking-wider">Startups Incubated</div>
                 </div>
-                <div className="mt-4 w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin-slow"></div>
-                <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+                {/* Add the PNG of assured image here */}
+                  <img src="/assets/newImage.svg" alt="Startups Graph" className="absolute bottom-0 right-0 w-full h-32 object-contain opacity-20 group-hover:scale-110 transition-transform duration-500" />
+                {/* <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div> */}
               </div>
 
               {/* Patents Stat - Bar Graph Style */}

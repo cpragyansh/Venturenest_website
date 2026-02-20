@@ -214,7 +214,7 @@ const CouncilHighlight = () => {
                                 <button
                                     key={cat.id}
                                     onClick={() => setActiveCategory(cat.id)}
-                                    className={`flex-1 min-w-[140px] p-5 group transition-all duration-300 relative flex flex-col items-center justify-center text-center ${
+                                    className={`flex-1 min-w-[150px] p-5 group transition-all duration-300 relative flex flex-col items-center justify-center text-center ${
                                         activeCategory === cat.id ? 'bg-[#9E0203] text-white' : 'hover:bg-gray-50'
                                     }`}
                                 >
@@ -242,7 +242,7 @@ const CouncilHighlight = () => {
                     <div className="flex items-center justify-between mb-6">
                         <div className="space-y-1">
                              <h3 className="text-lg font-black text-black tracking-tighter uppercase leading-none">
-                                {activeCategory} <span className="text-[#9E0203]">Advisory Group</span>
+                                {activeCategory} <span className="text-[#9E0203]">Group</span>
                             </h3>
                             <p className="text-[9px] text-gray-400 font-bold uppercase tracking-[0.2em]">
                                 Selective faculty of industry leaders
@@ -293,9 +293,9 @@ const CouncilHighlight = () => {
                                                 className="w-full h-full object-cover rounded-full"
                                             />
                                         </div>
-                                        {activeTab === member.id && (
-                                            <div key={activeTab} className="absolute -bottom-1.5 left-0 h-1 bg-[#9E0203] rounded-full animate-progress transition-all"></div>
-                                        )}
+                                        {/* {activeTab === member.id && (
+                                            <div key={activeTab} className="absolute mt-2 -bottom-1.5 left-0 h-1 bg-[#9E0203] rounded-full animate-progress transition-all"></div>
+                                        )} */}
                                     </div>
                                 ))
                             ) : (

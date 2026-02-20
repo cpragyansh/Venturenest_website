@@ -15,6 +15,11 @@ const Mslider = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
+    if (isMobile) {
+      setSlides(['/assets/Limca_Book_of_Records_2026.png', '/assets/Pulkesh_carousel1.png']);
+      return;
+    }
+
     const fetchImages = async () => {
       try {
         const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/images');
@@ -25,7 +30,7 @@ const Mslider = () => {
       }
     };
     fetchImages();
-  }, []);
+  }, [isMobile]);
 
   const slideVariants = {
     enter: (direction) => ({
@@ -79,7 +84,8 @@ const Mslider = () => {
       sx={{
         position: 'relative',
         width: '100%',
-        height: { xs: '60vh', sm: '70vh', md: '80vh', lg: 'calc(100vh - 80px)' },
+        height: { xs: 'auto', sm: '70vh', md: '80vh', lg: 'calc(100vh - 80px)' },
+        aspectRatio: { xs: '4/3', sm: 'auto' },
         borderRadius: { xs: 0, md: 0 }, // Removed border radius for a more "full width" immersive look
         overflow: 'hidden',
         backgroundColor: '#000',
@@ -124,7 +130,7 @@ const Mslider = () => {
             sx={{
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
+              objectFit: { xs: 'contain', sm: 'cover' },
               objectPosition: 'center',
             }}
           />
