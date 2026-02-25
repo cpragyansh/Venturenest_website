@@ -5,15 +5,9 @@ import "./Navbar.css";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Sound effects logic
-  const playSound = (url) => {
-    const audio = new Audio(url);
-    audio.volume = 0.3;
-    audio.play().catch(err => console.log("Sound play error:", err));
-  };
-
-  const hoverSound = "https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"; // Subtle hover
-  const clickSound = "https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"; // Clean click
+  useEffect(() => {
+    // Optional scroll logic
+  }, []);
 
   useEffect(() => {
     // Optional scroll logic
@@ -56,10 +50,8 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
-                  playSound(clickSound);
                   closeMenu();
                 }}
-                onMouseEnter={() => playSound(hoverSound)}
               >
                 E-Cell
               </a>
@@ -69,10 +61,8 @@ const Navbar = () => {
                 to="/VenturePulse"
                 className="ecell-highlight-link"
                 onClick={(e) => {
-                  playSound(clickSound);
                   closeMenu();
                 }}
-                onMouseEnter={() => playSound(hoverSound)}
               >
                 Venture Pulse
               </Link>
