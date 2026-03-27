@@ -21,11 +21,11 @@ const Mslider = () => {
     };
     
     // Check initially
-    checkMobile();
-    
-    // Add event listener
-    window.addEventListener('resize', checkMobile);
-    
+      checkMobile();
+      
+      // Add event listener
+      window.addEventListener('resize', checkMobile);
+      
     // Cleanup
     return () => window.removeEventListener('resize', checkMobile);
   }, []);

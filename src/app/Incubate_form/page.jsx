@@ -111,7 +111,7 @@ export default function IncubateFormPage() {
       </section>
 
       {/* 2. BENTO GRID - CLEAN VERSION */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
              <span className="text-[#a40f19] font-black uppercase tracking-[0.4em] text-[10px] block mb-2">The Ecosystem Advantage</span>

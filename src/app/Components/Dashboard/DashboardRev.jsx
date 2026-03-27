@@ -359,10 +359,11 @@ export default function Index() {
 
       {/* Student Cards Section */}
       <InViewRenderer minHeight="600px" rootMargin="400px">
-        <section className="bg-brand-red pt-20 pb-10">
+        <section className="bg-brand-red pt-20 pb-4">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
+
                 { name: 'Ashish Chabra', company: 'EDS Wagon Tech', package: '18 Lakhs', image: '/assets/eds wagon.jpg', logo: '/assets/eds_logo.webp' },
                 { name: 'Shivang Tiwari', company: 'Techealth Apex', package: '6.5 Lakhs', image: '/assets/success-1.jpeg', logo: '/assets/Start-up-logos/TechHealth - TecHealth.PNG' },
                 { name: 'Pulkesh Gautam', company: 'Vidyutam Verde', package: '3 Lakhs', image: '/assets/pulkesh_img.jpg', logo: '/assets/Start-up-logos/Vidyutam Verde - Pulkesh Gautam.jpg' },
@@ -370,6 +371,10 @@ export default function Index() {
                 { name: 'Harrish Babbar', company: 'EscapeKar', package: '3 Lakhs', image: '/assets/escapekar.jpg', logo: '/assets/escapekar_logo.png' },
                 // { name: 'Rajat Soni', company: 'V2R AutoInfinite', package: '5 Lakhs', image: '/assets/GalleryImages/V2R.jpg', logo: '/assets/Start-up-logos/1. V2R AutoInfinite.jpg' },
                 // { name: 'Karan Agrawal', company: 'Indi Tech', package: '4 Lakhs', image: '/assets/success-3.jpeg', logo: '/assets/Start-up-logos/Inditech - Karan Aggrawal.png' },
+                // { name: 'Grooming Young Minds Innovative Pvt. Ltd.', company: 'Grooming Young Minds Innovative Pvt. Ltd.', package: '23 Lakhs', image: '/assets/grooming_young_minds.jpg', logo: '/assets/grooming_young_minds_logo.png' },
+                { name: 'DILTAK.AI HealthTech (OPC) Pvt. Ltd.', company: 'DILTAK.AI HealthTech (OPC) Pvt. Ltd.', package: '3 Lakhs', image: '/assets/diltak_founder.jpeg', logo: '/assets/diltak_ai_logo.jpeg' },
+                { name: 'NeuroPixelPeak Private Limited', company: 'NeuroPixelPeak Private Limited', package: '20 Lakhs', image: '/assets/npp.jpeg', logo: '/assets/npp_logo.png' },
+                // { name: 'Travnext Pvt. Ltd.', company: 'Travnext Pvt. Ltd.', package: '25 Lakhs', image: '/assets/travnext.jpg', logo: '/assets/travnext_logo.png' },
               ].map((student, idx) => (
                 <div key={idx} className="relative bg-gray-800 h-[450px] md:h-[600px] overflow-hidden group rounded-2xl border border-white/5 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,0,0,0.4)]">
                   <img src={student.image} alt={student.name} className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain transition-transform duration-700" />
@@ -401,7 +406,7 @@ export default function Index() {
 
       {/* What Makes Venturenest Special */}
       <InViewRenderer minHeight="500px" rootMargin="400px">
-        <section className="bg-brand-red py-20">
+        <section className="bg-brand-red  pb-20 md:py-20">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-16">
               {/* Left Content */}

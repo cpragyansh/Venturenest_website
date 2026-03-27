@@ -41,7 +41,7 @@ const ProgramsSection = () => {
   }, []);
 
   return (
-    <section id="programs" className="py-12 bg-white font-jakarta overflow-hidden">
+    <section id="programs" className="py-12 md:pt-0 bg-white font-jakarta overflow-hidden">
       <div className="container mx-auto px-6">
         {/* Compact Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
