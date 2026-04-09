@@ -2,15 +2,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    padding: 3rem 2rem;
-    margin: 2rem auto;
+    gap: 28px;
+    /* Reduced from 3rem → 1.25rem to remove dead space above Welcome heading */
+    padding: 1.25rem 2rem;
+    margin: 0.75rem auto;
     width: 100%;
     max-width: 1200px;
 }
 
 .vn-title-icon-placeholder {
-    width: clamp(100px, 12vw, 180px);
+    width: clamp(80px, 10vw, 160px);
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -31,25 +32,26 @@
     line-height: normal;
     margin: 0;
     font-weight: 900;
-    white-space: nowrap;
+    /* Removed white-space: nowrap — it prevented fluid wrapping on mobile */
+    white-space: normal;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.3em;
+    /* Prevent single words from breaking mid-character on any screen */
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 .welcome-blue {
     color: #23409d;
-    /* Darker Deep Blue */
     letter-spacing: 0.5rem;
     text-shadow: 2px 2px 0px #A40C1A;
-    /* Solid Red Offset */
 }
 
 .welcome-red {
     color: #A40C1A;
-    /* Deep Red */
     letter-spacing: 0.5rem;
     text-shadow: 2px 2px 0px #1A4880;
-    /* Solid Blue Offset */
 }
 
 @keyframes welcomeFadeIn {
@@ -982,14 +984,8 @@
 
 
 .partners-section {
-    /* position: relative;  */
-    /* This sets up a positioning context for the child elements */
     width: 100%;
-    /* Adjust to your desired width */
-    /* height: 50vw; */
-    /* Adjust to your desired height */
     overflow: hidden;
-    /* Hide anything that overflows */
     background-image: url("../../../../public/assets/corosuel-bg.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -997,6 +993,12 @@
     padding-top: 4em;
     padding-bottom: 5em;
     margin: auto;
+    /*
+     * Defer rendering of this off-screen section until the user
+     * is about to scroll to it — reduces initial LCP/INP cost.
+     */
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
 }
 
 
@@ -2388,3 +2390,39 @@
 .fancy-apply-button:hover::before {
     width: 100%;
 }
+
+/* ============================================================
+   MOBILE TYPOGRAPHY FIXES (Issue #3)
+   Prevent "VENTURENEST" from breaking mid-character on phones.
+   font-size uses clamp so it is fluid, not fixed.
+============================================================ */
+@media (max-width: 480px) {
+    .welcome-container {
+        flex-direction: column;
+        gap: 12px;
+        padding: 0.75rem 1rem;
+        margin: 0.5rem auto;
+    }
+
+    .welcome-text {
+        font-size: clamp(1.5rem, 8vw, 2.4rem);
+        letter-spacing: 0.15rem;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .vn-title-icon-placeholder {
+        width: clamp(56px, 18vw, 90px);
+    }
+}
+
+/* ============================================================
+   PERFORMANCE — below-fold sections (Issue #5)
+   content-visibility: auto defers paint + layout of sections
+   the user hasn't reached yet, freeing up main-thread time
+   for the LCP element and reducing INP latency.
+============================================================ */
+.application-section-container {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 700px;
+}

@@ -28,7 +28,16 @@ const VentureNestIntro = () => {
         </div>
 
         <div className="vn-right">
-          <div className="vn-logo-placeholder"> <img src="/assets/cgc_venturenest_logo_n1-modified.png" alt="" /></div>
+          <div className="vn-logo-placeholder">
+            <img
+              src="/assets/cgc_venturenest_logo_n1-modified.png"
+              alt="CGC VentureNest Logo"
+              loading="lazy"
+              decoding="async"
+              width="320"
+              height="320"
+            />
+          </div>
         </div>
       </div>
 

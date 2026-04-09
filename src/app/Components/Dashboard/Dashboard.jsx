@@ -1,24 +1,21 @@
-// // "use client"
-
-import React, { useEffect, useState } from 'react';
-
-import HeroSection from '../HeroSection/HeroSection';
-// import { scrollanimation } from './scrollAnimation';
+import React, { useEffect, useState, lazy, Suspense, useCallback } from 'react';
 import "./dashboard.css";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import axios from 'axios';
 
-import axios from 'axios'; // Import axios for API calls
+// ── Critical above-fold components (eager load) ──
 import HeroCarousel from '../MainSlider/HeroCarousel';
-import PartnersSection from '../partners_slider/partners_slider';
-import NumberSection from '../Numbers_section/Numbers_section';
-import StarredEvents from '../StarredEvents/StarredEvents';
-import InspirationalStories from '../Inspirational_stories/Inspirational_stories';
-import HowWeSupportYou from '../HowWeWork/HowWeWork';
-import Video from '../VideoCorosuel/Video';
-import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
 import VentureNestIntro from '../../New_components/Component_2/Component_2';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+
+// ── Below-fold components (lazy-loaded for better LCP / INP) ──
+const HowWeSupportYou      = lazy(() => import('../HowWeWork/HowWeWork'));
+const PartnersSection      = lazy(() => import('../partners_slider/partners_slider'));
+const NumberSection        = lazy(() => import('../Numbers_section/Numbers_section'));
+const StarredEvents        = lazy(() => import('../StarredEvents/StarredEvents'));
+const InspirationalStories = lazy(() => import('../Inspirational_stories/Inspirational_stories'));
+
+// framer-motion — only needed for the Apply button interaction
+import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 // --- Colors for Background ---
 const COLORS = {
@@ -147,16 +144,16 @@ const MagneticButton = ({ children, className }) => {
 
 const Dashboard = () => {
 
-    const [starredEvents, setStarredEvents] = useState([]); // State to hold starred events
+    const [starredEvents, setStarredEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [starredStories, setStarredStories] = useState([]);
 
-
-    // / Function to fetch starred events
     const fetchStarredEvents = async () => {
         try {
-            const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/starred-events'); // Adjust the API path if necessary
+            const response = await axios.get(
+                (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in') + '/starred-events'
+            );
             setStarredEvents(response.data);
         } catch (err) {
             console.error("Error fetching starred events:", err);
@@ -165,21 +162,40 @@ const Dashboard = () => {
             setLoading(false);
         }
     };
+
     const fetchStarredStories = async () => {
         try {
-            const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/starred-stories');
-            setStarredStories(response.data);  // Assuming the response contains the array of starred stories
+            const response = await axios.get(
+                (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in') + '/starred-stories'
+            );
+            setStarredStories(response.data);
         } catch (error) {
             console.error("Error fetching starred stories:", error);
         }
-
     };
-    // Fetch starred events when the Component mounts
+
     useEffect(() => {
-        fetchStarredStories();
-        fetchStarredEvents(); // Fetch events from the backend
-        // scrollanimation();
-        // Initialize the scroll animation when the Component mounts
+        // Defer non-critical data fetches so they don’t compete with LCP
+        const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+        idle(() => {
+            fetchStarredStories();
+            fetchStarredEvents();
+        });
+
+        // Lazy AOS — initialise only after first paint so it doesn’t
+        // block the LCP frame or trigger layout shifts during load.
+        idle(() => {
+            import('aos').then(({ default: AOS }) => {
+                import('aos/dist/aos.css');
+                AOS.init({
+                    offset: 100,
+                    duration: 700,
+                    easing: 'ease-out',
+                    once: true,
+                    mirror: false,
+                });
+            });
+        });
     }, []);
 
 
@@ -380,7 +396,9 @@ const Dashboard = () => {
     </div>
 </div> */}
 
-            <HowWeSupportYou />
+            <Suspense fallback={<div style={{ height: '60vh' }} />}>
+                <HowWeSupportYou />
+            </Suspense>
 
 
 
@@ -433,7 +451,9 @@ const Dashboard = () => {
     </div>
 </div> */}
 
-            <PartnersSection />
+            <Suspense fallback={<div style={{ height: '300px' }} />}>
+                <PartnersSection />
+            </Suspense>
 
 
             <div className="application-section-container" data-aos="fade-up" data-aos-duration="1000" style={{ boxShadow: "0px -12px 8px rgba(0, 0, 0, 0.25)", marginTop: "0px", padding: "20px" }}>
@@ -549,7 +569,9 @@ const Dashboard = () => {
         </div>
     </div> */}
 
-            <NumberSection />
+            <Suspense fallback={<div style={{ height: '60vh', background: 'url(/assets/section-3-bg-img.jpg) center/cover' }} />}>
+                <NumberSection />
+            </Suspense>
 
             {/* <!-- continuously improving section ends here --> */}
             {/* Starred Events Section */}
@@ -680,45 +702,21 @@ const Dashboard = () => {
 
 </div> */}
 
-            {/* Premium Background Container for both News and Stories */}
+            {/* News & Stories — deferred, below fold */}
             <Box sx={{
                 position: 'relative',
                 overflow: 'hidden',
                 bgcolor: '#fafafa',
                 pb: 10,
-                borderTop: '1px solid rgba(0,0,0,0.05)'
+                borderTop: '1px solid rgba(0,0,0,0.05)',
+                /* content-visibility defers paint until near viewport */
+                contentVisibility: 'auto',
+                containIntrinsicSize: '0 900px',
             }}>
-                {/* Background Grid Pattern */}
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundImage: `
-                            linear-gradient(rgba(27, 72, 128, 0.1) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(27, 72, 128, 0.1) 1px, transparent 1px)
-                        `,
-                        backgroundSize: '40px 40px',
-                        zIndex: 0,
-                        pointerEvents: 'none',
-                    }}
-                />
-
-                {/* Floating Elements distributed across both sections */}
-                <Bubble color={COLORS.red} size={250} top="5%" left="-50px" duration={15} delay={0} />
-                <FloatingSquare color={COLORS.blue} size={100} top="15%" right="10%" duration={25} delay={1} />
-                <FloatingTriangle color={COLORS.red} size={60} top="40%" left="15%" duration={12} delay={2} />
-
-                <Bubble color={COLORS.blue} size={200} bottom="20%" right="-50px" duration={18} delay={3} />
-                <FloatingSquare color={COLORS.red} size={120} bottom="10%" left="5%" duration={30} delay={4} />
-                <FloatingTriangle color={COLORS.blue} size={80} bottom="5%" right="15%" duration={14} delay={5} />
-
-                <Box sx={{ position: 'relative', zIndex: 1 }}>
+                <Suspense fallback={<div style={{ height: '900px' }} />}>
                     <StarredEvents />
                     <InspirationalStories />
-                </Box>
+                </Suspense>
             </Box>
 
 

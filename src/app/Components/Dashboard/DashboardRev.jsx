@@ -169,9 +169,9 @@ export default function Index() {
         <div className="relative z-10 w-full md:w-[80%] lg:w-[65%] bg-white/95 backdrop-blur-md h-full flex flex-col justify-center px-6 md:px-16 lg:px-20 py-12 md:py-20 rounded-tr-none md:rounded-tr-[40px] shadow-2xl">
           <div className="max-w-xl">
               <div className="mb-4">
-                <svg width="60" height="30" viewBox="0 0 58 29" fill="none" className="mb-2">
+                {/* <svg width="60" height="30" viewBox="0 0 58 29" fill="none" className="mb-2">
                   <path d="M48.321 8.74875C45.6238 8.74875 44.3189 6.65379 43.0611 4.6313C41.8908 2.75375 40.7877 0.975009 38.6487 0.975009C36.5098 0.975009 35.4067 2.74716 34.2431 4.6313C32.9853 6.66038 31.6804 8.74875 28.9899 8.74875C26.2994 8.74875 24.9946 6.65379 23.73 4.6313C22.5597 2.75375 21.4566 0.975009 19.3176 0.975009C17.1787 0.975009 16.0756 2.74716 14.912 4.6313C13.6542 6.66038 12.3493 8.74875 9.65881 8.74875C6.96834 8.74875 5.66346 6.65379 4.40566 4.6313C3.2353 2.75375 2.1322 0.975009 0 0.975009V0C2.69721 0 3.99536 2.09495 5.25316 4.12403C6.42352 6.00159 7.52661 7.78033 9.65881 7.78033C11.791 7.78033 12.9008 6.00818 14.0645 4.12403C15.3223 2.09495 16.6272 0 19.3176 0C22.0081 0 23.313 2.09495 24.5775 4.12403C25.7479 6.00159 26.851 7.78033 28.9899 7.78033C31.1288 7.78033 32.2319 6.00818 33.4023 4.12403C34.6601 2.10154 35.965 0.0065843 38.6554 0.0065843C41.3459 0.0065843 42.6575 2.10155 43.9153 4.13063C45.0857 6.00818 46.1888 7.78691 48.3277 7.78691C50.4667 7.78691 51.5697 6.01477 52.7401 4.13063C53.9979 2.10155 55.3028 0.0065843 58 0.0065843V0.981603C55.8611 0.981603 54.758 2.75374 53.5876 4.63789C52.3298 6.66038 51.0249 8.75534 48.3277 8.75534L48.321 8.74875Z" fill="#9E0203" />
-                </svg>
+                </svg> */}
                 <h2 className="text-brand-red text-3xl md:text-5xl font-bold font-jakarta leading-tight">
                   Welcome to CGC <br />
                   Venturenest
@@ -209,11 +209,11 @@ export default function Index() {
           <div className="flex gap-2 md:gap-4 items-center animate-scroll whitespace-nowrap min-w-full" style={{ willChange: 'transform', transform: 'translate3d(0,0,0)' }}>
             {/* Duplicate list 3 times to ensure smooth scrolling on wide screens */}
             {[...startupLogos, ...startupLogos, ...startupLogos].map((logo, idx) => (
-              <div key={idx} className="flex-shrink-0 w-40 h-28 flex items-center justify-center transition-opacity duration-300 opacity-90 hover:opacity-100">
+              <div key={idx} className="flex-shrink-0 w-20 h-14 md:w-40 md:h-28 flex items-center justify-center transition-opacity duration-300 opacity-90 hover:opacity-100">
                 <img
                   src={`/assets/Start-up-logos/${logo}`}
                   alt="Startup Logo"
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-full object-contain scale-[0.7] md:scale-100"
                   loading="lazy"
                   decoding="async"
                 />
@@ -364,6 +364,7 @@ export default function Index() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
 
+                { name: 'NeuroPixelPeak Private Limited', company: 'NeuroPixelPeak Private Limited', package: '20 Lakhs', image: '/assets/npp.jpeg', logo: '/assets/npp_logo.png' },
                 { name: 'Ashish Chabra', company: 'EDS Wagon Tech', package: '18 Lakhs', image: '/assets/eds wagon.jpg', logo: '/assets/eds_logo.webp' },
                 { name: 'Shivang Tiwari', company: 'Techealth Apex', package: '6.5 Lakhs', image: '/assets/success-1.jpeg', logo: '/assets/Start-up-logos/TechHealth - TecHealth.PNG' },
                 { name: 'Pulkesh Gautam', company: 'Vidyutam Verde', package: '3 Lakhs', image: '/assets/pulkesh_img.jpg', logo: '/assets/Start-up-logos/Vidyutam Verde - Pulkesh Gautam.jpg' },
@@ -373,7 +374,6 @@ export default function Index() {
                 // { name: 'Karan Agrawal', company: 'Indi Tech', package: '4 Lakhs', image: '/assets/success-3.jpeg', logo: '/assets/Start-up-logos/Inditech - Karan Aggrawal.png' },
                 // { name: 'Grooming Young Minds Innovative Pvt. Ltd.', company: 'Grooming Young Minds Innovative Pvt. Ltd.', package: '23 Lakhs', image: '/assets/grooming_young_minds.jpg', logo: '/assets/grooming_young_minds_logo.png' },
                 { name: 'DILTAK.AI HealthTech (OPC) Pvt. Ltd.', company: 'DILTAK.AI HealthTech (OPC) Pvt. Ltd.', package: '3 Lakhs', image: '/assets/diltak_founder.jpeg', logo: '/assets/diltak_ai_logo.jpeg' },
-                { name: 'NeuroPixelPeak Private Limited', company: 'NeuroPixelPeak Private Limited', package: '20 Lakhs', image: '/assets/npp.jpeg', logo: '/assets/npp_logo.png' },
                 // { name: 'Travnext Pvt. Ltd.', company: 'Travnext Pvt. Ltd.', package: '25 Lakhs', image: '/assets/travnext.jpg', logo: '/assets/travnext_logo.png' },
               ].map((student, idx) => (
                 <div key={idx} className="relative bg-gray-800 h-[450px] md:h-[600px] overflow-hidden group rounded-2xl border border-white/5 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,0,0,0.4)]">
@@ -384,8 +384,8 @@ export default function Index() {
                     <div className="text-white font-black text-2xl">{student.package}</div>
                   </div>
 
-                  <div className="absolute top-8 left-6 bg-white backdrop-blur-xl p-4 rounded-3xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-20 transition-all duration-500">
-                    <img src={student.logo} alt="" className="h-10 w-auto object-contain max-w-[180px]" />
+                  <div className="absolute top-4 left-4 md:top-8 md:left-6 bg-white backdrop-blur-xl p-2 md:p-4 rounded-2xl md:rounded-3xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-20 transition-all duration-500">
+                    <img src={student.logo} alt="" className="h-10 md:h-16 lg:h-20 w-auto object-contain max-w-[100px] md:max-w-[180px]" />
                   </div>
 
                   <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/95 via-black/40 to-transparent z-10 transition-colors duration-500">
@@ -451,7 +451,10 @@ export default function Index() {
                   { title: 'Networking events', icon: '/assets/su-5.svg', desc: 'Partner collaborations' },
                   { title: 'Legal & IP Support', icon: '/assets/su-6.svg', desc: 'Regulatory guidance' },
                 ].map((feature, idx) => (
-                  <div key={idx} className="bg-brand-red-light/60 p-6 flex flex-col items-center justify-center text-center text-white h-60 hover:bg-brand-red/80 transition-all duration-300 rounded-xl">
+                  <div 
+                    key={idx} 
+                    className="bg-[#9E0203] md:bg-[#4D0000] p-6 flex flex-col items-center justify-center text-center text-white h-60 hover:bg-[#4D0000] md:hover:bg-[#9E0203] active:bg-[#4D0000] transition-all duration-300 rounded-xl shadow-lg border border-white/10 active:scale-95 cursor-pointer"
+                  >
                     <div className="w-16 h-16 mb-4 flex items-center justify-center bg-white/10 rounded-full p-3 backdrop-blur-sm">
                       <img src={feature.icon} alt={feature.title} className="w-full h-full object-contain brightness-0 invert" />
                     </div>

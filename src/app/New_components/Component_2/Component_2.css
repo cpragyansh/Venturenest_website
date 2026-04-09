@@ -11,14 +11,14 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 40px 60px;
+  padding: 24px 60px;        /* reduced from 40px → less dead space */
   justify-content: center;
 }
-.new-section-2-mian-head-logo-img-direct{
-    width: 6vw;
+.new-section-2-mian-head-logo-img-direct {
+  width: 6vw;
 }
 .vn-title-strip h1 {
-      font-family: var(--font-component-2);
+  font-family: var(--font-component-2);
   font-size: 52px;
   font-weight: 800;
   color: #fff;
@@ -44,21 +44,22 @@
   justify-content: space-between;
   align-items: center;
   background: #1f4e86;
-  padding: 20px 30px;
-  margin: 0 0px;
+  /* Reduced gutter — was 20px 30px with 0 right-padding */
+  padding: 36px 0 36px 44px;
+  gap: 36px;
+  margin: 0;
   width: 70%;
-  padding-right: 0px;
-  border-radius: 0px 200px 200px 0px;
+  border-radius: 0 200px 200px 0;
 }
 
 .vn-left {
-  width: 65%;
+  width: 58%;
   color: #fff;
 }
 
 .vn-left h2 {
-    font-family: var(--font-component-2);
-  font-size:40px;
+  font-family: var(--font-component-2);
+  font-size: 40px;
   font-weight: 800;
   text-decoration: underline;
   text-align: center;
@@ -66,48 +67,66 @@
 }
 
 .vn-left p {
-   font-family: var(--font-component-2);
-  font-size: 19px;
-  line-height: 1.4;
-  margin-bottom: 15px;
+  font-family: var(--font-component-2);
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 14px;
   font-weight: 500;
   text-align: justify;
 }
 
-/* RIGHT LOGO PLACEHOLDER */
+/* RIGHT LOGO — fixed aspect-ratio so image is never cropped */
 .vn-right {
-  width: 30%;
+  width: 34%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding-right: 30px;        /* breathing room inside the pill */
 }
 
 .vn-logo-placeholder {
-  width: 70%;
-  height: 70%;
+  width: 100%;
+  /* Height is determined by the image itself, not a % that collapses */
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
+  overflow: hidden;
+}
+
+/* 
+ * CRITICAL: was missing — the image had no width/height rules so it
+ * rendered at its natural pixel size and looked either massive or tiny.
+ */
+.vn-logo-placeholder img {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: 12px;
+  /* Lazy-load applies via attribute in JSX — this ensures it looks clean */
+  display: block;
 }
 
 /* ===== RED SECTION ===== */
 .vn-red-section {
   position: relative;
-  margin-top: -0px;
-  padding: 20px 0px;
+  padding: 20px 0;
 }
 
 .vn-red-content {
   background: #b11226;
   color: #fff;
-  padding: 50px;
-  padding-bottom: 4vw;
+  padding: 46px 50px;
   border-radius: 120px 0 0 120px;
   margin-left: auto;
   width: 70%;
 }
 
 .vn-red-content h2 {
-      font-family: var(--font-component-2);
-
-    font-size: 40px;
+  font-family: var(--font-component-2);
+  font-size: 40px;
   font-weight: 800;
   text-decoration: underline;
   margin-bottom: 20px;
@@ -115,9 +134,9 @@
 }
 
 .vn-red-content p {
-      font-family: var(--font-component-2);
-    font-size: 19px;
-  line-height: 1.5;
+  font-family: var(--font-component-2);
+  font-size: 18px;
+  line-height: 1.55;
   font-weight: 500;
   text-align: justify;
 }
@@ -141,13 +160,22 @@
 
   .vn-blue-section {
     flex-direction: column;
-    gap: 30px;
+    gap: 24px;
+    width: 100%;
+    border-radius: 0;
+    padding: 30px 24px;
   }
 
   .vn-left,
   .vn-right {
     width: 100%;
     text-align: center;
+    padding-right: 0;
+  }
+
+  .vn-logo-placeholder img {
+    max-height: 260px;
+    margin: 0 auto;
   }
 
   .vn-red-content {
@@ -162,20 +190,20 @@
 
 @media (max-width: 600px) {
   .vn-title-strip {
-    padding: 30px 20px;
+    padding: 20px 16px;
   }
 
   .vn-blue-section {
-    margin: 0;
-    padding: 30px 20px;
+    padding: 24px 16px;
+    gap: 16px;
   }
 
   .vn-red-content {
-    padding: 30px 20px;
+    padding: 28px 18px;
   }
 
   .vn-title-strip h1 {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .vn-left h2,
@@ -186,5 +214,9 @@
   .vn-left p,
   .vn-red-content p {
     font-size: 14px;
+  }
+
+  .vn-logo-placeholder img {
+    max-height: 200px;
   }
 }

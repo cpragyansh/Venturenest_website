@@ -24,9 +24,8 @@ const Stats = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-white text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tight uppercase">
-                Legacy of <br />
-                <span className="text-[#9E0203]">VentureNest</span>
+              <h2 className="text-white text-2xl sm:text-4xl md:text-6xl font-bold mb-4 md:mb-6 leading-tight tracking-tight uppercase whitespace-nowrap md:whitespace-normal">
+                Legacy of <span className="text-[#9E0203]">VentureNest</span>
               </h2>
               
               <div className="border-l-2 border-[#9E0203] pl-6 py-2">
@@ -43,26 +42,26 @@ const Stats = () => {
 
           {/* RIGHT GRID BLOCK - "Raw" Style Cards */}
           <div className="lg:col-span-7">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-2 md:gap-8">
               
               {/* Card 1: Placement & Scholarship (Raw Brutalist) */}
               <motion.div 
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                className="bg-white p-8 rounded-none border-b-[8px] border-r-[8px] border-[#9E0203] flex flex-col justify-between"
+                className="bg-white p-4 md:p-8 rounded-none border-b-[8px] border-r-[8px] border-[#9E0203] flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="text-[#1a1a1a] font-black text-2xl mb-6 leading-tight uppercase tracking-tighter">
-                    Unwavering <br />Commitment
+                  <h3 className="text-[#1a1a1a] font-black text-base md:text-2xl mb-4 md:mb-6 leading-tight uppercase tracking-tighter">
+                    Unwavering <br className="hidden md:block" />Commitment
                   </h3>
-                  <p className="text-xs text-black/60 font-bold leading-normal mb-10 uppercase tracking-widest">
+                  <p className="text-[8px] md:text-xs text-black/60 font-bold leading-normal mb-6 md:mb-10 uppercase tracking-widest">
                   {/* How many patents have been filed by Venturenest */}
                   Venturenest has scaled Patents from 50+ in 2024 to a monumental 2000+ Patents targeted in 2026.
                   </p>
                 </div>
-                <div className="flex items-baseline gap-4">
-                  <div className="text-[#9E0203] text-6xl font-black">2000+</div>
-                  <div className="text-[#1a1a1a] text-xl font-black uppercase">Patents Filed</div>
+                <div className="flex flex-col md:flex-row items-baseline gap-1 md:gap-4">
+                  <div className="text-[#9E0203] text-3xl sm:text-4xl md:text-6xl font-black">2000+</div>
+                  <div className="text-[#1a1a1a] text-[10px] md:text-xl font-black uppercase whitespace-nowrap">Patents Filed</div>
                 </div>
               </motion.div>
 

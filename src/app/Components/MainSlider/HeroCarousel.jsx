@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
 import axios from 'axios';
@@ -11,30 +11,124 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 
+/* ─────────────────────────────────────────────────────────
+   INLINE STYLES — defined outside the component so they
+   are never re-created on each render (CLS + INP fix).
+───────────────────────────────────────────────────────── */
+const wrapperStyle = {
+    /* 
+     * Explicit aspect-ratio locks the height BEFORE images
+     * arrive, eliminating the layout-shift on first load (CLS).
+     */
+    position: 'relative',
+    width: '100%',
+    // 16:7 desktop ≈ 70vh-ish feel; 4:3 on mobile via CSS below
+    aspectRatio: '16 / 7',
+    overflow: 'hidden',
+};
+
+const slideInnerStyle = {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+};
+
+const overlayStyle = {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.3) 100%)',
+    pointerEvents: 'none',
+};
+
+const controlBarStyle = {
+    position: 'absolute',
+    bottom: '2rem',
+    right: '1rem',
+    zIndex: 20,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '2rem',
+};
+
+const progressDotsStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem',
+};
+
+const arrowsStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+};
+
+/* CSS injected once for the progress animation & mobile ratio */
+const CAROUSEL_CSS = `
+@keyframes vn-progressFill {
+    from { width: 0%; }
+    to   { width: 100%; }
+}
+.vn-progress-fill {
+    animation: vn-progressFill var(--vn-delay, 5001ms) linear forwards;
+}
+
+/* 
+ * Explicit aspect-ratio on mobile so there is NO cumulative
+ * layout shift regardless of image dimensions (CLS fix).
+ */
+.vn-carousel-wrapper {
+    aspect-ratio: 16 / 7;
+}
+@media (max-width: 768px) {
+    .vn-carousel-wrapper {
+        aspect-ratio: 4 / 3;
+    }
+}
+
+/* 
+ * Ensure images fill the slide area without cropping subjects —
+ * object-position: center top keeps faces / logos visible.
+ */
+.vn-carousel-wrapper .swiper,
+.vn-carousel-wrapper .swiper-wrapper,
+.vn-carousel-wrapper .swiper-slide {
+    height: 100% !important;
+    width: 100% !important;
+}
+.vn-slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    /* GPU-layer hint only for the visible hero image */
+    will-change: auto;
+}
+`;
+
+const AUTOPLAY_DELAY = 5001;
+
 const HeroCarousel = () => {
     const [slides, setSlides] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     const swiperRef = useRef(null);
-    const AUTOPLAY_DELAY = 5001;
 
     useEffect(() => {
         const fetchSlides = async () => {
             try {
-                const response = await axios.get((window.API_BASE_URL || (window.API_BASE_URL || (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in'))) + '/images');
+                const response = await axios.get(
+                    (window.API_BASE_URL || 'https://venturenestbackend.cgcuniversity.in') + '/images'
+                );
                 const data = response.data[0];
-                
-                // Construct slide data matching user constraints
-                // We pair laptop and mobile images by index
                 const laptopImages = data?.laptop || [];
                 const mobileImages = data?.mobile || [];
-                
+
                 const formattedSlides = laptopImages.map((laptop, index) => ({
                     id: laptop._id || index,
                     desktopImg: laptop.path,
-                    mobileImg: mobileImages[index]?.path || laptop.path, // Fallback to desktop if mobile missing
-                    link: '#' // Standard placeholder as per constraints
+                    mobileImg: mobileImages[index]?.path || laptop.path,
                 }));
-                
+
                 setSlides(formattedSlides);
             } catch (error) {
                 console.error('Error fetching carousel images:', error);
@@ -43,93 +137,148 @@ const HeroCarousel = () => {
         fetchSlides();
     }, []);
 
+    /* Stable callbacks — avoids re-renders that worsen INP */
+    const handleSwiper = useCallback((swiper) => {
+        swiperRef.current = swiper;
+    }, []);
+
+    const handleSlideChange = useCallback((swiper) => {
+        setActiveIndex(swiper.realIndex);
+    }, []);
+
+    const handlePrev = useCallback(() => swiperRef.current?.slidePrev(), []);
+    const handleNext = useCallback(() => swiperRef.current?.slideNext(), []);
+    const handleDotClick = useCallback((index) => {
+        swiperRef.current?.slideToLoop(index);
+    }, []);
+
     if (slides.length === 0) return null;
 
     return (
-        <div className="relative w-full h-[50vh] md:h-[70vh] lg:h-[80vh] overflow-hidden group">
-            {/* Custom Styles for Progress Animation */}
-            <style jsx>{`
-                @keyframes progressFill {
-                    from { width: 0%; }
-                    to { width: 100%; }
-                }
-                .animate-progress-fill {
-                    animation: progressFill ${AUTOPLAY_DELAY}ms linear forwards;
-                }
-            `}</style>
+        <div className="vn-carousel-wrapper" style={wrapperStyle}>
+            {/* Inject animation CSS exactly once */}
+            <style>{CAROUSEL_CSS}</style>
 
             <Swiper
                 modules={[Autoplay, EffectFade, Navigation]}
                 effect="fade"
-                speed={1000}
+                speed={900}
                 autoplay={{
                     delay: AUTOPLAY_DELAY,
                     disableOnInteraction: false,
                 }}
                 loop={true}
-                onSwiper={(swiper) => (swiperRef.current = swiper)}
-                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-                className="w-full h-full"
+                onSwiper={handleSwiper}
+                onSlideChange={handleSlideChange}
+                style={{ width: '100%', height: '100%' }}
             >
-                {slides.map((slide) => (
+                {slides.map((slide, index) => (
                     <SwiperSlide key={slide.id}>
-                        <div className="relative w-full h-full">
+                        <div style={slideInnerStyle}>
                             <picture>
                                 <source media="(max-width: 768px)" srcSet={slide.mobileImg} />
-                                <img 
-                                    src={slide.desktopImg} 
-                                    alt="Hero Slide" 
-                                    className="w-full h-full object-cover"
+                                <img
+                                    src={slide.desktopImg}
+                                    alt={`VentureNest slide ${index + 1}`}
+                                    className="vn-slide-img"
+                                    /* 
+                                     * LCP fix: first image loads eagerly at high priority.
+                                     * All others are lazy-loaded so they don't compete
+                                     * for bandwidth during initial page load.
+                                     */
+                                    loading={index === 0 ? 'eager' : 'lazy'}
+                                    fetchpriority={index === 0 ? 'high' : 'low'}
+                                    decoding={index === 0 ? 'sync' : 'async'}
+                                    width="1600"
+                                    height="700"
                                 />
                             </picture>
-                            {/* Optional Gradient Overlay for readability */}
-                            <div className="absolute inset-0 bg-black/20" />
+                            <div style={overlayStyle} />
                         </div>
                     </SwiperSlide>
                 ))}
             </Swiper>
 
-            {/* DETACHED CONTROL BAR */}
-            <div className="absolute bottom-8 right-4 md:bottom-12 md:right-12 z-20 flex items-center gap-8">
-                
-                {/* PROGRESS DOTS (BARS) */}
-                <div className="flex items-center gap-3">
+            {/* ── DETACHED CONTROL BAR ── */}
+            <div style={controlBarStyle}>
+                {/* Progress Bars */}
+                <div style={progressDotsStyle}>
                     {slides.map((_, index) => (
-                        <div 
+                        <div
                             key={index}
-                            onClick={() => swiperRef.current?.slideToLoop(index)}
-                            className={`relative h-1 overflow-hidden cursor-pointer transition-all duration-500 ease-in-out
-                                ${activeIndex === index ? 'w-16 opacity-100' : 'w-10 opacity-50 bg-white/30'}`}
+                            onClick={() => handleDotClick(index)}
+                            style={{
+                                position: 'relative',
+                                height: '4px',
+                                width: activeIndex === index ? '64px' : '40px',
+                                overflow: 'hidden',
+                                cursor: 'pointer',
+                                opacity: activeIndex === index ? 1 : 0.5,
+                                backgroundColor: 'rgba(255,255,255,0.3)',
+                                transition: 'width 0.4s ease, opacity 0.4s ease',
+                                borderRadius: '2px',
+                            }}
                         >
-                            {/* Background Gray for active bar */}
                             {activeIndex === index && (
-                                <div className="absolute inset-0 bg-white/30" />
-                            )}
-                            
-                            {/* Inner Fill Animation */}
-                            {activeIndex === index && (
-                                <div 
-                                    key={activeIndex} // Force remount on slide change
-                                    className="h-full bg-[#e31e24] animate-progress-fill origin-left"
+                                <div
+                                    key={activeIndex}
+                                    className="vn-progress-fill"
+                                    style={{
+                                        '--vn-delay': `${AUTOPLAY_DELAY}ms`,
+                                        height: '100%',
+                                        width: 0,
+                                        backgroundColor: '#e31e24',
+                                        borderRadius: '2px',
+                                    }}
                                 />
                             )}
                         </div>
                     ))}
                 </div>
 
-                {/* ARROWS */}
-                <div className="flex items-center gap-4">
-                    <button 
-                        onClick={() => swiperRef.current?.slidePrev()}
-                        className="w-12 h-12 flex items-center justify-center rounded-full border border-white text-white transition-all duration-300 hover:bg-[#e31e24] hover:border-[#e31e24] group/btn"
+                {/* Arrow Buttons */}
+                <div style={arrowsStyle}>
+                    <button
+                        onClick={handlePrev}
+                        aria-label="Previous slide"
+                        style={{
+                            width: '44px',
+                            height: '44px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: '50%',
+                            border: '1px solid rgba(255,255,255,0.8)',
+                            background: 'transparent',
+                            color: 'white',
+                            cursor: 'pointer',
+                            transition: 'background 0.25s, border-color 0.25s',
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.background = '#e31e24'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
-                        <ArrowBackIosNewIcon sx={{ fontSize: 20 }} />
+                        <ArrowBackIosNewIcon sx={{ fontSize: 18 }} />
                     </button>
-                    <button 
-                        onClick={() => swiperRef.current?.slideNext()}
-                        className="w-12 h-12 flex items-center justify-center rounded-full border border-white text-white transition-all duration-300 hover:bg-[#e31e24] hover:border-[#e31e24] group/btn"
+                    <button
+                        onClick={handleNext}
+                        aria-label="Next slide"
+                        style={{
+                            width: '44px',
+                            height: '44px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: '50%',
+                            border: '1px solid rgba(255,255,255,0.8)',
+                            background: 'transparent',
+                            color: 'white',
+                            cursor: 'pointer',
+                            transition: 'background 0.25s, border-color 0.25s',
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.background = '#e31e24'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
-                        <ArrowForwardIosIcon sx={{ fontSize: 20 }} />
+                        <ArrowForwardIosIcon sx={{ fontSize: 18 }} />
                     </button>
                 </div>
             </div>

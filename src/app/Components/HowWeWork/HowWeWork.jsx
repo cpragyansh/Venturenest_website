@@ -28,6 +28,12 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   position: "relative",
   zIndex: 0,
   boxShadow: "0 8px 20px rgba(0, 0, 0, 0.5)",
+  /*
+   * content-visibility defers layout + paint until near the viewport.
+   * This is one of the biggest INP wins for below-fold heavy sections.
+   */
+  contentVisibility: "auto",
+  containIntrinsicSize: "0 800px",
   "&::before": {
     content: '""',
     position: "absolute",
@@ -39,7 +45,12 @@ const SectionContainer = styled(Box)(({ theme }) => ({
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    backgroundAttachment: "fixed",
+    /*
+     * Removed backgroundAttachment: 'fixed' — it forces a repaint on every
+     * scroll frame and creates a new stacking context that blocks composited
+     * layers. This was the primary INP offender in scroll interactions.
+     */
+    backgroundAttachment: "scroll",
     opacity: 0.25,
     zIndex: -1,
   },
@@ -62,12 +73,11 @@ const SectionHeading = styled(Typography)(({ theme }) => ({
 }));
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  padding: "1.5rem 0.1rem",
-  padding: "2.5rem",
-  borderRadius: "30px",
+  padding: "1rem md:2.5rem",
+  borderRadius: "20px md:30px",
   border: "0px solid transparent",
   boxShadow: "0 4px 12px rgba(27, 72, 128, 0.42)",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease",
+  transition: "all 0.3s ease",
   textAlign: "center",
   height: "100%",
   width: "100%",
@@ -75,11 +85,16 @@ const StyledCard = styled(Card)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
+  
+  // Desktop Default
   backgroundColor: "rgba(237, 237, 237, 0.9)",
-  [theme.breakpoints.up("xs")]: {
-    width: "100%",
-    height: "16rem",
+  
+  // Phone Only: Red by default, Maroon on click
+  [theme.breakpoints.down("sm")]: {
+    backgroundColor: "#9E0203", 
+    color: "white",
   },
+
   [theme.breakpoints.up("sm")]: {
     width: "46vw",
   },
@@ -89,13 +104,27 @@ const StyledCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     width: "20vw",
     height: "80%",
-    textAlign: "center",
   },
+
   "&:hover": {
-    transform: "translateY(-10px)",
-    // Use inset box-shadow to simulate a border without changing dimensions
-    boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2), inset 0 0 0 8px #1b4880",
-    color: "white",
+    transform: "translateY(-5px)",
+    // Desktop Hover: Dark Blue background inset
+    [theme.breakpoints.up("lg")]: {
+      boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2), inset 0 0 0 8px #1b4880",
+      color: "white",
+    },
+    // Mobile Hover: Maroon standout
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "#4D0000",
+      color: "white",
+    }
+  },
+  
+  "&:active": {
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "#4D0000",
+      transform: "scale(0.98)",
+    }
   },
 }));
 
@@ -117,7 +146,7 @@ const ProgramTitle = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   lineHeight: 1.3,
   letterSpacing: "0.02em",
-  color: "#2C2C2C",
+  color: "inherit", // Inherit color for responsiveness
 }));
 
 const ProgramDescription = styled(Typography)(({ theme }) => ({
@@ -126,10 +155,11 @@ const ProgramDescription = styled(Typography)(({ theme }) => ({
   fontSize: "clamp(0.95rem, 1vw, 1.25rem)",
   fontWeight: 400,
   lineHeight: 1.6,
-  color: "#555",
+  color: "inherit", // Inherit color for responsiveness
   marginTop: "0.8rem",
   padding: "0 0.5rem",
   letterSpacing: "0.01em",
+  opacity: 0.9,
 }));
 
 const supportPrograms = [
@@ -190,12 +220,13 @@ const HowWeSupportYou = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       AOS.init({
-        offset: 200,
-        duration: 1000,
-        easing: "ease",
-        delay: 100,
+        offset: 100,        // was 200 — triggers animations sooner for better perceived performance
+        duration: 700,      // was 1000 — snappier, reduces layout thrashing duration
+        easing: "ease-out",
+        delay: 0,           // was 100 — no global base delay
         once: true,
         mirror: false,
+        startEvent: "DOMContentLoaded",
       });
     }
   }, []);
@@ -210,7 +241,10 @@ const HowWeSupportYou = () => {
       >
         <img
           src="/assets/newImage.svg"
-          alt="Icon"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
           style={{
             color: "rgba(27, 72, 128, 0.42)",
             marginRight: "-30px",
@@ -228,7 +262,7 @@ const HowWeSupportYou = () => {
           pagination={{ clickable: true }}
           spaceBetween={20}
           breakpoints={{
-            0: { slidesPerView: 1 },
+            0: { slidesPerView: 2, spaceBetween: 10 },
             600: { slidesPerView: 2 },
             900: { slidesPerView: 3 },
           }}
