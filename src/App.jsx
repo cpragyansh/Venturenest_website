@@ -34,6 +34,7 @@ import ProgramDetails from "./app/Programs/[programName]/page";
 import StoryDetails from "./app/successstories/seperatesuccess";
 import ECellPage from "./app/ecell/page";
 import VenturePulsePage from "./app/vp/page";
+import AfricaGlobalFounderProgram from "./app/Programs/AfricaGlobalFounderProgram";
 
 import { initializeApi } from "./apiConfig";
 import ScrollToHash from "./app/utils/ScrollToHash";
@@ -79,6 +80,7 @@ function App() {
           <Route path="/success/:id" element={< StoryDetails />} />
           <Route path="/ecell" element={<ECellPage />} />
           <Route path="/VenturePulse" element={<VenturePulsePage />} />
+          <Route path="/AfricaGlobalFounderProgram" element={<AfricaGlobalFounderProgram />} />
 
 
 

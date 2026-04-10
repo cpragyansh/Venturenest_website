@@ -1,17 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProgramsOpen, setIsProgramsOpen] = useState(false);
+  const [programs, setPrograms] = useState([]);
 
   useEffect(() => {
-    // Optional scroll logic
+    const fetchPrograms = async () => {
+      try {
+        const response = await fetch('https://venturenestbackend.cgcuniversity.in/programs');
+        const data = await response.json();
+        setPrograms(data);
+      } catch (error) {
+        console.error("Error fetching programs for navbar:", error);
+      }
+    };
+    fetchPrograms();
   }, []);
 
-  useEffect(() => {
-    // Optional scroll logic
-  }, []);
+  const createSlug = (name) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -19,6 +36,22 @@ const Navbar = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setIsProgramsOpen(false);
+  };
+
+  const dropdownVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 10,
+      scale: 0.95,
+      transition: { duration: 0.2, ease: "easeOut" }
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.3, ease: "backOut" }
+    }
   };
 
   return (
@@ -49,9 +82,7 @@ const Navbar = () => {
                 className="ecell-highlight-link"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  closeMenu();
-                }}
+                onClick={closeMenu}
               >
                 E-Cell
               </a>
@@ -60,9 +91,7 @@ const Navbar = () => {
               <Link
                 to="/VenturePulse"
                 className="ecell-highlight-link"
-                onClick={(e) => {
-                  closeMenu();
-                }}
+                onClick={closeMenu}
               >
                 Venture Pulse
               </Link>
@@ -78,26 +107,70 @@ const Navbar = () => {
             <li>
               <Link to="/#home" onClick={closeMenu}>Home</Link>
             </li>
-
             <li>
               <Link to="/#about" onClick={closeMenu}>About</Link>
             </li>
-
             <li>
               <Link to="/#council" onClick={closeMenu}>Council Members</Link>
             </li>
-
             <li>
               <Link to="/#partners" onClick={closeMenu}>Partners</Link>
             </li>
 
-            <li><Link to="/#programs" onClick={closeMenu}>Programs</Link></li>
+            <li 
+              className={`dropdown ${isProgramsOpen ? 'active' : ''}`}
+              onMouseEnter={() => !isMenuOpen && setIsProgramsOpen(true)}
+              onMouseLeave={() => !isMenuOpen && setIsProgramsOpen(false)}
+            >
+              <Link 
+                to="/#programs" 
+                onClick={(e) => {
+                  if (isMenuOpen) {
+                    setIsProgramsOpen(!isProgramsOpen);
+                  } else {
+                    closeMenu();
+                  }
+                }}
+              >
+                Programs <span className="dropdown-arrow">▼</span>
+              </Link>
+              
+              <AnimatePresence>
+                {isProgramsOpen && (
+                  <motion.ul 
+                    className="dropdown-menu"
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={dropdownVariants}
+                    style={{ position: isMenuOpen ? 'static' : 'absolute' }}
+                  >
+                    <li>
+                      <Link to="/#programs" onClick={closeMenu}>All Programs</Link>
+                    </li>
+                    <li>
+                      <Link to="/AfricaGlobalFounderProgram" onClick={closeMenu} style={{ color: '#A30D33', fontWeight: '800' }}>
+                        Africa Global Founder Program
+                      </Link>
+                    </li>
+                    {programs.map((prog) => (
+                      <li key={prog._id}>
+                        <Link 
+                          to={`/Programs/${createSlug(prog.programName)}`} 
+                          onClick={closeMenu}
+                        >
+                          {prog.programName}
+                        </Link>
+                      </li>
+                    ))}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </li>
             <li><Link to="/#portfolio" onClick={closeMenu}>Portfolio</Link></li>
-
             <li>
               <Link to="/#events" onClick={closeMenu}>Events</Link>
             </li>
-
             <li>
               <Link to="/#gallery" onClick={closeMenu}>Gallery</Link>
             </li>
@@ -118,3 +191,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
