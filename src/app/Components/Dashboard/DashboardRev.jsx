@@ -604,60 +604,85 @@ export default function Index() {
 
       {/* <GallerySection /> */}
       <InViewRenderer minHeight="600px" rootMargin="400px">
-        <div id="gallery" className="text-center pt-12 mb-12">
-          <h3 className="text-3xl md:text-5xl font-black text-brand-dark leading-tight uppercase">
+        <div id="gallery" className="text-center pt-24 mb-16">
+          <h3 className="text-4xl md:text-7xl font-black text-brand-dark leading-tight uppercase tracking-tighter">
             The Innovation <span className="text-brand-red">Catalog</span>
           </h3>
+          <p className="text-gray-500 font-medium mt-4 max-w-2xl mx-auto px-4">
+            A visual journey through the groundbreaking ideas and ventures nurtured at VentureNest.
+          </p>
         </div>
 
-        <div className="space-y-4 mb-20">
+        <div className="space-y-8 mb-32">
           {/* Row 1: Left to Right */}
           <div className="relative overflow-hidden group">
-            <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll" style={{ willChange: 'transform' }}>
-              {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
+            <div className="flex gap-6 animate-scroll-ltr hover:pause-scroll" style={{ willChange: 'transform' }}>
+              {(photos.length > 0 ? [...photos, ...photos] : []).map((photo, idx) => (
                 <div
-                  key={idx}
-                  className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                  key={`r1-${idx}`}
+                  className="flex-shrink-0 w-[300px] md:w-[450px] aspect-[16/10] bg-gray-100 overflow-hidden rounded-[32px] relative cursor-pointer border border-gray-100 shadow-sm transition-transform duration-500 hover:scale-[1.02]"
                   onClick={() => setSelectedImage(photo)}
                 >
-                  <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-opacity duration-500 hover:opacity-90" loading="lazy" decoding="async" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                    <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                  <img 
+                    src={photo.imageUrl} 
+                    alt={photo.photoName} 
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" 
+                    loading="lazy" 
+                    decoding="async" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-8 flex flex-col justify-end">
+                    <span className="text-white text-xs font-black uppercase tracking-widest mb-2 px-3 py-1 bg-brand-red w-fit rounded-full">{photo.photoName}</span>
+                    <p className="text-white/70 text-sm font-medium">Click to view innovation</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Row 2: Right to Left */}
-          <div className="relative overflow-hidden p-2 bg-[#9E0203] group">
-            <div className="flex gap-4 animate-scroll-rtl hover:pause-scroll" style={{ willChange: 'transform' }}>
-              {[...photos.slice(15, 30), ...photos.slice(15, 30)].map((photo, idx) => (
+          {/* Row 2: Left to Right (Changed from RTL) */}
+          <div className="relative overflow-hidden group py-4">
+            <div className="flex gap-6 animate-scroll-ltr hover:pause-scroll" style={{ animationDelay: '-15s', willChange: 'transform' }}>
+              {(photos.length > 0 ? [...photos.slice().reverse(), ...photos.slice().reverse()] : []).map((photo, idx) => (
                 <div
-                  key={idx}
-                  className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                  key={`r2-${idx}`}
+                  className="flex-shrink-0 w-[300px] md:w-[450px] aspect-[16/10] bg-gray-100 overflow-hidden rounded-[32px] relative cursor-pointer border border-gray-100 shadow-sm transition-transform duration-500 hover:scale-[1.02]"
                   onClick={() => setSelectedImage(photo)}
                 >
-                  <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-opacity duration-500 hover:opacity-90" loading="lazy" decoding="async" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                    <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                  <img 
+                    src={photo.imageUrl} 
+                    alt={photo.photoName} 
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" 
+                    loading="lazy" 
+                    decoding="async" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-8 flex flex-col justify-end">
+                    <span className="text-white text-xs font-black uppercase tracking-widest mb-2 px-3 py-1 bg-brand-red w-fit rounded-full">{photo.photoName}</span>
+                    <p className="text-white/70 text-sm font-medium">Click to view innovation</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="relative overflow-hidden bg-[#1A4480] p-2 group">
-            <div className="flex gap-4 animate-scroll-ltr hover:pause-scroll" style={{ willChange: 'transform' }}>
-              {[...photos.slice(0, 15), ...photos.slice(0, 15)].map((photo, idx) => (
+          {/* Row 3: Left to Right */}
+          <div className="relative overflow-hidden group">
+            <div className="flex gap-6 animate-scroll-ltr hover:pause-scroll" style={{ animationDelay: '-30s', willChange: 'transform' }}>
+              {(photos.length > 0 ? [...photos, ...photos] : []).map((photo, idx) => (
                 <div
-                  key={idx}
-                  className="flex-shrink-0 w-[280px] md:w-[350px] aspect-video bg-gray-100 overflow-hidden rounded-2xl relative cursor-pointer border border-gray-100"
+                  key={`r3-${idx}`}
+                  className="flex-shrink-0 w-[300px] md:w-[450px] aspect-[16/10] bg-gray-100 overflow-hidden rounded-[32px] relative cursor-pointer border border-gray-100 shadow-sm transition-transform duration-500 hover:scale-[1.02]"
                   onClick={() => setSelectedImage(photo)}
                 >
-                  <img src={photo.imageUrl} alt={photo.photoName} className="w-full h-full object-cover transition-opacity duration-500 hover:opacity-90" loading="lazy" decoding="async" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                    <span className="text-white text-[10px] font-black uppercase tracking-widest">{photo.photoName}</span>
+                  <img 
+                    src={photo.imageUrl} 
+                    alt={photo.photoName} 
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" 
+                    loading="lazy" 
+                    decoding="async" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-8 flex flex-col justify-end">
+                    <span className="text-white text-xs font-black uppercase tracking-widest mb-2 px-3 py-1 bg-brand-red w-fit rounded-full">{photo.photoName}</span>
+                    <p className="text-white/70 text-sm font-medium">Click to view innovation</p>
                   </div>
                 </div>
               ))}

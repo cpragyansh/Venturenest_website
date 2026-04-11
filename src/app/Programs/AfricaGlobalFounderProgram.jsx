@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect } from "react";
-import { Box, Typography, Container, Grid, Button, Paper, Stack } from "@mui/material";
-import { Globe, Users, Target, BookOpen, Award, Rocket, ShieldCheck, Zap, Handshake, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Box, Typography, Container, Grid, Button, Stack } from "@mui/material";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Globe, Handshake } from "lucide-react";
 
 const AfricaGlobalFounderProgram = () => {
     useEffect(() => {
@@ -11,7 +11,6 @@ const AfricaGlobalFounderProgram = () => {
     }, []);
 
     const { scrollYProgress } = useScroll();
-    const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
     const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
 
     const fadeInUp = {
@@ -23,171 +22,96 @@ const AfricaGlobalFounderProgram = () => {
         }
     };
 
-    const staggerContainer = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15
-            }
-        }
-    };
-
-    const sections = [
-        {
-            title: "Program Overview",
-            icon: <Globe size={28} />,
-            color: "#A30D33",
-            content: "The VentureNest – Africa Global Founder Program is an international entrepreneurship development initiative designed to empower emerging entrepreneurs and startup founders from the African continent.",
-            description: "Providing structured mentorship, entrepreneurial training, and global startup ecosystem exposure to founders who aspire to build scalable and impactful ventures.",
-            points: [
-                { text: "Mentorship from global experts", icon: <Users size={18} />, color: "#A30D33", bgImage: "/assets/support_bg/mentorship.png" },
-                { text: "Startup development training", icon: <BookOpen size={18} />, color: "#1A4880", bgImage: "/assets/support_bg/training.png" },
-                { text: "Cross-border ecosystem exposure", icon: <Globe size={18} />, color: "#A30D33", bgImage: "/assets/support_bg/ecosystem.png" },
-                { text: "Investor readiness support", icon: <Zap size={18} />, color: "#1A4880", bgImage: "/assets/support_bg/investor.png" },
-                { text: "International networking opportunities", icon: <Handshake size={18} />, color: "#A30D33", bgImage: "/assets/support_bg/networking.png" }
-            ]
-        },
-        {
-            title: "Program Objectives",
-            icon: <Target size={28} />,
-            color: "#1A4880",
-            content: "We seek to bridge the gap between innovation and market leadership through a multi-dimensional approach.",
-            points: [
-                { text: "Strengthen entrepreneurial capabilities among founders from Africa", icon: <Zap size={20} />, color: "#A30D33" },
-                { text: "Provide structured training on startup development and scaling", icon: <BookOpen size={20} />, color: "#1A4880" },
-                { text: "Enable founders to connect with mentors and ecosystem leaders", icon: <Users size={20} />, color: "#A30D33" },
-                { text: "Prepare startups for global markets and investment opportunities", icon: <Target size={20} />, color: "#1A4880" },
-                { text: "Promote cross-border collaboration between India and Africa", icon: <Globe size={20} />, color: "#A30D33" }
-            ]
-        }
-    ];
-
-    const curriculum = [
-        {
-            title: "Entrepreneurship Fundamentals",
-            icon: <BookOpen size={20} />,
-            modules: ["Startup ideation", "Opportunity identification", "Entrepreneurial mindset"]
-        },
-        {
-            title: "Business Model Development",
-            icon: <Target size={20} />,
-            modules: ["Value proposition design", "Business model frameworks", "Customer segmentation"]
-        },
-        {
-            title: "Product Development",
-            icon: <Rocket size={20} />,
-            modules: ["MVP development", "Product-market fit strategies", "Product iteration"]
-        },
-        {
-            title: "Go-To-Market Strategy",
-            icon: <Globe size={20} />,
-            modules: ["Market validation", "Customer acquisition", "Growth planning"]
-        },
-        {
-            title: "Startup Fundraising",
-            icon: <Zap size={20} />,
-            modules: ["Investor pitch decks", "Valuation fundamentals", "Engagement strategies"]
-        },
-        {
-            title: "Leadership and Team Building",
-            icon: <Users size={20} />,
-            modules: ["Founder leadership", "Team management", "Startup culture"]
-        }
-    ];
-
     return (
-        <Box sx={{ bgcolor: '#fff', minHeight: '100vh', overflowX: 'hidden' }}>
-            <style>
-                {`
-                    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
-                    
-                    :root {
-                        --brand-red: #A30D33;
-                        --brand-blue: #1A4880;
-                        --bg-dark: #0A0A0A;
-                        --card-bg: rgba(255, 255, 255, 0.05);
-                        --radius-lg: 32px;
-                        --radius-md: 16px;
-                    }
+        <div className="bg-white font-['Public_Sans',_sans-serif] text-[#1A1A1A] antialiased">
+            <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Public+Sans:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
-                    .editorial-title {
-                        font-family: 'Plus Jakarta Sans', sans-serif;
-                        font-weight: 800;
-                        letter-spacing: -0.04em;
-                    }
+                .material-symbols-outlined {
+                    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+                }
+                .text-stroke {
+                    -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+                    color: transparent;
+                }
+                .grid-line {
+                    border: 1px solid #E0E0E0;
+                }
+                .prestige-gradient {
+                    background: linear-gradient(135deg, #000000 0%, #1A1A1A 100%);
+                }
+                .prestige-hover:hover {
+                    background-color: #D41D24;
+                    color: white;
+                    border-color: #D41D24;
+                }
+                .density-container {
+                    max-width: 1440px;
+                    margin: 0 auto;
+                }
+                
+                .editorial-title {
+                    font-family: 'Plus Jakarta Sans', sans-serif;
+                    font-weight: 800;
+                    letter-spacing: -0.04em;
+                }
 
-                    .modern-card {
-                        background: var(--card-bg) !important;
-                        backdrop-filter: blur(20px);
-                        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                        border-radius: var(--radius-lg) !important;
-                        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-                        position: relative;
-                        overflow: hidden;
-                    }
+                .pill-label {
+                    background: #A30D33;
+                    color: #fff;
+                    padding: 6px 16px;
+                    border-radius: 100px;
+                    font-size: 0.75rem;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    width: fit-content;
+                }
 
-                    .modern-card:hover {
-                        transform: translateY(-10px);
-                        border-color: var(--brand-red) !important;
-                        box-shadow: 0 40px 80px rgba(0,0,0,0.4);
-                        background: rgba(255, 255, 255, 0.08) !important;
-                    }
+                /* Custom utility classes mimicking the user's tailwind config */
+                .bg-primary { background-color: #D41D24; }
+                .text-primary { color: #D41D24; }
+                .border-primary { border-color: #D41D24; }
+                .hover\\:bg-primary:hover { background-color: #D41D24; }
+                .hover\\:text-primary:hover { color: #D41D24; }
+                
+                .bg-secondary { background-color: #000000; }
+                .text-secondary { color: #000000; }
+                .border-secondary { border-color: #000000; }
+                .hover\\:bg-secondary:hover { background-color: #000000; }
+                .hover\\:text-secondary:hover { color: #000000; }
+                
+                .bg-surface-variant { background-color: #F5F5F5; }
+                .border-outline { border-color: #E0E0E0; }
+                .divide-outline { border-color: #E0E0E0; }
+            `}</style>
 
-                    .pill-label {
-                        background: var(--brand-red);
-                        color: #fff;
-                        padding: 6px 16px;
-                        border-radius: 100px;
-                        font-size: 0.75rem;
-                        font-weight: 800;
-                        text-transform: uppercase;
-                        letter-spacing: 0.1em;
-                        display: inline-flex;
-                        align-items: center;
-                        gap: 8px;
-                    }
+            {/* Navigation */}
+            <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline">
+                <div className="density-container flex justify-between items-center px-6 py-3">
+                    <Link to="/" className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-primary flex items-center justify-center">
+                            <span className="text-white font-bold text-xl">A</span>
+                        </div>
+                        <span className="text-lg font-extrabold tracking-tighter text-secondary font-['Manrope',_sans-serif]">AFRICA GLOBAL FOUNDERS</span>
+                    </Link>
+                    <div className="hidden md:flex items-center gap-10">
+                        <Link to="#" className="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors">Programs</Link>
+                        <Link to="#" className="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors">Mentorship</Link>
+                        <Link to="#" className="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors">Roadmap</Link>
+                        <Link to="#" className="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors">Impact</Link>
+                    </div>
+                    <Link to="/IncubateWithUs" className="bg-secondary text-white px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-primary transition-all duration-300">
+                        Apply Now
+                    </Link>
+                </div>
+            </nav>
 
-                    .glass-card {
-                        background: rgba(255, 255, 255, 0.95) !important;
-                        backdrop-filter: blur(20px);
-                        border: 1px solid rgba(0,0,0,0.05) !important;
-                        border-radius: var(--radius-lg) !important;
-                        box-shadow: 0 20px 40px rgba(0,0,0,0.05) !important;
-                        position: relative;
-                        overflow: hidden;
-                    }
-
-                    .blueprint-bg {
-                        position: absolute;
-                        top: 0; left: 0; right: 0; bottom: 0;
-                        background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
-                        background-size: 30px 30px;
-                        pointer-events: none;
-                        opacity: 0.5;
-                    }
-
-                    .curriculum-grid {
-                        display: grid;
-                        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-                        gap: 24px;
-                    }
-
-                    .line-draw {
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 0%;
-                        height: 4px;
-                        background: var(--brand-red);
-                        transition: width 0.6s ease;
-                    }
-
-                    .modern-card:hover .line-draw {
-                        width: 100%;
-                    }
-                `}
-            </style>            {/* Immersive Hero Section */}
+            {/* Immersive Hero Section (Restored Previous Version) */}
             <Box sx={{ 
                 height: '100vh',
                 position: 'relative',
@@ -267,254 +191,214 @@ const AfricaGlobalFounderProgram = () => {
                     <Box sx={{ width: '1px', height: '60px', bgcolor: '#fff', mx: 'auto' }} />
                 </Box>
             </Box>
->            {/* Redesigned Overview & Objectives Section */}
-            <Box sx={{ py: 15, bgcolor: '#F9F9F9' }}>
-                <Container maxWidth="xl">
-                    <Grid container spacing={4} sx={{ mb: 15, alignItems: 'center' }}>
-                        <Grid item xs={12} lg={12}>
-                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-                                <Box className="pill-label" sx={{ mb: 4, bgcolor: '#1A4880' }}>
-                                    <ShieldCheck size={14} /> Comprehensive Support
-                                </Box>
-                                <Typography variant="h2" className="editorial-title" sx={{ fontSize: { xs: '3rem', md: '5rem' }, mb: 4, textTransform: 'uppercase' }}>
-                                    Global Impact <span style={{ color: '#A30D33' }}>Division</span>
-                                </Typography>
-                                <Typography sx={{ fontSize: '1.5rem', lineHeight: 1.6, color: '#444', mb: 8, maxWidth: '1000px' }}>
-                                    An international entrepreneurship development initiative designed to empower emerging founders from the African continent by bridging the gap between local innovation and global markets.
-                                </Typography>
-                                
-                                <Grid container spacing={3}>
-                                    {sections[0].points.map((pt, i) => (
-                                        <Grid item xs={12} sm={6} md={4} key={i}>
-                                            <Box sx={{ 
-                                                p: 6, 
-                                                minHeight: '260px',
-                                                background: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url(${pt.bgImage})`, 
-                                                backgroundSize: 'cover',
-                                                backgroundPosition: 'center',
-                                                borderRadius: '32px', 
-                                                border: '1px solid',
-                                                borderColor: 'rgba(255,255,255,0.1)', 
-                                                height: '100%', 
-                                                transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)', 
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                justifyContent: 'flex-end',
-                                                gap: 2.5,
-                                                position: 'relative',
-                                                overflow: 'hidden',
-                                                cursor: 'pointer',
-                                                '&:hover': { 
-                                                    transform: 'translateY(-10px) scale(1.02)', 
-                                                    borderColor: pt.color, 
-                                                    boxShadow: `0 30px 60px ${pt.color}25`,
-                                                    background: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(${pt.bgImage})`,
-                                                    backgroundSize: 'cover',
-                                                    backgroundPosition: 'center',
-                                                    '& .glow-effect': { opacity: 1 }
-                                                } 
-                                            }}>
-                                                <Box className="glow-effect" sx={{ 
-                                                    position: 'absolute', 
-                                                    top: -20, left: -20, 
-                                                    width: 150, height: 150, 
-                                                    background: `radial-gradient(circle, ${pt.color}40 0%, transparent 70%)`,
-                                                    filter: 'blur(30px)',
-                                                    opacity: 0,
-                                                    transition: 'opacity 0.4s ease',
-                                                    pointerEvents: 'none'
-                                                }} />
 
-                                                <Box sx={{ position: 'relative', zIndex: 1 }}>
-                                                    <Typography sx={{ fontWeight: 800, fontSize: '1.25rem', color: '#fff', mb: 2, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
-                                                        {pt.text}
-                                                    </Typography>
-                                                    <Box sx={{ width: '40px', height: '4px', bgcolor: pt.color, borderRadius: '4px' }} />
-                                                </Box>
-                                            </Box>
-                                        </Grid>
-                                    ))}
-                                </Grid>
-                            </motion.div>
-                        </Grid>
-                    </Grid>
+            {/* High-Density Stats Bar */}
+            <div className="bg-secondary text-white border-b border-outline">
+                <div className="density-container grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+                    <div className="p-8 text-center">
+                        <div className="text-3xl font-black text-primary mb-1">GLOBAL</div>
+                        <div className="text-[10px] uppercase tracking-widest opacity-60">Ecosystem Reach</div>
+                    </div>
+                    <div className="p-8 text-center">
+                        <div className="text-3xl font-black text-primary mb-1">INTENSIVE</div>
+                        <div className="text-[10px] uppercase tracking-widest opacity-60">Startup Training</div>
+                    </div>
+                    <div className="p-8 text-center">
+                        <div className="text-3xl font-black text-primary mb-1">ELITE</div>
+                        <div className="text-[10px] uppercase tracking-widest opacity-60">Mentor Network</div>
+                    </div>
+                    <div className="p-8 text-center">
+                        <div className="text-3xl font-black text-primary mb-1">SCALABLE</div>
+                        <div className="text-[10px] uppercase tracking-widest opacity-60">Venture Models</div>
+                    </div>
+                </div>
+            </div>
 
-                    {/* Objectives Bento Grid */}
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-                        <Paper className="glass-card" sx={{ p: { xs: 6, md: 10 }, bgcolor: '#fff !important' }}>
-                            <Box className="blueprint-bg" />
-                            <Grid container spacing={8} sx={{ position: 'relative', zIndex: 1 }}>
-                                <Grid item xs={12} md={4}>
-                                    <Box className="pill-label" sx={{ mb: 4 }}>
-                                        <Target size={14} /> Program Goals
-                                    </Box>
-                                    <Typography variant="h2" className="editorial-title" sx={{ fontSize: { xs: '2.5rem', md: '3.5rem' }, mb: 4 }}>
-                                        Core<br /><span style={{ color: '#1A4880' }}>Objectives</span>
-                                    </Typography>
-                                    <Typography sx={{ color: '#666', fontSize: '1.2rem', lineHeight: 1.6 }}>
-                                        We seek to bridge the gap between innovation and market leadership through a multi-dimensional approach to startup scaling.
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={8}>
-                                    <Grid container spacing={2}>
-                                        {sections[1].points.map((pt, i) => (
-                                            <Grid item xs={12} sm={6} key={i}>
-                                                <Box sx={{ 
-                                                    p: 4, 
-                                                    background: `linear-gradient(135deg, ${pt.color}05 0%, #fff 100%)`,
-                                                    borderRadius: '32px', 
-                                                    border: '1px solid',
-                                                    borderColor: `${pt.color}15`, 
-                                                    transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)', 
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    justifyContent: 'center',
-                                                    gap: 2,
-                                                    height: '100%',
-                                                    position: 'relative',
-                                                    overflow: 'hidden',
-                                                    '&:hover': { 
-                                                        borderColor: pt.color, 
-                                                        transform: 'translateY(-10px)',
-                                                        boxShadow: `0 30px 60px ${pt.color}12`,
-                                                    } 
-                                                }}>
-                                                    {/* Background Glow */}
-                                                    <Box sx={{ 
-                                                        position: 'absolute', 
-                                                        top: -20, right: -20, 
-                                                        width: 150, height: 150, 
-                                                        background: `radial-gradient(circle, ${pt.color}10 0%, transparent 70%)`,
-                                                        filter: 'blur(30px)',
-                                                        pointerEvents: 'none'
-                                                    }} />
+            {/* Support Grid: High Density */}
+            <section className="border-b border-outline">
+                <div className="grid grid-cols-1 lg:grid-cols-4">
+                    {/* Section Header */}
+                    <div className="lg:col-span-1 p-12 bg-surface-variant border-r border-outline flex flex-col justify-between">
+                        <div>
+                            <h2 className="font-['Manrope',_sans-serif] font-extrabold text-4xl text-secondary tracking-tighter leading-none mb-6">COMPREHENSIVE<br />SUPPORT</h2>
+                            <p className="text-sm text-[#1A1A1A]/60 leading-relaxed uppercase font-bold tracking-tight">Bridging the gap between local innovation and global markets.</p>
+                        </div>
+                        <div className="text-stroke text-7xl font-black select-none">IMPACT</div>
+                    </div>
+                    {/* Support Items */}
+                    <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2">
+                        <div className="p-10 border-b md:border-b-0 md:border-r border-outline prestige-hover group transition-all duration-300">
+                            <span className="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-white transition-colors">diversity_3</span>
+                            <h3 className="text-xl font-bold mb-4 uppercase tracking-tight">Mentorship from Global Experts</h3>
+                            <p className="text-sm opacity-70 leading-relaxed">Direct access to industry titans and seasoned entrepreneurs from the world's leading tech hubs like Silicon Valley and Bangalore.</p>
+                        </div>
+                        <div className="p-10 border-b border-outline prestige-hover group transition-all duration-300">
+                            <span className="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-white transition-colors">model_training</span>
+                            <h3 className="text-xl font-bold mb-4 uppercase tracking-tight">Startup Development</h3>
+                            <p className="text-sm opacity-70 leading-relaxed">Structured intensive training focused on building sustainable business models and operational excellence at scale.</p>
+                        </div>
+                        <div className="p-10 md:border-r border-outline prestige-hover group transition-all duration-300">
+                            <span className="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-white transition-colors">public</span>
+                            <h3 className="text-xl font-bold mb-4 uppercase tracking-tight">Ecosystem Exposure</h3>
+                            <p className="text-sm opacity-70 leading-relaxed">Cross-border opportunities to immerse in international tech environments and build valuable global networks.</p>
+                        </div>
+                        <div className="p-10 prestige-hover group transition-all duration-300">
+                            <span className="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-white transition-colors">payments</span>
+                            <h3 className="text-xl font-bold mb-4 uppercase tracking-tight">Investor Readiness</h3>
+                            <p className="text-sm opacity-70 leading-relaxed">Prepare your venture for global fundraising with elite pitch coaching and comprehensive financial modeling workshops.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                                                    <Typography sx={{ fontWeight: 800, fontSize: '1.2rem', color: '#1a1a1a', lineHeight: 1.4, letterSpacing: '-0.02em', position: 'relative', zIndex: 1 }}>
-                                                        {pt.text}
-                                                    </Typography>
+            {/* Core Objectives: Dense List */}
+            <section className="border-b border-outline overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-12">
+                    <div className="lg:col-span-5 p-12 lg:p-20 bg-secondary text-white relative">
+                        <h2 className="font-['Manrope',_sans-serif] font-extrabold text-5xl tracking-tighter mb-10 leading-none">CORE<br /><span className="text-primary italic">OBJECTIVES</span></h2>
+                        <div className="space-y-8">
+                            <div className="flex items-start gap-4">
+                                <span className="text-primary font-black">01.</span>
+                                <p className="text-sm font-bold uppercase tracking-widest opacity-80">Strengthen Capabilities</p>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <span className="text-primary font-black">02.</span>
+                                <p className="text-sm font-bold uppercase tracking-widest opacity-80">Structured Training</p>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <span className="text-primary font-black">03.</span>
+                                <p className="text-sm font-bold uppercase tracking-widest opacity-80">Connect with Mentors</p>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <span className="text-primary font-black">04.</span>
+                                <p className="text-sm font-bold uppercase tracking-widest opacity-80">Global Market Prep</p>
+                            </div>
+                        </div>
+                        <div className="mt-16 p-6 border border-white/20 inline-flex items-center gap-4">
+                            <span className="material-symbols-outlined text-primary">handshake</span>
+                            <span className="text-xs font-bold uppercase tracking-widest">Promoting India-Africa Collaboration</span>
+                        </div>
+                    </div>
+                    <div className="lg:col-span-7 relative h-full min-h-[400px]">
+                        <img 
+                            alt="Collaboration" 
+                            className="w-full h-full object-cover grayscale" 
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuATK5wyUWxpaD-VxJJDY54WEE_M67ZkaQdMHuXq7AV8nm8-OESdfo32yvWbe9pqTBDdsOJCWr5XmCNP_L2d9V5apOU93vR36GqqWlk72FOUM9usHOFtzl4THMjV8bRDXM5F1to4BrPsjk5Pnnv7EiLDy5_JhzahK7jnswRhhU-SRoy37vW3dtvmkLOd1465FwIozJ5VgrkJQPbl6QOCdme-S756lflMJlVxYZP2L8TkjqV14_0nGS4AYUECinG0SJX7-t_AYwf-Auo0" 
+                        />
+                        <div className="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+                    </div>
+                </div>
+            </section>
 
-                                                    <Box sx={{ 
-                                                        position: 'absolute', 
-                                                        bottom: 0, left: 0, 
-                                                        width: '4px', height: '0', 
-                                                        bgcolor: pt.color,
-                                                        transition: 'height 0.4s ease'
-                                                    }} className="hover-line" />
-                                                </Box>
-                                                <style>{`
-                                                    .MuiBox-root:hover .hover-line { height: 100% !important; }
-                                                `}</style>
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Paper>
-                    </motion.div>
-                </Container>
-            </Box>
->            {/* Curriculum Roadmap Redesign */}
-            <Box sx={{ bgcolor: '#000', color: '#fff', py: 20 }}>
-                <Container maxWidth="xl">
-                    <motion.div 
-                        initial="hidden" 
-                        whileInView="visible" 
-                        viewport={{ once: true }} 
-                        variants={fadeInUp}
-                        style={{ textAlign: 'center', marginBottom: '100px' }}
-                    >
-                        <Box className="pill-label" sx={{ mb: 4 }}>
-                            <Rocket size={14} /> Full Program Cycle
-                        </Box>
-                        <Typography variant="h2" className="editorial-title" sx={{ fontSize: { xs: '3.5rem', md: '6rem' }, mt: 2, textTransform: 'uppercase' }}>
-                            The Roadmap to <span style={{ color: '#A30D33' }}>Scale</span>
-                        </Typography>
-                    </motion.div>
+            {/* Roadmap: Compact 3x2 Grid */}
+            <section className="py-24 border-b border-outline">
+                <div className="density-container px-6">
+                    <div className="mb-16 text-center">
+                        <h2 className="text-xs font-bold text-primary uppercase tracking-[0.4em] mb-4">The Scalable Journey</h2>
+                        <h3 className="font-['Manrope',_sans-serif] font-extrabold text-5xl text-secondary tracking-tighter">PROGRAM ROADMAP</h3>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-outline">
+                        {/* Phase 01 */}
+                        <div className="p-10 border-r border-b border-outline hover:bg-surface-variant transition-colors group">
+                            <div className="text-5xl font-black text-stroke mb-6 group-hover:text-primary transition-colors">01</div>
+                            <h4 className="text-lg font-bold uppercase tracking-tight mb-4">Entrepreneurship Fundamentals</h4>
+                            <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">Developing the foundational mindset, resilience, and creative ideation techniques needed for the journey.</p>
+                        </div>
+                        {/* Phase 02 */}
+                        <div className="p-10 border-r border-b border-outline hover:bg-surface-variant transition-colors group">
+                            <div className="text-5xl font-black text-stroke mb-6 group-hover:text-primary transition-colors">02</div>
+                            <h4 className="text-lg font-bold uppercase tracking-tight mb-4">Business Model Development</h4>
+                            <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">Defining value propositions and segmenting target markets for maximum competitive advantage.</p>
+                        </div>
+                        {/* Phase 03 */}
+                        <div className="p-10 border-r border-b border-outline hover:bg-surface-variant transition-colors group">
+                            <div className="text-5xl font-black text-stroke mb-6 group-hover:text-primary transition-colors">03</div>
+                            <h4 className="text-lg font-bold uppercase tracking-tight mb-4">Product Development</h4>
+                            <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">Building the MVP through rapid iteration, focusing intensely on achieving Product-Market Fit.</p>
+                        </div>
+                        {/* Phase 04 */}
+                        <div className="p-10 border-r border-b border-outline hover:bg-surface-variant transition-colors group">
+                            <div className="text-5xl font-black text-stroke mb-6 group-hover:text-primary transition-colors">04</div>
+                            <h4 className="text-lg font-bold uppercase tracking-tight mb-4">Go-To-Market Strategy</h4>
+                            <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">Executing validation tests and scaling growth channels through data-driven marketing approaches.</p>
+                        </div>
+                        {/* Phase 05 */}
+                        <div className="p-10 border-r border-b border-outline hover:bg-surface-variant transition-colors group">
+                            <div className="text-5xl font-black text-stroke mb-6 group-hover:text-primary transition-colors">05</div>
+                            <h4 className="text-lg font-bold uppercase tracking-tight mb-4">Startup Fundraising</h4>
+                            <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">Mastering the art of the pitch, valuation methodologies, and investor relationship management.</p>
+                        </div>
+                        {/* Phase 06 */}
+                        <div className="p-10 border-r border-b border-outline hover:bg-surface-variant transition-colors group">
+                            <div className="text-5xl font-black text-stroke mb-6 group-hover:text-primary transition-colors">06</div>
+                            <h4 className="text-lg font-bold uppercase tracking-tight mb-4">Leadership & Team</h4>
+                            <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">Scaling culture, organizational structures, and high-performance team management for global scale.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                    <Box className="curriculum-grid">
-                        {curriculum.map((item, idx) => (
-                            <motion.div
-                                key={idx}
-                                variants={fadeInUp}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                            >
-                                <Box className="modern-card" sx={{ p: 6, height: '100%', display: 'flex', flexDirection: 'column' }}>
-                                    <Box className="line-draw" />
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 6 }}>
-                                        <Box sx={{ color: '#A30D33', transform: 'scale(1.5)', transformOrigin: 'left' }}>{item.icon}</Box>
-                                        <Typography variant="h4" sx={{ 
-                                            fontFamily: 'Plus Jakarta Sans', 
-                                            fontWeight: 800, 
-                                            opacity: 0.1, 
-                                            fontSize: '4rem',
-                                            lineHeight: 1
-                                        }}>
-                                            {(idx + 1).toString().padStart(2, '0')}
-                                        </Typography>
-                                    </Box>
-                                    <Typography variant="h5" sx={{ fontWeight: 800, mb: 4, letterSpacing: '-0.02em', textTransform: 'uppercase' }}>
-                                        {item.title}
-                                    </Typography>
-                                    <Stack spacing={2} sx={{ mt: 'auto' }}>
-                                        {item.modules.map((m, i) => (
-                                            <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                                                <Box sx={{ w: 6, h: 6, bgcolor: '#A30D33', borderRadius: '50%' }} />
-                                                <Typography sx={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', fontWeight: 500 }}>{m}</Typography>
-                                            </Box>
-                                        ))}
-                                    </Stack>
-                                </Box>
-                            </motion.div>
-                        ))}
-                    </Box>
-                </Container>
-            </Box>
+            {/* CTA: Punchy & Professional */}
+            <section className="bg-secondary text-white py-24 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 pointer-events-none">
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] border border-primary rotate-45 translate-x-1/2 -translate-y-1/2"></div>
+                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] border border-primary rotate-45 -translate-x-1/2 translate-y-1/2"></div>
+                </div>
+                <div className="density-container px-6 relative z-10 text-center">
+                    <h2 className="font-['Manrope',_sans-serif] font-extrabold text-5xl md:text-7xl tracking-tighter mb-8 leading-none">READY FOR<br /><span className="text-primary italic">GLOBAL VENTURES?</span></h2>
+                    <p className="text-xl text-white/70 max-w-2xl mx-auto mb-12">Join an elite network of visionary founders from Africa. Gain access to the global entrepreneurship ecosystem today.</p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-4">
+                        <Link to="/contact" className="bg-primary text-white px-12 py-5 font-bold text-sm uppercase tracking-[0.2em] hover:bg-white hover:text-secondary transition-all text-center">Stay Connected</Link>
+                        <Link to="#" className="border border-white text-white px-12 py-5 font-bold text-sm uppercase tracking-[0.2em] hover:bg-white hover:text-secondary transition-all text-center">View Alumni</Link>
+                    </div>
+                </div>
+            </section>
 
-            {/* Final Call to Action */}
-            <Box sx={{ py: 20, textAlign: 'center' }}>
-                <Container maxWidth="md">
-                    <motion.div 
-                        initial={{ opacity: 0, scale: 0.9 }} 
-                        whileInView={{ opacity: 1, scale: 1 }} 
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <Handshake size={80} color="#A30D33" style={{ marginBottom: '32px' }} />
-                            <Typography variant="h2" className="editorial-title" sx={{ mb: 4 }}>
-                                Ready for Global <span style={{ color: '#A30D33' }}>Ventures?</span>
-                            </Typography>
-                            <Typography sx={{ color: '#666', fontSize: '1.2rem', mb: 8 }}>
-                                Join a network of visionary founders from Africa and gain access to the global entrepreneurship ecosystem.
-                            </Typography>
-                            <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} justifyContent="center">
-                                <Button 
-                                    variant="contained" 
-                                    component={Link}
-                                    to="/IncubateWithUs"
-                                    sx={{ bgcolor: '#A30D33', px: 8, py: 2.5, fontWeight: 800, borderRadius: 0 }}
-                                >
-                                    START APPLICATION
-                                </Button>
-                                <Button 
-                                    variant="outlined" 
-                                    component={Link}
-                                    to="/contact"
-                                    sx={{ color: '#000', borderColor: '#000', px: 8, py: 2.5, fontWeight: 800, borderRadius: 0, '&:hover': { bgcolor: '#000', color: '#fff' } }}
-                                >
-                                    GET IN TOUCH
-                                </Button>
-                            </Stack>
-                        </Box>
-                    </motion.div>
-                </Container>
-            </Box>
-        </Box>
+            {/* Footer
+            <footer className="bg-white border-t border-outline">
+                <div className="density-container px-6 py-12">
+                    <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
+                        <div className="max-w-xs">
+                            <div className="text-2xl font-black tracking-tighter mb-4 text-secondary">VENTURE NEST</div>
+                            <p className="text-xs text-[#1A1A1A]/60 uppercase tracking-widest font-bold">International Entrepreneurship Division</p>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-16">
+                            <div>
+                                <h5 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-6">Directory</h5>
+                                <ul className="space-y-3">
+                                    <li><Link to="#" className="text-xs font-bold hover:text-primary transition-colors">Programs</Link></li>
+                                    <li><Link to="#" className="text-xs font-bold hover:text-primary transition-colors">Mentorship</Link></li>
+                                    <li><Link to="#" className="text-xs font-bold hover:text-primary transition-colors">Roadmap</Link></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-6">Legal</h5>
+                                <ul className="space-y-3">
+                                    <li><Link to="#" className="text-xs font-bold hover:text-primary transition-colors">Privacy</Link></li>
+                                    <li><Link to="#" className="text-xs font-bold hover:text-primary transition-colors">Terms</Link></li>
+                                    <li><Link to="#" className="text-xs font-bold hover:text-primary transition-colors">Policy</Link></li>
+                                </ul>
+                            </div>
+                            <div className="col-span-2 sm:col-span-1">
+                                <h5 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-6">Connect</h5>
+                                <div className="flex gap-4">
+                                    <Link to="#" className="w-8 h-8 border border-outline flex items-center justify-center hover:bg-primary hover:text-white transition-all"><span className="material-symbols-outlined text-sm">share</span></Link>
+                                    <Link to="#" className="w-8 h-8 border border-outline flex items-center justify-center hover:bg-primary hover:text-white transition-all"><span className="material-symbols-outlined text-sm">alternate_email</span></Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="pt-8 border-t border-outline flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p className="text-[10px] text-[#1A1A1A]/40 uppercase font-bold tracking-[0.2em]">© 2024 AFRICA GLOBAL FOUNDERS. IGNITE PRESTIGE EDITION.</p>
+                        <div className="flex items-center gap-2 text-primary font-bold text-[10px] uppercase tracking-widest">
+                            <span>IN COLLABORATION WITH</span>
+                            <span className="text-secondary">THRIVE FUTURE GLOBAL</span>
+                        </div>
+                    </div>
+                </div>
+            </footer> */}
+        </div>
     );
 };
 
 export default AfricaGlobalFounderProgram;
-
